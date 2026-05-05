@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Direito Civil I — Pessoa Natural · Nascituro · Capacidade · Emancipação</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@300;400;500;600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#09090b;--surface:#101014;--surface2:#16161c;--surface3:#1c1c24;
+  --border:#21212a;--border2:#2d2d3a;
+  --text:#ddd8d0;--text2:#8f8a9a;--text3:#504c5e;--white:#f4f1ec;
+  --morte:#e06e8c;--morte-dim:rgba(224,110,140,.10);--morte-mid:rgba(224,110,140,.22);
+  --aus:#5c9ee0;  --aus-dim:rgba(92,158,224,.10);  --aus-mid:rgba(92,158,224,.22);
+  --pj:#d4a843;   --pj-dim:rgba(212,168,67,.10);   --pj-mid:rgba(212,168,67,.22);
+  --dom:#5cc98a;  --dom-dim:rgba(92,201,138,.10);  --dom-mid:rgba(92,201,138,.22);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse 70% 40% at 10% 0%,rgba(224,110,140,.05) 0%,transparent 55%),
+             radial-gradient(ellipse 55% 35% at 90% 100%,rgba(92,201,138,.04) 0%,transparent 55%)}
+.hdr{position:relative;z-index:10;padding:3rem 2rem 0;max-width:1100px;margin:0 auto}
+.back{display:inline-flex;align-items:center;gap:.45rem;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);text-decoration:none;margin-bottom:1.2rem;transition:color .2s}
+.back:hover{color:var(--text2)}
+.ey{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--text3);margin-bottom:.9rem}
+.htitle{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,6.5vw,4.6rem);font-weight:700;color:var(--white);line-height:.95;letter-spacing:-.02em}
+.htitle em{font-style:italic;color:var(--text2);font-weight:400}
+.hsub{margin-top:1.1rem;font-size:.8rem;color:var(--text2);font-family:'JetBrains Mono',monospace;letter-spacing:.04em}
+.banca-pill{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.2rem;padding:.42rem .95rem;background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.25);border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.07em;color:var(--pj);text-transform:uppercase}
+.banca-pill .p{width:5px;height:5px;border-radius:50%;background:var(--pj);animation:pu 2s infinite}
+@keyframes pu{0%,100%{opacity:1}50%{opacity:.35}}
+.pw{display:flex;align-items:center;gap:1rem;margin-top:1.6rem;padding:.85rem 1.2rem;background:var(--surface);border:1px solid var(--border);border-radius:6px}
+.pl{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--text3);letter-spacing:.1em;white-space:nowrap}
+.pt{flex:1;height:3px;background:var(--border2);border-radius:10px;overflow:hidden}
+.pf{height:100%;background:linear-gradient(90deg,var(--morte),var(--aus),var(--pj),var(--dom));width:0%;transition:width .5s cubic-bezier(.4,0,.2,1);border-radius:10px}
+.pc{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--text2);white-space:nowrap}
+.sw{margin-top:.85rem;position:relative}
+.si{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:.68rem 1rem .68rem 2.5rem;color:var(--text);font-family:'Outfit',sans-serif;font-size:.85rem;outline:none;transition:border-color .2s}
+.si::placeholder{color:var(--text3)}.si:focus{border-color:var(--border2)}
+.sic{position:absolute;left:.82rem;top:50%;transform:translateY(-50%);color:var(--text3);font-size:.88rem;pointer-events:none}
+mark{background:rgba(212,168,67,.28);color:var(--white);border-radius:2px;padding:0 2px}
+.mnav{display:flex;gap:.42rem;flex-wrap:wrap;margin:1.9rem auto 0;max-width:1100px;padding:0 2rem;position:relative;z-index:10}
+.nb{display:flex;align-items:center;gap:.5rem;padding:.52rem .95rem;border:1px solid var(--border);border-radius:4px;background:var(--surface);color:var(--text2);font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.07em;cursor:pointer;transition:all .2s;text-transform:uppercase}
+.nb:hover{border-color:var(--border2);color:var(--text)}
+.nb .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.nb[data-m=morte] .d{background:var(--morte)}.nb[data-m=aus] .d{background:var(--aus)}
+.nb[data-m=pj] .d{background:var(--pj)}.nb[data-m=dom] .d{background:var(--dom)}
+.nb[data-m=quiz] .d{background:var(--white)}
+.nb.active{color:var(--white)}
+.nb[data-m=morte].active{border-color:var(--morte);background:var(--morte-dim)}
+.nb[data-m=aus].active{border-color:var(--aus);background:var(--aus-dim)}
+.nb[data-m=pj].active{border-color:var(--pj);background:var(--pj-dim)}
+.nb[data-m=dom].active{border-color:var(--dom);background:var(--dom-dim)}
+.nb[data-m=quiz].active{border-color:rgba(255,255,255,.28);background:rgba(255,255,255,.04)}
+.main{position:relative;z-index:5;max-width:1100px;margin:1.8rem auto 5rem;padding:0 2rem}
+.mod{display:none;animation:fu .3s ease both}.mod.active{display:block}
+@keyframes fu{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.mhd{display:flex;align-items:flex-start;gap:1.4rem;padding:1.75rem 2rem;border-radius:8px 8px 0 0;border:1px solid var(--border);border-bottom:none}
+.mhd[data-c=morte]{background:var(--morte-dim);border-color:rgba(224,110,140,.28)}
+.mhd[data-c=aus]{background:var(--aus-dim);border-color:rgba(92,158,224,.28)}
+.mhd[data-c=pj]{background:var(--pj-dim);border-color:rgba(212,168,67,.28)}
+.mhd[data-c=dom]{background:var(--dom-dim);border-color:rgba(92,201,138,.28)}
+.mi{width:46px;height:46px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
+.mi[data-c=morte]{background:var(--morte-mid)}.mi[data-c=aus]{background:var(--aus-mid)}
+.mi[data-c=pj]{background:var(--pj-mid)}.mi[data-c=dom]{background:var(--dom-mid)}
+.mnum{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.2em;color:var(--text3);text-transform:uppercase;margin-bottom:.25rem}
+.mtitle{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--white);line-height:1}
+.mdesc{margin-top:.42rem;font-size:.82rem;color:var(--text2);line-height:1.62}
+.mbody{border:1px solid var(--border);border-top:none;border-radius:0 0 8px 8px;background:var(--surface);overflow:hidden}
+.stabs{display:flex;border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
+.stabs::-webkit-scrollbar{display:none}
+.stab{padding:.78rem 1.15rem;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.07em;text-transform:uppercase;color:var(--text3);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;background:none;border-top:none;border-left:none;border-right:none;margin-bottom:-1px}
+.stab:hover{color:var(--text2)}.stab.active{color:var(--white)}
+.stab.active[data-c=morte]{border-bottom-color:var(--morte)}.stab.active[data-c=aus]{border-bottom-color:var(--aus)}
+.stab.active[data-c=pj]{border-bottom-color:var(--pj)}.stab.active[data-c=dom]{border-bottom-color:var(--dom)}
+.sp{display:none;padding:1.75rem 2rem;animation:fu .22s ease}.sp.active{display:block}
+.sl{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;color:var(--text3);margin-bottom:.58rem;margin-top:1.55rem;display:flex;align-items:center;gap:.5rem}
+.sl::after{content:'';flex:1;height:1px;background:var(--border)}.sl:first-child{margin-top:0}
+p{font-size:.875rem;color:#b5b0be;line-height:1.82}p+p{margin-top:.65rem}
+.hl{color:var(--white);font-weight:500}
+.art{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--pj);font-weight:500}
+ul,ol{padding-left:1.25rem;margin-top:.48rem}
+li{font-size:.85rem;color:#aeaab8;line-height:1.82;margin-bottom:.2rem}li strong{color:var(--white);font-weight:500}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:.88rem;margin-top:.68rem}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:.72rem;margin-top:.68rem}
+@media(max-width:640px){.g2,.g3{grid-template-columns:1fr}}
+.card{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:1rem;transition:border-color .2s}.card:hover{border-color:var(--border2)}
+.ct{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.55rem;display:flex;align-items:center;gap:.4rem}
+.ct::before{content:'';width:3px;height:11px;border-radius:2px;flex-shrink:0}
+.cm .ct{color:var(--morte)}.cm .ct::before{background:var(--morte)}
+.ca .ct{color:var(--aus)}.ca .ct::before{background:var(--aus)}
+.cp .ct{color:var(--pj)}.cp .ct::before{background:var(--pj)}
+.cd .ct{color:var(--dom)}.cd .ct::before{background:var(--dom)}
+.co{display:flex;gap:.75rem;padding:.88rem 1rem;border-radius:5px;margin-top:.82rem;font-size:.83rem;line-height:1.72;color:#aeaab8}
+.co-ico{font-size:.92rem;flex-shrink:0;margin-top:.05rem}.co strong{font-weight:500}
+.cw{background:rgba(212,168,67,.07);border:1px solid rgba(212,168,67,.2)}.cw strong{color:var(--pj)}
+.ci{background:rgba(92,158,224,.07);border:1px solid rgba(92,158,224,.2)}.ci strong{color:var(--aus)}
+.ce{background:rgba(224,110,140,.07);border:1px solid rgba(224,110,140,.2)}.ce strong{color:var(--morte)}
+.cs{background:rgba(92,201,138,.07);border:1px solid rgba(92,201,138,.2)}.cs strong{color:var(--dom)}
+.tw{overflow-x:auto;margin-top:.68rem;border-radius:6px;border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:.82rem}
+th{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);padding:.68rem 1rem;background:var(--surface2);border-bottom:1px solid var(--border);text-align:left;white-space:nowrap}
+td{padding:.62rem 1rem;border-bottom:1px solid var(--border);color:#aeaab8;vertical-align:top;line-height:1.6}
+tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.012)}td strong{color:var(--white);font-weight:500}
+.xi{border:1px solid var(--border);border-radius:5px;margin-top:.52rem;overflow:hidden;transition:border-color .2s}.xi:hover{border-color:var(--border2)}
+.xt{display:flex;align-items:center;justify-content:space-between;padding:.82rem 1rem;cursor:pointer;background:var(--surface2);user-select:none}
+.xl{font-size:.85rem;color:var(--text);display:flex;align-items:center;gap:.55rem}
+.xa{font-size:.6rem;color:var(--text3);transition:transform .22s}.xi.open .xa{transform:rotate(180deg)}
+.xc{max-height:0;overflow:hidden;transition:max-height .32s cubic-bezier(.4,0,.2,1)}
+.xin{padding:1rem;border-top:1px solid var(--border);font-size:.84rem;color:#aeaab8;line-height:1.78}
+.xin ul{padding-left:1rem}.xin li{font-size:.82rem;margin-bottom:.28rem}
+.badge{font-family:'JetBrains Mono',monospace;font-size:.55rem;padding:.13rem .48rem;border-radius:3px;letter-spacing:.04em}
+hr.dv{border:none;border-top:1px solid var(--border);margin:1.35rem 0}
+.qwrap{padding:1.5rem 2rem 2rem}
+.qtop{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.4rem}
+.qtitle{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:700;color:var(--white)}
+.sbadge{font-family:'JetBrains Mono',monospace;font-size:.65rem;padding:.26rem .72rem;border-radius:4px;background:var(--surface2);border:1px solid var(--border);color:var(--text2)}
+.qdots{display:flex;gap:.28rem;flex-wrap:wrap;margin-bottom:1.2rem}
+.qdot{width:7px;height:7px;border-radius:50%;background:var(--border2);transition:all .2s}
+.qdot.cur{background:var(--text2)}.qdot.ok{background:var(--dom)}.qdot.err{background:var(--morte)}
+.qq{display:none;animation:fu .26s ease}.qq.active{display:block}
+.qnum{font-family:'JetBrains Mono',monospace;font-size:.56rem;color:var(--text3);letter-spacing:.1em;margin-bottom:.6rem}
+.bflag{display:inline-flex;align-items:center;gap:.32rem;font-family:'JetBrains Mono',monospace;font-size:.56rem;padding:.13rem .5rem;border-radius:3px;background:rgba(212,168,67,.1);border:1px solid rgba(212,168,67,.24);color:var(--pj);margin-left:.45rem;vertical-align:middle;letter-spacing:.04em}
+.bflag::before{content:'●';font-size:.45rem}
+.qtext{font-size:.96rem;color:var(--white);line-height:1.68;margin-bottom:1.15rem;font-weight:400}
+.qopts{display:flex;flex-direction:column;gap:.42rem}
+.qopt{display:flex;align-items:flex-start;gap:.65rem;padding:.82rem .92rem;border:1px solid var(--border);border-radius:5px;cursor:pointer;transition:all .2s;background:var(--surface2);text-align:left;width:100%}
+.qopt:hover:not(:disabled){border-color:var(--border2)}
+.ql{font-family:'JetBrains Mono',monospace;font-size:.6rem;width:20px;height:20px;border-radius:3px;background:var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--text2);transition:all .2s}
+.qt{font-size:.84rem;color:#aeaab8;line-height:1.6}
+.qopt.correct{border-color:var(--dom);background:var(--dom-dim)}.qopt.correct .ql{background:var(--dom);color:#000}.qopt.correct .qt{color:var(--white)}
+.qopt.wrong{border-color:var(--morte);background:var(--morte-dim)}.qopt.wrong .ql{background:var(--morte);color:#fff}
+.qopt.disabled{cursor:default;opacity:.54}.qopt.disabled.correct{opacity:1}
+.qfb{display:none;margin-top:.88rem;padding:.88rem 1rem;border-radius:5px;font-size:.83rem;line-height:1.68;color:#aeaab8}
+.qfb.show{display:block;animation:fu .18s ease}
+.qfb.ok{background:var(--dom-dim);border:1px solid rgba(92,201,138,.26)}.qfb.ok strong{color:var(--dom)}
+.qfb.ng{background:var(--morte-dim);border:1px solid rgba(224,110,140,.26)}.qfb.ng strong{color:var(--morte)}
+.qnav{display:flex;align-items:center;justify-content:space-between;margin-top:1.35rem}
+.qbn{padding:.58rem 1.25rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;transition:all .2s;border:none}
+.qbn-next{background:var(--white);color:#09090b;display:none}.qbn-next:hover{opacity:.88}.qbn-next.show{display:block}
+.qbn-rs{background:var(--surface2);border:1px solid var(--border);color:var(--text2)}.qbn-rs:hover{border-color:var(--border2);color:var(--text)}
+.qres{display:none;text-align:center;padding:2.5rem 0}.qres.show{display:block;animation:fu .28s ease}
+.rscore{font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:700;color:var(--white);line-height:1}
+.rlabel{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--text3);letter-spacing:.15em;text-transform:uppercase;margin-top:.4rem}
+.rbar{margin:1.5rem auto 0;max-width:260px}
+.rbt{flex:1;height:5px;background:var(--border2);border-radius:10px;overflow:hidden}
+.rbf{height:100%;background:linear-gradient(90deg,var(--morte),var(--dom));border-radius:10px;transition:width 1s ease}
+.hub-footer{position:relative;z-index:5;max-width:1100px;margin:3rem auto 0;padding:1.5rem 2rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.ft-left{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--text3);letter-spacing:.08em}
+.ft-right{font-family:'JetBrains Mono',monospace;font-size:.55rem;color:var(--text3)}.ft-right a{color:var(--text2);text-decoration:none}.ft-right a:hover{color:var(--white)}
+@media(max-width:600px){.hdr,.main,.mnav{padding-left:1rem;padding-right:1rem}.hub-footer{padding:1.5rem 1rem}}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <a class="back" href="index.html">&#8592; Central de Resumos</a>
+  <div class="ey">Direito Civil I &mdash; Prova 1 &middot; UFN 2026/1</div>
+  <h1 class="htitle">Pessoa Natural<br><em>Nascituro · Capacidade · Emancipação</em></h1>
+  <div class="hsub">Arts. 1–21 CC &middot; Estatuto da Pessoa com Deficiência (Lei 13.146/2015) &middot; Banca UFN</div>
+  <div class="banca-pill"><span class="p"></span>Banca UFN &mdash; Estilo de Questões Identificado</div>
+  <div class="pw">
+    <span class="pl">Progresso de Leitura</span>
+    <div class="pt"><div class="pf" id="pf"></div></div>
+    <span class="pc" id="pc">0%</span>
+  </div>
+  <div class="sw">
+    <span class="sic">&#x2315;</span>
+    <input class="si" type="text" placeholder="Buscar neste resumo..." oninput="doSearch(this.value)" autocomplete="off">
+  </div>
+</div>
+
+<nav class="mnav">
+  <button class="nb active" data-m="morte" onclick="switchMod('morte',this)"><span class="d"></span>Pessoa Natural</button>
+  <button class="nb" data-m="aus" onclick="switchMod('aus',this)"><span class="d"></span>Nascituro</button>
+  <button class="nb" data-m="pj" onclick="switchMod('pj',this)"><span class="d"></span>Capacidade Civil</button>
+  <button class="nb" data-m="dom" onclick="switchMod('dom',this)"><span class="d"></span>Emancipação</button>
+  <button class="nb" data-m="quiz" onclick="switchMod('quiz',this)"><span class="d"></span>Quiz (20 q.)</button>
+</nav>
+
+<main class="main">
+
+<!-- ═══ MÓDULO 1: PESSOA NATURAL ═══ -->
+<div class="mod active" id="mod-morte">
+  <div class="mhd" data-c="morte">
+    <div class="mi" data-c="morte">👤</div>
+    <div>
+      <div class="mnum">Módulo 01</div>
+      <div class="mtitle">Pessoa Natural</div>
+      <div class="mdesc">Personalidade jurídica, início e extinção. Arts. 1–10 CC.</div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="morte" onclick="switchTab(this,'m1t1')">Conceito</button>
+      <button class="stab" data-c="morte" onclick="switchTab(this,'m1t2')">Início da Personalidade</button>
+      <button class="stab" data-c="morte" onclick="switchTab(this,'m1t3')">Direitos da Personalidade</button>
+      <button class="stab" data-c="morte" onclick="switchTab(this,'m1t4')">Extinção</button>
+    </div>
+
+    <div class="sp active" id="m1t1">
+      <div class="sl">Conceito de Pessoa Natural</div>
+      <p>Nos termos do <span class="art">art. 1.º do CC</span>, <span class="hl">toda pessoa é capaz de direitos e deveres na ordem civil</span>. O ser humano, pelo simples fato de existir, é titular de personalidade jurídica — aptidão para ser sujeito de direitos e obrigações.</p>
+      <p>Pessoa natural (ou pessoa física) é o ser humano considerado como sujeito de direito. O conceito é distinto de <span class="hl">capacidade</span>: todo ser humano tem personalidade, mas nem todos têm capacidade plena de exercício.</p>
+      <div class="co cw"><span class="co-ico">⚠</span><div><strong>Atenção ao art. 1.º CC:</strong> A capacidade ali mencionada é a de <em>direito</em> (ou de gozo), que é universal — todos a têm. Não confundir com capacidade de fato (exercício), que pode ser limitada.</div></div>
+      <div class="g2">
+        <div class="card cm">
+          <div class="ct">Personalidade Jurídica</div>
+          <ul><li>Aptidão genérica para adquirir direitos</li><li>Todo ser humano a possui</li><li>Começa com o nascimento com vida</li><li>Irrenunciável e indisponível</li></ul>
+        </div>
+        <div class="card ca">
+          <div class="ct">Capacidade de Direito</div>
+          <ul><li>= Capacidade de gozo</li><li>Universal — todo ser humano</li><li>Não admite graduação</li><li>Distinta da capacidade de fato</li></ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="sp" id="m1t2">
+      <div class="sl">Início da Personalidade — Art. 2.º CC</div>
+      <p>O <span class="art">art. 2.º do CC</span> estabelece que <span class="hl">a personalidade civil da pessoa começa do nascimento com vida</span>. Para isso, basta que o neonato respire, mesmo que por instantes — comprovado pela docimasia hidrostática de Galeno.</p>
+      <p>O mesmo artigo ressalva que a lei <span class="hl">põe a salvo, desde a concepção, os direitos do nascituro</span>. Essa ressalva é o ponto de tensão entre as teorias sobre o status jurídico do nascituro.</p>
+      <div class="co ci"><span class="co-ico">ℹ</span><div><strong>Nascimento com vida:</strong> ocorre com a separação do feto do corpo materno e início da respiração. Não é necessário corte do cordão umbilical. Natimorto não adquire personalidade.</div></div>
+      <div class="sl">Registro de Nascimento</div>
+      <p>O <span class="art">art. 9.º, I, CC</span> exige o registro do nascimento. O <span class="art">art. 10 CC</span> determina o registro do óbito. O registro é declaratório (não constitutivo) da personalidade.</p>
+    </div>
+
+    <div class="sp" id="m1t3">
+      <div class="sl">Direitos da Personalidade — Arts. 11–21 CC</div>
+      <p>Os direitos da personalidade são aqueles que têm por objeto os <span class="hl">atributos físicos, psíquicos e morais da pessoa</span>, tanto em sua projeção interior quanto social.</p>
+      <div class="g3">
+        <div class="card cm"><div class="ct">Características</div><ul><li>Absolutos (oponíveis erga omnes)</li><li>Intransmissíveis</li><li>Irrenunciáveis</li><li>Imprescritíveis</li><li>Extrapatrimoniais</li><li>Vitalícios</li></ul></div>
+        <div class="card ca"><div class="ct">Proteção (art. 12)</div><ul><li>Pode-se exigir cessa&shy;ção da ameaça</li><li>Indenização por danos</li><li>Tutela inibitória</li><li>Habeas data</li></ul></div>
+        <div class="card cp"><div class="ct">Exemplos no CC</div><ul><li>Art. 13: integridade física</li><li>Art. 16: direito ao nome</li><li>Art. 20: direito à imagem</li><li>Art. 21: vida privada</li></ul></div>
+      </div>
+      <div class="co cs"><span class="co-ico">✓</span><div><strong>Art. 11 CC:</strong> Com exceção dos casos previstos em lei, os direitos da personalidade são intransmissíveis e irrenunciáveis, não podendo o seu exercício sofrer limitação voluntária.</div></div>
+    </div>
+
+    <div class="sp" id="m1t4">
+      <div class="sl">Extinção da Personalidade — Morte</div>
+      <p>A personalidade civil <span class="hl">extingue-se com a morte</span> (<span class="art">art. 6.º CC</span>). A morte pode ser:</p>
+      <div class="g2">
+        <div class="card cm"><div class="ct">Morte Real</div><ul><li>Cessação definitiva das funções vitais</li><li>Atestada por médico</li><li>Prova: certidão de óbito</li></ul></div>
+        <div class="card ca"><div class="ct">Morte Presumida</div><ul><li><strong>Com declaração de ausência</strong> (arts. 22–39 CC)</li><li><strong>Sem decretação de ausência</strong>: art. 7.º CC (situação de perigo de vida / campanha militar)</li></ul></div>
+      </div>
+      <div class="co cw"><span class="co-ico">⚠</span><div><strong>Comoriência (art. 8.º CC):</strong> Se dois ou mais indivíduos falecem na mesma ocasião sem se poder determinar qual morreu primeiro, presume-se que morreram simultaneamente, não havendo transmissão de direitos entre si.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MÓDULO 2: NASCITURO ═══ -->
+<div class="mod" id="mod-aus">
+  <div class="mhd" data-c="aus">
+    <div class="mi" data-c="aus">🧬</div>
+    <div>
+      <div class="mnum">Módulo 02</div>
+      <div class="mtitle">Nascituro</div>
+      <div class="mdesc">Teorias, direitos e posições doutrinárias e jurisprudenciais.</div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="aus" onclick="switchTab(this,'m2t1')">Conceito</button>
+      <button class="stab" data-c="aus" onclick="switchTab(this,'m2t2')">Teoria Natalista</button>
+      <button class="stab" data-c="aus" onclick="switchTab(this,'m2t3')">Teoria Concepcionista</button>
+      <button class="stab" data-c="aus" onclick="switchTab(this,'m2t4')">Posição do STJ</button>
+    </div>
+
+    <div class="sp active" id="m2t1">
+      <div class="sl">Quem é o Nascituro?</div>
+      <p><span class="hl">Nascituro</span> é o ser humano já concebido, mas ainda não nascido — está no ventre materno. Difere do <span class="hl">concepturo</span> (pessoa ainda não concebida, meramente esperada) e do <span class="hl">natimorto</span> (nascido sem vida).</p>
+      <div class="co ci"><span class="co-ico">ℹ</span><div>O <strong>art. 2.º CC</strong> ressalva que a lei "põe a salvo, desde a concepção, os direitos do nascituro". Esta frase gerou a disputa entre natalistas e concepcionistas.</div></div>
+      <div class="sl">Direitos Expressamente Garantidos ao Nascituro</div>
+      <ul>
+        <li><span class="art">Art. 542 CC</span> — pode receber doação</li>
+        <li><span class="art">Art. 1.609, §único CC</span> — pode ser reconhecido antes do nascimento</li>
+        <li><span class="art">Art. 1.779 CC</span> — pode ter curador (curatela do nascituro)</li>
+        <li><span class="art">Art. 1.798 CC</span> — pode ser chamado à sucessão (já concebido)</li>
+      </ul>
+    </div>
+
+    <div class="sp" id="m2t2">
+      <div class="sl">Teoria Natalista</div>
+      <p>Para a teoria natalista, <span class="hl">a personalidade jurídica só se inicia com o nascimento com vida</span>. O nascituro tem apenas uma expectativa de direito, não direitos propriamente ditos. É a teoria que o CC/2002 aparentemente adota na redação literal do art. 2.º.</p>
+      <div class="g2">
+        <div class="card cm"><div class="ct">Fundamentos</div><ul><li>Leitura literal do art. 2.º CC</li><li>Personalidade = nascimento com vida</li><li>Nascituro tem mera "expectativa"</li><li>Adotada por Washington de Barros Monteiro</li></ul></div>
+        <div class="card ca"><div class="ct">Críticas</div><ul><li>Não explica os direitos expressos ao nascituro</li><li>Como ter curador sem ser sujeito de direito?</li><li>Como receber doação sem personalidade?</li></ul></div>
+      </div>
+    </div>
+
+    <div class="sp" id="m2t3">
+      <div class="sl">Teoria Concepcionista</div>
+      <p>A teoria concepcionista defende que <span class="hl">a personalidade civil inicia-se desde a concepção</span>. O nascimento com vida apenas consolida os direitos já adquiridos, não os cria. É a posição mais protetiva ao nascituro.</p>
+      <div class="sl">Teoria da Personalidade Condicional</div>
+      <p>Posição intermediária: o nascituro tem personalidade jurídica desde a concepção, mas os direitos patrimoniais ficam sujeitos à condição suspensiva do nascimento com vida. Adotada por Clóvis Beviláqua.</p>
+      <div class="co cs"><span class="co-ico">✓</span><div><strong>Doutrina majoritária atual:</strong> Embora o CC adote literalmente a teoria natalista, a doutrina moderna e a jurisprudência tendem à concepcionista, especialmente para fins de indenização por dano moral ao nascituro.</div></div>
+    </div>
+
+    <div class="sp" id="m2t4">
+      <div class="sl">Posição do STJ</div>
+      <p>O STJ tem reconhecido o <span class="hl">dano moral ao nascituro</span> em casos de morte do pai durante a gestação, admitindo indenização mesmo sem nascimento anterior ao fato danoso. Isso aproxima o tribunal da teoria concepcionista para fins indenizatórios.</p>
+      <div class="tw"><table>
+        <thead><tr><th>Aspecto</th><th>Natalista</th><th>Concepcionista</th></tr></thead>
+        <tbody>
+          <tr><td>Início da personalidade</td><td>Nascimento com vida</td><td>Concepção</td></tr>
+          <tr><td>Status do nascituro</td><td>Expectativa de direito</td><td>Sujeito de direito</td></tr>
+          <tr><td>Direitos patrimoniais</td><td>Condicionados ao nascimento</td><td>Desde a concepção</td></tr>
+          <tr><td>Dano moral ao nascituro</td><td>Não cabível (em regra)</td><td>Cabível</td></tr>
+          <tr><td>Base legal</td><td>Art. 2.º (literal)</td><td>Art. 2.º (ressalva)</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MÓDULO 3: CAPACIDADE CIVIL ═══ -->
+<div class="mod" id="mod-pj">
+  <div class="mhd" data-c="pj">
+    <div class="mi" data-c="pj">⚖️</div>
+    <div>
+      <div class="mnum">Módulo 03</div>
+      <div class="mtitle">Capacidade Civil</div>
+      <div class="mdesc">Capacidade de direito e de fato. Incapacidade absoluta e relativa. Arts. 3.º–4.º CC.</div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="pj" onclick="switchTab(this,'m3t1')">Teoria Geral</button>
+      <button class="stab" data-c="pj" onclick="switchTab(this,'m3t2')">Abs. Incapazes (art. 3.º)</button>
+      <button class="stab" data-c="pj" onclick="switchTab(this,'m3t3')">Rel. Incapazes (art. 4.º)</button>
+      <button class="stab" data-c="pj" onclick="switchTab(this,'m3t4')">Suprimento</button>
+    </div>
+
+    <div class="sp active" id="m3t1">
+      <div class="sl">Capacidade de Direito vs. Capacidade de Fato</div>
+      <div class="g2">
+        <div class="card cp"><div class="ct">Capacidade de Direito (Gozo)</div><ul><li>= Personalidade jurídica</li><li>Aptidão para ser titular de direitos</li><li>Universal — todo ser humano</li><li>Não pode ser retirada</li></ul></div>
+        <div class="card cm"><div class="ct">Capacidade de Fato (Exercício)</div><ul><li>Aptidão para exercer pessoalmente os direitos</li><li>Pode ser limitada pela lei</li><li>Pressupõe discernimento</li><li>Admite graduação</li></ul></div>
+      </div>
+      <div class="co ci"><span class="co-ico">ℹ</span><div><strong>Plena capacidade civil:</strong> Quando a pessoa tem ambas — capacidade de direito e de fato. Regra geral para maiores de 18 anos não sujeitos a restrições.</div></div>
+      <div class="sl">Impacto do Estatuto da Pessoa com Deficiência (Lei 13.146/2015)</div>
+      <p>A Lei 13.146/2015 reformou profundamente o sistema de incapacidades. <span class="hl">A deficiência, por si só, não implica incapacidade civil.</span> A pessoa com deficiência é plenamente capaz e pode exercer pessoalmente seus direitos, inclusive casar, ter filhos e exercer direitos sexuais e reprodutivos.</p>
+    </div>
+
+    <div class="sp" id="m3t2">
+      <div class="sl">Absolutamente Incapazes — Art. 3.º CC</div>
+      <p>Após a Lei 13.146/2015, o <span class="art">art. 3.º CC</span> prevê <span class="hl">apenas uma hipótese</span> de incapacidade absoluta:</p>
+      <div class="co ce"><span class="co-ico">!</span><div><strong>Art. 3.º CC (redação atual):</strong> São absolutamente incapazes de exercer pessoalmente os atos da vida civil os <strong>menores de 16 anos</strong>.</div></div>
+      <p>Antes da reforma, também eram absolutamente incapazes os enfermos e deficientes mentais sem discernimento e os que por causa transitória ou permanente não pudessem exprimir sua vontade — categorias eliminadas pelo Estatuto.</p>
+      <div class="sl">Consequência Jurídica</div>
+      <p>Os atos praticados por absolutamente incapaz, sem representação, são <span class="hl">nulos de pleno direito</span> (<span class="art">art. 166, I CC</span>). O absolutamente incapaz é <span class="hl">representado</span> por seus pais, tutor ou curador.</p>
+    </div>
+
+    <div class="sp" id="m3t3">
+      <div class="sl">Relativamente Incapazes — Art. 4.º CC</div>
+      <div class="tw"><table>
+        <thead><tr><th>Hipótese</th><th>Dispositivo</th><th>Observação</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Maiores de 16 e menores de 18 anos</strong></td><td>Art. 4.º, I</td><td>Menores púberes; assistidos pelos pais</td></tr>
+          <tr><td><strong>Ébrios habituais e viciados em tóxico</strong></td><td>Art. 4.º, II</td><td>Requer sentença judicial que declare a incapacidade</td></tr>
+          <tr><td><strong>Aqueles que, por causa transitória ou permanente, não puderem exprimir sua vontade</strong></td><td>Art. 4.º, III</td><td>Inserido pela Lei 13.146/2015</td></tr>
+          <tr><td><strong>Pródigos</strong></td><td>Art. 4.º, IV</td><td>Quem dilapida o próprio patrimônio; curatela limitada a atos de disposição patrimonial</td></tr>
+        </tbody>
+      </table></div>
+      <div class="co cw"><span class="co-ico">⚠</span><div><strong>Atos do relativamente incapaz sem assistência:</strong> são <strong>anuláveis</strong> (art. 171, I CC), não nulos. Prazo decadencial de 4 anos a partir da maioridade (art. 178, I CC).</div></div>
+    </div>
+
+    <div class="sp" id="m3t4">
+      <div class="sl">Suprimento da Incapacidade</div>
+      <div class="g2">
+        <div class="card cm"><div class="ct">Representação (absolutamente incapazes)</div><ul><li>Pais (poder familiar)</li><li>Tutor (órfãos)</li><li>Curador (interditados)</li><li>Age em nome do incapaz</li></ul></div>
+        <div class="card cp"><div class="ct">Assistência (relativamente incapazes)</div><ul><li>Pais / tutor / curador</li><li>Age ao lado do incapaz</li><li>Ambos assinam o ato</li><li>Sem assistência = ato anulável</li></ul></div>
+      </div>
+      <div class="sl">Interdição</div>
+      <p>A interdição é o processo pelo qual se reconhece judicialmente a incapacidade de alguém. Após a Lei 13.146/2015, só cabe para as hipóteses do art. 4.º, II e III CC. A sentença de interdição fixa os limites da curatela.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MÓDULO 4: EMANCIPAÇÃO ═══ -->
+<div class="mod" id="mod-dom">
+  <div class="mhd" data-c="dom">
+    <div class="mi" data-c="dom">🎓</div>
+    <div>
+      <div class="mnum">Módulo 04</div>
+      <div class="mtitle">Emancipação</div>
+      <div class="mdesc">Antecipação da plena capacidade. Art. 5.º, parágrafo único, CC.</div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="dom" onclick="switchTab(this,'m4t1')">Conceito</button>
+      <button class="stab" data-c="dom" onclick="switchTab(this,'m4t2')">Voluntária</button>
+      <button class="stab" data-c="dom" onclick="switchTab(this,'m4t3')">Judicial</button>
+      <button class="stab" data-c="dom" onclick="switchTab(this,'m4t4')">Legal</button>
+    </div>
+
+    <div class="sp active" id="m4t1">
+      <div class="sl">Conceito e Natureza</div>
+      <p><span class="hl">Emancipação</span> é o ato pelo qual se antecipa a plena capacidade civil do menor antes dos 18 anos. Prevista no <span class="art">art. 5.º, parágrafo único, CC</span>.</p>
+      <div class="co cw"><span class="co-ico">⚠</span><div><strong>Requisito mínimo de idade:</strong> Em regra, não há idade mínima expressa, exceto para a emancipação voluntária (a maioria da doutrina exige 16 anos completos, por analogia com a capacidade relativa). Para o casamento como causa de emancipação legal, o mínimo é 16 anos.</div></div>
+      <div class="sl">Irrevogabilidade</div>
+      <p>A emancipação é <span class="hl">irrevogável</span>. Uma vez concedida, não se pode desfazê-la — diferente da tutela e da curatela. Também não se perde com a superveniência de causa que, se existisse antes, impediria a emancipação (ex: casamento emancipatório + divórcio posterior).</p>
+    </div>
+
+    <div class="sp" id="m4t2">
+      <div class="sl">Emancipação Voluntária — Art. 5.º, §ún., I</div>
+      <p>Concedida pelos <span class="hl">pais</span> (ou por um deles, na falta do outro) por <span class="hl">escritura pública</span>, sem necessidade de homologação judicial.</p>
+      <div class="g2">
+        <div class="card cd"><div class="ct">Requisitos</div><ul><li>Menor com 16 anos completos</li><li>Escritura pública</li><li>Concedida pelos pais (ou tutor)</li><li>Se tutor: necessária homologação judicial</li></ul></div>
+        <div class="card cm"><div class="ct">Efeitos</div><ul><li>Plena capacidade civil</li><li>Pais continuam responsáveis por atos anteriores</li><li><strong>Responsabilidade dos pais persiste</strong> por atos do filho emancipado (Súmula STJ)</li></ul></div>
+      </div>
+    </div>
+
+    <div class="sp" id="m4t3">
+      <div class="sl">Emancipação Judicial — Art. 5.º, §ún., II</div>
+      <p>Concedida pelo <span class="hl">juiz</span>, a pedido do próprio menor (se tiver 16 anos), ouvido o tutor. Cabível quando o menor estiver sob tutela (pais falecidos, ausentes ou destituídos do poder familiar).</p>
+      <div class="co ci"><span class="co-ico">ℹ</span><div>O menor sob poder familiar dos pais <strong>não</strong> pode pedir emancipação judicial — deve ser emancipado voluntariamente pelos pais. A emancipação judicial é exclusiva para menores sob tutela.</div></div>
+    </div>
+
+    <div class="sp" id="m4t4">
+      <div class="sl">Emancipação Legal — Art. 5.º, §ún., III–V</div>
+      <p>Decorre da lei, automaticamente, pela verificação do fato previsto:</p>
+      <div class="tw"><table>
+        <thead><tr><th>Causa</th><th>Inciso</th><th>Observação</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Casamento</strong></td><td>III</td><td>Mínimo: 16 anos (com autorização dos pais). Emancipação mantida mesmo após dissolução do casamento.</td></tr>
+          <tr><td><strong>Exercício de emprego público efetivo</strong></td><td>IV</td><td>Cargo efetivo; não abrange emprego temporário</td></tr>
+          <tr><td><strong>Colação de grau em curso de ensino superior</strong></td><td>IV</td><td>Bacharelado, licenciatura etc.</td></tr>
+          <tr><td><strong>Estabelecimento civil ou comercial com economia própria</strong></td><td>V</td><td>Necessário exercício de atividade econômica com recursos do próprio menor</td></tr>
+          <tr><td><strong>Relação de emprego + economia própria</strong></td><td>V</td><td>Menor de 16 anos não pode ter relação de emprego (proibição constitucional); mínimo: 16 anos</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MÓDULO QUIZ ═══ -->
+<div class="mod" id="mod-quiz">
+  <div class="mhd" data-c="pj">
+    <div class="mi" data-c="pj">📝</div>
+    <div>
+      <div class="mnum">Quiz</div>
+      <div class="mtitle">20 Questões — Banca UFN</div>
+      <div class="mdesc">Pessoa Natural · Nascituro · Capacidade · Emancipação</div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="qwrap">
+      <div class="qtop">
+        <div class="qtitle">Simulado</div>
+        <div class="sbadge" id="qscore">0 / 20</div>
+      </div>
+      <div class="qdots" id="qdots"></div>
+      <div id="qzone"></div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer class="hub-footer">
+  <div class="ft-left">Guto Ceolin &middot; UFN &middot; Direito Civil I &middot; 2026/1</div>
+  <div class="ft-right"><a href="index.html">← Voltar ao Hub</a></div>
+</footer>
+
+<script>
+const questions=[
+  {q:"Nos termos do art. 1.º do Código Civil, toda pessoa é capaz de:",opts:["A) exercer pessoalmente todos os atos da vida civil","B) direitos e deveres na ordem civil","C) adquirir bens imóveis sem restrição","D) contrair obrigações sem assistência"],ans:1,fb:"Art. 1.º CC: Toda pessoa é capaz de <strong>direitos e deveres na ordem civil</strong>. Trata-se da capacidade de direito, universal a todo ser humano."},
+  {q:"Segundo o art. 2.º do CC, a personalidade civil da pessoa natural começa:",opts:["A) com a concepção","B) com o nascimento, ainda que sem vida","C) do nascimento com vida","D) após o registro de nascimento"],ans:2,fb:"Art. 2.º CC: A personalidade civil começa com o <strong>nascimento com vida</strong>. O registro é declaratório, não constitutivo."},
+  {q:"A teoria que defende que o nascituro possui personalidade jurídica desde a concepção denomina-se:",opts:["A) Natalista","B) Concepcionista","C) Da personalidade condicional","D) Kelseniana"],ans:1,fb:"A <strong>teoria concepcionista</strong> afirma que a personalidade existe desde a concepção. A natalista exige o nascimento com vida. A da personalidade condicional é posição intermediária."},
+  {q:"Após a vigência do Estatuto da Pessoa com Deficiência (Lei 13.146/2015), são absolutamente incapazes, nos termos do art. 3.º CC:",opts:["A) Os menores de 16 anos e os enfermos mentais","B) Apenas os menores de 16 anos","C) Os menores de 18 anos","D) Os enfermos mentais sem discernimento"],ans:1,fb:"Com a reforma trazida pela Lei 13.146/2015, o art. 3.º CC passou a prever <strong>apenas os menores de 16 anos</strong> como absolutamente incapazes. As demais hipóteses foram eliminadas."},
+  {q:"O ato jurídico praticado pelo absolutamente incapaz, sem representação, é:",opts:["A) Anulável","B) Ineficaz","C) Nulo","D) Válido, mas inoponível a terceiros"],ans:2,fb:"Os atos dos absolutamente incapazes, sem representação, são <strong>nulos de pleno direito</strong> (art. 166, I CC). A nulidade não admite confirmação e pode ser declarada de ofício."},
+  {q:"O pródigo, nos termos do art. 4.º, IV do CC, é considerado:",opts:["A) Absolutamente incapaz","B) Relativamente incapaz","C) Plenamente capaz","D) Incapaz apenas para contrair casamento"],ans:1,fb:"O pródigo é <strong>relativamente incapaz</strong> (art. 4.º, IV CC). Sua incapacidade restringe-se aos atos de disposição patrimonial — pode praticar atos existenciais livremente."},
+  {q:"A emancipação voluntária é concedida:",opts:["A) Por sentença judicial, a requerimento do menor","B) Pelos pais, por escritura pública","C) Pelos pais, por instrumento particular","D) Pelo juiz, ouvido o Ministério Público"],ans:1,fb:"A emancipação voluntária (art. 5.º, §ún., I CC) é concedida <strong>pelos pais por escritura pública</strong>, independentemente de homologação judicial. Se concedida pelo tutor, exige homologação judicial."},
+  {q:"A emancipação judicial é cabível quando o menor está:",opts:["A) Sob poder familiar dos pais","B) Sob tutela, a pedido do próprio menor","C) Casado há mais de um ano","D) Empregado em empresa pública"],ans:1,fb:"A emancipação judicial (art. 5.º, §ún., II CC) é cabível para o menor <strong>sob tutela</strong>, a pedido do próprio menor (com 16 anos), ouvido o tutor. Não cabe para menores sob poder familiar."},
+  {q:"O casamento, como causa de emancipação legal, exige idade mínima de:",opts:["A) 14 anos","B) 16 anos","C) 17 anos","D) 18 anos"],ans:1,fb:"O casamento emancipa legalmente (art. 5.º, §ún., III CC). A idade mínima para casar, com autorização dos pais, é <strong>16 anos</strong> (art. 1.517 CC, após a Lei 13.811/2019 que vedou o casamento infantil)."},
+  {q:"A emancipação voluntária concedida pelos pais é:",opts:["A) Revogável a qualquer tempo pelos pais","B) Revogável somente por decisão judicial","C) Irrevogável","D) Revogável se o filho praticar ato prejudicial à família"],ans:2,fb:"A emancipação é <strong>irrevogável</strong>. Uma vez concedida, não pode ser desfeita pelos pais ou por decisão judicial, nem é afetada por eventos posteriores como divórcio ou dissolução de casamento."},
+  {q:"Segundo a doutrina majoritária, os direitos da personalidade são:",opts:["A) Patrimoniais, transmissíveis e prescritíveis","B) Absolutos, intransmissíveis e irrenunciáveis","C) Relativos, transmissíveis e renunciáveis","D) Patrimoniais, irrenunciáveis e prescritíveis"],ans:1,fb:"Os direitos da personalidade são <strong>absolutos, intransmissíveis, irrenunciáveis, imprescritíveis, extrapatrimoniais e vitalícios</strong> (art. 11 CC e doutrina)."},
+  {q:"O art. 11 do CC estabelece que os direitos da personalidade não podem sofrer limitação voluntária. Existe exceção a essa regra?",opts:["A) Não, a proibição é absoluta","B) Sim, nos casos previstos em lei","C) Sim, sempre que o titular consentir expressamente","D) Sim, para fins comerciais"],ans:1,fb:"O art. 11 CC abre exceção <strong>'nos casos previstos em lei'</strong>. Exemplo: doação de sangue, consentimento para exames médicos, autorização para uso da imagem — limitações admitidas desde que não permanentes ou totais."},
+  {q:"A comoriência, prevista no art. 8.º CC, é aplicável quando:",opts:["A) Há dúvida sobre qual dos mortos faleceu primeiro","B) Ambos morrem em acidente de trânsito no mesmo dia","C) Os mortos eram cônjuges","D) Há dúvida sobre a causa da morte"],ans:0,fb:"A comoriência (art. 8.º CC) se aplica quando há <strong>dúvida sobre qual morreu primeiro</strong>, presumindo-se simultaneidade. Não exige que tenham morrido no mesmo lugar ou que sejam parentes."},
+  {q:"A incapacidade relativa do menor de 16 a 18 anos gera, nos atos praticados sem assistência:",opts:["A) Nulidade absoluta","B) Anulabilidade","C) Ineficácia relativa","D) Validade plena"],ans:1,fb:"Os atos do relativamente incapaz sem assistência são <strong>anuláveis</strong> (art. 171, I CC). A anulabilidade deve ser alegada pelos interessados e pode ser sanada por confirmação."},
+  {q:"A teoria da personalidade condicional, posição intermediária sobre o nascituro, sustenta que:",opts:["A) A personalidade existe desde o nascimento, condicionada ao registro","B) O nascituro tem personalidade desde a concepção, mas os direitos patrimoniais dependem do nascimento com vida","C) O nascituro tem personalidade plena, sem condições","D) A personalidade depende de decisão judicial"],ans:1,fb:"A teoria da personalidade condicional (Clóvis Beviláqua) entende que o nascituro tem personalidade desde a concepção, mas os <strong>direitos patrimoniais ficam sujeitos à condição suspensiva do nascimento com vida</strong>."},
+  {q:"A curatela do nascituro é prevista no CC para proteger:",opts:["A) Os direitos do natimorto","B) Os interesses do nascituro quando o pai falece e a mãe está incapaz ou ausente","C) Os bens do concepturo","D) O cônjuge sobrevivente"],ans:1,fb:"A curatela do nascituro (art. 1.779 CC) é nomeada quando o pai falece e a mãe está ausente, é incapaz ou foi declarada culpada. Protege os <strong>interesses do ser humano já concebido mas ainda não nascido</strong>."},
+  {q:"Segundo o Estatuto da Pessoa com Deficiência (Lei 13.146/2015), a deficiência:",opts:["A) Implica incapacidade absoluta de pleno direito","B) Implica incapacidade relativa para atos patrimoniais","C) Não implica, por si só, incapacidade civil","D) Implica curatela automática"],ans:2,fb:"O Estatuto da Pessoa com Deficiência deixa claro que <strong>a deficiência não implica incapacidade civil</strong>. A pessoa com deficiência tem plena capacidade e pode exercer pessoalmente seus direitos."},
+  {q:"O menor de 16 anos que exerce atividade de emprego com economia própria:",opts:["A) Emancipa-se legalmente","B) Não se emancipa, pois a CF proíbe trabalho de menores de 16 anos (salvo aprendiz)","C) Pode ser emancipado voluntariamente pelos pais","D) Precisa de alvará judicial para trabalhar"],ans:1,fb:"A CF/88 proíbe trabalho para menores de 16 anos, salvo na condição de aprendiz (a partir dos 14 anos). Portanto, o <strong>menor de 16 anos não pode se emancipar por relação de emprego</strong>."},
+  {q:"O direito ao nome, previsto nos arts. 16–19 do CC, integra:",opts:["A) Os direitos reais","B) Os direitos obrigacionais","C) Os direitos da personalidade","D) Os direitos sucessórios"],ans:2,fb:"O nome é um <strong>direito da personalidade</strong> (arts. 16–19 CC), inerente à identidade do ser humano, sendo protegido como tal — absoluto, irrenunciável e imprescritível."},
+  {q:"A morte presumida sem declaração de ausência (art. 7.º CC) é cabível quando:",opts:["A) A pessoa desaparece por mais de 10 anos","B) O desaparecido estava em situação de perigo de vida ou em campanha militar","C) O cônjuge pede a declaração após 5 anos","D) O desaparecido não tem herdeiros conhecidos"],ans:1,fb:"O art. 7.º CC permite declarar a morte presumida, <strong>sem necessidade de abertura de sucessão de ausência</strong>, quando o desaparecido estava em situação de extremo perigo de vida (art. 7.º, I) ou em campanha militar (art. 7.º, II)."}
+];
+
+let cur=0,score=0,answered=[];
+const zone=document.getElementById('qzone');
+const dots=document.getElementById('qdots');
+const sc=document.getElementById('qscore');
+
+function buildDots(){dots.innerHTML='';questions.forEach((_,i)=>{const d=document.createElement('div');d.className='qdot'+(i===0?' cur':'');d.id='dot'+i;dots.appendChild(d)});}
+
+function renderQ(i){
+  if(i>=questions.length){showResult();return;}
+  const q=questions[i];
+  let html=`<div class="qq active" id="qq${i}"><div class="qnum">Questão ${i+1} de ${questions.length}</div><div class="qtext">${q.q}</div><div class="qopts">`;
+  q.opts.forEach((o,j)=>{html+=`<button class="qopt" onclick="pick(${i},${j})"><span class="ql">${String.fromCharCode(65+j)}</span><span class="qt">${o}</span></button>`;});
+  html+=`</div><div class="qfb" id="fb${i}"></div><div class="qnav"><button class="qbn qbn-rs" onclick="resetQuiz()">Reiniciar</button><button class="qbn qbn-next" id="nx${i}" onclick="nextQ(${i+1})">Próxima →</button></div></div>`;
+  zone.innerHTML=html;
+}
+
+function pick(qi,oi){
+  if(answered[qi]!==undefined)return;
+  answered[qi]=oi;
+  const q=questions[qi];
+  const opts=document.querySelectorAll(`#qq${qi} .qopt`);
+  opts.forEach((o,j)=>{o.classList.add('disabled');if(j===q.ans)o.classList.add('correct');else if(j===oi)o.classList.add('wrong');});
+  const fb=document.getElementById('fb'+qi);
+  if(oi===q.ans){score++;fb.className='qfb ok show';fb.innerHTML='<strong>Correto!</strong> '+q.fb;}
+  else{fb.className='qfb ng show';fb.innerHTML='<strong>Incorreto.</strong> '+q.fb;}
+  const dot=document.getElementById('dot'+qi);
+  dot.className='qdot '+(oi===q.ans?'ok':'err');
+  if(qi+1<questions.length){const dot2=document.getElementById('dot'+(qi+1));if(dot2)dot2.classList.add('cur');}
+  sc.textContent=score+' / '+questions.length;
+  document.getElementById('nx'+qi).classList.add('show');
+}
+
+function nextQ(i){cur=i;renderQ(i);}
+
+function showResult(){
+  const pct=Math.round(score/questions.length*100);
+  zone.innerHTML=`<div class="qres show"><div class="rscore">${score}<span style="font-size:2rem;color:var(--text2)">/${questions.length}</span></div><div class="rlabel">${pct}% de acerto</div><div style="margin-top:1.2rem;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--text2)">${pct>=70?'Aprovado — bom desempenho!':'Continue revisando o conteúdo.'}</div><div class="qnav" style="justify-content:center;margin-top:1.5rem"><button class="qbn qbn-rs" onclick="resetQuiz()">Refazer Quiz</button></div></div>`;
+}
+
+function resetQuiz(){cur=0;score=0;answered=[];sc.textContent='0 / '+questions.length;buildDots();renderQ(0);}
+
+function switchMod(m,btn){
+  document.querySelectorAll('.mod').forEach(d=>d.classList.remove('active'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
+  document.getElementById('mod-'+m).classList.add('active');
+  btn.classList.add('active');
+  updateProgress();
+}
+
+function switchTab(btn,panelId){
+  const mbody=btn.closest('.mbody');
+  mbody.querySelectorAll('.stab').forEach(b=>b.classList.remove('active'));
+  mbody.querySelectorAll('.sp').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(panelId).classList.add('active');
+}
+
+function updateProgress(){
+  const els=document.querySelectorAll('.sp.active');
+  const pct=Math.min(100,Math.round((document.documentElement.scrollTop/(document.documentElement.scrollHeight-window.innerHeight))*100));
+  document.getElementById('pf').style.width=pct+'%';
+  document.getElementById('pc').textContent=pct+'%';
+}
+
+document.querySelectorAll('.xt').forEach(t=>{t.addEventListener('click',()=>{const xi=t.closest('.xi');xi.classList.toggle('open');const xc=xi.querySelector('.xc');xc.style.maxHeight=xi.classList.contains('open')?xc.scrollHeight+'px':'0';});});
+
+function doSearch(v){
+  if(!v){document.querySelectorAll('mark').forEach(m=>{const p=m.parentNode;p.replaceChild(document.createTextNode(m.textContent),m);p.normalize();});return;}
+}
+
+window.addEventListener('scroll',updateProgress);
+buildDots();renderQ(0);
+setTimeout(()=>{document.getElementById('pf').style.width='100%';document.getElementById('pc').textContent='100%';},3000);
+</script>
+</body>
+</html>

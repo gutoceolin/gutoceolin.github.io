@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teoria da Constituição — Poder Constituinte · Supremacia · Cláusulas Pétreas</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@300;400;500;600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#09090b;--surface:#101014;--surface2:#16161c;--surface3:#1c1c24;
+  --border:#21212a;--border2:#2d2d3a;
+  --text:#ddd8d0;--text2:#8f8a9a;--text3:#504c5e;--white:#f4f1ec;
+  --morte:#7b8fe8;--morte-dim:rgba(123,143,232,.10);--morte-mid:rgba(123,143,232,.22);
+  --aus:#5c9ee0;  --aus-dim:rgba(92,158,224,.10);  --aus-mid:rgba(92,158,224,.22);
+  --pj:#d4a843;   --pj-dim:rgba(212,168,67,.10);   --pj-mid:rgba(212,168,67,.22);
+  --dom:#5cc98a;  --dom-dim:rgba(92,201,138,.10);  --dom-mid:rgba(92,201,138,.22);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse 70% 40% at 10% 0%,rgba(123,143,232,.06) 0%,transparent 55%),
+             radial-gradient(ellipse 55% 35% at 90% 100%,rgba(92,201,138,.04) 0%,transparent 55%)}
+.hdr{position:relative;z-index:10;padding:3rem 2rem 0;max-width:1100px;margin:0 auto}
+.back{display:inline-flex;align-items:center;gap:.45rem;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);text-decoration:none;margin-bottom:1.2rem;transition:color .2s}.back:hover{color:var(--text2)}
+.ey{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--text3);margin-bottom:.9rem}
+.htitle{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,6.5vw,4.6rem);font-weight:700;color:var(--white);line-height:.95;letter-spacing:-.02em}
+.htitle em{font-style:italic;color:var(--text2);font-weight:400}
+.hsub{margin-top:1.1rem;font-size:.8rem;color:var(--text2);font-family:'JetBrains Mono',monospace;letter-spacing:.04em}
+.banca-pill{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.2rem;padding:.42rem .95rem;background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.25);border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.07em;color:var(--pj);text-transform:uppercase}
+.banca-pill .p{width:5px;height:5px;border-radius:50%;background:var(--pj);animation:pu 2s infinite}
+@keyframes pu{0%,100%{opacity:1}50%{opacity:.35}}
+.pw{display:flex;align-items:center;gap:1rem;margin-top:1.6rem;padding:.85rem 1.2rem;background:var(--surface);border:1px solid var(--border);border-radius:6px}
+.pl{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--text3);letter-spacing:.1em;white-space:nowrap}
+.pt{flex:1;height:3px;background:var(--border2);border-radius:10px;overflow:hidden}
+.pf{height:100%;background:linear-gradient(90deg,var(--morte),var(--aus),var(--pj),var(--dom));width:0%;transition:width .5s cubic-bezier(.4,0,.2,1);border-radius:10px}
+.pc{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--text2);white-space:nowrap}
+.sw{margin-top:.85rem;position:relative}
+.si{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:.68rem 1rem .68rem 2.5rem;color:var(--text);font-family:'Outfit',sans-serif;font-size:.85rem;outline:none;transition:border-color .2s}
+.si::placeholder{color:var(--text3)}.si:focus{border-color:var(--border2)}
+.sic{position:absolute;left:.82rem;top:50%;transform:translateY(-50%);color:var(--text3);font-size:.88rem;pointer-events:none}
+mark{background:rgba(212,168,67,.28);color:var(--white);border-radius:2px;padding:0 2px}
+.mnav{display:flex;gap:.42rem;flex-wrap:wrap;margin:1.9rem auto 0;max-width:1100px;padding:0 2rem;position:relative;z-index:10}
+.nb{display:flex;align-items:center;gap:.5rem;padding:.52rem .95rem;border:1px solid var(--border);border-radius:4px;background:var(--surface);color:var(--text2);font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.07em;cursor:pointer;transition:all .2s;text-transform:uppercase}
+.nb:hover{border-color:var(--border2);color:var(--text)}
+.nb .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.nb[data-m=morte] .d{background:var(--morte)}.nb[data-m=aus] .d{background:var(--aus)}
+.nb[data-m=pj] .d{background:var(--pj)}.nb[data-m=dom] .d{background:var(--dom)}
+.nb[data-m=quiz] .d{background:var(--white)}
+.nb.active{color:var(--white)}
+.nb[data-m=morte].active{border-color:var(--morte);background:var(--morte-dim)}
+.nb[data-m=aus].active{border-color:var(--aus);background:var(--aus-dim)}
+.nb[data-m=pj].active{border-color:var(--pj);background:var(--pj-dim)}
+.nb[data-m=dom].active{border-color:var(--dom);background:var(--dom-dim)}
+.nb[data-m=quiz].active{border-color:rgba(255,255,255,.28);background:rgba(255,255,255,.04)}
+.main{position:relative;z-index:5;max-width:1100px;margin:1.8rem auto 5rem;padding:0 2rem}
+.mod{display:none;animation:fu .3s ease both}.mod.active{display:block}
+@keyframes fu{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.mhd{display:flex;align-items:flex-start;gap:1.4rem;padding:1.75rem 2rem;border-radius:8px 8px 0 0;border:1px solid var(--border);border-bottom:none}
+.mhd[data-c=morte]{background:var(--morte-dim);border-color:rgba(123,143,232,.28)}
+.mhd[data-c=aus]{background:var(--aus-dim);border-color:rgba(92,158,224,.28)}
+.mhd[data-c=pj]{background:var(--pj-dim);border-color:rgba(212,168,67,.28)}
+.mhd[data-c=dom]{background:var(--dom-dim);border-color:rgba(92,201,138,.28)}
+.mi{width:46px;height:46px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
+.mi[data-c=morte]{background:var(--morte-mid)}.mi[data-c=aus]{background:var(--aus-mid)}
+.mi[data-c=pj]{background:var(--pj-mid)}.mi[data-c=dom]{background:var(--dom-mid)}
+.mnum{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.2em;color:var(--text3);text-transform:uppercase;margin-bottom:.25rem}
+.mtitle{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--white);line-height:1}
+.mdesc{margin-top:.42rem;font-size:.82rem;color:var(--text2);line-height:1.62}
+.mbody{border:1px solid var(--border);border-top:none;border-radius:0 0 8px 8px;background:var(--surface);overflow:hidden}
+.stabs{display:flex;border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
+.stabs::-webkit-scrollbar{display:none}
+.stab{padding:.78rem 1.15rem;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.07em;text-transform:uppercase;color:var(--text3);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;background:none;border-top:none;border-left:none;border-right:none;margin-bottom:-1px}
+.stab:hover{color:var(--text2)}.stab.active{color:var(--white)}
+.stab.active[data-c=morte]{border-bottom-color:var(--morte)}.stab.active[data-c=aus]{border-bottom-color:var(--aus)}
+.stab.active[data-c=pj]{border-bottom-color:var(--pj)}.stab.active[data-c=dom]{border-bottom-color:var(--dom)}
+.sp{display:none;padding:1.75rem 2rem;animation:fu .22s ease}.sp.active{display:block}
+.sl{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;color:var(--text3);margin-bottom:.58rem;margin-top:1.55rem;display:flex;align-items:center;gap:.5rem}
+.sl::after{content:'';flex:1;height:1px;background:var(--border)}.sl:first-child{margin-top:0}
+p{font-size:.875rem;color:#b5b0be;line-height:1.82}p+p{margin-top:.65rem}
+.hl{color:var(--white);font-weight:500}
+.art{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--pj);font-weight:500}
+ul,ol{padding-left:1.25rem;margin-top:.48rem}
+li{font-size:.85rem;color:#aeaab8;line-height:1.82;margin-bottom:.2rem}li strong{color:var(--white);font-weight:500}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:.88rem;margin-top:.68rem}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:.72rem;margin-top:.68rem}
+@media(max-width:640px){.g2,.g3{grid-template-columns:1fr}}
+.card{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:1rem;transition:border-color .2s}.card:hover{border-color:var(--border2)}
+.ct{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.55rem;display:flex;align-items:center;gap:.4rem}
+.ct::before{content:'';width:3px;height:11px;border-radius:2px;flex-shrink:0}
+.cm .ct{color:var(--morte)}.cm .ct::before{background:var(--morte)}
+.ca .ct{color:var(--aus)}.ca .ct::before{background:var(--aus)}
+.cp .ct{color:var(--pj)}.cp .ct::before{background:var(--pj)}
+.cd .ct{color:var(--dom)}.cd .ct::before{background:var(--dom)}
+.co{display:flex;gap:.75rem;padding:.88rem 1rem;border-radius:5px;margin-top:.82rem;font-size:.83rem;line-height:1.72;color:#aeaab8}
+.co-ico{font-size:.92rem;flex-shrink:0;margin-top:.05rem}.co strong{font-weight:500}
+.cw{background:rgba(212,168,67,.07);border:1px solid rgba(212,168,67,.2)}.cw strong{color:var(--pj)}
+.ci{background:rgba(92,158,224,.07);border:1px solid rgba(92,158,224,.2)}.ci strong{color:var(--aus)}
+.ce{background:rgba(123,143,232,.07);border:1px solid rgba(123,143,232,.2)}.ce strong{color:var(--morte)}
+.cs{background:rgba(92,201,138,.07);border:1px solid rgba(92,201,138,.2)}.cs strong{color:var(--dom)}
+.tw{overflow-x:auto;margin-top:.68rem;border-radius:6px;border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:.82rem}
+th{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);padding:.68rem 1rem;background:var(--surface2);border-bottom:1px solid var(--border);text-align:left;white-space:nowrap}
+td{padding:.62rem 1rem;border-bottom:1px solid var(--border);color:#aeaab8;vertical-align:top;line-height:1.6}
+tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.012)}td strong{color:var(--white);font-weight:500}
+.xi{border:1px solid var(--border);border-radius:5px;margin-top:.52rem;overflow:hidden;transition:border-color .2s}.xi:hover{border-color:var(--border2)}
+.xt{display:flex;align-items:center;justify-content:space-between;padding:.82rem 1rem;cursor:pointer;background:var(--surface2);user-select:none}
+.xl{font-size:.85rem;color:var(--text);display:flex;align-items:center;gap:.55rem}
+.xa{font-size:.6rem;color:var(--text3);transition:transform .22s}.xi.open .xa{transform:rotate(180deg)}
+.xc{max-height:0;overflow:hidden;transition:max-height .32s cubic-bezier(.4,0,.2,1)}
+.xin{padding:1rem;border-top:1px solid var(--border);font-size:.84rem;color:#aeaab8;line-height:1.78}
+.qwrap{padding:1.5rem 2rem 2rem}
+.qtop{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.4rem}
+.qtitle{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:700;color:var(--white)}
+.sbadge{font-family:'JetBrains Mono',monospace;font-size:.65rem;padding:.26rem .72rem;border-radius:4px;background:var(--surface2);border:1px solid var(--border);color:var(--text2)}
+.qdots{display:flex;gap:.28rem;flex-wrap:wrap;margin-bottom:1.2rem}
+.qdot{width:7px;height:7px;border-radius:50%;background:var(--border2);transition:all .2s}
+.qdot.cur{background:var(--text2)}.qdot.ok{background:var(--dom)}.qdot.err{background:var(--morte)}
+.qq{display:none;animation:fu .26s ease}.qq.active{display:block}
+.qnum{font-family:'JetBrains Mono',monospace;font-size:.56rem;color:var(--text3);letter-spacing:.1em;margin-bottom:.6rem}
+.qtext{font-size:.96rem;color:var(--white);line-height:1.68;margin-bottom:1.15rem;font-weight:400}
+.qopts{display:flex;flex-direction:column;gap:.42rem}
+.qopt{display:flex;align-items:flex-start;gap:.65rem;padding:.82rem .92rem;border:1px solid var(--border);border-radius:5px;cursor:pointer;transition:all .2s;background:var(--surface2);text-align:left;width:100%}
+.qopt:hover:not(:disabled){border-color:var(--border2)}
+.ql{font-family:'JetBrains Mono',monospace;font-size:.6rem;width:20px;height:20px;border-radius:3px;background:var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--text2);transition:all .2s}
+.qt{font-size:.84rem;color:#aeaab8;line-height:1.6}
+.qopt.correct{border-color:var(--dom);background:var(--dom-dim)}.qopt.correct .ql{background:var(--dom);color:#000}.qopt.correct .qt{color:var(--white)}
+.qopt.wrong{border-color:var(--morte);background:var(--morte-dim)}.qopt.wrong .ql{background:var(--morte);color:#fff}
+.qopt.disabled{cursor:default;opacity:.54}.qopt.disabled.correct{opacity:1}
+.qfb{display:none;margin-top:.88rem;padding:.88rem 1rem;border-radius:5px;font-size:.83rem;line-height:1.68;color:#aeaab8}
+.qfb.show{display:block;animation:fu .18s ease}
+.qfb.ok{background:var(--dom-dim);border:1px solid rgba(92,201,138,.26)}.qfb.ok strong{color:var(--dom)}
+.qfb.ng{background:var(--morte-dim);border:1px solid rgba(123,143,232,.26)}.qfb.ng strong{color:var(--morte)}
+.qnav{display:flex;align-items:center;justify-content:space-between;margin-top:1.35rem}
+.qbn{padding:.58rem 1.25rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;transition:all .2s;border:none}
+.qbn-next{background:var(--white);color:#09090b;display:none}.qbn-next:hover{opacity:.88}.qbn-next.show{display:block}
+.qbn-rs{background:var(--surface2);border:1px solid var(--border);color:var(--text2)}.qbn-rs:hover{border-color:var(--border2);color:var(--text)}
+.qres{display:none;text-align:center;padding:2.5rem 0}.qres.show{display:block}
+.rscore{font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:700;color:var(--white);line-height:1}
+.rlabel{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--text3);letter-spacing:.15em;text-transform:uppercase;margin-top:.4rem}
+.hub-footer{position:relative;z-index:5;max-width:1100px;margin:3rem auto 0;padding:1.5rem 2rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.ft-left{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--text3);letter-spacing:.08em}
+.ft-right{font-family:'JetBrains Mono',monospace;font-size:.55rem;color:var(--text3)}.ft-right a{color:var(--text2);text-decoration:none}.ft-right a:hover{color:var(--white)}
+@media(max-width:600px){.hdr,.main,.mnav{padding-left:1rem;padding-right:1rem}}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <a class="back" href="index.html">&#8592; Central de Resumos</a>
+  <div class="ey">Teoria da Constituição &mdash; Prova 1 &middot; UFN 2026/1</div>
+  <h1 class="htitle">Poder Constituinte<br><em>Supremacia · Cláusulas Pétreas</em></h1>
+  <div class="hsub">CF/88 arts. 1.º, 5.º, 60 &middot; Doutrina: Sieyès, Schmitt, Bonavides &middot; Banca UFN</div>
+  <div class="banca-pill"><span class="p"></span>Banca UFN &mdash; Estilo de Questões Identificado</div>
+  <div class="pw"><span class="pl">Progresso de Leitura</span><div class="pt"><div class="pf" id="pf"></div></div><span class="pc" id="pc">0%</span></div>
+  <div class="sw"><span class="sic">&#x2315;</span><input class="si" type="text" placeholder="Buscar neste resumo..." autocomplete="off"></div>
+</div>
+
+<nav class="mnav">
+  <button class="nb active" data-m="morte" onclick="switchMod('morte',this)"><span class="d"></span>Conceito de Constituição</button>
+  <button class="nb" data-m="aus" onclick="switchMod('aus',this)"><span class="d"></span>PC Originário</button>
+  <button class="nb" data-m="pj" onclick="switchMod('pj',this)"><span class="d"></span>PC Derivado</button>
+  <button class="nb" data-m="dom" onclick="switchMod('dom',this)"><span class="d"></span>Supremacia e Cláusulas Pétreas</button>
+  <button class="nb" data-m="quiz" onclick="switchMod('quiz',this)"><span class="d"></span>Quiz (20 q.)</button>
+</nav>
+
+<main class="main">
+
+<!-- ═══ MÓDULO 1: CONCEITO DE CONSTITUIÇÃO ═══ -->
+<div class="mod active" id="mod-morte">
+  <div class="mhd" data-c="morte">
+    <div class="mi" data-c="morte">📜</div>
+    <div><div class="mnum">Módulo 01</div><div class="mtitle">Conceito de Constituição</div><div class="mdesc">Sentidos, classificações e teorias fundamentais.</div></div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="morte" onclick="switchTab(this,'m1t1')">Sentidos da Constituição</button>
+      <button class="stab" data-c="morte" onclick="switchTab(this,'m1t2')">Classificações</button>
+      <button class="stab" data-c="morte" onclick="switchTab(this,'m1t3')">Lassalle vs. Hesse</button>
+      <button class="stab" data-c="morte" onclick="switchTab(this,'m1t4')">Constituição Brasileira</button>
+    </div>
+
+    <div class="sp active" id="m1t1">
+      <div class="sl">Sentidos da Constituição</div>
+      <div class="g3">
+        <div class="card cm"><div class="ct">Sentido Sociológico</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem">Ferdinand Lassalle: Constituição é a soma dos fatores reais de poder. O texto escrito é apenas "folha de papel" se não refletir esses fatores.</p></div>
+        <div class="card ca"><div class="ct">Sentido Político</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem">Carl Schmitt: Constituição é a decisão política fundamental do titular do poder constituinte sobre a forma e o modo de existência do Estado.</p></div>
+        <div class="card cm"><div class="ct">Sentido Jurídico</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem">Hans Kelsen: Constituição é a norma fundamental (Grundnorm), fundamento de validade de todo o ordenamento. Plano normativo puro.</p></div>
+      </div>
+      <div class="co ce"><span class="co-ico">★</span><div><strong>Sentido material vs. formal:</strong> Material = normas que regulam estrutura e funcionamento do Estado, independentemente de onde estejam. Formal = conjunto de normas inseridas no texto constitucional, pelo critério do processo de elaboração (mais rígido).</div></div>
+    </div>
+
+    <div class="sp" id="m1t2">
+      <div class="sl">Classificações das Constituições</div>
+      <div class="tw"><table>
+        <thead><tr><th>Critério</th><th>Espécie</th><th>Exemplo</th></tr></thead>
+        <tbody>
+          <tr><td>Origem</td><td><strong>Outorgada</strong> (imposta) / <strong>Promulgada</strong> (democrática)</td><td>CF/1824 (outorgada) / CF/1988 (promulgada)</td></tr>
+          <tr><td>Forma</td><td><strong>Escrita</strong> / <strong>Não-escrita (costumeira)</strong></td><td>CF/1988 (escrita) / Reino Unido (não-escrita)</td></tr>
+          <tr><td>Estabilidade</td><td><strong>Rígida</strong> / <strong>Semirrígida</strong> / <strong>Flexível</strong></td><td>CF/1988 (rígida)</td></tr>
+          <tr><td>Extensão</td><td><strong>Sintética</strong> (concisa) / <strong>Analítica</strong> (prolixa)</td><td>EUA (sintética) / CF/1988 (analítica)</td></tr>
+          <tr><td>Conteúdo</td><td><strong>Material</strong> / <strong>Formal</strong></td><td>—</td></tr>
+          <tr><td>Modo de elaboração</td><td><strong>Dogmática</strong> / <strong>Histórica</strong></td><td>CF/1988 (dogmática)</td></tr>
+        </tbody>
+      </table></div>
+      <div class="co cw"><span class="co-ico">⚠</span><div><strong>CF/1988:</strong> Promulgada, escrita, rígida, analítica (prolixa), dogmática, formal, dirigente e social. Conhecer todas as classificações é frequente em provas.</div></div>
+    </div>
+
+    <div class="sp" id="m1t3">
+      <div class="sl">Lassalle vs. Hesse — O Embate Clássico</div>
+      <div class="g2">
+        <div class="card cm">
+          <div class="ct">Lassalle — "Fatores Reais de Poder"</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem">A Constituição real são os fatores de poder (monarquia, exército, aristocracia, banqueiros, classe operária). A Constituição escrita que não os reflita é uma "folha de papel", inevitavelmente superada pelos fatores reais.</p>
+        </div>
+        <div class="card ca">
+          <div class="ct">Hesse — "Força Normativa da Constituição"</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem">Contrapõe Lassalle: a Constituição possui força normativa própria. Quando incorporada à consciência geral, pode condicionar a realidade política. A vontade de Constituição (<em>Wille zur Verfassung</em>) é essencial.</p>
+        </div>
+      </div>
+      <div class="co ci"><span class="co-ico">ℹ</span><div><strong>Posição doutrinária:</strong> A maioria do constitucionalismo contemporâneo aproxima-se de Hesse — a norma constitucional tem força para moldar a realidade, mas precisa de concordância mínima com a realidade para ser eficaz.</div></div>
+    </div>
+
+    <div class="sp" id="m1t4">
+      <div class="sl">A Constituição Federal de 1988</div>
+      <p>A <span class="hl">CF/1988</span> foi promulgada em 5 de outubro de 1988 pela Assembleia Nacional Constituinte. É considerada a "Constituição Cidadã" (Ulysses Guimarães) por seu amplo catálogo de direitos fundamentais.</p>
+      <ul>
+        <li><strong>Preâmbulo:</strong> não tem força normativa (STF), mas serve como vetor interpretativo</li>
+        <li><strong>Princípios Fundamentais:</strong> arts. 1–4 (soberania, cidadania, dignidade, valores sociais do trabalho, pluralismo político)</li>
+        <li><strong>Estrutura:</strong> 9 títulos, 250 artigos permanentes + ADCT (Ato das Disposições Constitucionais Transitórias)</li>
+      </ul>
+      <div class="co cs"><span class="co-ico">✓</span><div><strong>Fundamentos da República (art. 1.º CF):</strong> Soberania · Cidadania · Dignidade da pessoa humana · Valores sociais do trabalho e da livre iniciativa · Pluralismo político. Mnemônico: <strong>SC-DIVA-P</strong></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MÓDULO 2: PC ORIGINÁRIO ═══ -->
+<div class="mod" id="mod-aus">
+  <div class="mhd" data-c="aus">
+    <div class="mi" data-c="aus">⚡</div>
+    <div><div class="mnum">Módulo 02</div><div class="mtitle">Poder Constituinte Originário</div><div class="mdesc">Conceito, características e titularidade. Sieyès e o constitucionalismo.</div></div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="aus" onclick="switchTab(this,'m2t1')">Conceito e Origem</button>
+      <button class="stab" data-c="aus" onclick="switchTab(this,'m2t2')">Características</button>
+      <button class="stab" data-c="aus" onclick="switchTab(this,'m2t3')">Titularidade</button>
+      <button class="stab" data-c="aus" onclick="switchTab(this,'m2t4')">Limites</button>
+    </div>
+
+    <div class="sp active" id="m2t1">
+      <div class="sl">Origem da Teoria — Sieyès</div>
+      <p>A teoria do poder constituinte foi sistematizada por <span class="hl">Emmanuel Joseph Sieyès</span> no panfleto "O que é o Terceiro Estado?" (1789), durante a Revolução Francesa. Para Sieyès, o poder constituinte pertence à nação, é ilimitado e anterior ao direito positivo.</p>
+      <div class="co ce"><span class="co-ico">★</span><div><strong>Distinção fundamental de Sieyès:</strong> Poder Constituinte (pouvoir constituant) — cria a Constituição. Poderes Constituídos (pouvoirs constitués) — criados pela Constituição (Executivo, Legislativo, Judiciário). Os constituídos são limitados; o constituinte, não.</div></div>
+    </div>
+
+    <div class="sp" id="m2t2">
+      <div class="sl">Características do PCO</div>
+      <div class="g2">
+        <div class="card cm"><div class="ct">Inicial</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem">Inaugura uma nova ordem jurídica. Rompe com a ordem anterior (sem continuidade jurídica). Ex.: promulgação da CF/1988 encerrou a vigência da CF/1969.</p></div>
+        <div class="card ca"><div class="ct">Ilimitado Juridicamente</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem">Não está subordinado a nenhuma norma jurídica anterior. Pode criar a Constituição que entender pertinente. (Há debate sobre limites suprapositivos/jusnaturalistas.)</p></div>
+        <div class="card cm"><div class="ct">Incondicionado</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem">Não obedece a formas ou procedimentos preestabelecidos pelo direito positivo. Estabelece suas próprias regras.</p></div>
+        <div class="card ca"><div class="ct">Permanente</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem">Não se esgota com o exercício. Permanece latente na titularidade do povo, podendo ser convocado a qualquer tempo.</p></div>
+      </div>
+    </div>
+
+    <div class="sp" id="m2t3">
+      <div class="sl">Titularidade</div>
+      <p>Na teoria democrática, o <span class="hl">titular do poder constituinte é o povo</span> (ou a nação, na terminologia de Sieyès). No Brasil, o <span class="art">art. 1.º, parágrafo único, CF</span> afirma: "Todo poder emana do povo, que o exerce por meio de representantes eleitos ou diretamente."</p>
+      <div class="co cw"><span class="co-ico">⚠</span><div><strong>Titular ≠ Exercente:</strong> O titular é o povo, mas o exercício concreto do poder constituinte originário se deu pela Assembleia Nacional Constituinte (1987–1988), representando o povo. O povo delega o exercício, mas não a titularidade.</div></div>
+    </div>
+
+    <div class="sp" id="m2t4">
+      <div class="sl">Limites do PCO — Debate Doutrinário</div>
+      <div class="g2">
+        <div class="card cm"><div class="ct">Positivista (Kelsen)</div><ul><li>PCO é juridicamente ilimitado</li><li>Qualquer Constituição é válida formalmente</li><li>Limites são apenas fáticos (políticos, sociais)</li></ul></div>
+        <div class="card ca"><div class="ct">Jusnaturalista</div><ul><li>PCO encontra limites no direito natural</li><li>Direitos inatos do ser humano são anteriores ao Estado</li><li>Constituição não pode violá-los validamente</li></ul></div>
+      </div>
+      <div class="co ci"><span class="co-ico">ℹ</span><div><strong>Posição majoritária no Brasil:</strong> O PCO é <strong>juridicamente ilimitado</strong>, mas encontra limites <strong>suprapositivos</strong> (valores éticos e jusnaturalistas) e <strong>fáticos</strong> (realidade histórica e social). O STF adota a posição positivista: a CF/1988 não conhece hierarquia interna entre normas originais.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MÓDULO 3: PC DERIVADO ═══ -->
+<div class="mod" id="mod-pj">
+  <div class="mhd" data-c="pj">
+    <div class="mi" data-c="pj">🔧</div>
+    <div><div class="mnum">Módulo 03</div><div class="mtitle">Poder Constituinte Derivado</div><div class="mdesc">Reformador, revisor e decorrente. Espécies e limites. Art. 60 CF.</div></div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="pj" onclick="switchTab(this,'m3t1')">Conceito e Espécies</button>
+      <button class="stab" data-c="pj" onclick="switchTab(this,'m3t2')">Reformador (EC)</button>
+      <button class="stab" data-c="pj" onclick="switchTab(this,'m3t3')">Revisor</button>
+      <button class="stab" data-c="pj" onclick="switchTab(this,'m3t4')">Decorrente</button>
+    </div>
+
+    <div class="sp active" id="m3t1">
+      <div class="sl">Conceito</div>
+      <p>O <span class="hl">Poder Constituinte Derivado (PCD)</span> é criado e delimitado pelo PCO. É limitado, condicionado e subordinado à Constituição. Seu exercício deve observar as regras fixadas pelo próprio texto constitucional.</p>
+      <div class="g3">
+        <div class="card cp"><div class="ct">Reformador</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem">Modifica o texto constitucional por meio de Emendas Constitucionais (art. 60 CF).</p></div>
+        <div class="card cp"><div class="ct">Revisor</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem">Revisão global da CF após 5 anos (ADCT, art. 3.º). Já foi exercido (1993–1994). Esgotado.</p></div>
+        <div class="card cp"><div class="ct">Decorrente</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem">Poder dos Estados de elaborar suas próprias Constituições (art. 25 CF). Deriva do PCO federal.</p></div>
+      </div>
+    </div>
+
+    <div class="sp" id="m3t2">
+      <div class="sl">Poder Constituinte Reformador — Art. 60 CF</div>
+      <p>O <span class="art">art. 60 CF</span> disciplina as Emendas Constitucionais (EC). Há limites expressos e implícitos.</p>
+      <div class="sl">Iniciativa (art. 60, I–III)</div>
+      <ul>
+        <li>1/3 dos membros da Câmara ou do Senado</li>
+        <li>Presidente da República</li>
+        <li>Mais da metade das Assembleias Legislativas (maioria relativa)</li>
+      </ul>
+      <div class="sl">Aprovação</div>
+      <div class="co cw"><span class="co-ico">⚠</span><div><strong>Quórum especial:</strong> 3/5 dos membros de <strong>cada Casa</strong>, em <strong>dois turnos de votação</strong> (art. 60, §2.º CF). Muito mais difícil que lei ordinária (maioria simples) ou lei complementar (maioria absoluta).</div></div>
+      <div class="sl">Limites Circunstanciais (art. 60, §1.º)</div>
+      <p>A CF <span class="hl">não pode ser emendada na vigência de</span>: intervenção federal, estado de defesa ou estado de sítio.</p>
+    </div>
+
+    <div class="sp" id="m3t3">
+      <div class="sl">Poder Constituinte Revisor</div>
+      <p>O <span class="art">art. 3.º do ADCT</span> previu revisão constitucional 5 anos após a promulgação da CF/1988. Foi exercida em 1993–1994, resultando em 6 Emendas de Revisão. <span class="hl">Está totalmente esgotado</span> — não pode ser convocado novamente.</p>
+      <div class="co ci"><span class="co-ico">ℹ</span><div>As Emendas de Revisão (ER 1 a 6) têm numeração diferente das Emendas Constitucionais (EC 1, EC 2...). As ER não seguiram o quórum de 3/5, mas de maioria absoluta em sessão unicameral (Congresso Nacional reunido).</div></div>
+    </div>
+
+    <div class="sp" id="m3t4">
+      <div class="sl">Poder Constituinte Decorrente</div>
+      <p>Os <span class="hl">Estados-membros</span> têm competência para elaborar suas próprias Constituições estaduais (<span class="art">art. 25 CF</span>). Esse poder é derivado porque encontra seus limites na CF/1988 — os Estados não podem contrariar normas constitucionais federais.</p>
+      <div class="g2">
+        <div class="card ca"><div class="ct">O que os Estados podem fazer</div><ul><li>Estruturar seus poderes (Executivo, Legislativo, Judiciário estaduais)</li><li>Criar normas de organização estadual</li><li>Ampliar direitos fundamentais (nunca restringir)</li></ul></div>
+        <div class="card cm"><div class="ct">Limites do PCD Decorrente</div><ul><li>Observar os princípios constitucionais sensíveis (art. 34, VII CF)</li><li>Não violar a separação dos poderes federal</li><li>Respeitar as normas de reprodução obrigatória</li></ul></div>
+      </div>
+      <div class="co cw"><span class="co-ico">⚠</span><div><strong>Municípios e DF não têm PCD decorrente:</strong> Os Municípios aprovam Leis Orgânicas (não Constituições), e o DF tem Lei Orgânica com status especial, mas não tem constituição própria.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MÓDULO 4: SUPREMACIA E CLÁUSULAS PÉTREAS ═══ -->
+<div class="mod" id="mod-dom">
+  <div class="mhd" data-c="dom">
+    <div class="mi" data-c="dom">🛡️</div>
+    <div><div class="mnum">Módulo 04</div><div class="mtitle">Supremacia e Cláusulas Pétreas</div><div class="mdesc">Hierarquia constitucional, cláusulas pétreas e limites ao poder de reforma. Art. 60, §4.º CF.</div></div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="dom" onclick="switchTab(this,'m4t1')">Supremacia</button>
+      <button class="stab" data-c="dom" onclick="switchTab(this,'m4t2')">Cláusulas Pétreas</button>
+      <button class="stab" data-c="dom" onclick="switchTab(this,'m4t3')">Alcance das Pétreas</button>
+      <button class="stab" data-c="dom" onclick="switchTab(this,'m4t4')">Limites Implícitos</button>
+    </div>
+
+    <div class="sp active" id="m4t1">
+      <div class="sl">Supremacia da Constituição</div>
+      <p>A supremacia constitucional significa que a CF/1988 está no <span class="hl">topo da pirâmide normativa</span> — todas as demais normas do ordenamento (leis, decretos, atos administrativos) devem estar em conformidade com ela.</p>
+      <div class="co ce"><span class="co-ico">★</span><div><strong>Consequência:</strong> norma infraconstitucional incompatível com a CF é <strong>inconstitucional</strong> e deve ser afastada. O controle de constitucionalidade é o mecanismo para garantir a supremacia.</div></div>
+      <div class="sl">Rigidez Constitucional</div>
+      <p>A supremacia pressupõe <span class="hl">rigidez</span>: a CF só pode ser modificada por procedimento mais dificultoso do que o legislativo ordinário. A CF/1988 é rígida (exige EC com quórum de 3/5 em dois turnos).</p>
+    </div>
+
+    <div class="sp" id="m4t2">
+      <div class="sl">Cláusulas Pétreas — Art. 60, §4.º CF</div>
+      <p>São os limites materiais ao poder de reforma constitucional — <span class="hl">o núcleo imutável da CF</span>. Nem mesmo por EC pode-se abolir:</p>
+      <div class="co ce"><span class="co-ico">!</span><div><strong>Art. 60, §4.º CF — não será objeto de deliberação proposta de emenda tendente a abolir:</strong><br>I — a forma federativa de Estado;<br>II — o voto direto, secreto, universal e periódico;<br>III — a separação dos Poderes;<br>IV — os direitos e garantias individuais.</div></div>
+      <div class="co cw"><span class="co-ico">⚠</span><div><strong>Atenção:</strong> A EC que <em>aumente</em> ou <em>fortaleça</em> uma cláusula pétrea é válida. A vedação é para EC <em>tendente a abolir</em> — não para qualquer alteração.</div></div>
+    </div>
+
+    <div class="sp" id="m4t3">
+      <div class="sl">Alcance das Cláusulas Pétreas</div>
+      <div class="tw"><table>
+        <thead><tr><th>Cláusula Pétrea</th><th>O que protege</th><th>Ponto crítico</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Forma federativa</strong></td><td>Autonomia dos entes; repartição de competências; integridade territorial</td><td>Pode haver fusão de Estados? STF: não se afetar o núcleo federativo.</td></tr>
+          <tr><td><strong>Voto</strong></td><td>Direto, secreto, universal, periódico (art. 14 CF)</td><td>Não protege o sistema eleitoral (proporcional/majoritário)</td></tr>
+          <tr><td><strong>Separação dos Poderes</strong></td><td>Independência e harmonia entre E, L e J (art. 2.º CF)</td><td>Não impede delegação legislativa (art. 68 CF)</td></tr>
+          <tr><td><strong>Direitos e garantias individuais</strong></td><td>Art. 5.º e outros direitos fundamentais de 1.ª geração</td><td>STF: extensível a direitos sociais (art. 6.º) pelo núcleo essencial</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="sp" id="m4t4">
+      <div class="sl">Limites Implícitos ao Poder de Reforma</div>
+      <p>Além dos expressos (art. 60, §4.º), a doutrina reconhece limites <span class="hl">implícitos</span> ao poder de reforma:</p>
+      <ul>
+        <li><strong>Titularidade do PCO:</strong> Não se pode transferir a titularidade do poder constituinte do povo para outra entidade</li>
+        <li><strong>O próprio processo de reforma:</strong> Não se pode facilitar o processo de emenda (reduzir o quórum para aprovação de EC)</li>
+        <li><strong>A identidade da Constituição:</strong> Não se pode substituir completamente a CF por outra — isso seria ato do PCO, não do PCD</li>
+      </ul>
+      <div class="co ci"><span class="co-ico">ℹ</span><div><strong>Teoria da dupla revisão:</strong> Segundo essa tese (minoritária), seria possível primeiro emendar as cláusulas pétreas e depois a matéria protegida. A doutrina majoritária e o STF rejeitam essa possibilidade.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ QUIZ ═══ -->
+<div class="mod" id="mod-quiz">
+  <div class="mhd" data-c="pj"><div class="mi" data-c="pj">📝</div><div><div class="mnum">Quiz</div><div class="mtitle">20 Questões — Banca UFN</div><div class="mdesc">Poder Constituinte · Supremacia · Cláusulas Pétreas</div></div></div>
+  <div class="mbody"><div class="qwrap">
+    <div class="qtop"><div class="qtitle">Simulado</div><div class="sbadge" id="qscore">0 / 20</div></div>
+    <div class="qdots" id="qdots"></div>
+    <div id="qzone"></div>
+  </div></div>
+</div>
+
+</main>
+
+<footer class="hub-footer">
+  <div class="ft-left">Guto Ceolin &middot; UFN &middot; Teoria da Constituição &middot; 2026/1</div>
+  <div class="ft-right"><a href="index.html">← Voltar ao Hub</a></div>
+</footer>
+
+<script>
+const questions=[
+  {q:"A teoria do Poder Constituinte foi sistematizada por qual pensador, durante a Revolução Francesa?",opts:["A) Hans Kelsen","B) Carl Schmitt","C) Emmanuel Joseph Sieyès","D) Konrad Hesse"],ans:2,fb:"<strong>Sieyès</strong> sistematizou a teoria do PC em 'O que é o Terceiro Estado?' (1789), distinguindo o pouvoir constituant dos pouvoirs constitués."},
+  {q:"Segundo a concepção sociológica de Ferdinand Lassalle, a Constituição real de um país é:",opts:["A) O texto escrito aprovado pelo parlamento","B) A soma dos fatores reais de poder","C) A norma fundamental (Grundnorm) de Kelsen","D) A decisão política fundamental de Schmitt"],ans:1,fb:"Lassalle: a Constituição real é a <strong>soma dos fatores reais de poder</strong>. O texto escrito é apenas 'folha de papel' se não refletir esses fatores."},
+  {q:"Konrad Hesse, ao rebater Lassalle, sustenta que:",opts:["A) A Constituição escrita não tem força normativa própria","B) Os fatores reais de poder sempre sobrepõem a norma","C) A Constituição possui força normativa capaz de condicionar a realidade","D) A Constituição deve ser modificada a cada geração"],ans:2,fb:"Hesse defende a <strong>força normativa da Constituição</strong>: quando incorporada à consciência geral e existindo a Wille zur Verfassung (vontade de Constituição), a norma molda a realidade."},
+  {q:"A Constituição Federal de 1988, quanto à estabilidade, é classificada como:",opts:["A) Flexível","B) Semirrígida","C) Rígida","D) Imutável"],ans:2,fb:"A CF/1988 é <strong>rígida</strong> pois exige processo mais dificultoso para sua alteração (EC com 3/5 dos votos em dois turnos) do que o processo legislativo ordinário."},
+  {q:"O Poder Constituinte Originário é considerado ilimitado juridicamente. Isso significa que:",opts:["A) Pode criar qualquer Constituição, sem vinculação a normas jurídicas positivas anteriores","B) Não encontra nenhum tipo de limite, nem fático","C) Está subordinado ao direito natural","D) Deve respeitar as cláusulas pétreas da Constituição anterior"],ans:0,fb:"O PCO é <strong>juridicamente ilimitado</strong> — não se vincula a normas positivas anteriores. A maioria da doutrina reconhece apenas limites suprapositivos (jusnaturalistas) e fáticos."},
+  {q:"O Poder Constituinte Derivado Reformador, no Brasil, exercita-se por meio de:",opts:["A) Leis Complementares","B) Emendas Constitucionais","C) Decretos Legislativos","D) Medidas Provisórias"],ans:1,fb:"O PCD Reformador se manifesta pelas <strong>Emendas Constitucionais</strong>, disciplinadas pelo art. 60 CF. Não se confunde com lei complementar (quórum diferente) nem com outros instrumentos."},
+  {q:"O quórum de aprovação de uma Emenda Constitucional é:",opts:["A) Maioria simples em sessão unicameral","B) Maioria absoluta em dois turnos em cada Casa","C) 3/5 dos membros de cada Casa em dois turnos","D) 2/3 dos membros de cada Casa em um turno"],ans:2,fb:"Art. 60, §2.º CF: aprovação por <strong>3/5 dos membros de cada Casa (Câmara e Senado), em dois turnos de votação</strong>."},
+  {q:"A proposta de Emenda Constitucional NÃO pode ser apresentada por:",opts:["A) O Presidente da República","B) 1/3 dos membros da Câmara dos Deputados","C) Um único Senador da República","D) Mais da metade das Assembleias Legislativas"],ans:2,fb:"O art. 60, I–III CF define os legitimados para propor EC: PR, 1/3 da Câmara ou do Senado, mais da metade das ALs (maioria relativa). <strong>Um único senador não tem legitimidade</strong>."},
+  {q:"Em qual situação a Constituição Federal NÃO pode ser emendada?",opts:["A) Durante o recesso parlamentar","B) Na vigência de estado de sítio, estado de defesa ou intervenção federal","C) Durante mandato presidencial de vice-presidente","D) Em ano eleitoral"],ans:1,fb:"Art. 60, §1.º CF: limites circunstanciais — a CF não pode ser emendada na vigência de <strong>intervenção federal, estado de defesa ou estado de sítio</strong>."},
+  {q:"São cláusulas pétreas expressas na CF/1988 (art. 60, §4.º), EXCETO:",opts:["A) A forma federativa de Estado","B) O voto direto, secreto, universal e periódico","C) A forma republicana de governo","D) Os direitos e garantias individuais"],ans:2,fb:"A <strong>forma republicana de governo</strong> NÃO é cláusula pétrea expressa. As cláusulas pétreas do art. 60, §4.º são: forma federativa, voto (direto/secreto/universal/periódico), separação dos poderes e direitos/garantias individuais."},
+  {q:"Uma proposta de EC que tende a abolir os direitos e garantias individuais deve ser:",opts:["A) Aprovada por quórum qualificado de 2/3","B) Rejeitada — é inconstitucional, não pode sequer ser deliberada","C) Aprovada se contar com 3/5 em dois turnos","D) Enviada ao STF para autorização prévia"],ans:1,fb:"Art. 60, §4.º CF: não será objeto de deliberação proposta tendente a abolir cláusulas pétreas. A proposta não pode <strong>sequer ser votada</strong> — é inconstitucional. O STF pode declarar inconstitucional mesmo antes da votação."},
+  {q:"O Poder Constituinte Derivado Revisor, previsto no art. 3.º do ADCT, encontra-se:",opts:["A) Disponível para ser convocado a cada 10 anos","B) Disponível sempre que o Congresso Nacional deliberar","C) Totalmente esgotado após a revisão de 1993–1994","D) Disponível apenas em caso de crise institucional"],ans:2,fb:"O PCD Revisor foi exercido em 1993–1994 (5 anos após a CF/1988), resultando em 6 Emendas de Revisão. Está <strong>totalmente esgotado</strong> — não pode mais ser convocado."},
+  {q:"O Poder Constituinte Decorrente é exercido pelos:",opts:["A) Municípios, para elaborar suas Leis Orgânicas","B) Estados-membros, para elaborar suas Constituições estaduais","C) Poder Executivo federal, por meio de decretos","D) Tribunais, para elaborar seus regimentos internos"],ans:1,fb:"O PCD Decorrente é exercido pelos <strong>Estados-membros</strong> para elaborar suas Constituições Estaduais (art. 25 CF). Os Municípios aprovam Leis Orgânicas — não possuem PCD decorrente."},
+  {q:"O preâmbulo da CF/1988, segundo o STF, possui:",opts:["A) Força normativa equivalente aos artigos da Constituição","B) Valor supraconstitucional","C) Nenhuma força normativa, servindo apenas como vetor interpretativo","D) Força normativa apenas para os direitos fundamentais"],ans:2,fb:"O STF entende que o preâmbulo da CF/1988 <strong>não possui força normativa</strong>. É uma proclamação de intenções que serve como vetor interpretativo, mas não cria direitos ou obrigações diretamente."},
+  {q:"A distinção entre Constituição em sentido material e formal consiste em:",opts:["A) Material = texto escrito; formal = costumes constitucionais","B) Material = normas que regulam a estrutura do Estado; formal = normas inseridas no texto constitucional","C) Material = origem democrática; formal = origem outorgada","D) Material = normas rígidas; formal = normas flexíveis"],ans:1,fb:"Constituição <strong>material</strong>: normas que regulam a estrutura do Estado e os direitos fundamentais (conteúdo). Constituição <strong>formal</strong>: normas inseridas no texto constitucional, independentemente do conteúdo (critério formal/processual)."},
+  {q:"Qual é o fundamento da supremacia constitucional no constitucionalismo moderno?",opts:["A) A maior extensão do texto constitucional","B) A rigidez da Constituição e sua posição como norma fundamental do ordenamento","C) O fato de ter sido promulgada por assembleia popular","D) A antiguidade da Constituição"],ans:1,fb:"A supremacia constitucional fundamenta-se na <strong>rigidez</strong> (procedimento mais difícil de alteração) e na posição da CF como <strong>norma fundamental do ordenamento</strong>, que condiciona a validade de todas as demais normas."},
+  {q:"A chamada 'teoria da dupla revisão', que pretende suprimir cláusulas pétreas em dois passos, é aceita pelo STF?",opts:["A) Sim, desde que aprovada por 4/5 dos votos","B) Sim, se aprovada por referendo popular","C) Não — o STF e a doutrina majoritária rejeitam essa possibilidade","D) Sim, apenas para alterar o voto e a federação"],ans:2,fb:"A <strong>teoria da dupla revisão é rejeitada</strong> pelo STF e pela doutrina majoritária. As cláusulas pétreas são limites absolutos ao PCD reformador — não podem ser suprimidas em etapas."},
+  {q:"O art. 1.º da CF/1988 lista os fundamentos da República Federativa do Brasil. Qual das alternativas NÃO é um desses fundamentos?",opts:["A) Soberania","B) Dignidade da pessoa humana","C) Separação dos poderes","D) Pluralismo político"],ans:2,fb:"Os fundamentos do art. 1.º CF são: soberania, cidadania, dignidade da pessoa humana, valores sociais do trabalho e livre iniciativa, pluralismo político. <strong>Separação dos Poderes</strong> é princípio (art. 2.º CF), não fundamento."},
+  {q:"A CF/1988, quanto à extensão do texto, é classificada como:",opts:["A) Sintética ou concisa","B) Analítica ou prolixa","C) Semianalítica","D) Minimalista"],ans:1,fb:"A CF/1988 é classificada como <strong>analítica ou prolixa</strong> por conter normas de grande detalhe e extensão, incluindo matérias que poderiam ser tratadas em legislação ordinária em constituições mais sintéticas (ex.: Constituição americana)."},
+  {q:"O poder constituinte originário, segundo a doutrina majoritária, é:",opts:["A) Limitado, condicionado e derivado","B) Inicial, ilimitado juridicamente e incondicionado","C) Limitado pelos direitos naturais e pela Constituição anterior","D) Exercido apenas por representantes eleitos diretamente"],ans:1,fb:"As características clássicas do PCO são: <strong>inicial</strong> (inaugura nova ordem), <strong>ilimitado juridicamente</strong> (não vinculado ao direito positivo anterior) e <strong>incondicionado</strong> (não segue forma preestabelecida)."}
+];
+
+let cur=0,score=0,answered=[];
+const zone=document.getElementById('qzone');
+const dots=document.getElementById('qdots');
+const sc=document.getElementById('qscore');
+function buildDots(){dots.innerHTML='';questions.forEach((_,i)=>{const d=document.createElement('div');d.className='qdot'+(i===0?' cur':'');d.id='dot'+i;dots.appendChild(d);});}
+function renderQ(i){if(i>=questions.length){showResult();return;}const q=questions[i];let html=`<div class="qq active"><div class="qnum">Questão ${i+1} de ${questions.length}</div><div class="qtext">${q.q}</div><div class="qopts">`;q.opts.forEach((o,j)=>{html+=`<button class="qopt" onclick="pick(${i},${j})"><span class="ql">${String.fromCharCode(65+j)}</span><span class="qt">${o}</span></button>`;});html+=`</div><div class="qfb" id="fb${i}"></div><div class="qnav"><button class="qbn qbn-rs" onclick="resetQuiz()">Reiniciar</button><button class="qbn qbn-next" id="nx${i}" onclick="nextQ(${i+1})">Próxima →</button></div></div>`;zone.innerHTML=html;}
+function pick(qi,oi){if(answered[qi]!==undefined)return;answered[qi]=oi;const q=questions[qi];const opts=document.querySelectorAll('.qopt');opts.forEach((o,j)=>{o.classList.add('disabled');if(j===q.ans)o.classList.add('correct');else if(j===oi)o.classList.add('wrong');});const fb=document.getElementById('fb'+qi);if(oi===q.ans){score++;fb.className='qfb ok show';fb.innerHTML='<strong>Correto!</strong> '+q.fb;}else{fb.className='qfb ng show';fb.innerHTML='<strong>Incorreto.</strong> '+q.fb;}document.getElementById('dot'+qi).className='qdot '+(oi===q.ans?'ok':'err');if(qi+1<questions.length){const d=document.getElementById('dot'+(qi+1));if(d)d.classList.add('cur');}sc.textContent=score+' / '+questions.length;document.getElementById('nx'+qi).classList.add('show');}
+function nextQ(i){cur=i;renderQ(i);}
+function showResult(){const pct=Math.round(score/questions.length*100);zone.innerHTML=`<div class="qres show"><div class="rscore">${score}<span style="font-size:2rem;color:var(--text2)">/${questions.length}</span></div><div class="rlabel">${pct}% de acerto</div><div style="margin-top:1.2rem;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--text2)">${pct>=70?'Aprovado!':'Continue revisando.'}</div><div class="qnav" style="justify-content:center;margin-top:1.5rem"><button class="qbn qbn-rs" onclick="resetQuiz()">Refazer Quiz</button></div></div>`;}
+function resetQuiz(){cur=0;score=0;answered=[];sc.textContent='0 / '+questions.length;buildDots();renderQ(0);}
+function switchMod(m,btn){document.querySelectorAll('.mod').forEach(d=>d.classList.remove('active'));document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));document.getElementById('mod-'+m).classList.add('active');btn.classList.add('active');}
+function switchTab(btn,panelId){const mbody=btn.closest('.mbody');mbody.querySelectorAll('.stab').forEach(b=>b.classList.remove('active'));mbody.querySelectorAll('.sp').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById(panelId).classList.add('active');}
+buildDots();renderQ(0);
+</script>
+</body>
+</html>
