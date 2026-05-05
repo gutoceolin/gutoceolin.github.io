@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Direito Civil I — Morte · Ausência · PJ · Domicílio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@300;400;500;600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#09090b;--surface:#101014;--surface2:#16161c;--surface3:#1c1c24;
+  --border:#21212a;--border2:#2d2d3a;
+  --text:#ddd8d0;--text2:#8f8a9a;--text3:#504c5e;--white:#f4f1ec;
+
+  --morte:#e06e8c;--morte-dim:rgba(224,110,140,.10);--morte-mid:rgba(224,110,140,.22);
+  --aus:#5c9ee0;  --aus-dim:rgba(92,158,224,.10);  --aus-mid:rgba(92,158,224,.22);
+  --pj:#d4a843;   --pj-dim:rgba(212,168,67,.10);   --pj-mid:rgba(212,168,67,.22);
+  --dom:#5cc98a;  --dom-dim:rgba(92,201,138,.10);  --dom-mid:rgba(92,201,138,.22);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse 70% 40% at 10% 0%,rgba(224,110,140,.05) 0%,transparent 55%),
+             radial-gradient(ellipse 55% 35% at 90% 100%,rgba(92,201,138,.04) 0%,transparent 55%)}
+
+/* ─── HEADER ─── */
+.hdr{position:relative;z-index:10;padding:3rem 2rem 0;max-width:1100px;margin:0 auto}
+.ey{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--text3);margin-bottom:.9rem}
+.htitle{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,6.5vw,4.6rem);font-weight:700;color:var(--white);line-height:.95;letter-spacing:-.02em}
+.htitle em{font-style:italic;color:var(--text2);font-weight:400}
+.hsub{margin-top:1.1rem;font-size:.8rem;color:var(--text2);font-family:'JetBrains Mono',monospace;letter-spacing:.04em}
+.banca-pill{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.2rem;padding:.42rem .95rem;background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.25);border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.07em;color:var(--pj);text-transform:uppercase}
+.banca-pill .p{width:5px;height:5px;border-radius:50%;background:var(--pj);animation:pu 2s infinite}
+@keyframes pu{0%,100%{opacity:1}50%{opacity:.35}}
+
+/* progresso */
+.pw{display:flex;align-items:center;gap:1rem;margin-top:1.6rem;padding:.85rem 1.2rem;background:var(--surface);border:1px solid var(--border);border-radius:6px}
+.pl{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--text3);letter-spacing:.1em;white-space:nowrap}
+.pt{flex:1;height:3px;background:var(--border2);border-radius:10px;overflow:hidden}
+.pf{height:100%;background:linear-gradient(90deg,var(--morte),var(--aus),var(--pj),var(--dom));width:0%;transition:width .5s cubic-bezier(.4,0,.2,1);border-radius:10px}
+.pc{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--text2);white-space:nowrap}
+
+/* busca */
+.sw{margin-top:.85rem;position:relative}
+.si{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:.68rem 1rem .68rem 2.5rem;color:var(--text);font-family:'Outfit',sans-serif;font-size:.85rem;outline:none;transition:border-color .2s}
+.si::placeholder{color:var(--text3)}.si:focus{border-color:var(--border2)}
+.sic{position:absolute;left:.82rem;top:50%;transform:translateY(-50%);color:var(--text3);font-size:.88rem;pointer-events:none}
+.scc{position:absolute;right:.9rem;top:50%;transform:translateY(-50%);font-family:'JetBrains Mono',monospace;font-size:.56rem;color:var(--text3)}
+mark{background:rgba(212,168,67,.28);color:var(--white);border-radius:2px;padding:0 2px}
+
+/* ─── NAV ─── */
+.mnav{display:flex;gap:.42rem;flex-wrap:wrap;margin:1.9rem auto 0;max-width:1100px;padding:0 2rem;position:relative;z-index:10}
+.nb{display:flex;align-items:center;gap:.5rem;padding:.52rem .95rem;border:1px solid var(--border);border-radius:4px;background:var(--surface);color:var(--text2);font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.07em;cursor:pointer;transition:all .2s;text-transform:uppercase}
+.nb:hover{border-color:var(--border2);color:var(--text)}
+.nb .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.nb[data-m=morte] .d{background:var(--morte)}.nb[data-m=aus] .d{background:var(--aus)}
+.nb[data-m=pj] .d{background:var(--pj)}.nb[data-m=dom] .d{background:var(--dom)}
+.nb[data-m=quiz] .d{background:var(--white)}
+.nb.active{color:var(--white)}
+.nb[data-m=morte].active{border-color:var(--morte);background:var(--morte-dim)}
+.nb[data-m=aus].active{border-color:var(--aus);background:var(--aus-dim)}
+.nb[data-m=pj].active{border-color:var(--pj);background:var(--pj-dim)}
+.nb[data-m=dom].active{border-color:var(--dom);background:var(--dom-dim)}
+.nb[data-m=quiz].active{border-color:rgba(255,255,255,.28);background:rgba(255,255,255,.04)}
+
+/* ─── MAIN ─── */
+.main{position:relative;z-index:5;max-width:1100px;margin:1.8rem auto 5rem;padding:0 2rem}
+.mod{display:none;animation:fu .3s ease both}.mod.active{display:block}
+@keyframes fu{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* mod header */
+.mhd{display:flex;align-items:flex-start;gap:1.4rem;padding:1.75rem 2rem;border-radius:8px 8px 0 0;border:1px solid var(--border);border-bottom:none}
+.mhd[data-c=morte]{background:var(--morte-dim);border-color:rgba(224,110,140,.28)}
+.mhd[data-c=aus]{background:var(--aus-dim);border-color:rgba(92,158,224,.28)}
+.mhd[data-c=pj]{background:var(--pj-dim);border-color:rgba(212,168,67,.28)}
+.mhd[data-c=dom]{background:var(--dom-dim);border-color:rgba(92,201,138,.28)}
+.mi{width:46px;height:46px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
+.mi[data-c=morte]{background:var(--morte-mid)}.mi[data-c=aus]{background:var(--aus-mid)}
+.mi[data-c=pj]{background:var(--pj-mid)}.mi[data-c=dom]{background:var(--dom-mid)}
+.mnum{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.2em;color:var(--text3);text-transform:uppercase;margin-bottom:.25rem}
+.mtitle{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--white);line-height:1}
+.mdesc{margin-top:.42rem;font-size:.82rem;color:var(--text2);line-height:1.62}
+.atags{display:flex;gap:.3rem;flex-wrap:wrap;margin-top:.65rem}
+.at{font-family:'JetBrains Mono',monospace;font-size:.56rem;padding:.16rem .48rem;border-radius:3px;letter-spacing:.04em}
+.at-morte{background:var(--morte-mid);color:var(--morte)}.at-aus{background:var(--aus-mid);color:var(--aus)}
+.at-pj{background:var(--pj-mid);color:var(--pj)}.at-dom{background:var(--dom-mid);color:var(--dom)}
+
+/* mod body */
+.mbody{border:1px solid var(--border);border-top:none;border-radius:0 0 8px 8px;background:var(--surface);overflow:hidden}
+
+/* subtabs */
+.stabs{display:flex;border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
+.stabs::-webkit-scrollbar{display:none}
+.stab{padding:.78rem 1.15rem;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.07em;text-transform:uppercase;color:var(--text3);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;background:none;border-top:none;border-left:none;border-right:none;margin-bottom:-1px}
+.stab:hover{color:var(--text2)}.stab.active{color:var(--white)}
+.stab.active[data-c=morte]{border-bottom-color:var(--morte)}.stab.active[data-c=aus]{border-bottom-color:var(--aus)}
+.stab.active[data-c=pj]{border-bottom-color:var(--pj)}.stab.active[data-c=dom]{border-bottom-color:var(--dom)}
+
+/* panels */
+.sp{display:none;padding:1.75rem 2rem;animation:fu .22s ease}.sp.active{display:block}
+
+/* content */
+.sl{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;color:var(--text3);margin-bottom:.58rem;margin-top:1.55rem;display:flex;align-items:center;gap:.5rem}
+.sl::after{content:'';flex:1;height:1px;background:var(--border)}.sl:first-child{margin-top:0}
+p{font-size:.875rem;color:#b5b0be;line-height:1.82}p+p{margin-top:.65rem}
+.hl{color:var(--white);font-weight:500}
+.art{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--pj);font-weight:500}
+ul,ol{padding-left:1.25rem;margin-top:.48rem}
+li{font-size:.85rem;color:#aeaab8;line-height:1.82;margin-bottom:.2rem}li strong{color:var(--white);font-weight:500}
+
+/* grids */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:.88rem;margin-top:.68rem}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:.72rem;margin-top:.68rem}
+@media(max-width:640px){.g2,.g3{grid-template-columns:1fr}}
+.card{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:1rem;transition:border-color .2s}.card:hover{border-color:var(--border2)}
+.ct{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.55rem;display:flex;align-items:center;gap:.4rem}
+.ct::before{content:'';width:3px;height:11px;border-radius:2px;flex-shrink:0}
+.cm .ct{color:var(--morte)}.cm .ct::before{background:var(--morte)}
+.ca .ct{color:var(--aus)}.ca .ct::before{background:var(--aus)}
+.cp .ct{color:var(--pj)}.cp .ct::before{background:var(--pj)}
+.cd .ct{color:var(--dom)}.cd .ct::before{background:var(--dom)}
+
+/* callouts */
+.co{display:flex;gap:.75rem;padding:.88rem 1rem;border-radius:5px;margin-top:.82rem;font-size:.83rem;line-height:1.72;color:#aeaab8}
+.co-ico{font-size:.92rem;flex-shrink:0;margin-top:.05rem}.co strong{font-weight:500}
+.cw{background:rgba(212,168,67,.07);border:1px solid rgba(212,168,67,.2)}.cw strong{color:var(--pj)}
+.ci{background:rgba(92,158,224,.07);border:1px solid rgba(92,158,224,.2)}.ci strong{color:var(--aus)}
+.ce{background:rgba(224,110,140,.07);border:1px solid rgba(224,110,140,.2)}.ce strong{color:var(--morte)}
+.cs{background:rgba(92,201,138,.07);border:1px solid rgba(92,201,138,.2)}.cs strong{color:var(--dom)}
+
+/* table */
+.tw{overflow-x:auto;margin-top:.68rem;border-radius:6px;border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:.82rem}
+th{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);padding:.68rem 1rem;background:var(--surface2);border-bottom:1px solid var(--border);text-align:left;white-space:nowrap}
+td{padding:.62rem 1rem;border-bottom:1px solid var(--border);color:#aeaab8;vertical-align:top;line-height:1.6}
+tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.012)}td strong{color:var(--white);font-weight:500}
+
+/* comparativo */
+.comp{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-top:.68rem}
+@media(max-width:520px){.comp{grid-template-columns:1fr}}
+.cc{padding:1rem}.cc:first-child{border-right:1px solid var(--border)}
+.cctitle{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.62rem;padding-bottom:.42rem;border-bottom:1px solid var(--border)}
+
+/* timeline */
+.tl{position:relative;padding-left:1.9rem;margin-top:.72rem}
+.tl::before{content:'';position:absolute;left:.52rem;top:.8rem;bottom:.8rem;width:1px;background:linear-gradient(to bottom,var(--aus),var(--dom));opacity:.35}
+.tli{position:relative;margin-bottom:1.35rem;padding:1rem;background:var(--surface2);border:1px solid var(--border);border-radius:6px;transition:border-color .2s}.tli:hover{border-color:var(--border2)}
+.tli::before{content:'';position:absolute;left:-1.6rem;top:1.2rem;width:9px;height:9px;border-radius:50%;background:var(--bg);border:2px solid var(--aus);z-index:1}
+.tlph{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:var(--aus);margin-bottom:.25rem}
+.tltitle{font-family:'Cormorant Garamond',serif;font-size:1.08rem;font-weight:600;color:var(--white);margin-bottom:.42rem}
+.tlpr{display:inline-flex;align-items:center;gap:.38rem;font-family:'JetBrains Mono',monospace;font-size:.62rem;background:var(--aus-dim);border:1px solid rgba(92,158,224,.28);color:var(--aus);padding:.18rem .55rem;border-radius:3px;margin-bottom:.58rem}
+.tlb{font-size:.84rem;color:#aeaab8;line-height:1.75}
+
+/* expandable */
+.xi{border:1px solid var(--border);border-radius:5px;margin-top:.52rem;overflow:hidden;transition:border-color .2s}.xi:hover{border-color:var(--border2)}
+.xt{display:flex;align-items:center;justify-content:space-between;padding:.82rem 1rem;cursor:pointer;background:var(--surface2);user-select:none}
+.xl{font-size:.85rem;color:var(--text);display:flex;align-items:center;gap:.55rem}
+.xa{font-size:.6rem;color:var(--text3);transition:transform .22s}.xi.open .xa{transform:rotate(180deg)}
+.xc{max-height:0;overflow:hidden;transition:max-height .32s cubic-bezier(.4,0,.2,1)}
+.xin{padding:1rem;border-top:1px solid var(--border);font-size:.84rem;color:#aeaab8;line-height:1.78}
+.xin ul{padding-left:1rem}.xin li{font-size:.82rem;margin-bottom:.28rem}
+
+/* badge */
+.badge{font-family:'JetBrains Mono',monospace;font-size:.55rem;padding:.13rem .48rem;border-radius:3px;letter-spacing:.04em}
+
+hr.dv{border:none;border-top:1px solid var(--border);margin:1.35rem 0}
+
+/* ─── QUIZ ─── */
+.qwrap{padding:1.5rem 2rem 2rem}
+.qtop{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.4rem}
+.qtitle{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:700;color:var(--white)}
+.sbadge{font-family:'JetBrains Mono',monospace;font-size:.65rem;padding:.26rem .72rem;border-radius:4px;background:var(--surface2);border:1px solid var(--border);color:var(--text2)}
+.qdots{display:flex;gap:.28rem;flex-wrap:wrap;margin-bottom:1.2rem}
+.qdot{width:7px;height:7px;border-radius:50%;background:var(--border2);transition:all .2s}
+.qdot.cur{background:var(--text2)}.qdot.ok{background:var(--dom)}.qdot.err{background:var(--morte)}
+.qq{display:none;animation:fu .26s ease}.qq.active{display:block}
+.qnum{font-family:'JetBrains Mono',monospace;font-size:.56rem;color:var(--text3);letter-spacing:.1em;margin-bottom:.6rem}
+.bflag{display:inline-flex;align-items:center;gap:.32rem;font-family:'JetBrains Mono',monospace;font-size:.56rem;padding:.13rem .5rem;border-radius:3px;background:rgba(212,168,67,.1);border:1px solid rgba(212,168,67,.24);color:var(--pj);margin-left:.45rem;vertical-align:middle;letter-spacing:.04em}
+.bflag::before{content:'●';font-size:.45rem}
+.qtext{font-size:.96rem;color:var(--white);line-height:1.68;margin-bottom:1.15rem;font-weight:400}
+.qopts{display:flex;flex-direction:column;gap:.42rem}
+.qopt{display:flex;align-items:flex-start;gap:.65rem;padding:.82rem .92rem;border:1px solid var(--border);border-radius:5px;cursor:pointer;transition:all .2s;background:var(--surface2);text-align:left;width:100%}
+.qopt:hover:not(:disabled){border-color:var(--border2)}
+.ql{font-family:'JetBrains Mono',monospace;font-size:.6rem;width:20px;height:20px;border-radius:3px;background:var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--text2);transition:all .2s}
+.qt{font-size:.84rem;color:#aeaab8;line-height:1.6}
+.qopt.correct{border-color:var(--dom);background:var(--dom-dim)}.qopt.correct .ql{background:var(--dom);color:#000}.qopt.correct .qt{color:var(--white)}
+.qopt.wrong{border-color:var(--morte);background:var(--morte-dim)}.qopt.wrong .ql{background:var(--morte);color:#fff}
+.qopt.disabled{cursor:default;opacity:.54}.qopt.disabled.correct{opacity:1}
+.qfb{display:none;margin-top:.88rem;padding:.88rem 1rem;border-radius:5px;font-size:.83rem;line-height:1.68;color:#aeaab8}
+.qfb.show{display:block;animation:fu .18s ease}
+.qfb.ok{background:var(--dom-dim);border:1px solid rgba(92,201,138,.26)}.qfb.ok strong{color:var(--dom)}
+.qfb.ng{background:var(--morte-dim);border:1px solid rgba(224,110,140,.26)}.qfb.ng strong{color:var(--morte)}
+.qnav{display:flex;align-items:center;justify-content:space-between;margin-top:1.35rem}
+.qbn{padding:.58rem 1.25rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;transition:all .2s;border:none}
+.qbn-next{background:var(--white);color:#09090b;display:none}.qbn-next:hover{opacity:.88}.qbn-next.show{display:block}
+.qbn-rs{background:var(--surface2);border:1px solid var(--border);color:var(--text2)}.qbn-rs:hover{border-color:var(--border2);color:var(--text)}
+.qres{display:none;text-align:center;padding:2.5rem 0}.qres.show{display:block;animation:fu .28s ease}
+.rscore{font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:700;color:var(--white);line-height:1}
+.rlabel{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--text3);letter-spacing:.15em;text-transform:uppercase;margin-top:.4rem}
+.rmsg{font-size:.9rem;color:var(--text2);margin:1rem 0 1.5rem}
+
+.ft{text-align:center;padding:2rem;border-top:1px solid var(--border);max-width:1100px;margin:0 auto;font-family:'JetBrains Mono',monospace;font-size:.57rem;color:var(--text3);letter-spacing:.1em;position:relative;z-index:5}
+@media(max-width:600px){.hdr,.mnav,.main{padding-left:1rem;padding-right:1rem}.sp{padding:1.2rem 1rem}.qwrap{padding:1rem 1rem 1.5rem}.mhd{flex-direction:column;gap:.85rem;padding:1.2rem 1rem}}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="ey">Introdução ao Direito Civil · UFN · Prof. Santiago Artur Berger Sito · 2026/1</div>
+  <h1 class="htitle">Resumão <em>Interativo</em></h1>
+  <div class="hsub">Morte · Ausência · Pessoa Jurídica · Domicílio</div>
+  <div class="banca-pill"><span class="p"></span>Quiz no estilo da Banca UFN</div>
+
+  <div class="pw">
+    <span class="pl">Progresso quiz</span>
+    <div class="pt"><div class="pf" id="PF"></div></div>
+    <span class="pc" id="PC">0 / 28</span>
+  </div>
+  <div class="sw">
+    <span class="sic">⌕</span>
+    <input class="si" type="text" placeholder="Buscar conceito, artigo, prazo..." id="SI" autocomplete="off">
+    <span class="scc" id="SC"></span>
+  </div>
+</header>
+
+<nav class="mnav">
+  <button class="nb active" data-m="morte" onclick="swM('morte',this)"><span class="d"></span>Morte</button>
+  <button class="nb" data-m="aus" onclick="swM('aus',this)"><span class="d"></span>Ausência</button>
+  <button class="nb" data-m="pj" onclick="swM('pj',this)"><span class="d"></span>Pessoa Jurídica</button>
+  <button class="nb" data-m="dom" onclick="swM('dom',this)"><span class="d"></span>Domicílio</button>
+  <button class="nb" data-m="quiz" onclick="swM('quiz',this)" style="margin-left:auto"><span class="d"></span>Quiz Banca</button>
+</nav>
+
+<main class="main">
+
+<!-- ═══════════════════════════ MORTE ═══════════════════════════ -->
+<div class="mod active" id="mod-morte">
+  <div class="mhd" data-c="morte">
+    <div class="mi" data-c="morte">💀</div>
+    <div>
+      <div class="mnum">Módulo 01</div>
+      <div class="mtitle">Morte</div>
+      <div class="mdesc">Fato jurídico que extingue a personalidade civil. Espécies, efeitos e regras sobre comoriência.</div>
+      <div class="atags">
+        <span class="at at-morte">CC, art. 6º</span>
+        <span class="at at-morte">CC, art. 7º</span>
+        <span class="at at-morte">CC, art. 8º</span>
+        <span class="at at-morte">Lei 9.434/97</span>
+      </div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="morte" onclick="swS(this,'m-c')">Conceito</button>
+      <button class="stab" data-c="morte" onclick="swS(this,'m-esp')">Espécies</button>
+      <button class="stab" data-c="morte" onclick="swS(this,'m-comor')">Comoriência</button>
+      <button class="stab" data-c="morte" onclick="swS(this,'m-prova')">Para a Prova</button>
+    </div>
+
+    <div class="sp active" id="m-c">
+      <div class="sl">Conceito e efeito jurídico</div>
+      <p>A <span class="hl">morte</span> é o fato jurídico stricto sensu que extingue a personalidade civil da pessoa natural (<span class="art">art. 6º CC</span>). Com ela cessam os direitos personalíssimos, dissolve-se o casamento e abre-se a sucessão hereditária (princípio da saisine — herança transferida automaticamente).</p>
+      <div class="co ce"><span class="co-ico">⚡</span><div><strong>Distinção crítica:</strong> morte extingue a personalidade. Incapacidade apenas limita o exercício. O morto não tem personalidade; o incapaz a tem plenamente.</div></div>
+
+      <div class="sl">Morte encefálica — Lei 9.434/97</div>
+      <p>Para fins de transplante de órgãos, a lei reconhece a <span class="hl">morte encefálica</span> como critério jurídico de morte. A atividade cardíaca mantida por suporte artificial não impede a declaração de óbito. Doutrinariamente, é o critério prevalecente de morte real.</p>
+
+      <div class="sl">Efeitos jurídicos da morte</div>
+      <div class="g2">
+        <div class="card cm"><div class="ct">Direito Patrimonial</div><ul>
+          <li>Abre a sucessão hereditária</li>
+          <li>Herança transferida automaticamente (saisine)</li>
+          <li>Extinguem-se usufruto, uso e habitação</li>
+          <li>Extinção do mandato (em regra)</li>
+        </ul></div>
+        <div class="card cm"><div class="ct">Direito de Família</div><ul>
+          <li>Dissolve o casamento e a união estável</li>
+          <li>Extingue o poder familiar</li>
+          <li>Extingue alimentos (regra — art. 1.700 ressalva)</li>
+          <li>Abre tutela para filhos menores</li>
+        </ul></div>
+      </div>
+    </div>
+
+    <div class="sp" id="m-esp">
+      <div class="sl">Morte real / biológica</div>
+      <p>Cessação irreversível das funções vitais. Comprovada por <span class="hl">atestado de óbito</span> do médico. Gera o assento de óbito no cartório do Registro Civil. É a regra geral do sistema.</p>
+
+      <hr class="dv">
+      <div class="sl">Morte presumida sem declaração de ausência — art. 7º</div>
+      <p>O juiz pode declarar a morte <span class="hl">diretamente</span>, sem instaurar o processo de ausência, em dois casos:</p>
+      <div class="g2" style="margin-top:.6rem">
+        <div class="card cm"><div class="ct">Inciso I — Perigo de vida</div>
+          <p style="font-size:.83rem;color:#aeaab8">Desaparecimento em situação de <strong>perigo de vida</strong> (catástrofe, naufrágio, desastre) + buscas exaustivas sem encontrar vivo nem morto. <strong>Sem prazo mínimo legal.</strong></p>
+        </div>
+        <div class="card cm"><div class="ct">Inciso II — Campanha de guerra</div>
+          <p style="font-size:.83rem;color:#aeaab8">Desaparecimento em <strong>campanha de guerra</strong> + mais de <strong>2 anos</strong> após o término do conflito sem notícias.</p>
+        </div>
+      </div>
+      <div class="co cw"><span class="co-ico">★</span><div><strong>Parágrafo único do art. 7º:</strong> a sentença declaratória deve fixar a <strong>data provável da morte</strong>. Requisito essencial — sem ela o registro é inválido. Ação de jurisdição voluntária.</div></div>
+      <div class="co ce"><span class="co-ico">⚡</span><div><strong>Morte presumida ≠ ausência:</strong> no art. 7º a morte é declarada diretamente, sem as 3 fases do processo de ausência. Caminhos distintos com o mesmo resultado final (morte presumida), mas procedimentos e prazos completamente diferentes.</div></div>
+    </div>
+
+    <div class="sp" id="m-comor">
+      <div class="sl">Comoriência — art. 8º CC</div>
+      <p>Se duas ou mais pessoas morrerem na mesma catástrofe e <span class="hl">não for possível determinar a ordem cronológica dos óbitos</span>, presume-se que morreram simultaneamente. É presunção <span class="hl">relativa (iuris tantum)</span> — admite prova em contrário.</p>
+
+      <div class="co ce"><span class="co-ico">⚡</span><div><strong>Efeito central:</strong> sem transmissão de herança entre comorientes. Cada um herda de sua própria linhagem — um não é herdeiro do outro.</div></div>
+
+      <div class="sl">Exemplo clássico para prova</div>
+      <div class="card cm">
+        <div class="ct">Casal sem filhos — acidente aéreo</div>
+        <p style="font-size:.84rem;color:#aeaab8">A tem R$ 500k; B tem R$ 300k. Morrem no mesmo acidente — ordem desconhecida.</p>
+        <p style="font-size:.84rem;color:#aeaab8;margin-top:.5rem"><strong>Com comoriência:</strong> A não herda de B e B não herda de A. Herança de A → herdeiros de A. Herança de B → herdeiros de B.</p>
+        <p style="font-size:.84rem;color:#aeaab8;margin-top:.5rem"><strong>Se provado que A morreu depois:</strong> A herdaria de B e transmitiria tudo acrescido aos seus herdeiros.</p>
+      </div>
+
+      <div class="co ci"><span class="co-ico">ℹ</span><div><strong>Comoriência ≠ morte simultânea:</strong> não exige que tenham morrido no mesmo instante — basta a <em>impossibilidade probatória</em> de determinar a ordem. Prova em contrário (testemunhas, perícia) afasta a presunção.</div></div>
+    </div>
+
+    <div class="sp" id="m-prova">
+      <div class="sl">Pontos críticos — estilo banca UFN</div>
+      <div class="xi"><div class="xt" onclick="xp(this)"><span class="xl">Qual a diferença entre morte presumida (art. 7º) e morte do ausente (art. 37)?</span><span class="xa">▾</span></div><div class="xc"><div class="xin">Art. 7º: morte declarada <strong>diretamente</strong> pelo juiz, sem processo de ausência, em casos de perigo de vida ou campanha de guerra. Célere.<br><br>Art. 37 (morte do ausente): resultado da 3ª fase do processo de ausência — depois de curadoria + sucessão provisória + 10 anos. Muito mais lento. Ambas geram os mesmos efeitos finais (morte presumida), mas os procedimentos são radicalmente distintos.</div></div></div>
+      <div class="xi"><div class="xt" onclick="xp(this)"><span class="xl">A morte encefálica é aceita para todos os fins no Direito Civil?</span><span class="xa">▾</span></div><div class="xc"><div class="xin">A Lei 9.434/97 adota a morte encefálica para fins de transplante. Doutrinariamente, é o critério prevalecente de morte real para todos os fins civis — o CC não define critério, remetendo à ciência médica. O atestado de óbito pode ser lavrado com base na morte encefálica, gerando todos os efeitos civis da morte (abertura da sucessão, dissolução do casamento etc.).</div></div></div>
+      <div class="xi"><div class="xt" onclick="xp(this)"><span class="xl">Mapa de artigos — Morte</span><span class="xa">▾</span></div><div class="xc"><div class="xin">
+        <div class="tw"><table><thead><tr><th>Art.</th><th>Assunto</th><th>O que saber</th></tr></thead><tbody>
+          <tr><td><strong>6º</strong></td><td>Extinção da personalidade</td><td>Morte extingue a personalidade da pessoa natural</td></tr>
+          <tr><td><strong>7º, I</strong></td><td>Morte presumida — perigo de vida</td><td>Buscas exaustivas + não encontrado. Sem prazo mínimo.</td></tr>
+          <tr><td><strong>7º, II</strong></td><td>Morte presumida — guerra</td><td>Campanha de guerra + 2 anos após fim do conflito</td></tr>
+          <tr><td><strong>7º, pu.</strong></td><td>Data provável da morte</td><td>Exigência obrigatória da sentença declaratória</td></tr>
+          <tr><td><strong>8º</strong></td><td>Comoriência</td><td>Presunção de morte simultânea → sem herança entre comorientes</td></tr>
+        </tbody></table></div>
+      </div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ AUSÊNCIA ═══════════════════════════ -->
+<div class="mod" id="mod-aus">
+  <div class="mhd" data-c="aus">
+    <div class="mi" data-c="aus">🌊</div>
+    <div>
+      <div class="mnum">Módulo 02</div>
+      <div class="mtitle">Ausência</div>
+      <div class="mdesc">Situação de incerteza jurídica sobre a existência da pessoa desaparecida. Processo gradual em 3 fases com prazos específicos.</div>
+      <div class="atags">
+        <span class="at at-aus">CC, arts. 22–39</span>
+        <span class="at at-aus">CC, art. 1.571</span>
+        <span class="at at-aus">CPC, arts. 747–763</span>
+      </div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="aus" onclick="swS(this,'a-c')">Conceito</button>
+      <button class="stab" data-c="aus" onclick="swS(this,'a-fas')">3 Fases</button>
+      <button class="stab" data-c="aus" onclick="swS(this,'a-praz')">Prazos</button>
+      <button class="stab" data-c="aus" onclick="swS(this,'a-ef')">Efeitos</button>
+      <button class="stab" data-c="aus" onclick="swS(this,'a-prova')">Para a Prova</button>
+    </div>
+
+    <div class="sp active" id="a-c">
+      <div class="sl">Conceito — art. 22 CC</div>
+      <p>Ausente é quem <span class="hl">desaparece do domicílio sem notícia</span> e sem deixar representante — ou quando o representante não pode ou não quer agir. Exige a cumulação de três requisitos:</p>
+      <div class="g3">
+        <div class="card ca"><div class="ct">Desaparecimento</div><p style="font-size:.82rem;color:#aeaab8">Saída do domicílio sem paradeiro conhecido. Não basta viagem ou mudança com comunicação.</p></div>
+        <div class="card ca"><div class="ct">Falta de Notícias</div><p style="font-size:.82rem;color:#aeaab8">Nenhuma comunicação, sinal de vida ou informação sobre o paradeiro.</p></div>
+        <div class="card ca"><div class="ct">Sem Representante</div><p style="font-size:.82rem;color:#aeaab8">Sem procurador, ou procurador que não pode/quer agir. Se há representante idôneo, não se declara ausência.</p></div>
+      </div>
+      <div class="co ce"><span class="co-ico">⚡</span><div><strong>Ausência ≠ viagem:</strong> quem viaja, estuda no exterior ou muda de cidade com comunicação regular NÃO é ausente no sentido jurídico. A ausência pressupõe desaparecimento + falta absoluta de notícias.</div></div>
+      <div class="sl">Legitimidade para requerer</div>
+      <p>Qualquer <span class="hl">interessado</span> (cônjuge, herdeiros, credores) e o <span class="hl">Ministério Público</span> podem requerer a declaração de ausência e a nomeação de curador.</p>
+    </div>
+
+    <div class="sp" id="a-fas">
+      <p style="margin-bottom:1rem">O CC estrutura a ausência como um processo <span class="hl">gradual e progressivo</span> — da proteção dos bens até a morte presumida.</p>
+      <div class="tl">
+        <div class="tli">
+          <div class="tlph">Fase 1 · Arts. 22–25</div>
+          <div class="tltitle">Curadoria dos Bens do Ausente</div>
+          <div class="tlpr">⏱ Imediata ao desaparecimento</div>
+          <div class="tlb">O juiz <strong>declara a ausência</strong> e nomeia <strong>curador</strong> para administrar os bens. O ausente ainda tem personalidade — não há presunção de morte.<br><br>
+          <strong>Preferência para curador (art. 25):</strong> cônjuge não separado → pais → descendentes → pessoa idônea nomeada pelo juiz.<br><br>
+          <strong>Duração:</strong> 1 ano de curadoria se havia procurador; 3 anos se não havia, antes de se poder pedir a fase seguinte.</div>
+        </div>
+        <div class="tli">
+          <div class="tlph">Fase 2 · Arts. 26–36</div>
+          <div class="tltitle">Sucessão Provisória</div>
+          <div class="tlpr">⏱ Após 1 ou 3 anos de curadoria</div>
+          <div class="tlb">Qualquer interessado ou o MP requer a <strong>abertura da sucessão provisória</strong>. Os herdeiros prestam <strong>caução</strong> (garantia real ou fidejussória) e imittem-se na posse dos bens — não na propriedade.<br><br>
+          <strong>Frutos imóveis:</strong> capitalizados (poupados) para eventual retorno do ausente.<br><strong>Frutos móveis:</strong> ficam com os herdeiros.<br><br>
+          <strong>Retorno durante essa fase:</strong> ausente reaver bens no estado em que estiverem + valores capitalizados.<br><br>
+          <strong>Duração mínima:</strong> 10 anos da sentença que abriu a sucessão provisória.</div>
+        </div>
+        <div class="tli">
+          <div class="tlph">Fase 3 · Arts. 37–39</div>
+          <div class="tltitle">Sucessão Definitiva</div>
+          <div class="tlpr">⏱ 10 anos de sucessão provisória · ou · 80 anos + 5 anos desap.</div>
+          <div class="tlb">Herdeiros recebem <strong>domínio pleno</strong> dos bens — propriedade transferida definitivamente. Morte presumida declarada formalmente.<br><br>
+          <strong>Regra especial (art. 38):</strong> se o ausente tiver <strong>80 anos</strong> e estiver desaparecido há mais de <strong>5 anos</strong>, pode-se abrir a definitiva diretamente, sem os 10 anos da provisória.<br><br>
+          <strong>Retorno após a definitiva:</strong> até <strong>10 anos</strong> após a abertura, o ausente pode reaver os bens no estado em que estiverem ou o valor equivalente. Após esse prazo, perde qualquer direito.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sp" id="a-praz">
+      <div class="sl">Tabela-mestre dos prazos</div>
+      <div class="tw"><table>
+        <thead><tr><th>Fase</th><th>Condição de abertura</th><th>Duração mínima</th><th>Efeito principal</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Curadoria</strong></td><td>Desaparecimento sem notícias</td><td>1 ano (com procurador) / 3 anos (sem)</td><td>Curador administra bens; ausente tem personalidade</td></tr>
+          <tr><td><strong>Suces. provisória</strong></td><td>Após curadoria</td><td>10 anos da sentença</td><td>Herdeiros com posse + caução obrigatória</td></tr>
+          <tr><td><strong>Suces. definitiva</strong></td><td>10 anos provisória <em>ou</em> 80 anos + 5 anos desap.</td><td>—</td><td>Domínio pleno; morte presumida declarada</td></tr>
+          <tr><td><strong>Retorno do ausente</strong></td><td>Qualquer fase</td><td>Até 10 anos após a definitiva</td><td>Reaver bens restantes ou valor equivalente</td></tr>
+        </tbody>
+      </table></div>
+      <div class="co cw"><span class="co-ico">★</span><div><strong>Prazo total mínimo (sem a regra dos 80 anos):</strong> sem procurador → ~13 anos para concluir o processo completo (3 curadoria + 10 definitiva). Com procurador → ~11 anos.</div></div>
+    </div>
+
+    <div class="sp" id="a-ef">
+      <div class="sl">Efeitos no casamento — art. 1.571, §1º CC</div>
+      <p>A morte presumida do ausente <span class="hl">dissolve o vínculo matrimonial</span>. O cônjuge pode se casar novamente após a declaração na sucessão definitiva.</p>
+      <div class="co ce"><span class="co-ico">⚡</span><div><strong>Se o ausente retornar após novo casamento do cônjuge:</strong> o <strong>segundo casamento prevalece</strong>. O primeiro foi validamente dissolvido pela morte presumida. O ausente recupera apenas direitos patrimoniais — não conjugais.</div></div>
+
+      <div class="sl">Efeitos patrimoniais por fase</div>
+      <div class="comp">
+        <div class="cc">
+          <div class="cctitle" style="color:var(--aus)">Fase 1 — Curadoria</div>
+          <ul>
+            <li>Ausente ainda é proprietário</li>
+            <li>Curador apenas administra</li>
+            <li>Personalidade jurídica mantida</li>
+            <li>Retorno: recupera tudo integralmente</li>
+          </ul>
+        </div>
+        <div class="cc">
+          <div class="cctitle" style="color:var(--aus)">Fase 2 — Provisória</div>
+          <ul>
+            <li>Herdeiros têm posse (não propriedade)</li>
+            <li>Caução obrigatória</li>
+            <li>Frutos imóveis: capitalizados</li>
+            <li>Retorno: bens restantes + valores capitalizados</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card ca" style="margin-top:.75rem"><div class="ct">Fase 3 — Definitiva</div>
+        <ul>
+          <li>Herdeiros recebem domínio pleno (propriedade definitiva)</li>
+          <li>Morte presumida formalmente declarada — casamento dissolvido</li>
+          <li>Retorno em até 10 anos: reaver bens restantes ou valor</li>
+          <li>Após 10 anos da definitiva: perda total de direitos patrimoniais</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sp" id="a-prova">
+      <div class="sl">Expandables — estilo banca</div>
+      <div class="xi"><div class="xt" onclick="xp(this)"><span class="xl">O ausente tem personalidade jurídica?</span><span class="xa">▾</span></div><div class="xc"><div class="xin"><strong>Fases 1 e 2:</strong> sim — o ausente ainda tem personalidade. Apenas seus bens são administrados/possuídos por terceiros.<br><strong>Fase 3:</strong> com a declaração de morte presumida, a personalidade cessa juridicamente. Mas o ausente pode fisicamente retornar e exercer direitos patrimoniais por até 10 anos.</div></div></div>
+      <div class="xi"><div class="xt" onclick="xp(this)"><span class="xl">Por que a caução é obrigatória na sucessão provisória?</span><span class="xa">▾</span></div><div class="xc"><div class="xin">A posse na fase provisória é temporária — se o ausente retornar, tem direito de reaver os bens. A caução (real ou fidejussória) garante esse eventual retorno, protegendo o ausente. Herdeiros que não prestam caução ficam excluídos da imitição na posse.</div></div></div>
+      <div class="xi"><div class="xt" onclick="xp(this)"><span class="xl">A regra dos 80 anos (art. 38) dispensa todas as fases anteriores?</span><span class="xa">▾</span></div><div class="xc"><div class="xin">Não dispensa a curadoria, mas permite <strong>abrir a sucessão definitiva sem aguardar os 10 anos da provisória</strong>. Requisitos cumulativos: (1) ausente completou 80 anos e (2) está desaparecido há mais de 5 anos. A lógica é probabilística — alta chance de já ter falecido.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ PESSOA JURÍDICA ═══════════════════════════ -->
+<div class="mod" id="mod-pj">
+  <div class="mhd" data-c="pj">
+    <div class="mi" data-c="pj">🏛</div>
+    <div>
+      <div class="mnum">Módulo 03</div>
+      <div class="mtitle">Pessoa Jurídica</div>
+      <div class="mdesc">Ente abstrato com personalidade própria, distinta dos membros. Classificação, associações, fundações e desconsideração.</div>
+      <div class="atags">
+        <span class="at at-pj">CC, arts. 40–69</span>
+        <span class="at at-pj">CC, art. 50</span>
+        <span class="at at-pj">CDC, art. 28</span>
+        <span class="at at-pj">CPC, arts. 133–137</span>
+      </div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="pj" onclick="swS(this,'p-c')">Conceito</button>
+      <button class="stab" data-c="pj" onclick="swS(this,'p-class')">Classificação</button>
+      <button class="stab" data-c="pj" onclick="swS(this,'p-af')">Assoc. vs. Fund.</button>
+      <button class="stab" data-c="pj" onclick="swS(this,'p-desc')">Desconsideração</button>
+      <button class="stab" data-c="pj" onclick="swS(this,'p-prova')">Para a Prova</button>
+    </div>
+
+    <div class="sp active" id="p-c">
+      <div class="sl">Conceito</div>
+      <p><span class="hl">Pessoa jurídica</span> é o ente abstrato — conjunto de pessoas ou de bens — dotado de personalidade jurídica própria e autônoma, distinta da dos membros que a compõem, apto a ser titular de direitos e obrigações na ordem civil.</p>
+
+      <div class="sl">Início e extinção da personalidade</div>
+      <ul>
+        <li><span class="hl">Início:</span> <strong>registro do ato constitutivo</strong> no órgão competente — Junta Comercial (sociedades), cartório de registro civil (associações/fundações), órgão específico (partidos, religiosas)</li>
+        <li><span class="hl">Extinção:</span> dissolução + liquidação + <strong>cancelamento do registro</strong>. A PJ em liquidação ainda existe — só se extingue com o cancelamento.</li>
+      </ul>
+
+      <div class="co ce"><span class="co-ico">⚡</span><div><strong>Sociedade irregular (de fato):</strong> sem registro, sem personalidade. Os sócios respondem <strong>ilimitada e solidariamente</strong> pelas obrigações. Não goza da autonomia patrimonial da PJ.</div></div>
+
+      <div class="sl">Teorias explicativas</div>
+      <div class="g2">
+        <div class="card cp"><div class="ct">Teoria da Ficção (Savigny)</div><p style="font-size:.82rem;color:#aeaab8">PJ é criação artificial do Direito — não existe na realidade. Crítica: não explica adequadamente o Estado.</p></div>
+        <div class="card cp"><div class="ct">Teoria da Realidade Orgânica</div><p style="font-size:.82rem;color:#aeaab8">PJ é organismo social real, com vida e vontade próprias. Adotada majoritariamente no Brasil.</p></div>
+      </div>
+    </div>
+
+    <div class="sp" id="p-class">
+      <div class="sl">Direito Público</div>
+      <div class="g2">
+        <div class="card cp"><div class="ct">Externas</div><ul>
+          <li>Estados estrangeiros e seus governos</li>
+          <li>Organizações internacionais (ONU, FMI, OEA)</li>
+          <li>Santa Sé</li>
+        </ul></div>
+        <div class="card cp"><div class="ct">Internas</div><ul>
+          <li>União Federal</li>
+          <li>Estados-membros e Distrito Federal</li>
+          <li>Municípios</li>
+          <li>Autarquias e fundações públicas</li>
+          <li>Associações públicas (consórcios)</li>
+        </ul></div>
+      </div>
+
+      <div class="sl">Direito Privado — art. 44 CC</div>
+      <div class="card cp" style="margin-top:.5rem"><div class="ct">Rol do art. 44</div>
+        <div class="g2" style="margin-top:.5rem">
+          <ul>
+            <li><strong>Associações</strong> — art. 53</li>
+            <li><strong>Sociedades</strong> — CC e leis especiais</li>
+            <li><strong>Fundações</strong> — arts. 62–69</li>
+          </ul>
+          <ul>
+            <li><strong>Organizações religiosas</strong> — art. 44, IV</li>
+            <li><strong>Partidos políticos</strong> — art. 44, V</li>
+            <li><strong>EIRELI / SLU</strong> — art. 44, VI</li>
+          </ul>
+        </div>
+      </div>
+      <div class="co ci"><span class="co-ico">ℹ</span><div><strong>Domicílio das PJ públicas (art. 75):</strong> União → DF · Estados → capitais · Municípios → sede da Prefeitura. PJ privada → onde a diretoria funciona, ou o indicado no estatuto.</div></div>
+    </div>
+
+    <div class="sp" id="p-af">
+      <div class="sl">Comparativo — Associações vs. Fundações</div>
+      <div class="comp">
+        <div class="cc">
+          <div class="cctitle" style="color:var(--pj)">Associações (arts. 53–61)</div>
+          <ul>
+            <li>União de <strong>pessoas</strong></li>
+            <li>Sem fins econômicos/lucrativos</li>
+            <li>Pode ter atividade econômica acessória</li>
+            <li>Criada por <strong>estatuto</strong></li>
+            <li>Deliberações em assembleia</li>
+            <li>MP fiscaliza só se de interesse público</li>
+            <li>Dissolução: deliberação dos associados ou judicial</li>
+          </ul>
+        </div>
+        <div class="cc">
+          <div class="cctitle" style="color:var(--pj)">Fundações (arts. 62–69)</div>
+          <ul>
+            <li>Conjunto de <strong>bens</strong> afetados a uma finalidade</li>
+            <li>Fins não econômicos: religioso, cultural, assistencial…</li>
+            <li>Criada por <strong>escritura pública ou testamento</strong></li>
+            <li><strong>MP sempre fiscaliza</strong> (curador das fundações)</li>
+            <li>Dissolução: fim impossível/ilícito ou patrimônio insuficiente</li>
+            <li>Patrimônio → outra fundação de fim similar</li>
+          </ul>
+        </div>
+      </div>
+      <div class="co cw"><span class="co-ico">★</span><div><strong>MP e fundações — ponto mais cobrado:</strong> o MP é curador geral de todas as fundações — aprova criação, fiscaliza funcionamento, homologa alterações e autoriza extinção. Nas associações, só atua se houver interesse público. Esta distinção é recorrente em provas.</div></div>
+
+      <div class="sl">Direitos dos associados — arts. 57–59</div>
+      <ul>
+        <li>Igualdade de direitos entre os associados (salvo distinção estatutária fundamentada)</li>
+        <li>Exclusão apenas por <strong>justa causa</strong> com ampla defesa assegurada</li>
+        <li>Ninguém pode ser compelido a associar-se ou permanecer associado (<span class="art">art. 5º, XX CF</span>)</li>
+        <li>Qualidade de associado é <strong>intransmissível</strong> (salvo disposição estatutária)</li>
+      </ul>
+    </div>
+
+    <div class="sp" id="p-desc">
+      <div class="sl">Desconsideração da personalidade jurídica — art. 50 CC</div>
+      <p>Quando a PJ é usada de forma <span class="hl">abusiva</span>, o juiz pode "levantar o véu" (disregard doctrine) e responsabilizar pessoalmente os sócios/administradores pelas obrigações da empresa.</p>
+
+      <div class="sl">Teorias comparadas</div>
+      <div class="tw"><table>
+        <thead><tr><th>Teoria</th><th>Base legal</th><th>Requisito</th><th>Aplicação</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Maior</strong></td><td>CC, art. 50</td><td>Prova de desvio de finalidade <em>OU</em> confusão patrimonial</td><td>Direito Civil geral</td></tr>
+          <tr><td><strong>Menor</strong></td><td>CDC, art. 28 §5º</td><td>Insolvência — basta a PJ não ter como pagar</td><td>Relações de consumo</td></tr>
+          <tr><td><strong>Inversa</strong></td><td>CC, art. 50 + doutrina</td><td>Mesmos do art. 50</td><td>Credor pessoal do sócio atinge patrimônio da PJ</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="co ce"><span class="co-ico">⚡</span><div><strong>Mero inadimplemento NÃO gera desconsideração:</strong> é necessário provar abuso — desvio de finalidade ou confusão patrimonial. O simples fato de a PJ não pagar não basta. O STJ pacificou esse entendimento.</div></div>
+
+      <div class="sl">Incidente de desconsideração — CPC, arts. 133–137</div>
+      <p>O CPC/2015 criou <span class="hl">procedimento contraditório obrigatório</span> antes de qualquer constrição patrimonial dos sócios. Os sócios são citados e têm direito de defesa antes da desconsideração ser efetivada.</p>
+      <div class="co cw"><span class="co-ico">★</span><div><strong>Mudança importante:</strong> antes do CPC/2015, a desconsideração podia ser decretada de plano. Hoje, o incidente garante o contraditório — direito de defesa antes do bloqueio patrimonial.</div></div>
+    </div>
+
+    <div class="sp" id="p-prova">
+      <div class="sl">Expandables — questões frequentes</div>
+      <div class="xi"><div class="xt" onclick="xp(this)"><span class="xl">Qual a diferença entre PJ de Direito Público e Privado?</span><span class="xa">▾</span></div><div class="xc"><div class="xin"><strong>Público:</strong> criadas por lei, regime jurídico administrativo, prerrogativas (imunidade, imprescritibilidade) e sujeições especiais (licitação, concurso público).<br><br><strong>Privado:</strong> criadas por ato de autonomia privada com registro. Submetidas ao CC e leis especiais. Podem ter fins econômicos (sociedades) ou não (associações, fundações).</div></div></div>
+      <div class="xi"><div class="xt" onclick="xp(this)"><span class="xl">O que é desconsideração inversa e quando se aplica?</span><span class="xa">▾</span></div><div class="xc"><div class="xin">Na direta: credores da PJ atingem o sócio. Na <strong>inversa</strong>: credores pessoais do sócio atingem o patrimônio da PJ — quando o sócio transfere bens para a empresa para blindá-los. Muito usada no direito de família (cônjuge que esconde patrimônio na empresa para não partilhar no divórcio).</div></div></div>
+      <div class="xi"><div class="xt" onclick="xp(this)"><span class="xl">Fundação pode ter fins econômicos?</span><span class="xa">▾</span></div><div class="xc"><div class="xin"><strong>Não.</strong> Art. 62, pu. CC lista os fins admitidos: religioso, moral, cultural, assistencial, científico, literário, artístico. Fins econômicos/lucrativos são vedados. O MP pode impugnar a criação de fundação com finalidade econômica.</div></div></div>
+      <div class="xi"><div class="xt" onclick="xp(this)"><span class="xl">Mapa de artigos — PJ</span><span class="xa">▾</span></div><div class="xc"><div class="xin">
+        <div class="tw"><table><thead><tr><th>Art.</th><th>Assunto</th></tr></thead><tbody>
+          <tr><td><strong>40–41</strong></td><td>PJ de direito público externo e interno</td></tr>
+          <tr><td><strong>44</strong></td><td>PJ de direito privado — rol</td></tr>
+          <tr><td><strong>45</strong></td><td>Início da personalidade — registro do ato constitutivo</td></tr>
+          <tr><td><strong>50</strong></td><td>Desconsideração — desvio de finalidade ou confusão patrimonial</td></tr>
+          <tr><td><strong>53–61</strong></td><td>Associações — constituição, direitos, dissolução</td></tr>
+          <tr><td><strong>62–69</strong></td><td>Fundações — criação, fiscalização do MP, extinção</td></tr>
+          <tr><td><strong>75</strong></td><td>Domicílio das PJ — públicas e privadas</td></tr>
+        </tbody></table></div>
+      </div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ DOMICÍLIO ═══════════════════════════ -->
+<div class="mod" id="mod-dom">
+  <div class="mhd" data-c="dom">
+    <div class="mi" data-c="dom">🏠</div>
+    <div>
+      <div class="mnum">Módulo 04</div>
+      <div class="mtitle">Domicílio</div>
+      <div class="mdesc">Sede jurídica da pessoa — onde responde por obrigações, pratica atos e é presumida presente. Conceito diverso de residência e moradia.</div>
+      <div class="atags">
+        <span class="at at-dom">CC, arts. 70–78</span>
+        <span class="at at-dom">CC, art. 75</span>
+        <span class="at at-dom">CPC, art. 46</span>
+      </div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="dom" onclick="swS(this,'d-c')">Conceito</button>
+      <button class="stab" data-c="dom" onclick="swS(this,'d-esp')">Espécies</button>
+      <button class="stab" data-c="dom" onclick="swS(this,'d-leg')">Legal / Necessário</button>
+      <button class="stab" data-c="dom" onclick="swS(this,'d-pj')">Dom. da PJ</button>
+      <button class="stab" data-c="dom" onclick="swS(this,'d-prova')">Para a Prova</button>
+    </div>
+
+    <div class="sp active" id="d-c">
+      <div class="sl">Conceito e distinções fundamentais</div>
+      <div class="g3">
+        <div class="card cd"><div class="ct">Moradia</div><p style="font-size:.82rem;color:#aeaab8">Habitação <strong>ocasional ou temporária</strong>. Sem animus de permanência. Ex: hotel, casa de temporada. O conceito mais precário.</p></div>
+        <div class="card cd"><div class="ct">Residência</div><p style="font-size:.82rem;color:#aeaab8">Lugar de <strong>moradia habitual</strong> — elemento objetivo/fático. A pessoa vive ali regularmente. Sem exigência de animus jurídico.</p></div>
+        <div class="card cd"><div class="ct">Domicílio</div><p style="font-size:.82rem;color:#aeaab8"><strong>Residência + animus manendi</strong> (intenção de permanecer). Sede jurídica. Art. 70 CC.</p></div>
+      </div>
+
+      <div class="co cs"><span class="co-ico">✓</span><div><strong>Fórmula:</strong> Corpus (residência habitual) + Animus manendi (intenção de permanecer) = Domicílio civil voluntário (art. 70). Ambos os elementos são necessários.</div></div>
+
+      <div class="sl">Importância prática</div>
+      <ul>
+        <li>Fixa a <strong>competência territorial</strong> para ações pessoais (regra geral do CPC)</li>
+        <li>Define o foro para ações de família e sucessão</li>
+        <li>Determina onde se presume estar a pessoa para intimações e notificações</li>
+        <li>Estabelece o lugar de cumprimento de obrigações sem local determinado</li>
+      </ul>
+    </div>
+
+    <div class="sp" id="d-esp">
+      <div class="sl">Domicílio voluntário geral — art. 70</div>
+      <p>Eleito livremente: <span class="hl">residência habitual com animus de permanecer</span>. Pode ser mudado a qualquer momento (art. 74).</p>
+
+      <div class="sl">Pluralidade de domicílios — art. 71</div>
+      <p>Se a pessoa <span class="hl">viver alternadamente em mais de um lugar</span> com intenção de permanecer em cada um, todos são igualmente domicílio. O credor pode acionar qualquer deles. Não há domicílio "principal".</p>
+      <div class="co cs"><span class="co-ico">✓</span><div><strong>Exemplo:</strong> executivo com casa em SP e em Campinas, com vida estabelecida nos dois lugares. Ambas as cidades são seu domicílio — credor pode processar em qualquer delas.</div></div>
+
+      <div class="sl">Sem domicílio fixo — art. 73</div>
+      <p>Quem não tem residência habitual (artistas circenses, vendedores ambulantes, nômades) tem domicílio no <span class="hl">lugar onde for encontrado</span>.</p>
+
+      <div class="sl">Mudança de domicílio — art. 74</div>
+      <p>Opera-se pela <span class="hl">transferência da residência com intenção manifesta de mudar</span>. Comprovada por: declarações às municipalidades, transferência do título eleitoral ou conjunto de circunstâncias.</p>
+
+      <div class="sl">Domicílio contratual / especial — art. 78</div>
+      <p>As partes de um <span class="hl">contrato escrito</span> podem eleger domicílio especial para os atos e litígios daquele negócio. Deve constar expressamente. Prevalece sobre o geral para fins de competência.</p>
+      <div class="co ce"><span class="co-ico">⚡</span><div><strong>Limitação no CDC:</strong> cláusula de foro de eleição em contrato de adesão pode ser declarada abusiva se dificultar o acesso do consumidor à Justiça (STJ, Súmula 381 e art. 51, IV CDC).</div></div>
+    </div>
+
+    <div class="sp" id="d-leg">
+      <div class="sl">Domicílio legal (necessário) — art. 76 CC</div>
+      <p>Imposto por lei, <span class="hl">independente da vontade</span> da pessoa. Pode coexistir com o voluntário.</p>
+      <div class="tw"><table>
+        <thead><tr><th>Pessoa</th><th>Domicílio Legal</th><th>Observação</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Incapaz</strong></td><td>Domicílio do representante ou assistente</td><td>Pai, mãe, tutor ou curador</td></tr>
+          <tr><td><strong>Servidor público</strong></td><td>Onde exerce permanentemente suas funções</td><td>Não se aplica ao servidor em missão temporária</td></tr>
+          <tr><td><strong>Militar (Exército)</strong></td><td>Onde serve</td><td>Regra geral</td></tr>
+          <tr><td><strong>Militar (Marinha/Aeronáutica)</strong></td><td>Capital do Estado onde a unidade está lotada</td><td>Exceção à regra geral</td></tr>
+          <tr><td><strong>Preso</strong></td><td>Onde cumpre a sentença</td><td>Enquanto durar o cumprimento da pena</td></tr>
+          <tr><td><strong>Marítimo</strong></td><td>Onde o navio está matriculado</td><td>Aplica-se a quem vive a bordo definitivamente</td></tr>
+        </tbody>
+      </table></div>
+      <div class="co ci"><span class="co-ico">ℹ</span><div><strong>Domicílio legal e voluntário coexistem?</strong> Em regra, sim. Para fins processuais (competência), o autor escolhe qual usar (art. 46 CPC).</div></div>
+    </div>
+
+    <div class="sp" id="d-pj">
+      <div class="sl">Domicílio da Pessoa Jurídica — art. 75 CC</div>
+      <div class="tw"><table>
+        <thead><tr><th>Pessoa Jurídica</th><th>Domicílio</th></tr></thead>
+        <tbody>
+          <tr><td><strong>União Federal</strong></td><td>Distrito Federal</td></tr>
+          <tr><td><strong>Estado / DF</strong></td><td>Respectivas Capitais</td></tr>
+          <tr><td><strong>Município</strong></td><td>Sede da Prefeitura</td></tr>
+          <tr><td><strong>PJ privada</strong></td><td>Onde funciona a diretoria/administração, ou indicado no estatuto</td></tr>
+          <tr><td><strong>PJ com filiais</strong></td><td>Cada estabelecimento é domicílio para atos ali praticados</td></tr>
+          <tr><td><strong>PJ estrangeira</strong></td><td>Agência, filial ou sucursal no Brasil (para atos aqui praticados)</td></tr>
+        </tbody>
+      </table></div>
+      <div class="co cs"><span class="co-ico">★</span><div><strong>PJ com filiais:</strong> se a PJ tem sede em SP e filiais no RJ e em MG, pode ser demandada em qualquer dos três estados para atos praticados em cada localidade.</div></div>
+    </div>
+
+    <div class="sp" id="d-prova">
+      <div class="sl">Expandables — questões frequentes</div>
+      <div class="xi"><div class="xt" onclick="xp(this)"><span class="xl">Qual a diferença prática entre residência e domicílio?</span><span class="xa">▾</span></div><div class="xc"><div class="xin">Residência = elemento fático (onde habitualmente mora). Domicílio = residência + animus manendi (intenção jurídica de permanecer). Toda pessoa domiciliada reside lá, mas nem toda residência é domicílio — ex: quem mora temporariamente numa cidade a trabalho por 6 meses. A distinção importa para competência processual e para atos jurídicos.</div></div></div>
+      <div class="xi"><div class="xt" onclick="xp(this)"><span class="xl">Pessoa pode não ter domicílio? E ter mais de um?</span><span class="xa">▾</span></div><div class="xc"><div class="xin"><strong>Sem domicílio fixo (art. 73):</strong> domicílio onde for encontrada. O ordenamento não admite pessoa sem domicílio — sempre há uma resposta legal.<br><br><strong>Mais de um (art. 71):</strong> sim, pluralidade de domicílios quando vive alternadamente em vários lugares com animus em cada um. Nenhum é "principal".</div></div></div>
+      <div class="xi"><div class="xt" onclick="xp(this)"><span class="xl">Mapa de artigos — Domicílio</span><span class="xa">▾</span></div><div class="xc"><div class="xin">
+        <div class="tw"><table><thead><tr><th>Art.</th><th>Tipo</th><th>Regra</th></tr></thead><tbody>
+          <tr><td><strong>70</strong></td><td>Voluntário geral</td><td>Residência habitual + animus manendi</td></tr>
+          <tr><td><strong>71</strong></td><td>Pluralidade</td><td>Várias residências com animus → todos são domicílio</td></tr>
+          <tr><td><strong>73</strong></td><td>Sem domicílio fixo</td><td>Domicílio onde for encontrado</td></tr>
+          <tr><td><strong>74</strong></td><td>Mudança</td><td>Transferência da residência + intenção manifesta</td></tr>
+          <tr><td><strong>75</strong></td><td>PJ</td><td>Sede da diretoria ou indicado no estatuto</td></tr>
+          <tr><td><strong>76</strong></td><td>Legal / necessário</td><td>Incapaz, servidor, militar, preso, marítimo</td></tr>
+          <tr><td><strong>78</strong></td><td>Contratual / especial</td><td>Eleito pelas partes em contrato escrito</td></tr>
+        </tbody></table></div>
+      </div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ QUIZ ═══════════════════════════ -->
+<div class="mod" id="mod-quiz">
+  <div class="mhd" style="background:rgba(255,255,255,.025);border-color:var(--border2)">
+    <div class="mi" style="background:rgba(255,255,255,.05);font-size:1.35rem">🎯</div>
+    <div>
+      <div class="mnum">Quiz</div>
+      <div class="mtitle">Simulado — Estilo Banca UFN</div>
+      <div class="mdesc">28 questões sobre Morte, Ausência, Pessoa Jurídica e Domicílio. Questões <span style="color:var(--pj);font-size:.75rem">● Banca Real</span> seguem exatamente o padrão da UFN.</div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="qwrap">
+      <div class="qtop">
+        <div class="qtitle">Direito Civil I — Simulado UFN</div>
+        <div class="sbadge" id="SB">0 acertos</div>
+      </div>
+      <div class="qdots" id="QD"></div>
+      <div id="QC"></div>
+      <div class="qres" id="QR">
+        <div class="rscore" id="RS">0/28</div>
+        <div class="rlabel">Resultado final</div>
+        <div class="rmsg" id="RM"></div>
+        <button class="qbn qbn-rs" onclick="restartQ()">↺ Recomeçar quiz</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+<footer class="ft">Introdução ao Direito Civil · UFN · Prof. Santiago Artur Berger Sito · 2026/1 · CC Lei 10.406/2002</footer>
+
+<script>
+// ── NAVEGAÇÃO ──
+function swM(id,btn){
+  document.querySelectorAll('.mod').forEach(m=>m.classList.remove('active'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
+  document.getElementById('mod-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+function swS(btn,pid){
+  const body=btn.closest('.mbody');
+  body.querySelectorAll('.stab').forEach(t=>t.classList.remove('active'));
+  body.querySelectorAll('.sp').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(pid).classList.add('active');
+}
+function xp(trigger){
+  const item=trigger.closest('.xi');
+  const content=item.querySelector('.xc');
+  const inner=item.querySelector('.xin');
+  const open=item.classList.contains('open');
+  item.classList.toggle('open');
+  content.style.maxHeight=open?'0':inner.scrollHeight+'px';
+}
+
+// ── BUSCA ──
+const SI=document.getElementById('SI');
+SI.addEventListener('input',function(){
+  clearHL();
+  const q=this.value.trim().toLowerCase();
+  if(!q){document.getElementById('SC').textContent='';return;}
+  let n=0;
+  document.querySelectorAll('.sp p,.sp li,.xin,.tw td,.card p,.co').forEach(el=>{
+    if(el.textContent.toLowerCase().includes(q)){hlEl(el,q);n++;}
+  });
+  document.getElementById('SC').textContent=n?n+' resultados':'sem resultado';
+});
+function hlEl(el,q){
+  const walk=node=>{
+    if(node.nodeType===3){
+      const i=node.textContent.toLowerCase().indexOf(q);
+      if(i>=0){const s=document.createElement('mark');s.textContent=node.textContent.substr(i,q.length);const a=node.splitText(i);a.textContent=a.textContent.substr(q.length);a.parentNode.insertBefore(s,a);}
+    }else if(node.nodeType===1&&node.tagName!=='MARK'){Array.from(node.childNodes).forEach(walk);}
+  };walk(el);
+}
+function clearHL(){document.querySelectorAll('mark').forEach(m=>{const p=m.parentNode;p.replaceChild(document.createTextNode(m.textContent),m);p.normalize();});}
+
+// ── QUIZ DATA ──
+const QS=[
+  // MORTE
+  {q:"A personalidade civil da pessoa natural extingue-se com:",opts:["A declaração de ausência pelo juiz.","A morte, real ou presumida.","A interdição judicial por incapacidade.","O início da sucessão provisória.","O desaparecimento do domicílio sem notícias."],ans:1,banca:true,exp:"Art. 6º CC: a existência da pessoa natural termina com a morte. A interdição apenas limita o exercício — não extingue a personalidade. A ausência tampouco extingue (apenas na fase 3, com a declaração de morte presumida)."},
+  {q:"A morte presumida sem declaração de ausência pode ser reconhecida:",opts:["Sempre que alguém desaparece por mais de dois anos.","Em situações de perigo de vida, quando for extremamente provável o falecimento.","Apenas após a emancipação do ausente.","Quando o desaparecido tiver completado 80 anos.","Apenas com pedido de herdeiros necessários."],ans:1,banca:true,exp:"Art. 7º, I CC: morte presumida sem instaurar ausência é cabível em caso de desaparecimento em perigo de vida + buscas exaustivas sem localizar vivo ou morto. Sem prazo mínimo legal. A alternativa D confunde com a regra especial de abertura da sucessão definitiva (art. 38)."},
+  {q:"A sentença declaratória de morte presumida (art. 7º CC) deve obrigatoriamente:",opts:["Nomear curador para os bens.","Fixar a data provável da morte.","Abrir imediatamente a sucessão definitiva.","Intimar todos os herdeiros presentes no Brasil.","Publicar edital por 6 meses."],ans:1,banca:true,exp:"Art. 7º, parágrafo único CC: a sentença deve fixar a data provável do falecimento — requisito essencial de validade. Sem essa fixação, o registro de óbito é inválido. A ação é de jurisdição voluntária."},
+  {q:"A comoriência ocorre quando:",opts:["Pessoas falecem em tempos comprovadamente distintos.","Não se pode determinar a ordem de falecimento entre duas ou mais pessoas chamadas à sucessão.","Apenas um dos falecidos era herdeiro do outro.","Há ausência de registro de óbito de ambos os falecidos.","A lei presume a morte sem necessidade de declaração judicial."],ans:1,banca:true,exp:"Art. 8º CC: comoriência é a presunção de morte simultânea quando não se pode determinar a ordem dos óbitos. É presunção relativa — admite prova em contrário. Efeito: nenhum comoriente herda do outro."},
+  {q:"Casal falece no mesmo acidente. Não é possível determinar quem morreu primeiro. O efeito jurídico é:",opts:["O cônjuge mais velho herda do mais jovem.","A herança de ambos é partilhada igualmente entre todos os herdeiros.","Nenhum herda do outro — cada herança vai para sua própria linhagem.","O juiz decide a ordem com base em probabilidades médicas.","Os herdeiros comuns recebem metade de cada herança."],ans:2,banca:false,exp:"Comoriência (art. 8º): presunção de morte simultânea → nenhum comoriente herda do outro. A herança de cada um vai para seus próprios herdeiros separadamente. Um cônjuge não herda do outro."},
+  {q:"A morte encefálica, para fins de transplante de órgãos, é disciplinada pela:",opts:["Resolução do CFM, sem previsão legal.","Lei 9.434/97, sendo o critério jurídico prevalecente de morte.","CC/2002, art. 6º, que define morte encefálica expressamente.","Lei 10.406/2002, no capítulo de direitos da personalidade.","Não há previsão legal — é critério exclusivamente médico."],ans:1,banca:false,exp:"Lei 9.434/97 (Lei de Transplantes) reconhece a morte encefálica como critério jurídico de morte para fins de retirada de órgãos. O CC não define o critério — remete à ciência médica. Doutrinariamente, a morte encefálica é o marco definitivo de morte real."},
+  {q:"O desaparecimento em campanha de guerra autoriza a morte presumida sem declaração de ausência quando:",opts:["O desaparecido não deixar herdeiros.","Passarem mais de 2 anos após o término do conflito sem notícias.","Houver pedido expresso do cônjuge.","O desaparecido tiver completado 80 anos de idade.","Passarem 10 anos do início da campanha."],ans:1,banca:false,exp:"Art. 7º, II CC: desaparecimento em campanha de guerra + mais de 2 anos após o fim do conflito sem notícias. Distingue-se do inciso I (perigo de vida) que não tem prazo mínimo. Aqui o prazo é expresso: 2 anos após o término do conflito."},
+
+  // AUSÊNCIA
+  {q:"Quando uma pessoa desaparece do domicílio sem deixar notícia nem representante, o juiz:",opts:["Declara imediatamente a morte presumida.","Declara a ausência e nomeia curador para os bens.","Transfere os bens automaticamente aos herdeiros.","Determina a arrecadação dos bens pelo Município.","Abre a sucessão provisória de imediato."],ans:1,banca:true,exp:"Art. 22 CC: desaparecendo a pessoa sem notícias e sem representante, o juiz declara a ausência e nomeia curador dos bens — fase 1 (curadoria). O ausente ainda tem personalidade. A morte presumida só vem na fase 3."},
+  {q:"Durante a sucessão provisória dos bens do ausente, os herdeiros:",opts:["Recebem definitivamente a propriedade dos bens.","Apenas detêm a posse dos bens, sendo exigida caução em regra.","Ficam dispensados de qualquer garantia por serem legítimos.","Administram os bens como curador sem qualquer responsabilidade.","Podem alienar livremente todos os bens do ausente."],ans:1,banca:true,exp:"Arts. 30–31 CC: na sucessão provisória, os herdeiros têm a POSSE (não a propriedade) dos bens e devem prestar caução. A propriedade só se consolida na fase definitiva. A caução protege o eventual retorno do ausente."},
+  {q:"O retorno do ausente durante a sucessão provisória implica que:",opts:["Ele perde definitivamente a titularidade dos bens.","Os bens já partilhados permanecem com os herdeiros por força da coisa julgada.","Ele pode reaver seus bens, recebendo-os no estado em que se encontram.","Deve indenizar os herdeiros pelo exercício da posse.","Não pode mais reclamar nada, pois a sentença é definitiva."],ans:2,banca:true,exp:"Art. 36 CC: o ausente que retornar durante a sucessão provisória reaver os bens no estado em que estiverem. Bens alienados regularmente para pagar dívidas: ausente não pode exigir o valor. Os herdeiros não recebem indenização pelo exercício lícito da posse."},
+  {q:"A regra especial para abertura direta da sucessão definitiva (art. 38 CC) exige:",opts:["Que o ausente tenha mais de 65 anos e desaparecido há 10 anos.","Que o ausente tenha completado 80 anos e esteja desaparecido há mais de 5 anos.","Apenas que o ausente tenha desaparecido há mais de 15 anos.","Que o cônjuge do ausente contraia novo casamento.","Que todos os herdeiros concordem com a abertura."],ans:1,banca:true,exp:"Art. 38 CC: abertura direta da definitiva (pulando os 10 anos da provisória) quando: (1) ausente completou 80 anos E (2) desaparecido há mais de 5 anos. Requisitos cumulativos. Lógica probabilística: alta chance de já ter falecido."},
+  {q:"Na fase de curadoria dos bens do ausente, qual é a ordem de preferência para nomeação do curador?",opts:["Herdeiros → cônjuge → MP → pessoa idônea.","Cônjuge não separado → pais → descendentes → pessoa idônea nomeada.","MP → cônjuge → herdeiros → curador judicial.","Descendentes → ascendentes → cônjuge → MP.","Qualquer pessoa, a critério exclusivo do juiz."],ans:1,banca:false,exp:"Art. 25 CC: preferência para curador do ausente — 1º cônjuge (não separado de fato ou judicialmente) → 2º pais → 3º descendentes → 4º pessoa idônea nomeada pelo juiz. O companheiro é equiparado ao cônjuge doutrinariamente."},
+  {q:"O ausente que retornar após a abertura da sucessão definitiva tem prazo de até:",opts:["5 anos para reaver os bens.","3 anos, contados da publicação do edital.","10 anos após a abertura da sucessão definitiva.","20 anos, em atenção ao prazo prescricional geral.","Não há prazo — pode retornar a qualquer momento."],ans:2,banca:false,exp:"Art. 39, parágrafo único CC: o ausente que retornar após a abertura da definitiva tem até 10 anos para reaver os bens no estado em que estiverem (ou o valor equivalente). Após esse prazo, perde qualquer direito patrimonial."},
+  {q:"A morte presumida declarada na sucessão definitiva produz qual efeito sobre o casamento do ausente?",opts:["O casamento se suspende até eventual retorno.","O casamento dissolve-se, permitindo novo casamento do cônjuge.","O casamento apenas se converte em separação de fato.","O casamento persiste até decisão expressa do cônjuge.","O casamento é convertido em união estável automaticamente."],ans:1,banca:false,exp:"Art. 1.571, §1º CC: a morte (inclusive presumida) dissolve o casamento. O cônjuge pode se casar novamente. Se o ausente retornar após o novo casamento, o segundo prevalece — o primeiro foi validamente dissolvido pela morte presumida."},
+
+  // PESSOA JURÍDICA
+  {q:"A personalidade jurídica das pessoas jurídicas de direito privado começa:",opts:["Com a assinatura do contrato social pelos sócios fundadores.","Com o registro do ato constitutivo no órgão competente.","Com a publicação do ato constitutivo no Diário Oficial.","Com a obtenção do CNPJ perante a Receita Federal.","Com a realização do capital social mínimo."],ans:1,banca:true,exp:"Art. 45 CC: começa a existência legal das PJ de direito privado com a inscrição do ato constitutivo no respectivo registro. O CNPJ é registro fiscal (não constitutivo). Uma PJ não registrada é irregular — os sócios respondem ilimitada e solidariamente."},
+  {q:"Qual das seguintes é pessoa jurídica de direito público interno?",opts:["Fundação privada de assistência social.","Associação de moradores registrada em cartório.","Autarquia federal.","Partido político.","Organização religiosa."],ans:2,banca:true,exp:"Art. 41 CC: PJ de direito público interno: União, Estados, DF, Municípios, Territórios, autarquias e demais entidades de caráter público. As demais alternativas são PJ de direito privado (art. 44 CC)."},
+  {q:"A principal diferença entre associação e fundação é:",opts:["A fundação visa ao lucro; a associação, não.","A associação reúne bens; a fundação reúne pessoas.","A associação reúne pessoas; a fundação afeta bens a uma finalidade específica.","A fundação dispensa registro; a associação não.","A associação sempre tem fins religiosos; a fundação, fins culturais."],ans:2,banca:true,exp:"Associação = união de pessoas com finalidade não econômica (art. 53). Fundação = conjunto de bens afetados a uma finalidade determinada (art. 62). Essa é a distinção essencial: pessoa vs. bem."},
+  {q:"Sobre a fiscalização das fundações privadas, é correto afirmar:",opts:["A Receita Federal fiscaliza todas as fundações.","O Ministério Público fiscaliza todas as fundações, sem exceção.","A OAB fiscaliza fundações jurídicas.","Apenas o juiz fiscaliza, mediante provocação dos interessados.","O Tribunal de Contas fiscaliza fundações de caráter social."],ans:1,banca:true,exp:"Art. 66 CC: incumbe ao MP velar pelas fundações — aprova criação, fiscaliza funcionamento, homologa alterações e autoriza extinção. É fiscalização geral e permanente. Nas associações, o MP só atua se houver interesse público específico."},
+  {q:"A Teoria Maior da desconsideração da personalidade jurídica (art. 50 CC) exige:",opts:["Apenas a insolvência da pessoa jurídica.","Prova de desvio de finalidade ou confusão patrimonial.","Que os sócios tenham agido com dolo específico.","Unanimidade dos credores para requerer a desconsideração.","Prévia falência da pessoa jurídica."],ans:1,banca:true,exp:"Art. 50 CC (Teoria Maior): exige prova de abuso da PJ, configurado por desvio de finalidade OU confusão patrimonial. O simples inadimplemento não basta — há que se demonstrar o abuso. Distingue-se da Teoria Menor (CDC) que admite apenas a insolvência."},
+  {q:"A 'desconsideração inversa' da personalidade jurídica consiste em:",opts:["O credor da PJ atingir o patrimônio pessoal dos sócios.","O credor pessoal do sócio atingir o patrimônio da PJ.","A PJ ignorar as deliberações dos sócios.","O sócio pedir a extinção da PJ unilateralmente.","O MP desconstituir a PJ por interesse público."],ans:1,banca:false,exp:"Na desconsideração direta: credores da PJ atingem o sócio. Na inversa: credores pessoais do sócio atingem o patrimônio da PJ — quando o sócio blindou seus bens pessoais na empresa. Muito usada no direito de família (ex: cônjuge que esconde bens na empresa para não partilhar)."},
+  {q:"O domicílio da União Federal, segundo o art. 75 CC, é:",opts:["São Paulo, por ser o maior polo econômico e financeiro.","O Distrito Federal.","A capital de cada estado, para atos ali praticados.","Onde o Presidente da República estiver presente.","Brasília e Rio de Janeiro, como capitais históricas."],ans:1,banca:true,exp:"Art. 75, I CC: o domicílio da União é o Distrito Federal. Estados: respectivas capitais. Municípios: sede da Prefeitura. PJ privada: onde funciona a diretoria ou o indicado no estatuto."},
+
+  // DOMICÍLIO
+  {q:"O domicílio civil da pessoa natural é definido como:",opts:["O local de nascimento registrado no cartório.","O local onde exerce atividade profissional predominante.","A residência habitual com intenção de permanecer (animus manendi).","O local indicado na Carteira de Identidade.","O endereço cadastrado na Receita Federal."],ans:2,banca:true,exp:"Art. 70 CC: domicílio civil é o lugar onde a pessoa estabelece sua residência com ânimo definitivo (animus manendi). Dois elementos: corpus (residência habitual) + animus (intenção de permanecer). Sem ambos, há apenas residência ou moradia."},
+  {q:"Uma pessoa vive alternadamente em Porto Alegre e São Paulo, com casa própria e vida estabelecida em ambas as cidades. Seu domicílio é:",opts:["Apenas Porto Alegre, por ser a cidade de nascimento.","Apenas São Paulo, por ser a de maior renda.","Ambas as cidades são seu domicílio (pluralidade).","Nenhuma — sem domicílio fixo, domicílio onde for encontrado.","O juiz decide, caso a caso, qual é o domicílio principal."],ans:2,banca:false,exp:"Art. 71 CC: se a pessoa tiver diversas residências onde alternadamente viva com animus de permanecer, qualquer delas é seu domicílio. Não há domicílio principal — todos são equivalentes. O credor pode demandar em qualquer deles."},
+  {q:"O domicílio legal (necessário) do preso, segundo o art. 76 CC, é:",opts:["Seu último domicílio voluntário antes da prisão.","O domicílio do advogado que o representa.","O lugar onde cumpre a sentença.","A comarca do juiz que prolatou a sentença.","O endereço da família do preso."],ans:2,banca:true,exp:"Art. 76, IV CC: o preso tem como domicílio necessário o lugar onde cumpre a sentença. É domicílio legal — imposto pela lei, independente de sua vontade, enquanto durar o cumprimento da pena."},
+  {q:"As partes de um contrato escrito elegem a cidade de Curitiba como foro para dirimir eventuais conflitos. Esse é um exemplo de:",opts:["Domicílio voluntário geral.","Domicílio legal necessário.","Domicílio contratual ou especial (art. 78 CC).","Pluralidade de domicílios.","Mudança de domicílio por instrumento público."],ans:2,banca:false,exp:"Art. 78 CC: nos contratos escritos, as partes podem especificar domicílio onde se exercitem os direitos e se cumpram as obrigações dele resultantes. É o domicílio contratual/especial — prevalece sobre o geral para fins de competência naquele negócio."},
+  {q:"Qual é o domicílio civil de pessoa que não tem residência habitual?",opts:["O local de nascimento constante em certidão.","O município da última residência conhecida.","O lugar onde for encontrada.","O domicílio do cônjuge ou companheiro.","Não há domicílio — pessoa sem domicílio não pode ser acionada judicialmente."],ans:2,banca:false,exp:"Art. 73 CC: quem não tiver residência habitual (ex: circenses, nômades, ambulantes) tem domicílio no lugar onde for encontrado. O ordenamento não admite pessoa sem domicílio — sempre há uma resposta legal."},
+  {q:"Uma pessoa jurídica privada possui sede em Belo Horizonte e filiais em Recife e Fortaleza. Para uma ação decorrente de contrato firmado na filial de Recife, o domicílio da PJ é:",opts:["Exclusivamente Belo Horizonte, sede da administração central.","Recife, pois é onde o ato foi praticado.","Qualquer das três cidades, à escolha do réu.","Apenas as filiais, nunca a sede.","O foro que julgar primeiro o processo."],ans:1,banca:false,exp:"Art. 75, §1º CC: se a PJ tiver diversos estabelecimentos, em lugares diferentes, considerar-se-á domicílio para os atos neles praticados o estabelecimento respectivo. Para ato praticado na filial de Recife → domicílio da PJ é Recife para essa ação."},
+];
+
+let cur=0,score=0,answered=[],qd=false;
+
+function buildQ(){
+  const C=document.getElementById('QC');
+  const D=document.getElementById('QD');
+  C.innerHTML='';D.innerHTML='';
+  QS.forEach((q,i)=>{
+    const dot=document.createElement('div');
+    dot.className='qdot'+(i===0?' cur':'');
+    dot.id='dot'+i;
+    D.appendChild(dot);
+    const div=document.createElement('div');
+    div.className='qq'+(i===0?' active':'');
+    div.id='qq'+i;
+    const bf=q.banca?'<span class="bflag">Banca Real</span>':'';
+    const lets=['A','B','C','D','E'];
+    const opts=q.opts.map((o,oi)=>`<button class="qopt" onclick="selA(${i},${oi})" id="o${i}_${oi}"><span class="ql">${lets[oi]}</span><span class="qt">${o}</span></button>`).join('');
+    div.innerHTML=`<div class="qnum">Questão ${i+1} de ${QS.length} ${bf}</div><div class="qtext">${q.q}</div><div class="qopts">${opts}</div><div class="qfb" id="fb${i}"></div><div class="qnav"><div></div><button class="qbn qbn-next" id="nx${i}" onclick="nxtQ(${i})">${i<QS.length-1?'Próxima →':'Ver resultado →'}</button></div>`;
+    C.appendChild(div);
+  });
+}
+
+function selA(qi,oi){
+  if(answered[qi]!==undefined)return;
+  answered[qi]=oi;
+  const q=QS[qi];const ok=oi===q.ans;if(ok)score++;
+  q.opts.forEach((_,i)=>{const b=document.getElementById(`o${qi}_${i}`);b.disabled=true;b.classList.add('disabled');if(i===q.ans)b.classList.add('correct');if(i===oi&&!ok)b.classList.add('wrong');});
+  const fb=document.getElementById('fb'+qi);
+  fb.className='qfb show '+(ok?'ok':'ng');
+  fb.innerHTML=`<strong>${ok?'✓ Correto!':'✗ Incorreto.'}</strong> ${q.exp}`;
+  document.getElementById('nx'+qi).classList.add('show');
+  const dot=document.getElementById('dot'+qi);dot.classList.remove('cur');dot.classList.add(ok?'ok':'err');
+  document.getElementById('SB').textContent=`${score} acerto${score!==1?'s':''}`;
+  updP();
+}
+
+function nxtQ(c){
+  document.getElementById('qq'+c).classList.remove('active');
+  if(c+1<QS.length){document.getElementById('qq'+(c+1)).classList.add('active');document.getElementById('dot'+(c+1)).classList.add('cur');}
+  else showR();
+}
+
+function showR(){
+  document.getElementById('QR').classList.add('show');
+  const p=Math.round(score/QS.length*100);
+  document.getElementById('RS').textContent=`${score}/${QS.length}`;
+  let msg='';
+  if(p>=90)msg=`${p}% — Excelente! Você dominou este conteúdo. 🎯`;
+  else if(p>=70)msg=`${p}% — Bom! Revise os pontos errados e está pronto.`;
+  else if(p>=50)msg=`${p}% — Mediano. Vale reler os módulos com mais atenção.`;
+  else msg=`${p}% — Precisa reforçar. Volte aos módulos antes da prova.`;
+  document.getElementById('RM').textContent=msg;
+}
+
+function restartQ(){
+  score=0;answered=[];qd=false;
+  document.getElementById('QR').classList.remove('show');
+  document.getElementById('SB').textContent='0 acertos';
+  buildQ();updP();
+}
+
+function updP(){
+  const done=answered.filter(a=>a!==undefined).length;
+  const p=done/QS.length*100;
+  document.getElementById('PF').style.width=p+'%';
+  document.getElementById('PC').textContent=`${done} / ${QS.length}`;
+}
+
+buildQ();updP();
+</script>
+</body>
+</html>
