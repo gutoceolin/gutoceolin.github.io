@@ -7,7 +7,7 @@ function toggleTheme(){var h=document.documentElement;var l=h.getAttribute('data
 
 (function(){var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');if(t==='light')document.documentElement.setAttribute('data-theme','light');})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Introdução ao Direito Civil — Morte · Ausência · PJ · Domicílio</title>
+<title>Direito Civil I — Prova 2</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@300;400;500;600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -264,7 +264,7 @@ hr.dv{border:none;border-top:1px solid var(--border);margin:1.35rem 0}
 <body>
 
 <header class="hdr">
-  <a class="back" href="../index.html">&#8592; Central de Resumos</a>
+  <a class="back" href="../../index.html">&#8592; Central de Resumos</a>
   <div class="ey">Introdução ao Direito Civil &mdash; Prova 2 &middot; UFN 2026/1</div>
   <h1 class="htitle">Resumão <em>Interativo</em></h1>
   <div class="hsub">Morte · Ausência · Pessoa Jurídica · Domicílio</div>
@@ -826,7 +826,7 @@ hr.dv{border:none;border-top:1px solid var(--border);margin:1.35rem 0}
 </main>
 <footer class="ft">
   <span>Introdução ao Direito Civil &middot; UFN &middot; 2026/1</span>
-  <a href="../index.html">&#8592; Voltar ao Hub</a>
+  <a href="../../index.html">&#8592; Voltar ao Hub</a>
 </footer>
 
 <script>
@@ -976,7 +976,7 @@ function showR(){
   else if(p>=50)msg=`${p}% — Mediano. Vale reler os módulos com mais atenção.`;
   else msg=`${p}% — Precisa reforçar. Volte aos módulos antes da prova.`;
   document.getElementById('RM').textContent=msg;
-  try{const _k='quiz_'+location.pathname.split('/').pop().replace('.html','');localStorage.setItem(_k,JSON.stringify({score,total:QS.length,pct:p,ts:Date.now()}));}catch(_e){}
+  try{const _k='quiz_'+location.pathname.split('/').slice(-2).join('/').replace('.html','').replace('/','_');localStorage.setItem(_k,JSON.stringify({score,total:QS.length,pct:p,ts:Date.now()}));}catch(_e){}
 }
 
 function restartQ(){
