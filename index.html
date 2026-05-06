@@ -168,9 +168,27 @@ body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font
 .rcard:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 .search-mini input:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 
+/* QUIZ SCORE BADGE */
+.qsb{padding:.7rem .8rem;border-radius:var(--r-xs);display:flex;flex-direction:column;gap:.42rem}
+.qsb-bar{height:4px;background:var(--border);border-radius:10px;overflow:hidden}
+.qsb-fill{height:100%;border-radius:10px;width:0%;transition:width .9s cubic-bezier(.22,1,.36,1)}
+.qsb-row{display:flex;align-items:baseline;justify-content:space-between;gap:.5rem}
+.qsb-score{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:700;line-height:1}
+.qsb-label{font-size:.6rem;font-weight:600;letter-spacing:.03em;opacity:.9}
+.qsb[data-t=great]{background:var(--eca-dim)}
+.qsb[data-t=great] .qsb-fill{background:var(--eca)}
+.qsb[data-t=great] .qsb-score,.qsb[data-t=great] .qsb-label{color:var(--eca)}
+.qsb[data-t=good]{background:var(--gold-dim)}
+.qsb[data-t=good] .qsb-fill{background:var(--gold)}
+.qsb[data-t=good] .qsb-score,.qsb[data-t=good] .qsb-label{color:var(--gold)}
+.qsb[data-t=low]{background:var(--penal-dim)}
+.qsb[data-t=low] .qsb-fill{background:var(--penal)}
+.qsb[data-t=low] .qsb-score,.qsb[data-t=low] .qsb-label{color:var(--penal)}
+
 /* reduced motion */
 @media(prefers-reduced-motion:reduce){
   .rcard{animation:none}
+  .qsb-fill{transition:none}
   @keyframes blink{0%,100%{opacity:1}}
 }
 
@@ -667,6 +685,26 @@ function toggleTheme(){
   localStorage.setItem('theme',isLight?'dark':'light');
 }
 
+
+function loadQuizScores(){
+  const labels={great:'Excelente',good:'Bom resultado',low:'Precisa revisar'};
+  document.querySelectorAll('.rcard').forEach(card=>{
+    const href=card.getAttribute('href');
+    if(!href)return;
+    const key='quiz_'+href.split('/').pop().replace('.html','');
+    let d;try{d=JSON.parse(localStorage.getItem(key));}catch(e){return;}
+    if(!d||d.score==null)return;
+    const pct=d.pct;
+    const tier=pct>=80?'great':pct>=60?'good':'low';
+    const el=document.createElement('div');
+    el.className='qsb';el.setAttribute('data-t',tier);
+    el.innerHTML=`<div class="qsb-bar"><div class="qsb-fill" data-w="${pct}"></div></div><div class="qsb-row"><span class="qsb-score">${d.score}/${d.total}</span><span class="qsb-label">${labels[tier]} &middot; ${pct}%</span></div>`;
+    const meta=card.querySelector('.rcard-meta');
+    if(meta)meta.before(el);
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{el.querySelector('.qsb-fill').style.width=pct+'%';}));
+  });
+}
+loadQuizScores();
 </script>
 <button class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar modo claro/escuro" title="Modo claro/escuro">
   <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>

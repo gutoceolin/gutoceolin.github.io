@@ -562,6 +562,7 @@ function nextQ(i){cur=i;renderQ(i);}
 function showResult(){
   const pct=Math.round(score/questions.length*100);
   zone.innerHTML=`<div class="qres show"><div class="rscore">${score}<span style="font-size:2rem;color:var(--text2)">/${questions.length}</span></div><div class="rlabel">${pct}% de acerto</div><div style="margin-top:1.2rem;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--text2)">${pct>=70?'Aprovado — bom desempenho!':'Continue revisando o conteúdo.'}</div><div class="qnav" style="justify-content:center;margin-top:1.5rem"><button class="qbn qbn-rs" onclick="resetQuiz()">Refazer Quiz</button></div></div>`;
+  try{const _k='quiz_'+location.pathname.split('/').pop().replace('.html','');localStorage.setItem(_k,JSON.stringify({score,total:questions.length,pct,ts:Date.now()}));}catch(_e){}
 }
 
 function resetQuiz(){cur=0;score=0;answered=[];sc.textContent='0 / '+questions.length;buildDots();renderQ(0);}

@@ -941,6 +941,7 @@ function showR(){
   else if(p>=50)msg=`${p}% — Mediano. Vale reler os módulos com mais atenção.`;
   else msg=`${p}% — Precisa reforçar. Volte aos módulos antes da prova.`;
   document.getElementById('RM').textContent=msg;
+  try{const _k='quiz_'+location.pathname.split('/').pop().replace('.html','');localStorage.setItem(_k,JSON.stringify({score,total:QS.length,pct:p,ts:Date.now()}));}catch(_e){}
 }
 
 function restartQ(){
