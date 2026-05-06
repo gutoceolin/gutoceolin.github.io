@@ -194,9 +194,11 @@ hr.dv{border:none;border-top:1px solid var(--border);margin:1.35rem 0}
 .rlabel{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--text3);letter-spacing:.15em;text-transform:uppercase;margin-top:.4rem}
 .rmsg{font-size:.9rem;color:var(--text2);margin:1rem 0 1.5rem}
 
-'Outfit',sans-serif;font-size:.57rem;color:var(--text3);letter-spacing:.1em;position:relative;z-index:5}
+.ft{max-width:1100px;margin:0 auto;padding:1.5rem 2rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;font-family:'Outfit',sans-serif;font-size:.72rem;color:var(--text3);position:relative;z-index:5;flex-wrap:wrap;gap:.75rem}
+.ft a{color:var(--text2);text-decoration:none;font-weight:500;transition:color .2s}.ft a:hover{color:var(--white)}
 .back{display:inline-flex;align-items:center;gap:.45rem;font-family:'Outfit',sans-serif;font-size:.75rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);text-decoration:none;margin-bottom:1.5rem;padding:.38rem 1rem;border-radius:100px;border:1px solid var(--border);background:var(--surface);transition:all .2s}
 .back:hover{color:var(--text);border-color:var(--border2);background:var(--surface2)}
+.back:focus-visible{outline:2px solid var(--gold,#d4a843);outline-offset:2px}
 @media(max-width:600px){.hdr,.mnav,.main{padding-left:1rem;padding-right:1rem}.sp{padding:1.2rem 1rem}.qwrap{padding:1rem 1rem 1.5rem}.mhd{flex-direction:column;gap:.85rem;padding:1.2rem 1rem}}
 
 /* focus states */
@@ -802,7 +804,10 @@ hr.dv{border:none;border-top:1px solid var(--border);margin:1.35rem 0}
 </div>
 
 </main>
-<footer class="ft">Introdução ao Direito Civil · UFN · Prof. Santiago Artur Berger Sito · 2026/1 · CC Lei 10.406/2002</footer>
+<footer class="ft">
+  <span>Introdução ao Direito Civil &middot; UFN &middot; 2026/1</span>
+  <a href="../index.html">&#8592; Voltar ao Hub</a>
+</footer>
 
 <script>
 function toggleTheme(){var h=document.documentElement;var l=h.getAttribute('data-theme')==='light';h.setAttribute('data-theme',l?'dark':'light');localStorage.setItem('theme',l?'dark':'light');}
