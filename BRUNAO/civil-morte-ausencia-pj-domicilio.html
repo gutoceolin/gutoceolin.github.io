@@ -164,10 +164,18 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.012
 hr.dv{border:none;border-top:1px solid var(--border);margin:1.35rem 0}
 
 /* ─── QUIZ ─── */
+.pw{display:flex;align-items:center;gap:1rem;margin-top:1.6rem;padding:.85rem 1.2rem;background:var(--surface);border:1px solid var(--border);border-radius:10px}
+.pl{font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);white-space:nowrap}
+.pt{flex:1;height:4px;background:var(--border);border-radius:10px;overflow:hidden}
+.pf{height:100%;background:linear-gradient(90deg,var(--morte),var(--aus),var(--pj),var(--dom));width:0%;transition:width .5s cubic-bezier(.4,0,.2,1);border-radius:10px}
+.pc{font-size:.65rem;font-weight:600;color:var(--text2);white-space:nowrap}
 .qwrap{padding:1.5rem 2rem 2rem}
-.qtop{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.4rem}
+.qtop{display:flex;align-items:center;justify-content:space-between;margin-bottom:.9rem}
 .qtitle{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:700;color:var(--white)}
-'Outfit',sans-serif;font-size:.65rem;padding:.26rem .72rem;border-radius:100px;background:var(--surface2);border:1px solid var(--border);color:var(--text2)}
+.sbadge{font-family:'Outfit',sans-serif;font-size:.65rem;font-weight:500;padding:.26rem .72rem;border-radius:100px;background:var(--surface2);border:1px solid var(--border);color:var(--text2)}
+.qdots{display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:1.2rem}
+.qdot{width:7px;height:7px;border-radius:50%;background:var(--border);transition:all .2s}
+.qdot.cur{background:var(--text2)}.qdot.ok{background:var(--eca)}.qdot.err{background:var(--civil)}
 .qq{display:none;animation:fu .26s ease}.qq.active{display:block}
 .qnum{font-family:'JetBrains Mono',monospace;font-size:.56rem;color:var(--text3);letter-spacing:.1em;margin-bottom:.6rem}
 .bflag{display:inline-flex;align-items:center;gap:.32rem;font-family:'JetBrains Mono',monospace;font-size:.56rem;padding:.13rem .5rem;border-radius:3px;background:rgba(212,168,67,.1);border:1px solid rgba(212,168,67,.24);color:var(--pj);margin-left:.45rem;vertical-align:middle;letter-spacing:.04em}
@@ -181,13 +189,13 @@ hr.dv{border:none;border-top:1px solid var(--border);margin:1.35rem 0}
 .qopt.correct{border-color:var(--dom);background:var(--dom-dim)}.qopt.correct .ql{background:var(--dom);color:#000}.qopt.correct .qt{color:var(--white)}
 .qopt.wrong{border-color:var(--morte);background:var(--morte-dim)}.qopt.wrong .ql{background:var(--morte);color:#fff}
 .qopt.disabled{cursor:default;opacity:.54}.qopt.disabled.correct{opacity:1}
-.qfb{display:none;margin-top:.88rem;padding:.88rem 1rem;border-radius:5px;font-size:.83rem;line-height:1.68;color:#aeaab8}
+.qfb{display:none;margin-top:.88rem;padding:.88rem 1rem;border-radius:10px;font-size:.83rem;line-height:1.68;color:#aeaab8}
 .qfb.show{display:block;animation:fu .18s ease}
 .qfb.ok{background:var(--dom-dim);border:1px solid rgba(92,201,138,.26)}.qfb.ok strong{color:var(--dom)}
 .qfb.ng{background:var(--morte-dim);border:1px solid rgba(224,110,140,.26)}.qfb.ng strong{color:var(--morte)}
 .qnav{display:flex;align-items:center;justify-content:space-between;margin-top:1.35rem}
-'Outfit',sans-serif;font-size:.6rem;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;transition:all .2s;border:none}
-.qbn-next{background:var(--eca);color:#fff;display:none;border-radius:100px}.qbn-next:hover{opacity:.88}.qbn-next.show{display:block}
+.qbn{padding:.55rem 1.25rem;border-radius:100px;font-family:'Outfit',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.02em;cursor:pointer;transition:all .2s;border:none}
+.qbn-next{background:var(--eca);color:#fff;display:none}.qbn-next:hover{opacity:.88}.qbn-next.show{display:block}
 .qbn-rs{background:var(--surface2);border:1px solid var(--border);color:var(--text2)}.qbn-rs:hover{border-color:var(--border2);color:var(--text)}
 .qres{display:none;text-align:center;padding:2.5rem 0}.qres.show{display:block;animation:fu .28s ease}
 .rscore{font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:700;color:var(--white);line-height:1}
@@ -256,6 +264,11 @@ hr.dv{border:none;border-top:1px solid var(--border);margin:1.35rem 0}
   <div class="hsub">Morte · Ausência · Pessoa Jurídica · Domicílio</div>
   <div class="banca-pill"><span class="p"></span>Quiz no estilo da Banca UFN</div>
 
+  <div class="pw">
+    <span class="pl">Progresso quiz</span>
+    <div class="pt"><div class="pf" id="PF"></div></div>
+    <span class="pc" id="PC">0 / 28</span>
+  </div>
 
   <div class="sw" role="search">
     <span class="sic" aria-hidden="true">⌕</span>
@@ -792,6 +805,7 @@ hr.dv{border:none;border-top:1px solid var(--border);margin:1.35rem 0}
         <div class="sbadge" id="SB">0 acertos</div>
       </div>
 
+      <div class="qdots" id="QD"></div>
       <div id="QC"></div>
       <div class="qres" id="QR">
         <div class="rscore" id="RS">0/28</div>
@@ -900,8 +914,13 @@ let cur=0,score=0,answered=[],qd=false;
 
 function buildQ(){
   const C=document.getElementById('QC');
-  C.innerHTML='';
+  const D=document.getElementById('QD');
+  C.innerHTML='';D.innerHTML='';
   QS.forEach((q,i)=>{
+    const dot=document.createElement('div');
+    dot.className='qdot'+(i===0?' cur':'');
+    dot.id='dot'+i;
+    D.appendChild(dot);
     const div=document.createElement('div');
     div.className='qq'+(i===0?' active':'');
     div.id='qq'+i;
@@ -922,13 +941,23 @@ function selA(qi,oi){
   fb.className='qfb show '+(ok?'ok':'ng');
   fb.innerHTML=`<strong>${ok?'✓ Correto!':'✗ Incorreto.'}</strong> ${q.exp}`;
   document.getElementById('nx'+qi).classList.add('show');
+  const dot=document.getElementById('dot'+qi);dot.classList.remove('cur');dot.classList.add(ok?'ok':'err');
+  if(qi+1<QS.length){const d=document.getElementById('dot'+(qi+1));if(d)d.classList.add('cur');}
   document.getElementById('SB').textContent=`${score} acerto${score!==1?'s':''}`;
+  updP();
 }
 
 function nxtQ(c){
   document.getElementById('qq'+c).classList.remove('active');
   if(c+1<QS.length){document.getElementById('qq'+(c+1)).classList.add('active');}
   else showR();
+}
+
+function updP(){
+  const done=answered.filter(a=>a!==undefined).length;
+  const p=done/QS.length*100;
+  document.getElementById('PF').style.width=p+'%';
+  document.getElementById('PC').textContent=`${done} / ${QS.length}`;
 }
 
 function showR(){
@@ -948,10 +977,10 @@ function restartQ(){
   score=0;answered=[];qd=false;
   document.getElementById('QR').classList.remove('show');
   document.getElementById('SB').textContent='0 acertos';
-  buildQ();
+  buildQ();updP();
 }
 
-buildQ();
+buildQ();updP();
 </script>
 <button class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar modo claro/escuro" title="Modo claro/escuro">
   <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
