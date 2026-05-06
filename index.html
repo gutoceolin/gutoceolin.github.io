@@ -38,27 +38,27 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .hero-badge.live::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--eca);animation:blink 2.5s infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
 
-/* SEM STRIP */
-.sem-strip{position:relative;z-index:10;max-width:1100px;margin:3rem auto 0;padding:0 2rem}
-.sem-inner{display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;background:var(--surface);border:1px solid var(--border);border-radius:6px;flex-wrap:wrap}
-.sem-label{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text3);white-space:nowrap}
-.sem-pills{display:flex;gap:.4rem;flex-wrap:wrap;flex:1}
-.sem-pill{font-family:'JetBrains Mono',monospace;font-size:.58rem;padding:.2rem .6rem;border-radius:3px;letter-spacing:.04em;border:1px solid transparent}
-.sem-pill[data-s="3"]{background:rgba(212,168,67,.1);color:var(--gold);border-color:rgba(212,168,67,.25)}
-.sem-pill[data-s="1"],.sem-pill[data-s="2"]{background:var(--surface2);color:var(--text3);border-color:var(--border)}
-.sem-stat{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--text2);white-space:nowrap}
-.sem-stat span{color:var(--white);font-weight:500}
+/* SEM TABS */
+.sem-tabs{position:relative;z-index:10;max-width:1100px;margin:3rem auto 0;padding:0 2rem}
+.sem-tabs-inner{display:flex;gap:0;border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
+.sem-tabs-inner::-webkit-scrollbar{display:none}
+.sem-tab{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;padding:.6rem 1.1rem;border:1px solid transparent;border-bottom:none;border-radius:4px 4px 0 0;background:transparent;color:var(--text3);cursor:pointer;transition:color .18s,background .18s,border-color .18s;min-height:40px;display:inline-flex;align-items:center;gap:.5rem;white-space:nowrap;margin-bottom:-1px}
+.sem-tab:hover{color:var(--text2);background:var(--surface)}
+.sem-tab.active{color:var(--gold);border-color:var(--border) var(--border) var(--bg) var(--border);background:var(--surface)}
+.sem-tab:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
+.sem-badge{font-size:.48rem;padding:.1rem .38rem;border-radius:2px;background:var(--surface2);color:var(--text3);border:1px solid var(--border);letter-spacing:.04em}
+.sem-tab.active .sem-badge{background:rgba(212,168,67,.1);color:var(--gold);border-color:rgba(212,168,67,.25)}
 
-/* PROGRESS */
-.overall-prog{position:relative;z-index:5;max-width:1100px;margin:1.5rem auto 0;padding:0 2rem}
-.op-inner{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1.25rem 1.5rem}
-.op-title{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text3);margin-bottom:1.1rem}
-.op-rows{display:flex;flex-direction:column;gap:.85rem}
-.op-row{display:flex;align-items:center;gap:1rem}
-.op-row-label{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--text2);width:170px;flex-shrink:0;letter-spacing:.03em}
-.op-track{flex:1;height:6px;background:var(--border);border-radius:10px;overflow:hidden}
-.op-fill{height:100%;border-radius:10px;width:0%;transition:width 1s cubic-bezier(.22,1,.36,1)}
-.op-pct{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--text2);width:34px;text-align:right;font-weight:500}
+/* SEM COMING SOON */
+.sem-coming{position:relative;z-index:5;max-width:1100px;margin:0 auto;padding:0 2rem;display:none}
+.sem-coming.show{display:block}
+.sem-coming-inner{margin-top:3rem;padding:5rem 2rem;border:1px solid var(--border);border-radius:10px;background:var(--surface);text-align:center}
+.sem-coming-num{font-family:'Cormorant Garamond',serif;font-size:6rem;font-weight:700;color:var(--border2);line-height:1;margin-bottom:.5rem;letter-spacing:-.03em}
+.sem-coming-label{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text3);margin-bottom:1.25rem}
+.sem-coming-text{font-family:'Outfit',sans-serif;font-size:.9rem;color:var(--text2);line-height:1.75;max-width:360px;margin:0 auto}
+
+/* oculta conteúdo do sem 3 quando outro está ativo */
+.sem-other-active .sem-3-only{display:none!important}
 
 /* FILTROS */
 .filters-rail{position:sticky;top:0;z-index:20;background:rgba(9,9,11,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border);margin-top:2rem}
@@ -161,7 +161,8 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 
 @media(max-width:600px){
   .hero{padding:3rem 1rem 0}
-  .sem-strip,.overall-prog,.section-head,.hub-footer{padding:0 1rem}
+  .sem-tabs,.section-head,.hub-footer{padding:0 1rem}
+  .sem-coming{padding:0 1rem}
   .filters{padding:.6rem 1rem}
   .grid{padding:0 1rem}
   .search-mini input{width:130px}
@@ -175,7 +176,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 /* reduced motion */
 @media(prefers-reduced-motion:reduce){
   .rcard{animation:none}
-  .op-fill{transition:none}
+
   @keyframes blink{0%,100%{opacity:1}}
   @keyframes fadeUp{from{opacity:1;transform:none}to{opacity:1;transform:none}}
 }
@@ -193,7 +194,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   --gold:#a87828}
 [data-theme=light] body::before{opacity:.25}
 [data-theme=light] .filters-rail{background:rgba(247,245,240,.95)}
-[data-theme=light] .sem-inner,[data-theme=light] .op-inner{box-shadow:0 1px 4px rgba(0,0,0,.06)}
+[data-theme=light] .sem-coming-inner{box-shadow:0 1px 4px rgba(0,0,0,.06)}
 [data-theme=light] .rcard{box-shadow:0 1px 4px rgba(0,0,0,.07)}
 [data-theme=light] .rcard[data-disc=civil]:not(.locked):hover{box-shadow:0 16px 40px rgba(192,74,104,.1)}
 [data-theme=light] .rcard[data-disc=const]:not(.locked):hover{box-shadow:0 16px 40px rgba(79,98,200,.1)}
@@ -226,55 +227,29 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   </div>
 </section>
 
-<!-- SEMESTRE + CONTAGEM -->
-<div class="sem-strip">
-  <div class="sem-inner">
-    <span class="sem-label">Semestre</span>
-    <div class="sem-pills">
-      <span class="sem-pill" data-s="1">1&ordm;</span>
-      <span class="sem-pill" data-s="2">2&ordm;</span>
-      <span class="sem-pill" data-s="3">3&ordm; &mdash; atual</span>
-    </div>
-    <span class="sem-stat"><span>3</span> de <span>15</span> completos</span>
+<!-- SEMESTRES -->
+<nav class="sem-tabs" aria-label="Navegação por semestre">
+  <div class="sem-tabs-inner" role="tablist">
+    <button class="sem-tab" data-sem="1" role="tab" aria-selected="false" onclick="setSemester(1,this)">1&ordm; <span class="sem-badge">Em breve</span></button>
+    <button class="sem-tab" data-sem="2" role="tab" aria-selected="false" onclick="setSemester(2,this)">2&ordm; <span class="sem-badge">Em breve</span></button>
+    <button class="sem-tab active" data-sem="3" role="tab" aria-selected="true" onclick="setSemester(3,this)">3&ordm; <span class="sem-badge">Atual</span></button>
+    <button class="sem-tab" data-sem="4" role="tab" aria-selected="false" onclick="setSemester(4,this)">4&ordm; <span class="sem-badge">Futuro</span></button>
+    <button class="sem-tab" data-sem="5" role="tab" aria-selected="false" onclick="setSemester(5,this)">5&ordm; <span class="sem-badge">Futuro</span></button>
+    <button class="sem-tab" data-sem="6" role="tab" aria-selected="false" onclick="setSemester(6,this)">6&ordm; <span class="sem-badge">Futuro</span></button>
   </div>
-</div>
+</nav>
 
-<!-- PROGRESSO POR DISCIPLINA -->
-<div class="overall-prog">
-  <div class="op-inner">
-    <div class="op-title">Cobertura por disciplina &mdash; 3&ordm; semestre</div>
-    <div class="op-rows">
-      <div class="op-row">
-        <span class="op-row-label">Dir. Civil I</span>
-        <div class="op-track"><div class="op-fill" data-width="67" style="background:var(--civil)"></div></div>
-        <span class="op-pct">67%</span>
-      </div>
-      <div class="op-row">
-        <span class="op-row-label">Teoria da Const.</span>
-        <div class="op-track"><div class="op-fill" data-width="33" style="background:var(--const)"></div></div>
-        <span class="op-pct">33%</span>
-      </div>
-      <div class="op-row">
-        <span class="op-row-label">Dir. Processual Civil</span>
-        <div class="op-track"><div class="op-fill" data-width="0" style="background:var(--proc)"></div></div>
-        <span class="op-pct">0%</span>
-      </div>
-      <div class="op-row">
-        <span class="op-row-label">Dir. Penal I</span>
-        <div class="op-track"><div class="op-fill" data-width="0" style="background:var(--penal)"></div></div>
-        <span class="op-pct">0%</span>
-      </div>
-      <div class="op-row">
-        <span class="op-row-label">Dir. Criança e Adol.</span>
-        <div class="op-track"><div class="op-fill" data-width="0" style="background:var(--eca)"></div></div>
-        <span class="op-pct">0%</span>
-      </div>
-    </div>
+<!-- COMING SOON (outros semestres) -->
+<div class="sem-coming" id="semComing" role="tabpanel">
+  <div class="sem-coming-inner">
+    <div class="sem-coming-num" id="semComingNum">1&ordm;</div>
+    <div class="sem-coming-label">Semestre</div>
+    <div class="sem-coming-text">Os resumos deste semestre ainda não estão disponíveis.<br>O material será publicado quando as aulas começarem.</div>
   </div>
 </div>
 
 <!-- FILTROS -->
-<div class="filters-rail">
+<div class="filters-rail sem-3-only">
 <div class="filters">
   <button class="filter-btn active" data-disc="all" aria-pressed="true" onclick="applyFilter('all',this)">Todos</button>
   <button class="filter-btn" data-disc="civil" aria-pressed="false" onclick="applyFilter('civil',this)">Civil</button>
@@ -291,14 +266,14 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 </div>
 
 <!-- SECTION HEAD -->
-<div class="section-head">
+<div class="section-head sem-3-only">
   <span class="section-head-label">Resumos</span>
   <div class="section-head-line"></div>
   <span class="section-head-count" id="cardCount"><span>15</span> disponíveis</span>
 </div>
 
 <!-- GRID -->
-<div class="grid" id="cardGrid">
+<div class="grid sem-3-only" id="cardGrid">
 
   <!-- FEATURED — disponível -->
   <a class="rcard featured" data-disc="civil" data-sem="3"
@@ -637,7 +612,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 
 </div>
 
-<div class="empty-state" id="emptyState" aria-live="polite" aria-atomic="true">
+<div class="empty-state sem-3-only" id="emptyState" aria-live="polite" aria-atomic="true">
   <div class="empty-inner">
     <p>Nenhum resumo encontrado para essa busca.</p>
   </div>
@@ -684,6 +659,25 @@ function render(){
   }
 }
 
+function setSemester(n,btn){
+  document.querySelectorAll('.sem-tab').forEach(t=>{
+    t.classList.remove('active');
+    t.setAttribute('aria-selected','false');
+  });
+  btn.classList.add('active');
+  btn.setAttribute('aria-selected','true');
+  const isSem3=n===3;
+  document.documentElement.classList.toggle('sem-other-active',!isSem3);
+  const coming=document.getElementById('semComing');
+  const num=document.getElementById('semComingNum');
+  if(isSem3){
+    coming.classList.remove('show');
+  } else {
+    coming.classList.add('show');
+    num.textContent=n+'º';
+  }
+}
+
 function toggleTheme(){
   var h=document.documentElement;
   var isLight=h.getAttribute('data-theme')==='light';
@@ -691,15 +685,6 @@ function toggleTheme(){
   localStorage.setItem('theme',isLight?'dark':'light');
 }
 
-// animar barras de progresso ao carregar
-window.addEventListener('load',()=>{
-  setTimeout(()=>{
-    document.querySelectorAll('.op-fill').forEach(bar=>{
-      const w=bar.dataset.width+'%';
-      requestAnimationFrame(()=>requestAnimationFrame(()=>{bar.style.width=w;}));
-    });
-  },300);
-});
 </script>
 <button class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar modo claro/escuro" title="Modo claro/escuro">
   <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
