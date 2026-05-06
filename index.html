@@ -177,24 +177,24 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 
 /* ── LIGHT MODE ── */
 [data-theme=light]{
-  --bg:#f6f4ef;--surface:#eceae4;--surface2:#e1ded7;
-  --border:#d2cec5;--border2:#bfbab0;
-  --text:#1a1815;--text2:#58524c;--text3:#9a9088;--white:#100e0c;
-  /* cores de disciplina: mesma família de matiz, saturação reduzida, adequadas para fundo claro */
-  --civil:#b84268;--civil-dim:rgba(184,66,104,.12);--civil-mid:rgba(184,66,104,.2);
-  --const:#4858c0;--const-dim:rgba(72,88,192,.12);--const-mid:rgba(72,88,192,.2);
-  --proc:#1880aa;--proc-dim:rgba(24,128,170,.12);--proc-mid:rgba(24,128,170,.2);
-  --penal:#a84830;--penal-dim:rgba(168,72,48,.12);--penal-mid:rgba(168,72,48,.2);
-  --eca:#289050;--eca-dim:rgba(40,144,80,.12);--eca-mid:rgba(40,144,80,.2);
-  --gold:#906820}
-[data-theme=light] body::before{opacity:.18}
-[data-theme=light] .filters-rail{background:rgba(246,244,239,.96)}
-[data-theme=light] .sem-coming-inner,[data-theme=light] .rcard{box-shadow:0 1px 4px rgba(0,0,0,.07)}
-[data-theme=light] .rcard[data-disc=civil]:not(.locked):hover{box-shadow:0 12px 32px rgba(184,66,104,.12)}
-[data-theme=light] .rcard[data-disc=const]:not(.locked):hover{box-shadow:0 12px 32px rgba(72,88,192,.12)}
-[data-theme=light] .rcard[data-disc=proc]:not(.locked):hover{box-shadow:0 12px 32px rgba(24,128,170,.12)}
-[data-theme=light] .rcard[data-disc=penal]:not(.locked):hover{box-shadow:0 12px 32px rgba(168,72,48,.12)}
-[data-theme=light] .rcard[data-disc=eca]:not(.locked):hover{box-shadow:0 12px 32px rgba(40,144,80,.12)}
+  --bg:#f4f1ec;--surface:#eae7e0;--surface2:#dedbd3;
+  --border:#cac6bc;--border2:#b4b0a6;
+  --text:#1a1612;--text2:#504840;--text3:#948c82;--white:#0e0c08;
+  --civil:#c05070;--civil-dim:rgba(192,80,112,.08);--civil-mid:rgba(192,80,112,.15);
+  --const:#5868d0;--const-dim:rgba(88,104,208,.08);--const-mid:rgba(88,104,208,.15);
+  --proc:#2898c0;--proc-dim:rgba(40,152,192,.08);--proc-mid:rgba(40,152,192,.15);
+  --penal:#c06040;--penal-dim:rgba(192,96,64,.08);--penal-mid:rgba(192,96,64,.15);
+  --eca:#30a860;--eca-dim:rgba(48,168,96,.08);--eca-mid:rgba(48,168,96,.15);
+  --gold:#987020}
+[data-theme=light] body::before{opacity:.15}
+[data-theme=light] .filters-rail{background:rgba(244,241,236,.96)}
+[data-theme=light] .disc-pill{background:transparent}
+[data-theme=light] .sem-coming-inner,[data-theme=light] .rcard{box-shadow:0 1px 3px rgba(0,0,0,.06),0 0 0 1px rgba(0,0,0,.03)}
+[data-theme=light] .rcard[data-disc=civil]:not(.locked):hover{box-shadow:0 12px 32px rgba(192,80,112,.11)}
+[data-theme=light] .rcard[data-disc=const]:not(.locked):hover{box-shadow:0 12px 32px rgba(88,104,208,.11)}
+[data-theme=light] .rcard[data-disc=proc]:not(.locked):hover{box-shadow:0 12px 32px rgba(40,152,192,.11)}
+[data-theme=light] .rcard[data-disc=penal]:not(.locked):hover{box-shadow:0 12px 32px rgba(192,96,64,.11)}
+[data-theme=light] .rcard[data-disc=eca]:not(.locked):hover{box-shadow:0 12px 32px rgba(48,168,96,.11)}
 
 /* ── THEME TOGGLE ── */
 .theme-toggle{position:fixed;bottom:1.75rem;right:1.75rem;z-index:100;width:40px;height:40px;border-radius:50%;background:var(--surface2);border:1px solid var(--border2);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text2);transition:background .2s,border-color .2s,color .2s,box-shadow .2s}
@@ -247,7 +247,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 <div class="filters">
   <button class="filter-btn active" data-disc="all" aria-pressed="true" onclick="applyFilter('all',this)">Todos</button>
   <button class="filter-btn" data-disc="civil" aria-pressed="false" onclick="applyFilter('civil',this)">Civil</button>
-  <button class="filter-btn" data-disc="const" aria-pressed="false" onclick="applyFilter('const',this)">Constitucional</button>
+  <button class="filter-btn" data-disc="const" aria-pressed="false" onclick="applyFilter('const',this)">Teoria da Constituição</button>
   <button class="filter-btn" data-disc="proc" aria-pressed="false" onclick="applyFilter('proc',this)">Processual</button>
   <button class="filter-btn" data-disc="penal" aria-pressed="false" onclick="applyFilter('penal',this)">Penal</button>
   <button class="filter-btn" data-disc="eca" aria-pressed="false" onclick="applyFilter('eca',this)">ECA</button>
@@ -269,68 +269,66 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 <!-- GRID -->
 <div class="grid sem-3-only" id="cardGrid">
 
-  <!-- FEATURED — disponível -->
+  <!-- CIVIL -->
+  <a class="rcard" data-disc="civil" data-sem="3"
+     data-title="pessoa natural nascituro capacidade emancipacao"
+     href="BRUNAO/civil-pessoa-natural-nascituro-capacidade.html">
+    <div class="rcard-top"></div>
+    <span class="status-badge ready">Dispon&#237;vel</span>
+    <div class="rcard-body">
+      <span class="disc-pill"><span class="dot"></span>Introdu&#231;&#227;o ao Direito Civil</span>
+      <div class="rcard-title">Pessoa Natural, Nascituro e Capacidade</div>
+      <div class="rcard-topics">
+        <span class="topic-tag">Personalidade &middot; art. 2&ordm;</span>
+        <span class="topic-tag">Nascituro</span>
+        <span class="topic-tag">Incapacidade &middot; arts. 3&#8211;4</span>
+        <span class="topic-tag">Emancipa&#231;&#227;o &middot; art. 5&ordm;</span>
+      </div>
+      <div class="rcard-meta">
+        <span class="meta-sem">3&ordm; semestre &middot; 2026/1</span>
+        <div class="meta-items"><span class="meta-chip">4 m&#243;dulos</span><span class="meta-chip has-quiz">20 quest&#245;es</span></div>
+      </div>
+    </div>
+  </a>
+
   <a class="rcard" data-disc="civil" data-sem="3"
      data-title="morte ausencia pj domicilio pessoa juridica"
      href="BRUNAO/civil-morte-ausencia-pj-domicilio.html">
     <div class="rcard-top"></div>
-    <span class="status-badge ready">Disponível</span>
+    <span class="status-badge ready">Dispon&#237;vel</span>
     <div class="rcard-body">
-      <span class="disc-pill"><span class="dot"></span>Introdução ao Direito Civil</span>
-      <div class="rcard-title">Morte, Ausência, Pessoa Jurídica e Domicílio</div>
+      <span class="disc-pill"><span class="dot"></span>Introdu&#231;&#227;o ao Direito Civil</span>
+      <div class="rcard-title">Morte, Aus&#234;ncia, Pessoa Jur&#237;dica e Domic&#237;lio</div>
       <div class="rcard-topics">
         <span class="topic-tag">Morte real e presumida</span>
-        <span class="topic-tag">Comoriência · art. 8º</span>
-        <span class="topic-tag">Ausência — 3 fases</span>
-        <span class="topic-tag">PJ · art. 44 CC</span>
-        <span class="topic-tag">Desconsideração · art. 50</span>
-        <span class="topic-tag">Domicílio · arts. 70–78</span>
+        <span class="topic-tag">Comori&#234;ncia &middot; art. 8&ordm;</span>
+        <span class="topic-tag">Aus&#234;ncia &#8212; 3 fases</span>
+        <span class="topic-tag">PJ &middot; art. 44 CC</span>
+        <span class="topic-tag">Desconsidera&#231;&#227;o &middot; art. 50</span>
+        <span class="topic-tag">Domic&#237;lio &middot; arts. 70&#8211;78</span>
       </div>
       <div class="rcard-meta">
         <span class="meta-sem">3&ordm; semestre &middot; 2026/1</span>
         <div class="meta-items">
-          <span class="meta-chip">4 módulos</span>
-          <span class="meta-chip has-quiz">28 questões</span>
+          <span class="meta-chip">4 m&#243;dulos</span>
+          <span class="meta-chip has-quiz">28 quest&#245;es</span>
           <span class="meta-chip">Banca UFN</span>
         </div>
       </div>
     </div>
   </a>
 
-  <!-- Civil — Pessoa Natural -->
-  <a class="rcard" data-disc="civil" data-sem="3"
-     data-title="pessoa natural nascituro capacidade emancipacao"
-     href="BRUNAO/civil-pessoa-natural-nascituro-capacidade.html">
-    <div class="rcard-top"></div>
-    <span class="status-badge ready">Disponível</span>
-    <div class="rcard-body">
-      <span class="disc-pill"><span class="dot"></span>Introdução ao Direito Civil</span>
-      <div class="rcard-title">Pessoa Natural, Nascituro e Capacidade</div>
-      <div class="rcard-topics">
-        <span class="topic-tag">Personalidade · art. 2º</span>
-        <span class="topic-tag">Nascituro</span>
-        <span class="topic-tag">Incapacidade · arts. 3–4</span>
-        <span class="topic-tag">Emancipação · art. 5º</span>
-      </div>
-      <div class="rcard-meta">
-        <span class="meta-sem">3&ordm; semestre &middot; 2026/1</span>
-        <div class="meta-items"><span class="meta-chip">4 módulos</span><span class="meta-chip has-quiz">20 questões</span></div>
-      </div>
-    </div>
-  </a>
-
-  <!-- Civil — Negócios Jurídicos -->
   <a class="rcard" data-disc="civil" data-sem="3"
      data-title="negocios juridicos vicios consentimento nulidade"
      href="BRUNAO/civil-negocios-juridicos-vicios-nulidades.html">
     <div class="rcard-top"></div>
-    <span class="status-badge ready">Disponível</span>
+    <span class="status-badge ready">Dispon&#237;vel</span>
     <div class="rcard-body">
-      <span class="disc-pill"><span class="dot"></span>Introdução ao Direito Civil</span>
-      <div class="rcard-title">Negócios Jurídicos e Vícios</div>
+      <span class="disc-pill"><span class="dot"></span>Introdu&#231;&#227;o ao Direito Civil</span>
+      <div class="rcard-title">Neg&#243;cios Jur&#237;dicos e V&#237;cios</div>
       <div class="rcard-topics">
-        <span class="topic-tag">Requisitos · art. 104</span>
-        <span class="topic-tag">Erro · dolo · coação</span>
+        <span class="topic-tag">Requisitos &middot; art. 104</span>
+        <span class="topic-tag">Erro &middot; dolo &middot; coa&#231;&#227;o</span>
         <span class="topic-tag">Nulidade e anulabilidade</span>
       </div>
       <div class="rcard-meta">
@@ -340,41 +338,40 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
     </div>
   </a>
 
-  <!-- Constitucional — Poder Constituinte -->
+  <!-- TEORIA DA CONSTITUICAO -->
   <a class="rcard" data-disc="const" data-sem="3"
      data-title="teoria constituicao poder constituinte supremacia"
      href="BRUNAO/const-poder-constituinte-supremacia.html">
     <div class="rcard-top"></div>
-    <span class="status-badge ready">Disponível</span>
+    <span class="status-badge ready">Dispon&#237;vel</span>
     <div class="rcard-body">
-      <span class="disc-pill"><span class="dot"></span>Teoria da Constituição</span>
+      <span class="disc-pill"><span class="dot"></span>Teoria da Constitui&#231;&#227;o</span>
       <div class="rcard-title">Poder Constituinte e Supremacia</div>
       <div class="rcard-topics">
-        <span class="topic-tag">Poder originário</span>
+        <span class="topic-tag">Poder origin&#225;rio</span>
         <span class="topic-tag">Poder derivado</span>
-        <span class="topic-tag">Cláusulas pétreas · art. 60</span>
+        <span class="topic-tag">Cl&#225;usulas p&#233;treas &middot; art. 60</span>
         <span class="topic-tag">Lassalle vs. Hesse</span>
       </div>
       <div class="rcard-meta">
         <span class="meta-sem">3&ordm; semestre &middot; 2026/1</span>
-        <div class="meta-items"><span class="meta-chip">4 módulos</span><span class="meta-chip has-quiz">Quiz</span></div>
+        <div class="meta-items"><span class="meta-chip">4 m&#243;dulos</span><span class="meta-chip has-quiz">Quiz</span></div>
       </div>
     </div>
   </a>
 
-  <!-- Constitucional — Eficácia -->
   <a class="rcard" data-disc="const" data-sem="3"
      data-title="eficacia normas constitucionais direitos fundamentais"
      href="BRUNAO/const-eficacia-normas-direitos-fundamentais.html">
     <div class="rcard-top"></div>
-    <span class="status-badge ready">Disponível</span>
+    <span class="status-badge ready">Dispon&#237;vel</span>
     <div class="rcard-body">
-      <span class="disc-pill"><span class="dot"></span>Teoria da Constituição</span>
-      <div class="rcard-title">Eficácia das Normas e Direitos Fundamentais</div>
+      <span class="disc-pill"><span class="dot"></span>Teoria da Constitui&#231;&#227;o</span>
+      <div class="rcard-title">Efic&#225;cia das Normas e Direitos Fundamentais</div>
       <div class="rcard-topics">
-        <span class="topic-tag">Plena · contida · limitada</span>
-        <span class="topic-tag">Dimensões dos direitos</span>
-        <span class="topic-tag">Eficácia horizontal</span>
+        <span class="topic-tag">Plena &middot; contida &middot; limitada</span>
+        <span class="topic-tag">Dimens&#245;es dos direitos</span>
+        <span class="topic-tag">Efic&#225;cia horizontal</span>
       </div>
       <div class="rcard-meta">
         <span class="meta-sem">3&ordm; semestre &middot; 2026/1</span>
@@ -383,19 +380,40 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
     </div>
   </a>
 
-  <!-- Processual -->
+  <a class="rcard" data-disc="const" data-sem="3"
+     data-title="controle constitucionalidade adi adc adpf stf"
+     href="BRUNAO/const-controle-constitucionalidade.html">
+    <div class="rcard-top"></div>
+    <span class="status-badge ready">Dispon&#237;vel</span>
+    <div class="rcard-body">
+      <span class="disc-pill"><span class="dot"></span>Teoria da Constitui&#231;&#227;o</span>
+      <div class="rcard-title">Controle de Constitucionalidade</div>
+      <div class="rcard-topics">
+        <span class="topic-tag">Controle difuso</span>
+        <span class="topic-tag">Controle concentrado</span>
+        <span class="topic-tag">ADI &middot; ADC &middot; ADPF</span>
+        <span class="topic-tag">Efeitos erga omnes</span>
+      </div>
+      <div class="rcard-meta">
+        <span class="meta-sem">3&ordm; semestre &middot; 2026/1</span>
+        <div class="meta-items"><span class="meta-chip">Em prep.</span></div>
+      </div>
+    </div>
+  </a>
+
+  <!-- PROCESSUAL CIVIL -->
   <a class="rcard" data-disc="proc" data-sem="3"
      data-title="principios processo civil contraditorio jurisdicao adr"
      href="BRUNAO/proc-principios-normas-fundamentais.html">
     <div class="rcard-top"></div>
-    <span class="status-badge ready">Disponível</span>
+    <span class="status-badge ready">Dispon&#237;vel</span>
     <div class="rcard-body">
       <span class="disc-pill"><span class="dot"></span>Dir. Processual Civil</span>
-      <div class="rcard-title">Princípios e Normas Fundamentais</div>
+      <div class="rcard-title">Princ&#237;pios e Normas Fundamentais</div>
       <div class="rcard-topics">
-        <span class="topic-tag">Contraditório · art. 9º CPC</span>
-        <span class="topic-tag">Boa-fé processual</span>
-        <span class="topic-tag">ADR · mediação</span>
+        <span class="topic-tag">Contradit&#243;rio &middot; art. 9&ordm; CPC</span>
+        <span class="topic-tag">Boa-f&#233; processual</span>
+        <span class="topic-tag">ADR &middot; media&#231;&#227;o</span>
         <span class="topic-tag">Instrumentalismo</span>
       </div>
       <div class="rcard-meta">
@@ -405,18 +423,60 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
     </div>
   </a>
 
-  <!-- Penal -->
+  <a class="rcard" data-disc="proc" data-sem="3"
+     data-title="jurisdicao acao competencia processual civil"
+     href="BRUNAO/proc-jurisdicao-acao-competencia.html">
+    <div class="rcard-top"></div>
+    <span class="status-badge ready">Dispon&#237;vel</span>
+    <div class="rcard-body">
+      <span class="disc-pill"><span class="dot"></span>Dir. Processual Civil</span>
+      <div class="rcard-title">Jurisdi&#231;&#227;o, A&#231;&#227;o e Compet&#234;ncia</div>
+      <div class="rcard-topics">
+        <span class="topic-tag">Jurisdi&#231;&#227;o</span>
+        <span class="topic-tag">Condi&#231;&#245;es da a&#231;&#227;o</span>
+        <span class="topic-tag">Compet&#234;ncia absoluta</span>
+        <span class="topic-tag">Compet&#234;ncia relativa</span>
+      </div>
+      <div class="rcard-meta">
+        <span class="meta-sem">3&ordm; semestre &middot; 2026/1</span>
+        <div class="meta-items"><span class="meta-chip">Em prep.</span></div>
+      </div>
+    </div>
+  </a>
+
+  <a class="rcard" data-disc="proc" data-sem="3"
+     data-title="partes litisconsorcio atos processuais intervencao"
+     href="BRUNAO/proc-partes-litisconsorcio-atos.html">
+    <div class="rcard-top"></div>
+    <span class="status-badge ready">Dispon&#237;vel</span>
+    <div class="rcard-body">
+      <span class="disc-pill"><span class="dot"></span>Dir. Processual Civil</span>
+      <div class="rcard-title">Partes, Litiscons&#243;rcio e Atos Processuais</div>
+      <div class="rcard-topics">
+        <span class="topic-tag">Capacidade processual</span>
+        <span class="topic-tag">Litiscons&#243;rcio</span>
+        <span class="topic-tag">Interven&#231;&#227;o de terceiros</span>
+        <span class="topic-tag">Prazos processuais</span>
+      </div>
+      <div class="rcard-meta">
+        <span class="meta-sem">3&ordm; semestre &middot; 2026/1</span>
+        <div class="meta-items"><span class="meta-chip">Em prep.</span></div>
+      </div>
+    </div>
+  </a>
+
+  <!-- PENAL -->
   <a class="rcard" data-disc="penal" data-sem="3"
      data-title="direito penal principios lei penal legalidade"
      href="BRUNAO/penal-principios-lei-penal.html">
     <div class="rcard-top"></div>
-    <span class="status-badge ready">Disponível</span>
+    <span class="status-badge ready">Dispon&#237;vel</span>
     <div class="rcard-body">
       <span class="disc-pill"><span class="dot"></span>Direito Penal I</span>
-      <div class="rcard-title">Princípios e Lei Penal</div>
+      <div class="rcard-title">Princ&#237;pios e Lei Penal</div>
       <div class="rcard-topics">
-        <span class="topic-tag">Princípio da legalidade</span>
-        <span class="topic-tag">Intervenção mínima</span>
+        <span class="topic-tag">Princ&#237;pio da legalidade</span>
+        <span class="topic-tag">Interven&#231;&#227;o m&#237;nima</span>
         <span class="topic-tag">Lei penal no tempo</span>
         <span class="topic-tag">Territorialidade</span>
       </div>
@@ -427,107 +487,18 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
     </div>
   </a>
 
-  <!-- ECA P1 -->
-  <a class="rcard" data-disc="eca" data-sem="3"
-     data-title="eca crianca adolescente protecao integral ato infracional"
-     href="BRUNAO/eca-protecao-integral-ato-infracional.html">
-    <div class="rcard-top"></div>
-    <span class="status-badge ready">Disponível</span>
-    <div class="rcard-body">
-      <span class="disc-pill"><span class="dot"></span>Dir. Criança e Adolescente</span>
-      <div class="rcard-title">Proteção Integral e Ato Infracional</div>
-      <div class="rcard-topics">
-        <span class="topic-tag">Proteção integral</span>
-        <span class="topic-tag">Medidas socioeducativas</span>
-        <span class="topic-tag">Conselho Tutelar</span>
-        <span class="topic-tag">Art. 227 CF</span>
-      </div>
-      <div class="rcard-meta">
-        <span class="meta-sem">3&ordm; semestre &middot; 2026/1</span>
-        <div class="meta-items"><span class="meta-chip">Em prep.</span></div>
-      </div>
-    </div>
-  </a>
-
-  <!-- Const P3 -->
-  <a class="rcard" data-disc="const" data-sem="3"
-     data-title="controle constitucionalidade adi adc adpf stf"
-     href="BRUNAO/const-controle-constitucionalidade.html">
-    <div class="rcard-top"></div>
-    <span class="status-badge ready">Disponível</span>
-    <div class="rcard-body">
-      <span class="disc-pill"><span class="dot"></span>Teoria da Constituição</span>
-      <div class="rcard-title">Controle de Constitucionalidade</div>
-      <div class="rcard-topics">
-        <span class="topic-tag">Controle difuso</span>
-        <span class="topic-tag">Controle concentrado</span>
-        <span class="topic-tag">ADI · ADC · ADPF</span>
-        <span class="topic-tag">Efeitos erga omnes</span>
-      </div>
-      <div class="rcard-meta">
-        <span class="meta-sem">3&ordm; semestre &middot; 2026/1</span>
-        <div class="meta-items"><span class="meta-chip">Em prep.</span></div>
-      </div>
-    </div>
-  </a>
-
-  <!-- Proc P2 -->
-  <a class="rcard" data-disc="proc" data-sem="3"
-     data-title="jurisdicao acao competencia processual civil"
-     href="BRUNAO/proc-jurisdicao-acao-competencia.html">
-    <div class="rcard-top"></div>
-    <span class="status-badge ready">Disponível</span>
-    <div class="rcard-body">
-      <span class="disc-pill"><span class="dot"></span>Dir. Processual Civil</span>
-      <div class="rcard-title">Jurisdição, Ação e Competência</div>
-      <div class="rcard-topics">
-        <span class="topic-tag">Jurisdição</span>
-        <span class="topic-tag">Condições da ação</span>
-        <span class="topic-tag">Competência absoluta</span>
-        <span class="topic-tag">Competência relativa</span>
-      </div>
-      <div class="rcard-meta">
-        <span class="meta-sem">3&ordm; semestre &middot; 2026/1</span>
-        <div class="meta-items"><span class="meta-chip">Em prep.</span></div>
-      </div>
-    </div>
-  </a>
-
-  <!-- Proc P3 -->
-  <a class="rcard" data-disc="proc" data-sem="3"
-     data-title="partes litisconsorcio atos processuais intervencao"
-     href="BRUNAO/proc-partes-litisconsorcio-atos.html">
-    <div class="rcard-top"></div>
-    <span class="status-badge ready">Disponível</span>
-    <div class="rcard-body">
-      <span class="disc-pill"><span class="dot"></span>Dir. Processual Civil</span>
-      <div class="rcard-title">Partes, Litisconsórcio e Atos Processuais</div>
-      <div class="rcard-topics">
-        <span class="topic-tag">Capacidade processual</span>
-        <span class="topic-tag">Litisconsórcio</span>
-        <span class="topic-tag">Intervenção de terceiros</span>
-        <span class="topic-tag">Prazos processuais</span>
-      </div>
-      <div class="rcard-meta">
-        <span class="meta-sem">3&ordm; semestre &middot; 2026/1</span>
-        <div class="meta-items"><span class="meta-chip">Em prep.</span></div>
-      </div>
-    </div>
-  </a>
-
-  <!-- Penal P2 -->
   <a class="rcard" data-disc="penal" data-sem="3"
      data-title="fato tipico conduta resultado nexo causal tipicidade penal"
      href="BRUNAO/penal-fato-tipico.html">
     <div class="rcard-top"></div>
-    <span class="status-badge ready">Disponível</span>
+    <span class="status-badge ready">Dispon&#237;vel</span>
     <div class="rcard-body">
       <span class="disc-pill"><span class="dot"></span>Direito Penal I</span>
-      <div class="rcard-title">Fato Típico</div>
+      <div class="rcard-title">Fato T&#237;pico</div>
       <div class="rcard-topics">
         <span class="topic-tag">Conduta dolosa e culposa</span>
         <span class="topic-tag">Teoria finalista</span>
-        <span class="topic-tag">Nexo causal · art. 13 CP</span>
+        <span class="topic-tag">Nexo causal &middot; art. 13 CP</span>
         <span class="topic-tag">Tipicidade</span>
       </div>
       <div class="rcard-meta">
@@ -537,17 +508,16 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
     </div>
   </a>
 
-  <!-- Penal P3 -->
   <a class="rcard" data-disc="penal" data-sem="3"
      data-title="ilicitude culpabilidade legitima defesa imputabilidade penal"
      href="BRUNAO/penal-ilicitude-culpabilidade.html">
     <div class="rcard-top"></div>
-    <span class="status-badge ready">Disponível</span>
+    <span class="status-badge ready">Dispon&#237;vel</span>
     <div class="rcard-body">
       <span class="disc-pill"><span class="dot"></span>Direito Penal I</span>
       <div class="rcard-title">Ilicitude e Culpabilidade</div>
       <div class="rcard-topics">
-        <span class="topic-tag">Legítima defesa</span>
+        <span class="topic-tag">Leg&#237;tima defesa</span>
         <span class="topic-tag">Estado de necessidade</span>
         <span class="topic-tag">Imputabilidade</span>
         <span class="topic-tag">Iter criminis</span>
@@ -559,20 +529,20 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
     </div>
   </a>
 
-  <!-- ECA P2 -->
+  <!-- ECA -->
   <a class="rcard" data-disc="eca" data-sem="3"
-     data-title="direitos fundamentais crianca adolescente vida saude educacao eca"
-     href="BRUNAO/eca-direitos-fundamentais-crianca.html">
+     data-title="eca crianca adolescente protecao integral ato infracional"
+     href="BRUNAO/eca-protecao-integral-ato-infracional.html">
     <div class="rcard-top"></div>
-    <span class="status-badge ready">Disponível</span>
+    <span class="status-badge ready">Dispon&#237;vel</span>
     <div class="rcard-body">
-      <span class="disc-pill"><span class="dot"></span>Dir. Criança e Adolescente</span>
-      <div class="rcard-title">Direitos Fundamentais da Criança</div>
+      <span class="disc-pill"><span class="dot"></span>Dir. Crian&#231;a e Adolescente</span>
+      <div class="rcard-title">Prote&#231;&#227;o Integral e Ato Infracional</div>
       <div class="rcard-topics">
-        <span class="topic-tag">Direito à vida · art. 7º</span>
-        <span class="topic-tag">Liberdade e dignidade</span>
-        <span class="topic-tag">Educação · art. 53</span>
-        <span class="topic-tag">Convivência familiar</span>
+        <span class="topic-tag">Prote&#231;&#227;o integral</span>
+        <span class="topic-tag">Medidas socioeducativas</span>
+        <span class="topic-tag">Conselho Tutelar</span>
+        <span class="topic-tag">Art. 227 CF</span>
       </div>
       <div class="rcard-meta">
         <span class="meta-sem">3&ordm; semestre &middot; 2026/1</span>
@@ -581,19 +551,39 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
     </div>
   </a>
 
-  <!-- ECA P3 -->
+  <a class="rcard" data-disc="eca" data-sem="3"
+     data-title="direitos fundamentais crianca adolescente vida saude educacao eca"
+     href="BRUNAO/eca-direitos-fundamentais-crianca.html">
+    <div class="rcard-top"></div>
+    <span class="status-badge ready">Dispon&#237;vel</span>
+    <div class="rcard-body">
+      <span class="disc-pill"><span class="dot"></span>Dir. Crian&#231;a e Adolescente</span>
+      <div class="rcard-title">Direitos Fundamentais da Crian&#231;a</div>
+      <div class="rcard-topics">
+        <span class="topic-tag">Direito &#224; vida &middot; art. 7&ordm;</span>
+        <span class="topic-tag">Liberdade e dignidade</span>
+        <span class="topic-tag">Educa&#231;&#227;o &middot; art. 53</span>
+        <span class="topic-tag">Conviv&#234;ncia familiar</span>
+      </div>
+      <div class="rcard-meta">
+        <span class="meta-sem">3&ordm; semestre &middot; 2026/1</span>
+        <div class="meta-items"><span class="meta-chip">Em prep.</span></div>
+      </div>
+    </div>
+  </a>
+
   <a class="rcard" data-disc="eca" data-sem="3"
      data-title="familia substituta adocao guarda tutela eca"
      href="BRUNAO/eca-familia-substituta-adocao.html">
     <div class="rcard-top"></div>
-    <span class="status-badge ready">Disponível</span>
+    <span class="status-badge ready">Dispon&#237;vel</span>
     <div class="rcard-body">
-      <span class="disc-pill"><span class="dot"></span>Dir. Criança e Adolescente</span>
-      <div class="rcard-title">Família Substituta e Adoção</div>
+      <span class="disc-pill"><span class="dot"></span>Dir. Crian&#231;a e Adolescente</span>
+      <div class="rcard-title">Fam&#237;lia Substituta e Ado&#231;&#227;o</div>
       <div class="rcard-topics">
-        <span class="topic-tag">Guarda · arts. 33–35</span>
-        <span class="topic-tag">Tutela · arts. 36–38</span>
-        <span class="topic-tag">Adoção · arts. 39–52</span>
+        <span class="topic-tag">Guarda &middot; arts. 33&#8211;35</span>
+        <span class="topic-tag">Tutela &middot; arts. 36&#8211;38</span>
+        <span class="topic-tag">Ado&#231;&#227;o &middot; arts. 39&#8211;52</span>
         <span class="topic-tag">Irrevogabilidade</span>
       </div>
       <div class="rcard-meta">
@@ -602,7 +592,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
       </div>
     </div>
   </a>
-
 </div>
 
 <div class="empty-state sem-3-only" id="emptyState" aria-live="polite" aria-atomic="true">
