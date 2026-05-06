@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Direito Civil I — Pessoa Natural · Nascituro · Capacidade · Emancipação</title>
+<title>Introdução ao Direito Civil — Pessoa Natural · Nascituro · Capacidade · Emancipação</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@300;400;500;600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -31,11 +31,6 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 .banca-pill{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.2rem;padding:.42rem .95rem;background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.25);border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.07em;color:var(--pj);text-transform:uppercase}
 .banca-pill .p{width:5px;height:5px;border-radius:50%;background:var(--pj);animation:pu 2s infinite}
 @keyframes pu{0%,100%{opacity:1}50%{opacity:.35}}
-.pw{display:flex;align-items:center;gap:1rem;margin-top:1.6rem;padding:.85rem 1.2rem;background:var(--surface);border:1px solid var(--border);border-radius:6px}
-.pl{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--text3);letter-spacing:.1em;white-space:nowrap}
-.pt{flex:1;height:3px;background:var(--border2);border-radius:10px;overflow:hidden}
-.pf{height:100%;background:linear-gradient(90deg,var(--morte),var(--aus),var(--pj),var(--dom));width:0%;transition:width .5s cubic-bezier(.4,0,.2,1);border-radius:10px}
-.pc{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--text2);white-space:nowrap}
 .sw{margin-top:.85rem;position:relative}
 .si{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:.68rem 1rem .68rem 2.5rem;color:var(--text);font-family:'Outfit',sans-serif;font-size:.85rem;outline:none;transition:border-color .2s}
 .si::placeholder{color:var(--text3)}.si:focus{border-color:var(--border2)}
@@ -157,15 +152,11 @@ hr.dv{border:none;border-top:1px solid var(--border);margin:1.35rem 0}
 
 <div class="hdr">
   <a class="back" href="index.html">&#8592; Central de Resumos</a>
-  <div class="ey">Direito Civil I &mdash; Prova 1 &middot; UFN 2026/1</div>
+  <div class="ey">Introdução ao Direito Civil &mdash; Prova 1 &middot; UFN 2026/1</div>
   <h1 class="htitle">Pessoa Natural<br><em>Nascituro · Capacidade · Emancipação</em></h1>
   <div class="hsub">Arts. 1–21 CC &middot; Estatuto da Pessoa com Deficiência (Lei 13.146/2015) &middot; Banca UFN</div>
   <div class="banca-pill"><span class="p"></span>Banca UFN &mdash; Estilo de Questões Identificado</div>
-  <div class="pw">
-    <span class="pl">Progresso de Leitura</span>
-    <div class="pt"><div class="pf" id="pf"></div></div>
-    <span class="pc" id="pc">0%</span>
-  </div>
+
   <div class="sw">
     <span class="sic">&#x2315;</span>
     <input class="si" type="text" placeholder="Buscar neste resumo..." oninput="doSearch(this.value)" autocomplete="off">
@@ -461,7 +452,7 @@ hr.dv{border:none;border-top:1px solid var(--border);margin:1.35rem 0}
 </main>
 
 <footer class="hub-footer">
-  <div class="ft-left">Guto Ceolin &middot; UFN &middot; Direito Civil I &middot; 2026/1</div>
+  <div class="ft-left">Guto Ceolin &middot; UFN &middot; Introdução ao Direito Civil &middot; 2026/1</div>
   <div class="ft-right"><a href="index.html">← Voltar ao Hub</a></div>
 </footer>
 
@@ -546,22 +537,13 @@ function switchTab(btn,panelId){
   document.getElementById(panelId).classList.add('active');
 }
 
-function updateProgress(){
-  const els=document.querySelectorAll('.sp.active');
-  const pct=Math.min(100,Math.round((document.documentElement.scrollTop/(document.documentElement.scrollHeight-window.innerHeight))*100));
-  document.getElementById('pf').style.width=pct+'%';
-  document.getElementById('pc').textContent=pct+'%';
-}
-
 document.querySelectorAll('.xt').forEach(t=>{t.addEventListener('click',()=>{const xi=t.closest('.xi');xi.classList.toggle('open');const xc=xi.querySelector('.xc');xc.style.maxHeight=xi.classList.contains('open')?xc.scrollHeight+'px':'0';});});
 
 function doSearch(v){
   if(!v){document.querySelectorAll('mark').forEach(m=>{const p=m.parentNode;p.replaceChild(document.createTextNode(m.textContent),m);p.normalize();});return;}
 }
 
-window.addEventListener('scroll',updateProgress);
 buildDots();renderQ(0);
-setTimeout(()=>{document.getElementById('pf').style.width='100%';document.getElementById('pc').textContent='100%';},3000);
 </script>
 </body>
 </html>

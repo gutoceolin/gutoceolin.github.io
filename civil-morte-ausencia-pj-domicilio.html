@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Direito Civil I — Morte · Ausência · PJ · Domicílio</title>
+<title>Introdução ao Direito Civil — Morte · Ausência · PJ · Domicílio</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@300;400;500;600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -33,12 +33,6 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 .banca-pill .p{width:5px;height:5px;border-radius:50%;background:var(--pj);animation:pu 2s infinite}
 @keyframes pu{0%,100%{opacity:1}50%{opacity:.35}}
 
-/* progresso */
-.pw{display:flex;align-items:center;gap:1rem;margin-top:1.6rem;padding:.85rem 1.2rem;background:var(--surface);border:1px solid var(--border);border-radius:6px}
-.pl{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--text3);letter-spacing:.1em;white-space:nowrap}
-.pt{flex:1;height:3px;background:var(--border2);border-radius:10px;overflow:hidden}
-.pf{height:100%;background:linear-gradient(90deg,var(--morte),var(--aus),var(--pj),var(--dom));width:0%;transition:width .5s cubic-bezier(.4,0,.2,1);border-radius:10px}
-.pc{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--text2);white-space:nowrap}
 
 /* busca */
 .sw{margin-top:.85rem;position:relative}
@@ -170,9 +164,6 @@ hr.dv{border:none;border-top:1px solid var(--border);margin:1.35rem 0}
 .qtop{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.4rem}
 .qtitle{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:700;color:var(--white)}
 .sbadge{font-family:'JetBrains Mono',monospace;font-size:.65rem;padding:.26rem .72rem;border-radius:4px;background:var(--surface2);border:1px solid var(--border);color:var(--text2)}
-.qdots{display:flex;gap:.28rem;flex-wrap:wrap;margin-bottom:1.2rem}
-.qdot{width:7px;height:7px;border-radius:50%;background:var(--border2);transition:all .2s}
-.qdot.cur{background:var(--text2)}.qdot.ok{background:var(--dom)}.qdot.err{background:var(--morte)}
 .qq{display:none;animation:fu .26s ease}.qq.active{display:block}
 .qnum{font-family:'JetBrains Mono',monospace;font-size:.56rem;color:var(--text3);letter-spacing:.1em;margin-bottom:.6rem}
 .bflag{display:inline-flex;align-items:center;gap:.32rem;font-family:'JetBrains Mono',monospace;font-size:.56rem;padding:.13rem .5rem;border-radius:3px;background:rgba(212,168,67,.1);border:1px solid rgba(212,168,67,.24);color:var(--pj);margin-left:.45rem;vertical-align:middle;letter-spacing:.04em}
@@ -209,16 +200,12 @@ hr.dv{border:none;border-top:1px solid var(--border);margin:1.35rem 0}
 
 <header class="hdr">
   <a class="back" href="index.html">&#8592; Central de Resumos</a>
-  <div class="ey">Direito Civil I &mdash; Prova 2 &middot; UFN 2026/1</div>
+  <div class="ey">Introdução ao Direito Civil &mdash; Prova 2 &middot; UFN 2026/1</div>
   <h1 class="htitle">Resumão <em>Interativo</em></h1>
   <div class="hsub">Morte · Ausência · Pessoa Jurídica · Domicílio</div>
   <div class="banca-pill"><span class="p"></span>Quiz no estilo da Banca UFN</div>
 
-  <div class="pw">
-    <span class="pl">Progresso quiz</span>
-    <div class="pt"><div class="pf" id="PF"></div></div>
-    <span class="pc" id="PC">0 / 28</span>
-  </div>
+
   <div class="sw">
     <span class="sic">⌕</span>
     <input class="si" type="text" placeholder="Buscar conceito, artigo, prazo..." id="SI" autocomplete="off">
@@ -750,10 +737,10 @@ hr.dv{border:none;border-top:1px solid var(--border);margin:1.35rem 0}
   <div class="mbody">
     <div class="qwrap">
       <div class="qtop">
-        <div class="qtitle">Direito Civil I — Simulado UFN</div>
+        <div class="qtitle">Introdução ao Direito Civil — Simulado UFN</div>
         <div class="sbadge" id="SB">0 acertos</div>
       </div>
-      <div class="qdots" id="QD"></div>
+
       <div id="QC"></div>
       <div class="qres" id="QR">
         <div class="rscore" id="RS">0/28</div>
@@ -856,13 +843,8 @@ let cur=0,score=0,answered=[],qd=false;
 
 function buildQ(){
   const C=document.getElementById('QC');
-  const D=document.getElementById('QD');
-  C.innerHTML='';D.innerHTML='';
+  C.innerHTML='';
   QS.forEach((q,i)=>{
-    const dot=document.createElement('div');
-    dot.className='qdot'+(i===0?' cur':'');
-    dot.id='dot'+i;
-    D.appendChild(dot);
     const div=document.createElement('div');
     div.className='qq'+(i===0?' active':'');
     div.id='qq'+i;
@@ -883,14 +865,12 @@ function selA(qi,oi){
   fb.className='qfb show '+(ok?'ok':'ng');
   fb.innerHTML=`<strong>${ok?'✓ Correto!':'✗ Incorreto.'}</strong> ${q.exp}`;
   document.getElementById('nx'+qi).classList.add('show');
-  const dot=document.getElementById('dot'+qi);dot.classList.remove('cur');dot.classList.add(ok?'ok':'err');
   document.getElementById('SB').textContent=`${score} acerto${score!==1?'s':''}`;
-  updP();
 }
 
 function nxtQ(c){
   document.getElementById('qq'+c).classList.remove('active');
-  if(c+1<QS.length){document.getElementById('qq'+(c+1)).classList.add('active');document.getElementById('dot'+(c+1)).classList.add('cur');}
+  if(c+1<QS.length){document.getElementById('qq'+(c+1)).classList.add('active');}
   else showR();
 }
 
@@ -910,17 +890,10 @@ function restartQ(){
   score=0;answered=[];qd=false;
   document.getElementById('QR').classList.remove('show');
   document.getElementById('SB').textContent='0 acertos';
-  buildQ();updP();
+  buildQ();
 }
 
-function updP(){
-  const done=answered.filter(a=>a!==undefined).length;
-  const p=done/QS.length*100;
-  document.getElementById('PF').style.width=p+'%';
-  document.getElementById('PC').textContent=`${done} / ${QS.length}`;
-}
-
-buildQ();updP();
+buildQ();
 </script>
 </body>
 </html>
