@@ -105,8 +105,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .rcard.hidden{display:none!important}
 .rcard.locked{opacity:.48;cursor:default;pointer-events:none}
 .rcard.locked:hover{transform:none;border-color:var(--border);box-shadow:none}
-.rcard.featured{grid-column:span 2}
-@media(max-width:560px){.rcard.featured{grid-column:span 1}}
 
 /* card top line */
 .rcard-top{height:3px;width:100%;transition:opacity .25s}
@@ -116,11 +114,8 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .rcard[data-disc=proc]   .rcard-top{background:linear-gradient(90deg,var(--proc) 0%,rgba(92,184,224,.3) 60%,transparent 100%)}
 .rcard[data-disc=penal]  .rcard-top{background:linear-gradient(90deg,var(--penal) 0%,rgba(224,122,92,.3) 60%,transparent 100%)}
 .rcard[data-disc=eca]    .rcard-top{background:linear-gradient(90deg,var(--eca) 0%,rgba(92,201,138,.3) 60%,transparent 100%)}
-.rcard.featured .rcard-top{height:4px}
 
 .rcard-body{padding:1.4rem;flex:1;display:flex;flex-direction:column;gap:.7rem}
-.rcard.featured .rcard-body{padding:1.75rem}
-.rcard.featured .rcard-title{font-size:1.8rem;line-height:1.1}
 
 /* disc pill */
 .disc-pill{display:inline-flex;align-items:center;gap:.38rem;font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.08em;text-transform:uppercase;padding:.18rem .55rem;border-radius:3px;width:fit-content}
@@ -132,7 +127,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .rcard[data-disc=eca]    .disc-pill{background:var(--eca-dim);   color:var(--eca);   border:1px solid rgba(92,201,138,.2)}
 
 .rcard-title{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:700;color:var(--white);line-height:1.18;margin-top:.1rem}
-.featured-desc{font-size:.84rem;color:var(--text2);line-height:1.82;margin-top:.15rem}
 
 .rcard-topics{display:flex;gap:.3rem;flex-wrap:wrap;margin-top:.1rem}
 .topic-tag{font-family:'JetBrains Mono',monospace;font-size:.52rem;letter-spacing:.04em;background:var(--surface2);border:1px solid var(--border);color:var(--text3);padding:.14rem .45rem;border-radius:2px}
@@ -276,15 +270,14 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 <div class="grid sem-3-only" id="cardGrid">
 
   <!-- FEATURED — disponível -->
-  <a class="rcard featured" data-disc="civil" data-sem="3"
+  <a class="rcard" data-disc="civil" data-sem="3"
      data-title="morte ausencia pj domicilio pessoa juridica"
      href="BRUNAO/civil-morte-ausencia-pj-domicilio.html">
     <div class="rcard-top"></div>
     <span class="status-badge ready">Disponível</span>
     <div class="rcard-body">
       <span class="disc-pill"><span class="dot"></span>Introdução ao Direito Civil</span>
-      <div class="rcard-title">Morte, Ausência, Pessoa Jurídica e Domicílio (Prova 2) </div>
-      <div class="featured-desc">Resumo interativo completo com módulos, subtabs, expandables e quiz no estilo da banca UFN. Cobre os 4 institutos com todos os prazos, requisitos e distinções críticas para a prova.</div>
+      <div class="rcard-title">Morte, Ausência, Pessoa Jurídica e Domicílio</div>
       <div class="rcard-topics">
         <span class="topic-tag">Morte real e presumida</span>
         <span class="topic-tag">Comoriência · art. 8º</span>
