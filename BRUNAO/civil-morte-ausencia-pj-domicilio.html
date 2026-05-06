@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -36,7 +36,7 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 
 /* busca */
 .sw{margin-top:.85rem;position:relative}
-.si{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:.68rem 1rem .68rem 2.5rem;color:var(--text);font-family:'Outfit',sans-serif;font-size:.85rem;outline:none;transition:border-color .2s}
+.si{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:.68rem 1rem .68rem 2.5rem;color:var(--text);font-family:'Outfit',sans-serif;font-size:.85rem;outline:none;transition:border-color .2s;min-height:44px}
 .si::placeholder{color:var(--text3)}.si:focus{border-color:var(--border2)}
 .sic{position:absolute;left:.82rem;top:50%;transform:translateY(-50%);color:var(--text3);font-size:.88rem;pointer-events:none}
 .scc{position:absolute;right:.9rem;top:50%;transform:translateY(-50%);font-family:'JetBrains Mono',monospace;font-size:.56rem;color:var(--text3)}
@@ -44,7 +44,7 @@ mark{background:rgba(212,168,67,.28);color:var(--white);border-radius:2px;paddin
 
 /* ─── NAV ─── */
 .mnav{display:flex;gap:.42rem;flex-wrap:wrap;margin:1.9rem auto 0;max-width:1100px;padding:0 2rem;position:relative;z-index:10}
-.nb{display:flex;align-items:center;gap:.5rem;padding:.52rem .95rem;border:1px solid var(--border);border-radius:4px;background:var(--surface);color:var(--text2);font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.07em;cursor:pointer;transition:all .2s;text-transform:uppercase}
+.nb{display:flex;align-items:center;gap:.5rem;padding:.52rem .95rem;border:1px solid var(--border);border-radius:4px;background:var(--surface);color:var(--text2);font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.07em;cursor:pointer;transition:all .2s;text-transform:uppercase;min-height:44px}
 .nb:hover{border-color:var(--border2);color:var(--text)}
 .nb .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
 .nb[data-m=morte] .d{background:var(--morte)}.nb[data-m=aus] .d{background:var(--aus)}
@@ -85,8 +85,8 @@ mark{background:rgba(212,168,67,.28);color:var(--white);border-radius:2px;paddin
 /* subtabs */
 .stabs{display:flex;border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
 .stabs::-webkit-scrollbar{display:none}
-.stab{padding:.78rem 1.15rem;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.07em;text-transform:uppercase;color:var(--text3);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;background:none;border-top:none;border-left:none;border-right:none;margin-bottom:-1px}
-.stab:hover{color:var(--text2)}.stab.active{color:var(--white)}
+.stab{padding:.78rem 1.15rem;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.07em;text-transform:uppercase;color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;background:none;border-top:none;border-left:none;border-right:none;margin-bottom:-1px;min-height:44px}
+.stab:hover{color:var(--text)}.stab.active{color:var(--white)}
 .stab.active[data-c=morte]{border-bottom-color:var(--morte)}.stab.active[data-c=aus]{border-bottom-color:var(--aus)}
 .stab.active[data-c=pj]{border-bottom-color:var(--pj)}.stab.active[data-c=dom]{border-bottom-color:var(--dom)}
 
@@ -194,21 +194,34 @@ hr.dv{border:none;border-top:1px solid var(--border);margin:1.35rem 0}
 .back{display:inline-flex;align-items:center;gap:.45rem;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);text-decoration:none;margin-bottom:1.2rem;transition:color .2s}
 .back:hover{color:var(--text2)}
 @media(max-width:600px){.hdr,.mnav,.main{padding-left:1rem;padding-right:1rem}.sp{padding:1.2rem 1rem}.qwrap{padding:1rem 1rem 1.5rem}.mhd{flex-direction:column;gap:.85rem;padding:1.2rem 1rem}}
+
+/* focus states */
+.nb:focus-visible,.stab:focus-visible{outline:2px solid var(--pj);outline-offset:2px}
+.si:focus-visible{outline:2px solid var(--pj);outline-offset:2px}
+
+/* reduced motion */
+@media(prefers-reduced-motion:reduce){
+  .mod{animation:none}
+  .sp{animation:none}
+  @keyframes fu{from{opacity:1;transform:none}to{opacity:1;transform:none}}
+  @keyframes pu{0%,100%{opacity:1}}
+  @keyframes fadeUp{from{opacity:1}to{opacity:1}}
+}
 </style>
 </head>
 <body>
 
 <header class="hdr">
-  <a class="back" href="index.html">&#8592; Central de Resumos</a>
+  <a class="back" href="../index.html">&#8592; Central de Resumos</a>
   <div class="ey">Introdução ao Direito Civil &mdash; Prova 2 &middot; UFN 2026/1</div>
   <h1 class="htitle">Resumão <em>Interativo</em></h1>
   <div class="hsub">Morte · Ausência · Pessoa Jurídica · Domicílio</div>
   <div class="banca-pill"><span class="p"></span>Quiz no estilo da Banca UFN</div>
 
 
-  <div class="sw">
-    <span class="sic">⌕</span>
-    <input class="si" type="text" placeholder="Buscar conceito, artigo, prazo..." id="SI" autocomplete="off">
+  <div class="sw" role="search">
+    <span class="sic" aria-hidden="true">⌕</span>
+    <input class="si" type="text" placeholder="Buscar conceito, artigo, prazo..." aria-label="Buscar conceito, artigo, prazo" id="SI" autocomplete="off">
     <span class="scc" id="SC"></span>
   </div>
 </header>
