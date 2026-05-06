@@ -916,13 +916,20 @@ const QS=[
   {q:"Uma pessoa jurídica privada possui sede em Belo Horizonte e filiais em Recife e Fortaleza. Para uma ação decorrente de contrato firmado na filial de Recife, o domicílio da PJ é:",opts:["Exclusivamente Belo Horizonte, sede da administração central.","Recife, pois é onde o ato foi praticado.","Qualquer das três cidades, à escolha do réu.","Apenas as filiais, nunca a sede.","O foro que julgar primeiro o processo."],ans:1,banca:false,exp:"Art. 75, §1º CC: se a PJ tiver diversos estabelecimentos, em lugares diferentes, considerar-se-á domicílio para os atos neles praticados o estabelecimento respectivo. Para ato praticado na filial de Recife → domicílio da PJ é Recife para essa ação."},
 ];
 
-let cur=0,score=0,answered=[],qd=false;
+let cur=0,score=0,answered=[],qd=false,SQ=[];
+
+function shuffleOpts(q){
+  const idx=Array.from({length:q.opts.length},(_,i)=>i);
+  for(let i=idx.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[idx[i],idx[j]]=[idx[j],idx[i]];}
+  return {...q,opts:idx.map(i=>q.opts[i]),ans:idx.indexOf(q.ans)};
+}
 
 function buildQ(){
   const C=document.getElementById('QC');
   const D=document.getElementById('QD');
   C.innerHTML='';D.innerHTML='';
-  QS.forEach((q,i)=>{
+  SQ=QS.map(shuffleOpts);
+  SQ.forEach((q,i)=>{
     const dot=document.createElement('div');
     dot.className='qdot'+(i===0?' cur':'');
     dot.id='dot'+i;
@@ -941,11 +948,11 @@ function buildQ(){
 function selA(qi,oi){
   if(answered[qi]!==undefined)return;
   answered[qi]=oi;
-  const q=QS[qi];const ok=oi===q.ans;if(ok)score++;
+  const q=SQ[qi];const ok=oi===q.ans;if(ok)score++;
   q.opts.forEach((_,i)=>{const b=document.getElementById(`o${qi}_${i}`);b.disabled=true;b.classList.add('disabled');if(i===q.ans)b.classList.add('correct');if(i===oi&&!ok)b.classList.add('wrong');});
   const fb=document.getElementById('fb'+qi);
   fb.className='qfb show '+(ok?'ok':'ng');
-  fb.innerHTML=`<strong>${ok?'✓ Correto!':'✗ Incorreto.'}</strong> ${q.exp}`;
+  fb.innerHTML=`<strong>${ok?'✓ Correto!':'✗ Incorreto.'}</strong> ${QS[qi].exp}`;
   document.getElementById('nx'+qi).classList.add('show');
   const dot=document.getElementById('dot'+qi);dot.classList.remove('cur');dot.classList.add(ok?'ok':'err');
   if(qi+1<QS.length){const d=document.getElementById('dot'+(qi+1));if(d)d.classList.add('cur');}
