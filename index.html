@@ -60,10 +60,16 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .op-pct{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--text3);width:32px;text-align:right}
 
 /* FILTROS */
-.filters{position:relative;z-index:10;max-width:1100px;margin:2rem auto 0;padding:0 2rem;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
-.filter-btn{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.07em;text-transform:uppercase;padding:.38rem .85rem;border:1px solid var(--border);border-radius:3px;background:var(--surface);color:var(--text2);cursor:pointer;transition:all .18s;min-height:44px;display:inline-flex;align-items:center}
+.filters-rail{position:sticky;top:0;z-index:20;background:rgba(9,9,11,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border);margin-top:2rem}
+.filters{max-width:1100px;margin:0 auto;padding:.6rem 2rem;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.filter-btn{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.07em;text-transform:uppercase;padding:.38rem .85rem;border:1px solid var(--border);border-radius:3px;background:transparent;color:var(--text2);cursor:pointer;transition:color .18s,border-color .18s,background .18s;min-height:44px;display:inline-flex;align-items:center}
 .filter-btn:hover{color:var(--text);border-color:var(--border2)}
 .filter-btn.active{color:var(--white);border-color:var(--border2);background:var(--surface2)}
+.filter-btn[data-disc=civil].active{color:var(--civil);border-color:rgba(224,110,140,.45);background:var(--civil-dim)}
+.filter-btn[data-disc=const].active{color:var(--const);border-color:rgba(123,143,232,.45);background:var(--const-dim)}
+.filter-btn[data-disc=proc].active{color:var(--proc);border-color:rgba(92,184,224,.45);background:var(--proc-dim)}
+.filter-btn[data-disc=penal].active{color:var(--penal);border-color:rgba(224,122,92,.45);background:var(--penal-dim)}
+.filter-btn[data-disc=eca].active{color:var(--eca);border-color:rgba(92,201,138,.45);background:var(--eca-dim)}
 .filter-sep{flex:1}
 .search-mini{position:relative}
 .search-mini input{background:var(--surface);border:1px solid var(--border);border-radius:3px;padding:.38rem .9rem .38rem 2.1rem;color:var(--text);font-family:'Outfit',sans-serif;font-size:.8rem;outline:none;width:200px;transition:border-color .2s;min-height:44px}
@@ -82,25 +88,32 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 @media(max-width:560px){.grid{grid-template-columns:1fr}}
 
 /* CARD */
-.rcard{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;cursor:pointer;transition:border-color .22s, transform .22s;text-decoration:none;display:flex;flex-direction:column;animation:fadeUp .4s ease both}
+.rcard{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;cursor:pointer;transition:border-color .25s,transform .25s,box-shadow .25s;text-decoration:none;display:flex;flex-direction:column;animation:fadeUp .4s ease both}
 @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 .rcard:nth-child(1){animation-delay:.04s}.rcard:nth-child(2){animation-delay:.08s}.rcard:nth-child(3){animation-delay:.12s}
 .rcard:nth-child(4){animation-delay:.16s}.rcard:nth-child(5){animation-delay:.20s}.rcard:nth-child(6){animation-delay:.24s}
 .rcard:nth-child(7){animation-delay:.28s}.rcard:nth-child(8){animation-delay:.32s}.rcard:nth-child(9){animation-delay:.36s}
-.rcard:hover{border-color:var(--border2);transform:translateY(-2px)}
+.rcard:hover{border-color:var(--border2);transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.28)}
+.rcard[data-disc=civil]:not(.locked):hover{border-color:rgba(224,110,140,.35);box-shadow:0 16px 40px rgba(224,110,140,.11)}
+.rcard[data-disc=const]:not(.locked):hover{border-color:rgba(123,143,232,.35);box-shadow:0 16px 40px rgba(123,143,232,.11)}
+.rcard[data-disc=proc]:not(.locked):hover{border-color:rgba(92,184,224,.35);box-shadow:0 16px 40px rgba(92,184,224,.11)}
+.rcard[data-disc=penal]:not(.locked):hover{border-color:rgba(224,122,92,.35);box-shadow:0 16px 40px rgba(224,122,92,.11)}
+.rcard[data-disc=eca]:not(.locked):hover{border-color:rgba(92,201,138,.35);box-shadow:0 16px 40px rgba(92,201,138,.11)}
 .rcard.hidden{display:none!important}
 .rcard.locked{opacity:.48;cursor:default;pointer-events:none}
-.rcard.locked:hover{transform:none;border-color:var(--border)}
+.rcard.locked:hover{transform:none;border-color:var(--border);box-shadow:none}
 .rcard.featured{grid-column:span 2}
 @media(max-width:560px){.rcard.featured{grid-column:span 1}}
 
 /* card top line */
-.rcard-top{height:4px;width:100%}
-.rcard[data-disc=civil]  .rcard-top{background:linear-gradient(90deg,var(--civil),rgba(224,110,140,0))}
-.rcard[data-disc=const]  .rcard-top{background:linear-gradient(90deg,var(--const),rgba(123,143,232,0))}
-.rcard[data-disc=proc]   .rcard-top{background:linear-gradient(90deg,var(--proc),rgba(92,184,224,0))}
-.rcard[data-disc=penal]  .rcard-top{background:linear-gradient(90deg,var(--penal),rgba(224,122,92,0))}
-.rcard[data-disc=eca]    .rcard-top{background:linear-gradient(90deg,var(--eca),rgba(92,201,138,0))}
+.rcard-top{height:3px;width:100%;transition:opacity .25s}
+.rcard:hover .rcard-top{opacity:.85}
+.rcard[data-disc=civil]  .rcard-top{background:linear-gradient(90deg,var(--civil) 0%,rgba(224,110,140,.3) 60%,transparent 100%)}
+.rcard[data-disc=const]  .rcard-top{background:linear-gradient(90deg,var(--const) 0%,rgba(123,143,232,.3) 60%,transparent 100%)}
+.rcard[data-disc=proc]   .rcard-top{background:linear-gradient(90deg,var(--proc) 0%,rgba(92,184,224,.3) 60%,transparent 100%)}
+.rcard[data-disc=penal]  .rcard-top{background:linear-gradient(90deg,var(--penal) 0%,rgba(224,122,92,.3) 60%,transparent 100%)}
+.rcard[data-disc=eca]    .rcard-top{background:linear-gradient(90deg,var(--eca) 0%,rgba(92,201,138,.3) 60%,transparent 100%)}
+.rcard.featured .rcard-top{height:4px}
 
 .rcard-body{padding:1.25rem;flex:1;display:flex;flex-direction:column;gap:.55rem}
 .rcard.featured .rcard-body{padding:1.5rem}
@@ -145,9 +158,10 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 
 @media(max-width:600px){
   .hero{padding:3rem 1rem 0}
-  .sem-strip,.filters,.overall-prog,.section-head,.hub-footer{padding:0 1rem}
+  .sem-strip,.overall-prog,.section-head,.hub-footer{padding:0 1rem}
+  .filters{padding:.6rem 1rem}
   .grid{padding:0 1rem}
-  .search-mini input{width:140px}
+  .search-mini input{width:130px}
 }
 
 /* focus states */
@@ -228,18 +242,20 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 </div>
 
 <!-- FILTROS -->
+<div class="filters-rail">
 <div class="filters">
-  <button class="filter-btn active" aria-pressed="true" onclick="applyFilter('all',this)">Todos</button>
-  <button class="filter-btn" aria-pressed="false" onclick="applyFilter('civil',this)">Civil</button>
-  <button class="filter-btn" aria-pressed="false" onclick="applyFilter('const',this)">Constitucional</button>
-  <button class="filter-btn" aria-pressed="false" onclick="applyFilter('proc',this)">Processual</button>
-  <button class="filter-btn" aria-pressed="false" onclick="applyFilter('penal',this)">Penal</button>
-  <button class="filter-btn" aria-pressed="false" onclick="applyFilter('eca',this)">ECA</button>
+  <button class="filter-btn active" data-disc="all" aria-pressed="true" onclick="applyFilter('all',this)">Todos</button>
+  <button class="filter-btn" data-disc="civil" aria-pressed="false" onclick="applyFilter('civil',this)">Civil</button>
+  <button class="filter-btn" data-disc="const" aria-pressed="false" onclick="applyFilter('const',this)">Constitucional</button>
+  <button class="filter-btn" data-disc="proc" aria-pressed="false" onclick="applyFilter('proc',this)">Processual</button>
+  <button class="filter-btn" data-disc="penal" aria-pressed="false" onclick="applyFilter('penal',this)">Penal</button>
+  <button class="filter-btn" data-disc="eca" aria-pressed="false" onclick="applyFilter('eca',this)">ECA</button>
   <div class="filter-sep"></div>
   <div class="search-mini" role="search">
     <span class="ico" aria-hidden="true">&#x2315;</span>
     <input type="text" placeholder="Buscar resumo..." aria-label="Buscar resumo" oninput="applySearch(this.value)" autocomplete="off">
   </div>
+</div>
 </div>
 
 <!-- SECTION HEAD -->
