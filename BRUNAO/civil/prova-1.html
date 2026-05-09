@@ -14,10 +14,11 @@ function toggleTheme(){var h=document.documentElement;var l=h.getAttribute('data
   --bg:#111118;--surface:#1c1c26;--surface2:#242430;--surface3:#1c1c24;
   --border:rgba(255,255,255,.07);--border2:rgba(255,255,255,.12);
   --text:#e8e4f0;--text2:#9490a8;--text3:#56526a;--white:#f5f2ff;
-  --morte:#e06e8c;--morte-dim:rgba(224,110,140,.10);--morte-mid:rgba(224,110,140,.22);
-  --aus:#5c9ee0;  --aus-dim:rgba(92,158,224,.10);  --aus-mid:rgba(92,158,224,.22);
-  --pj:#d4a843;   --pj-dim:rgba(212,168,67,.10);   --pj-mid:rgba(212,168,67,.22);
-  --dom:#5cc98a;  --dom-dim:rgba(92,201,138,.10);  --dom-mid:rgba(92,201,138,.22);
+  --nat:#e06e8c;--nat-dim:rgba(224,110,140,.10);--nat-mid:rgba(224,110,140,.22);
+  --nas:#5c9ee0;  --nas-dim:rgba(92,158,224,.10);  --nas-mid:rgba(92,158,224,.22);
+  --dir:#d4a843;   --dir-dim:rgba(212,168,67,.10);   --dir-mid:rgba(212,168,67,.22);
+  --eman:#5cc98a;  --eman-dim:rgba(92,201,138,.10);  --eman-mid:rgba(92,201,138,.22);
+  --hist:#9b7fe8; --hist-dim:rgba(155,127,232,.10); --hist-mid:rgba(155,127,232,.22);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -32,8 +33,8 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 .htitle{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,6.5vw,4.6rem);font-weight:700;color:var(--white);line-height:.95;letter-spacing:-.02em}
 .htitle em{font-style:italic;color:var(--text2);font-weight:400}
 .hsub{margin-top:1.1rem;font-size:.8rem;color:var(--text2);font-family:'JetBrains Mono',monospace;letter-spacing:.04em}
-.banca-pill{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.2rem;padding:.42rem .95rem;background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.25);border-radius:100px;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.07em;color:var(--pj);text-transform:uppercase}
-.banca-pill .p{width:5px;height:5px;border-radius:50%;background:var(--pj);animation:pu 2s infinite}
+.banca-pill{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.2rem;padding:.42rem .95rem;background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.25);border-radius:100px;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.07em;color:var(--dir);text-transform:uppercase}
+.banca-pill .p{width:5px;height:5px;border-radius:50%;background:var(--dir);animation:pu 2s infinite}
 @keyframes pu{0%,100%{opacity:1}50%{opacity:.35}}
 .sw{margin-top:.85rem;position:relative}
 .si{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:100px;padding:.68rem 1rem .68rem 2.5rem;color:var(--text);font-family:'Outfit',sans-serif;font-size:.85rem;outline:none;transition:border-color .2s}
@@ -44,26 +45,29 @@ mark{background:rgba(212,168,67,.28);color:var(--white);border-radius:2px;paddin
 .nb{display:flex;align-items:center;gap:.5rem;padding:.52rem .95rem;border:1px solid var(--border);border-radius:100px;background:var(--surface);color:var(--text2);font-family:'Outfit',sans-serif;font-size:.75rem;font-weight:500;letter-spacing:.02em;cursor:pointer;transition:all .2s;text-transform:none;min-height:36px}
 .nb:hover{border-color:var(--border2);color:var(--text)}
 .nb .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
-.nb[data-m=morte] .d{background:var(--morte)}.nb[data-m=aus] .d{background:var(--aus)}
-.nb[data-m=pj] .d{background:var(--pj)}.nb[data-m=dom] .d{background:var(--dom)}
+.nb[data-m=nat] .d{background:var(--nat)}.nb[data-m=nas] .d{background:var(--nas)}
+.nb[data-m=dir] .d{background:var(--dir)}.nb[data-m=eman] .d{background:var(--eman)}.nb[data-m=hist] .d{background:var(--hist)}
 .nb[data-m=quiz] .d{background:var(--white)}
 .nb.active{color:var(--white)}
-.nb[data-m=morte].active{border-color:var(--morte);background:var(--morte-dim)}
-.nb[data-m=aus].active{border-color:var(--aus);background:var(--aus-dim)}
-.nb[data-m=pj].active{border-color:var(--pj);background:var(--pj-dim)}
-.nb[data-m=dom].active{border-color:var(--dom);background:var(--dom-dim)}
+.nb[data-m=nat].active{border-color:var(--nat);background:var(--nat-dim)}
+.nb[data-m=nas].active{border-color:var(--nas);background:var(--nas-dim)}
+.nb[data-m=dir].active{border-color:var(--dir);background:var(--dir-dim)}
+.nb[data-m=eman].active{border-color:var(--eman);background:var(--eman-dim)}
+.nb[data-m=hist].active{border-color:var(--hist);background:var(--hist-dim)}
 .nb[data-m=quiz].active{border-color:rgba(255,255,255,.28);background:rgba(255,255,255,.04)}
 .main{position:relative;z-index:5;max-width:1100px;margin:1.8rem auto 5rem;padding:0 2rem}
 .mod{display:none;animation:fu .3s ease both}.mod.active{display:block}
 @keyframes fu{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .mhd{display:flex;align-items:flex-start;gap:1.4rem;padding:1.75rem 2rem;border-radius:14px 14px 0 0;border:1px solid var(--border);border-bottom:none;box-shadow:0 4px 20px rgba(0,0,0,.25)}
-.mhd[data-c=morte]{background:var(--morte-dim);border-color:rgba(224,110,140,.28)}
-.mhd[data-c=aus]{background:var(--aus-dim);border-color:rgba(92,158,224,.28)}
-.mhd[data-c=pj]{background:var(--pj-dim);border-color:rgba(212,168,67,.28)}
-.mhd[data-c=dom]{background:var(--dom-dim);border-color:rgba(92,201,138,.28)}
+.mhd[data-c=nat]{background:var(--nat-dim);border-color:rgba(224,110,140,.28)}
+.mhd[data-c=nas]{background:var(--nas-dim);border-color:rgba(92,158,224,.28)}
+.mhd[data-c=dir]{background:var(--dir-dim);border-color:rgba(212,168,67,.28)}
+.mhd[data-c=eman]{background:var(--eman-dim);border-color:rgba(92,201,138,.28)}
+.mhd[data-c=hist]{background:var(--hist-dim);border-color:rgba(155,127,232,.28)}
 .mi{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
-.mi[data-c=morte]{background:var(--morte-mid)}.mi[data-c=aus]{background:var(--aus-mid)}
-.mi[data-c=pj]{background:var(--pj-mid)}.mi[data-c=dom]{background:var(--dom-mid)}
+.mi[data-c=nat]{background:var(--nat-mid)}.mi[data-c=nas]{background:var(--nas-mid)}
+.mi[data-c=dir]{background:var(--dir-mid)}.mi[data-c=eman]{background:var(--eman-mid)}
+.mi[data-c=hist]{background:var(--hist-mid)}
 .mnum{font-family:'Outfit',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.12em;color:var(--text3);text-transform:uppercase;margin-bottom:.25rem}
 .mtitle{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--white);line-height:1}
 .mdesc{margin-top:.42rem;font-size:.82rem;color:var(--text2);line-height:1.62}
@@ -72,14 +76,15 @@ mark{background:rgba(212,168,67,.28);color:var(--white);border-radius:2px;paddin
 .stabs::-webkit-scrollbar{display:none}
 .stab{padding:.78rem 1.15rem;font-family:'Outfit',sans-serif;font-size:.78rem;font-weight:500;letter-spacing:.01em;text-transform:none;color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;background:none;border-top:none;border-left:none;border-right:none;margin-bottom:-1px;min-height:44px}
 .stab:hover{color:var(--text)}.stab.active{color:var(--white)}
-.stab.active[data-c=morte]{border-bottom-color:var(--morte)}.stab.active[data-c=aus]{border-bottom-color:var(--aus)}
-.stab.active[data-c=pj]{border-bottom-color:var(--pj)}.stab.active[data-c=dom]{border-bottom-color:var(--dom)}
+.stab.active[data-c=nat]{border-bottom-color:var(--nat)}.stab.active[data-c=nas]{border-bottom-color:var(--nas)}
+.stab.active[data-c=dir]{border-bottom-color:var(--dir)}.stab.active[data-c=eman]{border-bottom-color:var(--eman)}
+.stab.active[data-c=hist]{border-bottom-color:var(--hist)}
 .sp{display:none;padding:2rem 2.25rem;animation:fu .22s ease}.sp.active{display:block}
 .sl{font-family:'Outfit',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);margin-bottom:.58rem;margin-top:1.55rem;display:flex;align-items:center;gap:.5rem}
 .sl::after{content:'';flex:1;height:1px;background:var(--border)}.sl:first-child{margin-top:0}
 p{font-size:.9375rem;color:#b5b0be;line-height:1.88}p+p{margin-top:.65rem}
 .hl{color:var(--white);font-weight:500}
-.art{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--pj);font-weight:500}
+.art{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--dir);font-weight:500}
 ul,ol{padding-left:1.25rem;margin-top:.48rem}
 li{font-size:.9rem;color:#aeaab8;line-height:1.82;margin-bottom:.2rem}li strong{color:var(--white);font-weight:500}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:.88rem;margin-top:.68rem}
@@ -88,16 +93,17 @@ li{font-size:.9rem;color:#aeaab8;line-height:1.82;margin-bottom:.2rem}li strong{
 .card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:1rem;box-shadow:0 2px 8px rgba(0,0,0,.18);transition:border-color .2s,box-shadow .2s}.card:hover{border-color:var(--border2);box-shadow:0 4px 16px rgba(0,0,0,.28)}
 .ct{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.55rem;display:flex;align-items:center;gap:.4rem}
 .ct::before{content:'';width:3px;height:11px;border-radius:2px;flex-shrink:0}
-.cm .ct{color:var(--morte)}.cm .ct::before{background:var(--morte)}
-.ca .ct{color:var(--aus)}.ca .ct::before{background:var(--aus)}
-.cp .ct{color:var(--pj)}.cp .ct::before{background:var(--pj)}
-.cd .ct{color:var(--dom)}.cd .ct::before{background:var(--dom)}
+.cm .ct{color:var(--nat)}.cm .ct::before{background:var(--nat)}
+.ca .ct{color:var(--nas)}.ca .ct::before{background:var(--nas)}
+.cp .ct{color:var(--dir)}.cp .ct::before{background:var(--dir)}
+.cd .ct{color:var(--eman)}.cd .ct::before{background:var(--eman)}
+.ch .ct{color:var(--hist)}.ch .ct::before{background:var(--hist)}
 .co{display:flex;gap:.75rem;padding:.88rem 1rem;border-radius:10px;margin-top:.82rem;font-size:.83rem;line-height:1.72;color:#aeaab8}
 .co-ico{font-size:.92rem;flex-shrink:0;margin-top:.05rem}.co strong{font-weight:500}
-.cw{background:rgba(212,168,67,.07);border:1px solid rgba(212,168,67,.2)}.cw strong{color:var(--pj)}
-.ci{background:rgba(92,158,224,.07);border:1px solid rgba(92,158,224,.2)}.ci strong{color:var(--aus)}
-.ce{background:rgba(224,110,140,.07);border:1px solid rgba(224,110,140,.2)}.ce strong{color:var(--morte)}
-.cs{background:rgba(92,201,138,.07);border:1px solid rgba(92,201,138,.2)}.cs strong{color:var(--dom)}
+.cw{background:rgba(212,168,67,.07);border:1px solid rgba(212,168,67,.2)}.cw strong{color:var(--dir)}
+.ci{background:rgba(92,158,224,.07);border:1px solid rgba(92,158,224,.2)}.ci strong{color:var(--nas)}
+.ce{background:rgba(224,110,140,.07);border:1px solid rgba(224,110,140,.2)}.ce strong{color:var(--nat)}
+.cs{background:rgba(92,201,138,.07);border:1px solid rgba(92,201,138,.2)}.cs strong{color:var(--eman)}
 .tw{overflow-x:auto;margin-top:.68rem;border-radius:10px;border:1px solid var(--border)}
 table{width:100%;border-collapse:collapse;font-size:.82rem}
 th{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);padding:.68rem 1rem;background:var(--surface2);border-bottom:1px solid var(--border);text-align:left;white-space:nowrap}
@@ -118,10 +124,10 @@ hr.dv{border:none;border-top:1px solid var(--border);margin:1.35rem 0}
 'Outfit',sans-serif;font-size:.65rem;padding:.26rem .72rem;border-radius:100px;background:var(--surface2);border:1px solid var(--border);color:var(--text2)}
 .qdots{display:flex;gap:.28rem;flex-wrap:wrap;margin-bottom:1.2rem}
 .qdot{width:7px;height:7px;border-radius:50%;background:var(--border2);transition:all .2s}
-.qdot.cur{background:var(--text2)}.qdot.ok{background:var(--dom)}.qdot.err{background:var(--morte)}
+.qdot.cur{background:var(--text2)}.qdot.ok{background:var(--eman)}.qdot.err{background:var(--nat)}
 .qq{display:none;animation:fu .26s ease}.qq.active{display:block}
 .qnum{font-family:'JetBrains Mono',monospace;font-size:.56rem;color:var(--text3);letter-spacing:.1em;margin-bottom:.6rem}
-.bflag{display:inline-flex;align-items:center;gap:.32rem;font-family:'JetBrains Mono',monospace;font-size:.56rem;padding:.13rem .5rem;border-radius:3px;background:rgba(212,168,67,.1);border:1px solid rgba(212,168,67,.24);color:var(--pj);margin-left:.45rem;vertical-align:middle;letter-spacing:.04em}
+.bflag{display:inline-flex;align-items:center;gap:.32rem;font-family:'JetBrains Mono',monospace;font-size:.56rem;padding:.13rem .5rem;border-radius:3px;background:rgba(212,168,67,.1);border:1px solid rgba(212,168,67,.24);color:var(--dir);margin-left:.45rem;vertical-align:middle;letter-spacing:.04em}
 .bflag::before{content:'●';font-size:.45rem}
 .qtext{font-size:.96rem;color:var(--white);line-height:1.68;margin-bottom:1.15rem;font-weight:400}
 .qopts{display:flex;flex-direction:column;gap:.42rem}
@@ -129,23 +135,23 @@ hr.dv{border:none;border-top:1px solid var(--border);margin:1.35rem 0}
 .qopt:hover:not(:disabled){border-color:var(--border2)}
 .ql{font-family:'JetBrains Mono',monospace;font-size:.6rem;width:20px;height:20px;border-radius:6px;background:var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--text2);transition:all .2s}
 .qt{font-size:.84rem;color:#aeaab8;line-height:1.6}
-.qopt.correct{border-color:var(--dom);background:var(--dom-dim)}.qopt.correct .ql{background:var(--dom);color:#000}.qopt.correct .qt{color:var(--white)}
-.qopt.wrong{border-color:var(--morte);background:var(--morte-dim)}.qopt.wrong .ql{background:var(--morte);color:#fff}
+.qopt.correct{border-color:var(--eman);background:var(--eman-dim)}.qopt.correct .ql{background:var(--eman);color:#000}.qopt.correct .qt{color:var(--white)}
+.qopt.wrong{border-color:var(--nat);background:var(--nat-dim)}.qopt.wrong .ql{background:var(--nat);color:#fff}
 .qopt.disabled{cursor:default;opacity:.54}.qopt.disabled.correct{opacity:1}
 .qfb{display:none;margin-top:.88rem;padding:.88rem 1rem;border-radius:5px;font-size:.83rem;line-height:1.68;color:#aeaab8}
 .qfb.show{display:block;animation:fu .18s ease}
-.qfb.ok{background:var(--dom-dim);border:1px solid rgba(92,201,138,.26)}.qfb.ok strong{color:var(--dom)}
-.qfb.ng{background:var(--morte-dim);border:1px solid rgba(224,110,140,.26)}.qfb.ng strong{color:var(--morte)}
+.qfb.ok{background:var(--eman-dim);border:1px solid rgba(92,201,138,.26)}.qfb.ok strong{color:var(--eman)}
+.qfb.ng{background:var(--nat-dim);border:1px solid rgba(224,110,140,.26)}.qfb.ng strong{color:var(--nat)}
 .qnav{display:flex;align-items:center;justify-content:space-between;margin-top:1.35rem}
 'Outfit',sans-serif;font-size:.6rem;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;transition:all .2s;border:none}
-.qbn-next{background:var(--eca);color:#fff;display:none;border-radius:100px}.qbn-next:hover{opacity:.88}.qbn-next.show{display:block}
+.qbn-next{background:#5cc98a;color:#fff;display:none;border-radius:100px}.qbn-next:hover{opacity:.88}.qbn-next.show{display:block}
 .qbn-rs{background:var(--surface2);border:1px solid var(--border);color:var(--text2)}.qbn-rs:hover{border-color:var(--border2);color:var(--text)}
 .qres{display:none;text-align:center;padding:2.5rem 0}.qres.show{display:block;animation:fu .28s ease}
 .rscore{font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:700;color:var(--white);line-height:1}
 .rlabel{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--text3);letter-spacing:.15em;text-transform:uppercase;margin-top:.4rem}
 .rbar{margin:1.5rem auto 0;max-width:260px}
 .rbt{flex:1;height:5px;background:var(--border2);border-radius:10px;overflow:hidden}
-.rbf{height:100%;background:linear-gradient(90deg,var(--morte),var(--dom));border-radius:10px;transition:width 1s ease}
+.rbf{height:100%;background:linear-gradient(90deg,var(--nat),var(--eman));border-radius:10px;transition:width 1s ease}
 .hub-footer{position:relative;z-index:5;max-width:1100px;margin:3rem auto 0;padding:1.5rem 2rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
 .ft-left{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--text3);letter-spacing:.08em}
 .ft-right{font-family:'JetBrains Mono',monospace;font-size:.55rem;color:var(--text3)}.ft-right a{color:var(--text2);text-decoration:none}.ft-right a:hover{color:var(--white)}
@@ -159,6 +165,7 @@ hr.dv{border:none;border-top:1px solid var(--border);margin:1.35rem 0}
   --proc:#2088b0;--proc-dim:rgba(32,136,176,.1);--proc-mid:rgba(32,136,176,.18);
   --penal:#b85030;--penal-dim:rgba(184,80,48,.1);--penal-mid:rgba(184,80,48,.18);
   --eca:#289050;--eca-dim:rgba(40,144,80,.1);--eca-mid:rgba(40,144,80,.18);
+  --hist:#7b5fc8; --hist-dim:rgba(123,95,200,.10); --hist-mid:rgba(123,95,200,.18);
   --gold:#987020;--gold-dim:rgba(152,112,32,.1)}.nb:focus-visible,.stab:focus-visible{outline:2px solid var(--gold, #d4a843);outline-offset:2px}
 .si:focus-visible,.sw input:focus-visible{outline:2px solid var(--gold, #d4a843);outline-offset:2px}
 @media(prefers-reduced-motion:reduce){
@@ -176,6 +183,7 @@ hr.dv{border:none;border-top:1px solid var(--border);margin:1.35rem 0}
   --proc:#2088b0;--proc-dim:rgba(32,136,176,.1);--proc-mid:rgba(32,136,176,.18);
   --penal:#b85030;--penal-dim:rgba(184,80,48,.1);--penal-mid:rgba(184,80,48,.18);
   --eca:#289050;--eca-dim:rgba(40,144,80,.1);--eca-mid:rgba(40,144,80,.18);
+  --hist:#7b5fc8; --hist-dim:rgba(123,95,200,.10); --hist-mid:rgba(123,95,200,.18);
   --gold:#987020;--gold-dim:rgba(152,112,32,.1)}
 [data-theme=light] body::before{opacity:.18}
 [data-theme=light] .disc-pill{background:transparent}
@@ -195,8 +203,8 @@ hr.dv{border:none;border-top:1px solid var(--border);margin:1.35rem 0}
 <div class="hdr">
   <a class="back" href="../../index.html">&#8592; Central de Resumos</a>
   <div class="ey">Introdução ao Direito Civil &mdash; Prova 1 &middot; UFN 2026/1</div>
-  <h1 class="htitle">Pessoa Natural<br><em>Nascituro · Capacidade · Emancipação</em></h1>
-  <div class="hsub">Arts. 1–21 CC &middot; Estatuto da Pessoa com Deficiência (Lei 13.146/2015) &middot; Banca UFN</div>
+  <h1 class="htitle">Direito Civil I<br><em>Historicidade · Arts. 1–5 · Direitos da Personalidade</em></h1>
+  <div class="hsub">Arts. 1–5 CC &middot; Arts. 11–21 CC &middot; Nascituro &middot; Emancipação &middot; Historicidade &middot; Banca UFN</div>
   <div class="banca-pill"><span class="p"></span>Banca UFN &mdash; Estilo de Questões Identificado</div>
 
   <div class="sw" role="search">
@@ -206,19 +214,100 @@ hr.dv{border:none;border-top:1px solid var(--border);margin:1.35rem 0}
 </div>
 
 <nav class="mnav">
-  <button class="nb active" data-m="morte" onclick="switchMod('morte',this)"><span class="d"></span>Pessoa Natural</button>
-  <button class="nb" data-m="aus" onclick="switchMod('aus',this)"><span class="d"></span>Nascituro</button>
-  <button class="nb" data-m="pj" onclick="switchMod('pj',this)"><span class="d"></span>Capacidade Civil</button>
-  <button class="nb" data-m="dom" onclick="switchMod('dom',this)"><span class="d"></span>Emancipação</button>
+  <button class="nb active" data-m="hist" onclick="switchMod('hist',this)"><span class="d"></span>Historicidade</button>
+  <button class="nb" data-m="nat" onclick="switchMod('nat',this)"><span class="d"></span>Pessoa Natural</button>
+  <button class="nb" data-m="nas" onclick="switchMod('nas',this)"><span class="d"></span>Nascituro</button>
+  <button class="nb" data-m="eman" onclick="switchMod('eman',this)"><span class="d"></span>Emancipação</button>
+  <button class="nb" data-m="dir" onclick="switchMod('dir',this)"><span class="d"></span>Direitos da Personalidade</button>
   <button class="nb" data-m="quiz" onclick="switchMod('quiz',this)"><span class="d"></span>Quiz (20 q.)</button>
 </nav>
 
 <main class="main">
 
+<!-- ═══ MÓDULO 0: HISTORICIDADE ═══ -->
+<div class="mod active" id="mod-hist">
+  <div class="mhd" data-c="hist">
+    <div class="mi" data-c="hist">📜</div>
+    <div>
+      <div class="mnum">Módulo 01</div>
+      <div class="mtitle">Historicidade</div>
+      <div class="mdesc">Formação histórica do Direito Civil: Roma, Ordenações e os Códigos brasileiros.</div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="hist" onclick="switchTab(this,'h1t1')">Origens Romanas</button>
+      <button class="stab" data-c="hist" onclick="switchTab(this,'h1t2')">Brasil: CC 1916</button>
+      <button class="stab" data-c="hist" onclick="switchTab(this,'h1t3')">CC 2002</button>
+    </div>
+
+    <div class="sp active" id="h1t1">
+      <div class="sl">Direito Romano</div>
+      <p>O Direito Civil tem suas raízes no <span class="hl">Direito Romano</span>, o mais influente sistema jurídico da Antiguidade. O termo <em>ius civile</em> designava originalmente o direito aplicável aos cidadãos romanos (<em>cives</em>), em oposição ao <em>ius gentium</em> (direito das gentes, aplicável a estrangeiros).</p>
+      <div class="sl">Lei das XII Tábuas (451–450 a.C.)</div>
+      <p>Primeiro código escrito de Roma, gravado em doze tábuas de bronze expostas no Fórum Romano. Marcou a transição do direito consuetudinário para o direito positivo escrito, garantindo previsibilidade e publicidade às normas.</p>
+      <div class="sl">Corpus Juris Civilis (529–534 d.C.)</div>
+      <p>Compilação ordenada pelo Imperador <span class="hl">Justiniano I</span>, composta por quatro partes:</p>
+      <div class="g2">
+        <div class="card ch"><div class="ct">Institutas</div><ul><li>Manual introdutório para estudantes</li><li>Baseado nas Institutas de Gaio</li><li>Dividido em: pessoas, coisas e ações</li></ul></div>
+        <div class="card ch"><div class="ct">Digesto (Pandectas)</div><ul><li>Maior e mais importante parte</li><li>Compilação de excertos de jurisconsultos clássicos</li><li>50 livros de fragmentos doutrinários</li></ul></div>
+        <div class="card ch"><div class="ct">Codex</div><ul><li>Compilação de constituições imperiais</li><li>Leis dos imperadores anteriores a Justiniano</li></ul></div>
+        <div class="card ch"><div class="ct">Novelas</div><ul><li>Novas constituições do próprio Justiniano</li><li>Acrescentadas após as demais partes</li></ul></div>
+      </div>
+      <div class="co ci"><span class="co-ico">ℹ</span><div><strong>Influência:</strong> O Corpus Juris Civilis é a base do sistema da <em>civil law</em>, adotado pelo Brasil e pela maioria dos países da Europa continental e da América Latina. O sistema oposto é a <em>common law</em> (Inglaterra, EUA).</div></div>
+    </div>
+
+    <div class="sp" id="h1t2">
+      <div class="sl">Brasil Colonial: Ordenações do Reino</div>
+      <p>O Brasil foi colonizado sob a vigência das <span class="hl">Ordenações Portuguesas</span>, compilações do direito lusitano com forte influência romana e canônica. Três compilações se sucederam:</p>
+      <div class="tw"><table>
+        <thead><tr><th>Ordenação</th><th>Período</th><th>Observação</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Afonsinas</strong></td><td>1446</td><td>Primeira grande compilação; vigorou antes do descobrimento do Brasil</td></tr>
+          <tr><td><strong>Manuelinas</strong></td><td>1521</td><td>Substituíram as Afonsinas; vigoraram nos primeiros anos da colonização</td></tr>
+          <tr><td><strong>Filipinas</strong></td><td>1603</td><td>Editadas sob Filipe II de Portugal; vigeram no Brasil até 1916</td></tr>
+        </tbody>
+      </table></div>
+      <div class="co cw"><span class="co-ico">⚠</span><div><strong>Ordenações Filipinas:</strong> Vigoraram por mais de 300 anos no Brasil — do período colonial até a entrada em vigor do Código Civil de 1916 (1.º de janeiro de 1917).</div></div>
+      <div class="sl">Projetos Precursores do CC 1916</div>
+      <p><span class="hl">Teixeira de Freitas</span> elaborou a <em>Consolidação das Leis Civis</em> (1858) e o <em>Esboço</em> (1860–1865), projeto de código que influenciou os códigos civis argentino e uruguaio, mas não foi adotado no Brasil. Após outras tentativas frustradas (Nabuco de Araújo, Felício dos Santos), o projeto de <span class="hl">Clóvis Beviláqua</span> foi aprovado como <strong>Lei 3.071/1916</strong>, entrando em vigor em 1.º de janeiro de 1917.</p>
+    </div>
+
+    <div class="sp" id="h1t3">
+      <div class="sl">Código Civil de 2002</div>
+      <p>Os trabalhos para substituição do CC 1916 começaram em <span class="hl">1969</span>, com comissão presidida por <span class="hl">Miguel Reale</span>. Após décadas de tramitação, o projeto foi aprovado como <strong>Lei 10.406/2002</strong>, entrando em vigor em 11 de janeiro de 2003.</p>
+      <div class="sl">Três Princípios Norteadores (Miguel Reale)</div>
+      <div class="g3">
+        <div class="card ch">
+          <div class="ct">Eticidade</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Prevalência dos valores éticos sobre o formalismo. Boa-fé objetiva como princípio central. Cláusulas gerais permitem ao juiz decidir com base em valores.</p>
+        </div>
+        <div class="card ch">
+          <div class="ct">Socialidade</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Superação do individualismo do CC 1916. Função social da propriedade e do contrato. O individual cede ao coletivo quando em conflito.</p>
+        </div>
+        <div class="card ch">
+          <div class="ct">Operabilidade</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Simplicidade e praticidade. Distinção clara entre prescrição e decadência. Linguagem acessível para facilitar a aplicação.</p>
+        </div>
+      </div>
+      <div class="sl">Principais Mudanças em Relação ao CC 1916</div>
+      <ul>
+        <li>Unificação das obrigações civis e empresariais (Livro do Direito de Empresa)</li>
+        <li>Eliminação de categorias discriminatórias (filho legítimo/ilegítimo)</li>
+        <li>Reconhecimento da função social da propriedade e dos contratos</li>
+        <li>Adoção de cláusulas gerais e conceitos indeterminados (boa-fé, função social)</li>
+        <li>Reformulação completa do sistema de incapacidades (aprofundada pela Lei 13.146/2015)</li>
+      </ul>
+      <div class="co cs"><span class="co-ico">✓</span><div><strong>Para a prova:</strong> Saiba os três princípios de Miguel Reale (eticidade, socialidade, operabilidade), o nome do autor do CC 1916 (Clóvis Beviláqua), e que as Ordenações Filipinas vigoraram no Brasil até 1916.</div></div>
+    </div>
+  </div>
+</div>
+
 <!-- ═══ MÓDULO 1: PESSOA NATURAL ═══ -->
-<div class="mod active" id="mod-morte">
-  <div class="mhd" data-c="morte">
-    <div class="mi" data-c="morte">👤</div>
+<div class="mod" id="mod-nat">
+  <div class="mhd" data-c="nat">
+    <div class="mi" data-c="nat">👤</div>
     <div>
       <div class="mnum">Módulo 01</div>
       <div class="mtitle">Pessoa Natural</div>
@@ -227,10 +316,8 @@ hr.dv{border:none;border-top:1px solid var(--border);margin:1.35rem 0}
   </div>
   <div class="mbody">
     <div class="stabs">
-      <button class="stab active" data-c="morte" onclick="switchTab(this,'m1t1')">Conceito</button>
-      <button class="stab" data-c="morte" onclick="switchTab(this,'m1t2')">Início da Personalidade</button>
-      <button class="stab" data-c="morte" onclick="switchTab(this,'m1t3')">Direitos da Personalidade</button>
-      <button class="stab" data-c="morte" onclick="switchTab(this,'m1t4')">Extinção</button>
+      <button class="stab active" data-c="nat" onclick="switchTab(this,'m1t1')">Conceito</button>
+      <button class="stab" data-c="nat" onclick="switchTab(this,'m1t2')">Início da Personalidade</button>
     </div>
 
     <div class="sp active" id="m1t1">
@@ -259,33 +346,13 @@ hr.dv{border:none;border-top:1px solid var(--border);margin:1.35rem 0}
       <p>O <span class="art">art. 9.º, I, CC</span> exige o registro do nascimento. O <span class="art">art. 10 CC</span> determina o registro do óbito. O registro é declaratório (não constitutivo) da personalidade.</p>
     </div>
 
-    <div class="sp" id="m1t3">
-      <div class="sl">Direitos da Personalidade — Arts. 11–21 CC</div>
-      <p>Os direitos da personalidade são aqueles que têm por objeto os <span class="hl">atributos físicos, psíquicos e morais da pessoa</span>, tanto em sua projeção interior quanto social.</p>
-      <div class="g3">
-        <div class="card cm"><div class="ct">Características</div><ul><li>Absolutos (oponíveis erga omnes)</li><li>Intransmissíveis</li><li>Irrenunciáveis</li><li>Imprescritíveis</li><li>Extrapatrimoniais</li><li>Vitalícios</li></ul></div>
-        <div class="card ca"><div class="ct">Proteção (art. 12)</div><ul><li>Pode-se exigir cessa&shy;ção da ameaça</li><li>Indenização por danos</li><li>Tutela inibitória</li><li>Habeas data</li></ul></div>
-        <div class="card cp"><div class="ct">Exemplos no CC</div><ul><li>Art. 13: integridade física</li><li>Art. 16: direito ao nome</li><li>Art. 20: direito à imagem</li><li>Art. 21: vida privada</li></ul></div>
-      </div>
-      <div class="co cs"><span class="co-ico">✓</span><div><strong>Art. 11 CC:</strong> Com exceção dos casos previstos em lei, os direitos da personalidade são intransmissíveis e irrenunciáveis, não podendo o seu exercício sofrer limitação voluntária.</div></div>
-    </div>
-
-    <div class="sp" id="m1t4">
-      <div class="sl">Extinção da Personalidade — Morte</div>
-      <p>A personalidade civil <span class="hl">extingue-se com a morte</span> (<span class="art">art. 6.º CC</span>). A morte pode ser:</p>
-      <div class="g2">
-        <div class="card cm"><div class="ct">Morte Real</div><ul><li>Cessação definitiva das funções vitais</li><li>Atestada por médico</li><li>Prova: certidão de óbito</li></ul></div>
-        <div class="card ca"><div class="ct">Morte Presumida</div><ul><li><strong>Com declaração de ausência</strong> (arts. 22–39 CC)</li><li><strong>Sem decretação de ausência</strong>: art. 7.º CC (situação de perigo de vida / campanha militar)</li></ul></div>
-      </div>
-      <div class="co cw"><span class="co-ico">⚠</span><div><strong>Comoriência (art. 8.º CC):</strong> Se dois ou mais indivíduos falecem na mesma ocasião sem se poder determinar qual morreu primeiro, presume-se que morreram simultaneamente, não havendo transmissão de direitos entre si.</div></div>
-    </div>
   </div>
 </div>
 
 <!-- ═══ MÓDULO 2: NASCITURO ═══ -->
-<div class="mod" id="mod-aus">
-  <div class="mhd" data-c="aus">
-    <div class="mi" data-c="aus">🧬</div>
+<div class="mod" id="mod-nas">
+  <div class="mhd" data-c="nas">
+    <div class="mi" data-c="nas">🧬</div>
     <div>
       <div class="mnum">Módulo 02</div>
       <div class="mtitle">Nascituro</div>
@@ -294,10 +361,10 @@ hr.dv{border:none;border-top:1px solid var(--border);margin:1.35rem 0}
   </div>
   <div class="mbody">
     <div class="stabs">
-      <button class="stab active" data-c="aus" onclick="switchTab(this,'m2t1')">Conceito</button>
-      <button class="stab" data-c="aus" onclick="switchTab(this,'m2t2')">Teoria Natalista</button>
-      <button class="stab" data-c="aus" onclick="switchTab(this,'m2t3')">Teoria Concepcionista</button>
-      <button class="stab" data-c="aus" onclick="switchTab(this,'m2t4')">Posição do STJ</button>
+      <button class="stab active" data-c="nas" onclick="switchTab(this,'m2t1')">Conceito</button>
+      <button class="stab" data-c="nas" onclick="switchTab(this,'m2t2')">Teoria Natalista</button>
+      <button class="stab" data-c="nas" onclick="switchTab(this,'m2t3')">Teoria Concepcionista</button>
+      <button class="stab" data-c="nas" onclick="switchTab(this,'m2t4')">Posição do STJ</button>
     </div>
 
     <div class="sp active" id="m2t1">
@@ -347,74 +414,84 @@ hr.dv{border:none;border-top:1px solid var(--border);margin:1.35rem 0}
   </div>
 </div>
 
-<!-- ═══ MÓDULO 3: CAPACIDADE CIVIL ═══ -->
-<div class="mod" id="mod-pj">
-  <div class="mhd" data-c="pj">
-    <div class="mi" data-c="pj">⚖️</div>
+<!-- ═══ MÓDULO 5: DIREITOS DA PERSONALIDADE ═══ -->
+<div class="mod" id="mod-dir">
+  <div class="mhd" data-c="dir">
+    <div class="mi" data-c="dir">🛡</div>
     <div>
-      <div class="mnum">Módulo 03</div>
-      <div class="mtitle">Capacidade Civil</div>
-      <div class="mdesc">Capacidade de direito e de fato. Incapacidade absoluta e relativa. Arts. 3.º–4.º CC.</div>
+      <div class="mnum">Módulo 05</div>
+      <div class="mtitle">Direitos da Personalidade</div>
+      <div class="mdesc">Atributos físicos, psíquicos e morais da pessoa. Arts. 11–21 CC.</div>
     </div>
   </div>
   <div class="mbody">
     <div class="stabs">
-      <button class="stab active" data-c="pj" onclick="switchTab(this,'m3t1')">Teoria Geral</button>
-      <button class="stab" data-c="pj" onclick="switchTab(this,'m3t2')">Abs. Incapazes (art. 3.º)</button>
-      <button class="stab" data-c="pj" onclick="switchTab(this,'m3t3')">Rel. Incapazes (art. 4.º)</button>
-      <button class="stab" data-c="pj" onclick="switchTab(this,'m3t4')">Suprimento</button>
+      <button class="stab active" data-c="dir" onclick="switchTab(this,'d1t1')">Conceito e Características</button>
+      <button class="stab" data-c="dir" onclick="switchTab(this,'d1t2')">Tipos</button>
+      <button class="stab" data-c="dir" onclick="switchTab(this,'d1t3')">Proteção</button>
     </div>
 
-    <div class="sp active" id="m3t1">
-      <div class="sl">Capacidade de Direito vs. Capacidade de Fato</div>
+    <div class="sp active" id="d1t1">
+      <div class="sl">Conceito</div>
+      <p>Direitos da personalidade são aqueles que têm por objeto os <span class="hl">atributos físicos, psíquicos e morais da pessoa</span>, em sua projeção interior e social. São direitos inerentes à condição humana, reconhecidos tanto pelo Código Civil (arts. 11–21) quanto pela Constituição Federal.</p>
+      <div class="co ci"><span class="co-ico">ℹ</span><div><strong>Art. 11 CC:</strong> Com exceção dos casos previstos em lei, os direitos da personalidade são intransmissíveis e irrenunciáveis, não podendo o seu exercício sofrer limitação voluntária.</div></div>
+      <div class="sl">Características</div>
       <div class="g2">
-        <div class="card cp"><div class="ct">Capacidade de Direito (Gozo)</div><ul><li>= Personalidade jurídica</li><li>Aptidão para ser titular de direitos</li><li>Universal — todo ser humano</li><li>Não pode ser retirada</li></ul></div>
-        <div class="card cm"><div class="ct">Capacidade de Fato (Exercício)</div><ul><li>Aptidão para exercer pessoalmente os direitos</li><li>Pode ser limitada pela lei</li><li>Pressupõe discernimento</li><li>Admite graduação</li></ul></div>
+        <div class="card cd">
+          <div class="ct">Características Positivas</div>
+          <ul>
+            <li><strong>Absolutos:</strong> oponíveis erga omnes</li>
+            <li><strong>Extrapatrimoniais:</strong> sem valor econômico direto</li>
+            <li><strong>Vitalícios:</strong> duram toda a vida</li>
+            <li><strong>Inatos:</strong> adquiridos com o nascimento</li>
+          </ul>
+        </div>
+        <div class="card cd">
+          <div class="ct">Características Negativas</div>
+          <ul>
+            <li><strong>Intransmissíveis:</strong> não se transferem a terceiros</li>
+            <li><strong>Irrenunciáveis:</strong> não se pode abrir mão</li>
+            <li><strong>Imprescritíveis:</strong> não se extinguem pelo não uso</li>
+            <li><strong>Indisponíveis:</strong> em regra, não podem ser alienados</li>
+          </ul>
+        </div>
       </div>
-      <div class="co ci"><span class="co-ico">ℹ</span><div><strong>Plena capacidade civil:</strong> Quando a pessoa tem ambas — capacidade de direito e de fato. Regra geral para maiores de 18 anos não sujeitos a restrições.</div></div>
-      <div class="sl">Impacto do Estatuto da Pessoa com Deficiência (Lei 13.146/2015)</div>
-      <p>A Lei 13.146/2015 reformou profundamente o sistema de incapacidades. <span class="hl">A deficiência, por si só, não implica incapacidade civil.</span> A pessoa com deficiência é plenamente capaz e pode exercer pessoalmente seus direitos, inclusive casar, ter filhos e exercer direitos sexuais e reprodutivos.</p>
+      <div class="co cw"><span class="co-ico">⚠</span><div><strong>Exceção à irrenunciabilidade:</strong> A lei admite limitação voluntária em casos específicos (ex: doação de sangue, autorização de uso de imagem para fins publicitários). A limitação deve ser temporária e não pode abranger a totalidade dos direitos.</div></div>
     </div>
 
-    <div class="sp" id="m3t2">
-      <div class="sl">Absolutamente Incapazes — Art. 3.º CC</div>
-      <p>Após a Lei 13.146/2015, o <span class="art">art. 3.º CC</span> prevê <span class="hl">apenas uma hipótese</span> de incapacidade absoluta:</p>
-      <div class="co ce"><span class="co-ico">!</span><div><strong>Art. 3.º CC (redação atual):</strong> São absolutamente incapazes de exercer pessoalmente os atos da vida civil os <strong>menores de 16 anos</strong>.</div></div>
-      <p>Antes da reforma, também eram absolutamente incapazes os enfermos e deficientes mentais sem discernimento e os que por causa transitória ou permanente não pudessem exprimir sua vontade — categorias eliminadas pelo Estatuto.</p>
-      <div class="sl">Consequência Jurídica</div>
-      <p>Os atos praticados por absolutamente incapaz, sem representação, são <span class="hl">nulos de pleno direito</span> (<span class="art">art. 166, I CC</span>). O absolutamente incapaz é <span class="hl">representado</span> por seus pais, tutor ou curador.</p>
-    </div>
-
-    <div class="sp" id="m3t3">
-      <div class="sl">Relativamente Incapazes — Art. 4.º CC</div>
+    <div class="sp" id="d1t2">
+      <div class="sl">Principais Direitos da Personalidade no CC</div>
       <div class="tw"><table>
-        <thead><tr><th>Hipótese</th><th>Dispositivo</th><th>Observação</th></tr></thead>
+        <thead><tr><th>Direito</th><th>Artigo</th><th>Conteúdo</th></tr></thead>
         <tbody>
-          <tr><td><strong>Maiores de 16 e menores de 18 anos</strong></td><td>Art. 4.º, I</td><td>Menores púberes; assistidos pelos pais</td></tr>
-          <tr><td><strong>Ébrios habituais e viciados em tóxico</strong></td><td>Art. 4.º, II</td><td>Requer sentença judicial que declare a incapacidade</td></tr>
-          <tr><td><strong>Aqueles que, por causa transitória ou permanente, não puderem exprimir sua vontade</strong></td><td>Art. 4.º, III</td><td>Inserido pela Lei 13.146/2015</td></tr>
-          <tr><td><strong>Pródigos</strong></td><td>Art. 4.º, IV</td><td>Quem dilapida o próprio patrimônio; curatela limitada a atos de disposição patrimonial</td></tr>
+          <tr><td><strong>Integridade física</strong></td><td>Art. 13</td><td>Proibição de atos de disposição do próprio corpo que importem diminuição permanente da integridade ou contrariem os bons costumes</td></tr>
+          <tr><td><strong>Integridade moral</strong></td><td>Arts. 16–19</td><td>Direito ao nome, pseudônimo e proteção contra uso indevido</td></tr>
+          <tr><td><strong>Direito ao nome</strong></td><td>Art. 16</td><td>Nome é composto de prenome e sobrenome; é direito e dever da pessoa</td></tr>
+          <tr><td><strong>Direito à imagem</strong></td><td>Art. 20</td><td>Proibição de divulgação de escritos, transmissão de palavra, publicação ou exposição da imagem sem autorização</td></tr>
+          <tr><td><strong>Vida privada</strong></td><td>Art. 21</td><td>A vida privada da pessoa natural é inviolável; juiz pode adotar providências para impedir ou fazer cessar violação</td></tr>
         </tbody>
       </table></div>
-      <div class="co cw"><span class="co-ico">⚠</span><div><strong>Atos do relativamente incapaz sem assistência:</strong> são <strong>anuláveis</strong> (art. 171, I CC), não nulos. Prazo decadencial de 4 anos a partir da maioridade (art. 178, I CC).</div></div>
+      <div class="co cs"><span class="co-ico">✓</span><div><strong>Art. 14 CC:</strong> É válida, com objetivo científico, ou altruístico, a disposição gratuita do próprio corpo, no todo ou em parte, para depois da morte. Exemplo de limitação legal à indisponibilidade.</div></div>
     </div>
 
-    <div class="sp" id="m3t4">
-      <div class="sl">Suprimento da Incapacidade</div>
+    <div class="sp" id="d1t3">
+      <div class="sl">Proteção — Art. 12 CC</div>
+      <p>O <span class="art">art. 12 CC</span> estabelece que pode-se exigir que <span class="hl">cesse a ameaça ou a lesão a direito da personalidade</span>, e reclamar perdas e danos, sem prejuízo de outras sanções previstas em lei.</p>
       <div class="g2">
-        <div class="card cm"><div class="ct">Representação (absolutamente incapazes)</div><ul><li>Pais (poder familiar)</li><li>Tutor (órfãos)</li><li>Curador (interditados)</li><li>Age em nome do incapaz</li></ul></div>
-        <div class="card cp"><div class="ct">Assistência (relativamente incapazes)</div><ul><li>Pais / tutor / curador</li><li>Age ao lado do incapaz</li><li>Ambos assinam o ato</li><li>Sem assistência = ato anulável</li></ul></div>
+        <div class="card cd"><div class="ct">Tutela Inibitória</div><ul><li>Impede a prática ou continuação da violação</li><li>Não exige dano já consumado</li><li>Pode ser concedida <em>inaudita altera parte</em></li><li>Ex: liminar para retirar conteúdo da internet</li></ul></div>
+        <div class="card cd"><div class="ct">Tutela Ressarcitória</div><ul><li>Indenização por danos materiais e morais</li><li>Pressupõe dano já ocorrido</li><li>Cumulável com tutela inibitória</li><li>Dano moral: prescinde de prova do prejuízo</li></ul></div>
       </div>
-      <div class="sl">Interdição</div>
-      <p>A interdição é o processo pelo qual se reconhece judicialmente a incapacidade de alguém. Após a Lei 13.146/2015, só cabe para as hipóteses do art. 4.º, II e III CC. A sentença de interdição fixa os limites da curatela.</p>
+      <div class="sl">Proteção Post Mortem</div>
+      <p>O <span class="art">art. 12, §único CC</span> prevê que, em se tratando de morto, o cônjuge sobrevivente ou qualquer parente em linha reta ou colateral até o quarto grau tem legitimidade para exigir a cessação da ameaça ou lesão e reclamar perdas e danos.</p>
+      <div class="co ci"><span class="co-ico">ℹ</span><div><strong>STJ — Súmula 37:</strong> São cumuláveis as indenizações por dano material e dano moral oriundos do mesmo fato. Aplicável às violações de direitos da personalidade.</div></div>
     </div>
   </div>
 </div>
 
 <!-- ═══ MÓDULO 4: EMANCIPAÇÃO ═══ -->
-<div class="mod" id="mod-dom">
-  <div class="mhd" data-c="dom">
-    <div class="mi" data-c="dom">🎓</div>
+<div class="mod" id="mod-eman">
+  <div class="mhd" data-c="eman">
+    <div class="mi" data-c="eman">🎓</div>
     <div>
       <div class="mnum">Módulo 04</div>
       <div class="mtitle">Emancipação</div>
@@ -423,10 +500,10 @@ hr.dv{border:none;border-top:1px solid var(--border);margin:1.35rem 0}
   </div>
   <div class="mbody">
     <div class="stabs">
-      <button class="stab active" data-c="dom" onclick="switchTab(this,'m4t1')">Conceito</button>
-      <button class="stab" data-c="dom" onclick="switchTab(this,'m4t2')">Voluntária</button>
-      <button class="stab" data-c="dom" onclick="switchTab(this,'m4t3')">Judicial</button>
-      <button class="stab" data-c="dom" onclick="switchTab(this,'m4t4')">Legal</button>
+      <button class="stab active" data-c="eman" onclick="switchTab(this,'m4t1')">Conceito</button>
+      <button class="stab" data-c="eman" onclick="switchTab(this,'m4t2')">Voluntária</button>
+      <button class="stab" data-c="eman" onclick="switchTab(this,'m4t3')">Judicial</button>
+      <button class="stab" data-c="eman" onclick="switchTab(this,'m4t4')">Legal</button>
     </div>
 
     <div class="sp active" id="m4t1">
@@ -471,12 +548,12 @@ hr.dv{border:none;border-top:1px solid var(--border);margin:1.35rem 0}
 
 <!-- ═══ MÓDULO QUIZ ═══ -->
 <div class="mod" id="mod-quiz">
-  <div class="mhd" data-c="pj">
-    <div class="mi" data-c="pj">📝</div>
+  <div class="mhd" data-c="dir">
+    <div class="mi" data-c="dir">📝</div>
     <div>
       <div class="mnum">Quiz</div>
       <div class="mtitle">20 Questões — Banca UFN</div>
-      <div class="mdesc">Pessoa Natural · Nascituro · Capacidade · Emancipação</div>
+      <div class="mdesc">Historicidade · Arts. 1–5 · Nascituro · Emancipação · Direitos da Personalidade</div>
     </div>
   </div>
   <div class="mbody">
@@ -515,14 +592,14 @@ const questions=[
   {q:"A emancipação voluntária concedida pelos pais é:",opts:["A) Revogável a qualquer tempo pelos pais","B) Revogável somente por decisão judicial","C) Irrevogável","D) Revogável se o filho praticar ato prejudicial à família"],ans:2,fb:"A emancipação é <strong>irrevogável</strong>. Uma vez concedida, não pode ser desfeita pelos pais ou por decisão judicial, nem é afetada por eventos posteriores como divórcio ou dissolução de casamento."},
   {q:"Segundo a doutrina majoritária, os direitos da personalidade são:",opts:["A) Patrimoniais, transmissíveis e prescritíveis","B) Absolutos, intransmissíveis e irrenunciáveis","C) Relativos, transmissíveis e renunciáveis","D) Patrimoniais, irrenunciáveis e prescritíveis"],ans:1,fb:"Os direitos da personalidade são <strong>absolutos, intransmissíveis, irrenunciáveis, imprescritíveis, extrapatrimoniais e vitalícios</strong> (art. 11 CC e doutrina)."},
   {q:"O art. 11 do CC estabelece que os direitos da personalidade não podem sofrer limitação voluntária. Existe exceção a essa regra?",opts:["A) Não, a proibição é absoluta","B) Sim, nos casos previstos em lei","C) Sim, sempre que o titular consentir expressamente","D) Sim, para fins comerciais"],ans:1,fb:"O art. 11 CC abre exceção <strong>'nos casos previstos em lei'</strong>. Exemplo: doação de sangue, consentimento para exames médicos, autorização para uso da imagem — limitações admitidas desde que não permanentes ou totais."},
-  {q:"A comoriência, prevista no art. 8.º CC, é aplicável quando:",opts:["A) Há dúvida sobre qual dos mortos faleceu primeiro","B) Ambos morrem em acidente de trânsito no mesmo dia","C) Os mortos eram cônjuges","D) Há dúvida sobre a causa da morte"],ans:0,fb:"A comoriência (art. 8.º CC) se aplica quando há <strong>dúvida sobre qual morreu primeiro</strong>, presumindo-se simultaneidade. Não exige que tenham morrido no mesmo lugar ou que sejam parentes."},
   {q:"A incapacidade relativa do menor de 16 a 18 anos gera, nos atos praticados sem assistência:",opts:["A) Nulidade absoluta","B) Anulabilidade","C) Ineficácia relativa","D) Validade plena"],ans:1,fb:"Os atos do relativamente incapaz sem assistência são <strong>anuláveis</strong> (art. 171, I CC). A anulabilidade deve ser alegada pelos interessados e pode ser sanada por confirmação."},
   {q:"A teoria da personalidade condicional, posição intermediária sobre o nascituro, sustenta que:",opts:["A) A personalidade existe desde o nascimento, condicionada ao registro","B) O nascituro tem personalidade desde a concepção, mas os direitos patrimoniais dependem do nascimento com vida","C) O nascituro tem personalidade plena, sem condições","D) A personalidade depende de decisão judicial"],ans:1,fb:"A teoria da personalidade condicional (Clóvis Beviláqua) entende que o nascituro tem personalidade desde a concepção, mas os <strong>direitos patrimoniais ficam sujeitos à condição suspensiva do nascimento com vida</strong>."},
   {q:"A curatela do nascituro é prevista no CC para proteger:",opts:["A) Os direitos do natimorto","B) Os interesses do nascituro quando o pai falece e a mãe está incapaz ou ausente","C) Os bens do concepturo","D) O cônjuge sobrevivente"],ans:1,fb:"A curatela do nascituro (art. 1.779 CC) é nomeada quando o pai falece e a mãe está ausente, é incapaz ou foi declarada culpada. Protege os <strong>interesses do ser humano já concebido mas ainda não nascido</strong>."},
   {q:"Segundo o Estatuto da Pessoa com Deficiência (Lei 13.146/2015), a deficiência:",opts:["A) Implica incapacidade absoluta de pleno direito","B) Implica incapacidade relativa para atos patrimoniais","C) Não implica, por si só, incapacidade civil","D) Implica curatela automática"],ans:2,fb:"O Estatuto da Pessoa com Deficiência deixa claro que <strong>a deficiência não implica incapacidade civil</strong>. A pessoa com deficiência tem plena capacidade e pode exercer pessoalmente seus direitos."},
   {q:"O menor de 16 anos que exerce atividade de emprego com economia própria:",opts:["A) Emancipa-se legalmente","B) Não se emancipa, pois a CF proíbe trabalho de menores de 16 anos (salvo aprendiz)","C) Pode ser emancipado voluntariamente pelos pais","D) Precisa de alvará judicial para trabalhar"],ans:1,fb:"A CF/88 proíbe trabalho para menores de 16 anos, salvo na condição de aprendiz (a partir dos 14 anos). Portanto, o <strong>menor de 16 anos não pode se emancipar por relação de emprego</strong>."},
-  {q:"O direito ao nome, previsto nos arts. 16–19 do CC, integra:",opts:["A) Os direitos reais","B) Os direitos obrigacionais","C) Os direitos da personalidade","D) Os direitos sucessórios"],ans:2,fb:"O nome é um <strong>direito da personalidade</strong> (arts. 16–19 CC), inerente à identidade do ser humano, sendo protegido como tal — absoluto, irrenunciável e imprescritível."},
-  {q:"A morte presumida sem declaração de ausência (art. 7.º CC) é cabível quando:",opts:["A) A pessoa desaparece por mais de 10 anos","B) O desaparecido estava em situação de perigo de vida ou em campanha militar","C) O cônjuge pede a declaração após 5 anos","D) O desaparecido não tem herdeiros conhecidos"],ans:1,fb:"O art. 7.º CC permite declarar a morte presumida, <strong>sem necessidade de abertura de sucessão de ausência</strong>, quando o desaparecido estava em situação de extremo perigo de vida (art. 7.º, I) ou em campanha militar (art. 7.º, II)."}
+  {q:"O direito ao nome, previsto nos arts. 16–19 do CC, integra:",opts:["A) Os direitos reais","B) Os direitos obrigacionais","C) Os direitos da personalidade","D) Os direitos sucessórios"],ans:2,fb:"O nome é um <strong>direito da personalidade</strong> (arts. 16–19 CC), inerente à identidade do ser humano, sendo protegido como tal — absoluto, irrenunciável e imprescritível."}
+  ,{q:"A compilação jurídica que unificou o Direito Romano e serve como principal fundamento do sistema da civil law é:",opts:["A) Lei das XII Tábuas","B) Corpus Juris Civilis de Justiniano","C) Ordenações Filipinas","D) Código Napoleônico de 1804"],ans:1,fb:"O <strong>Corpus Juris Civilis</strong> (529–534 d.C.), compilado por ordem do Imperador Justiniano, é a principal fonte do Direito Civil ocidental. É composto pelas Institutas, Digesto, Codex e Novelas."}
+  ,{q:"O Código Civil de 1916 (Lei 3.071/1916) foi elaborado por:",opts:["A) Teixeira de Freitas","B) Rui Barbosa","C) Miguel Reale","D) Clóvis Beviláqua"],ans:3,fb:"O projeto de <strong>Clóvis Beviláqua</strong> foi o aprovado como CC 1916. Teixeira de Freitas elaborou o Esboço (influenciou a Argentina), mas seu projeto não foi adotado. Miguel Reale presidiu a comissão do CC 2002."}
 ];
 
 let cur=0,score=0,answered=[];
