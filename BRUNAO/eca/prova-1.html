@@ -1,88 +1,641 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<script>(function(){var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');if(t==='light')document.documentElement.setAttribute('data-theme','light');})();</script>
+<script>
+function toggleTheme(){var h=document.documentElement;var l=h.getAttribute('data-theme')==='light';h.setAttribute('data-theme',l?'dark':'light');localStorage.setItem('theme',l?'dark':'light');}
+(function(){var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');if(t==='light')document.documentElement.setAttribute('data-theme','light');})();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dir. Criança e Adolescente — Prova 1</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@300;400;500;600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#111118;--surface:#1c1c26;--surface2:#242430;--border:rgba(255,255,255,.07);--border2:rgba(255,255,255,.12);--text:#e8e4f0;--text2:#9490a8;--text3:#56526a;--white:#f5f2ff;--accent:#5cc98a;--accent-dim:rgba(92,201,138,.06);}
+:root{
+  --bg:#111118;--surface:#1c1c26;--surface2:#242430;--surface3:#1c1c24;
+  --border:rgba(255,255,255,.07);--border2:rgba(255,255,255,.12);
+  --text:#e8e4f0;--text2:#9490a8;--text3:#56526a;--white:#f5f2ff;
+  --hist:#9b7fe8;--hist-dim:rgba(155,127,232,.10);--hist-mid:rgba(155,127,232,.22);
+  --fund:#5cc98a;--fund-dim:rgba(92,201,138,.10);--fund-mid:rgba(92,201,138,.22);
+  --vida:#e06e8c;--vida-dim:rgba(224,110,140,.10);--vida-mid:rgba(224,110,140,.22);
+  --educ:#5c9ee0;--educ-dim:rgba(92,158,224,.10);--educ-mid:rgba(92,158,224,.22);
+}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-weight:300;min-height:100vh}
-body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse 70% 40% at 10% 0%,var(--accent-dim) 0%,transparent 55%)}
-.wrap{position:relative;z-index:10;max-width:1100px;margin:0 auto;padding:3rem 2rem}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse 70% 40% at 10% 0%,rgba(155,127,232,.04) 0%,transparent 55%),
+             radial-gradient(ellipse 55% 35% at 90% 100%,rgba(92,158,224,.03) 0%,transparent 55%)}
+.hdr{position:relative;z-index:10;padding:3rem 2rem 0;max-width:1100px;margin:0 auto}
 .back{display:inline-flex;align-items:center;gap:.45rem;font-family:'Outfit',sans-serif;font-size:.75rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);text-decoration:none;margin-bottom:1.5rem;padding:.38rem 1rem;border-radius:100px;border:1px solid var(--border);background:var(--surface);transition:all .2s}
-.back:hover{color:var(--text);border-color:var(--border2);background:var(--surface2)}.back:focus-visible{outline:2px solid var(--gold, #d4a843);outline-offset:2px}
+.back:hover{color:var(--text);border-color:var(--border2);background:var(--surface2)}
 .ey{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--text3);margin-bottom:.9rem}
-.htitle{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,6.5vw,4.6rem);font-weight:700;color:var(--white);line-height:.95;letter-spacing:-.02em;margin-bottom:.75rem}
+.htitle{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,6.5vw,4.6rem);font-weight:700;color:var(--white);line-height:.95;letter-spacing:-.02em}
 .htitle em{font-style:italic;color:var(--text2);font-weight:400}
-.disc-pill{display:inline-flex;align-items:center;gap:.38rem;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;padding:.25rem .65rem;border-radius:100px;margin-top:1.1rem;background:rgba(92,201,138,.1);color:var(--accent);border:1px solid rgba(92,201,138,.22)}
-.disc-pill .dot{width:4px;height:4px;border-radius:50%;background:currentColor}
-.wip{margin-top:3rem;padding:3.5rem 2.5rem;background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:0 2px 12px rgba(0,0,0,.25);text-align:center}
-.wip-icon{font-size:0;width:48px;height:48px;margin:0 auto 1.75rem;border-radius:12px;background:var(--surface2);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:5px}.wip-icon::before,.wip-icon::after{content:"";display:block;border-radius:2px;background:var(--accent);opacity:.55}.wip-icon::before{width:20px;height:2px}.wip-icon::after{width:13px;height:2px}
-.wip-title{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--white);margin-bottom:.65rem;letter-spacing:-.02em;margin-bottom:.75rem}
-.wip-text{font-family:'Outfit',sans-serif;font-size:.88rem;color:var(--text2);letter-spacing:.07em;line-height:1.85}
-.accent-line{width:48px;height:2px;background:var(--accent);margin:1.1rem auto 0;border-radius:2px;opacity:.5}
-.topics{display:flex;gap:.4rem;flex-wrap:wrap;justify-content:center;margin-top:1.5rem}
-.topic{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.04em;background:var(--surface2);border:1px solid var(--border);color:var(--text2);padding:.18rem .5rem;border-radius:100px}
-.ft{max-width:1100px;margin:4rem auto 0;padding:1.5rem 2rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.85rem;color:var(--text3)}
-.ft a{color:var(--text2);text-decoration:none}.ft a:hover{color:var(--white)}.ft a:focus-visible{outline:2px solid currentColor;outline-offset:3px}
-@media(max-width:600px){.wrap,.ft{padding-left:1rem;padding-right:1rem}}
-
-/* ── LIGHT MODE ── */
+.hsub{margin-top:1.1rem;font-size:.8rem;color:var(--text2);font-family:'JetBrains Mono',monospace;letter-spacing:.04em}
+.banca-pill{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.2rem;padding:.42rem .95rem;background:rgba(155,127,232,.08);border:1px solid rgba(155,127,232,.25);border-radius:100px;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.07em;color:var(--hist);text-transform:uppercase}
+.banca-pill .p{width:5px;height:5px;border-radius:50%;background:var(--hist);animation:pu 2s infinite}
+@keyframes pu{0%,100%{opacity:1}50%{opacity:.35}}
+.sw{margin-top:.85rem;position:relative}
+.si{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:100px;padding:.68rem 1rem .68rem 2.5rem;color:var(--text);font-family:'Outfit',sans-serif;font-size:.85rem;outline:none;transition:border-color .2s}
+.si::placeholder{color:var(--text3)}.si:focus{border-color:var(--border2)}
+.sic{position:absolute;left:.82rem;top:50%;transform:translateY(-50%);color:var(--text3);font-size:.88rem;pointer-events:none}
+mark{background:rgba(155,127,232,.28);color:var(--white);border-radius:2px;padding:0 2px}
+.mnav{display:flex;gap:.42rem;flex-wrap:wrap;margin:1.9rem auto 0;max-width:1100px;padding:0 2rem;position:relative;z-index:10}
+.nb{display:flex;align-items:center;gap:.5rem;padding:.52rem .95rem;border:1px solid var(--border);border-radius:100px;background:var(--surface);color:var(--text2);font-family:'Outfit',sans-serif;font-size:.75rem;font-weight:500;letter-spacing:.02em;cursor:pointer;transition:all .2s;text-transform:none;min-height:36px}
+.nb:hover{border-color:var(--border2);color:var(--text)}
+.nb .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.nb[data-m=hist] .d{background:var(--hist)}.nb[data-m=fund] .d{background:var(--fund)}
+.nb[data-m=vida] .d{background:var(--vida)}.nb[data-m=educ] .d{background:var(--educ)}
+.nb[data-m=quiz] .d{background:var(--white)}
+.nb.active{color:var(--white)}
+.nb[data-m=hist].active{border-color:var(--hist);background:var(--hist-dim)}
+.nb[data-m=fund].active{border-color:var(--fund);background:var(--fund-dim)}
+.nb[data-m=vida].active{border-color:var(--vida);background:var(--vida-dim)}
+.nb[data-m=educ].active{border-color:var(--educ);background:var(--educ-dim)}
+.nb[data-m=quiz].active{border-color:rgba(255,255,255,.28);background:rgba(255,255,255,.04)}
+.main{position:relative;z-index:5;max-width:1100px;margin:1.8rem auto 5rem;padding:0 2rem}
+.mod{display:none;animation:fu .3s ease both}.mod.active{display:block}
+@keyframes fu{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.mhd{display:flex;align-items:flex-start;gap:1.4rem;padding:1.75rem 2rem;border-radius:14px 14px 0 0;border:1px solid var(--border);border-bottom:none;box-shadow:0 4px 20px rgba(0,0,0,.25)}
+.mhd[data-c=hist]{background:var(--hist-dim);border-color:rgba(155,127,232,.28)}
+.mhd[data-c=fund]{background:var(--fund-dim);border-color:rgba(92,201,138,.28)}
+.mhd[data-c=vida]{background:var(--vida-dim);border-color:rgba(224,110,140,.28)}
+.mhd[data-c=educ]{background:var(--educ-dim);border-color:rgba(92,158,224,.28)}
+.mi{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
+.mi[data-c=hist]{background:var(--hist-mid)}.mi[data-c=fund]{background:var(--fund-mid)}
+.mi[data-c=vida]{background:var(--vida-mid)}.mi[data-c=educ]{background:var(--educ-mid)}
+.mnum{font-family:'Outfit',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.12em;color:var(--text3);text-transform:uppercase;margin-bottom:.25rem}
+.mtitle{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--white);line-height:1}
+.mdesc{margin-top:.42rem;font-size:.82rem;color:var(--text2);line-height:1.62}
+.mbody{border:1px solid var(--border);border-top:none;border-radius:0 0 14px 14px;background:var(--surface);overflow:hidden}
+.stabs{display:flex;border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
+.stabs::-webkit-scrollbar{display:none}
+.stab{padding:.78rem 1.15rem;font-family:'Outfit',sans-serif;font-size:.78rem;font-weight:500;letter-spacing:.01em;text-transform:none;color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;background:none;border-top:none;border-left:none;border-right:none;margin-bottom:-1px;min-height:44px}
+.stab:hover{color:var(--text)}.stab.active{color:var(--white)}
+.stab.active[data-c=hist]{border-bottom-color:var(--hist)}.stab.active[data-c=fund]{border-bottom-color:var(--fund)}
+.stab.active[data-c=vida]{border-bottom-color:var(--vida)}.stab.active[data-c=educ]{border-bottom-color:var(--educ)}
+.sp{display:none;padding:2rem 2.25rem;animation:fu .22s ease}.sp.active{display:block}
+.sl{font-family:'Outfit',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);margin-bottom:.58rem;margin-top:1.55rem;display:flex;align-items:center;gap:.5rem}
+.sl::after{content:'';flex:1;height:1px;background:var(--border)}.sl:first-child{margin-top:0}
+p{font-size:.9375rem;color:#b5b0be;line-height:1.88}p+p{margin-top:.65rem}
+.hl{color:var(--white);font-weight:500}
+.art{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--hist);font-weight:500}
+ul,ol{padding-left:1.25rem;margin-top:.48rem}
+li{font-size:.9rem;color:#aeaab8;line-height:1.82;margin-bottom:.2rem}li strong{color:var(--white);font-weight:500}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:.88rem;margin-top:.68rem}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:.72rem;margin-top:.68rem}
+@media(max-width:640px){.g2,.g3{grid-template-columns:1fr}}
+.card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:1rem;box-shadow:0 2px 8px rgba(0,0,0,.18);transition:border-color .2s,box-shadow .2s}.card:hover{border-color:var(--border2);box-shadow:0 4px 16px rgba(0,0,0,.28)}
+.ct{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.55rem;display:flex;align-items:center;gap:.4rem}
+.ct::before{content:'';width:3px;height:11px;border-radius:2px;flex-shrink:0}
+.ch .ct{color:var(--hist)}.ch .ct::before{background:var(--hist)}
+.cf .ct{color:var(--fund)}.cf .ct::before{background:var(--fund)}
+.cv .ct{color:var(--vida)}.cv .ct::before{background:var(--vida)}
+.ce .ct{color:var(--educ)}.ce .ct::before{background:var(--educ)}
+.co{display:flex;gap:.75rem;padding:.88rem 1rem;border-radius:10px;margin-top:.82rem;font-size:.83rem;line-height:1.72;color:#aeaab8}
+.co-ico{font-size:.92rem;flex-shrink:0;margin-top:.05rem}.co strong{font-weight:500}
+.cw{background:rgba(155,127,232,.07);border:1px solid rgba(155,127,232,.2)}.cw strong{color:var(--hist)}
+.ci{background:rgba(92,158,224,.07);border:1px solid rgba(92,158,224,.2)}.ci strong{color:var(--educ)}
+.ce-box{background:rgba(224,110,140,.07);border:1px solid rgba(224,110,140,.2)}.ce-box strong{color:var(--vida)}
+.cs{background:rgba(92,201,138,.07);border:1px solid rgba(92,201,138,.2)}.cs strong{color:var(--fund)}
+.tw{overflow-x:auto;margin-top:.68rem;border-radius:10px;border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:.82rem}
+th{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);padding:.68rem 1rem;background:var(--surface2);border-bottom:1px solid var(--border);text-align:left;white-space:nowrap}
+td{padding:.62rem 1rem;border-bottom:1px solid var(--border);color:#aeaab8;vertical-align:top;line-height:1.6}
+tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.012)}td strong{color:var(--white);font-weight:500}
+.hub-footer{position:relative;z-index:5;max-width:1100px;margin:3rem auto 0;padding:1.5rem 2rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.ft-left{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--text3);letter-spacing:.08em}
+.ft-right{font-family:'JetBrains Mono',monospace;font-size:.55rem;color:var(--text3)}.ft-right a{color:var(--text2);text-decoration:none}.ft-right a:hover{color:var(--white)}
+.quiz-placeholder{padding:3rem 2rem;text-align:center}
+.qp-icon{font-size:2.5rem;margin-bottom:1rem}
+.qp-title{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:var(--white);margin-bottom:.65rem}
+.qp-text{font-size:.88rem;color:var(--text2);line-height:1.8}
+@media(max-width:600px){.hdr,.main,.mnav{padding-left:1rem;padding-right:1rem}.hub-footer{padding:1.5rem 1rem}}
 [data-theme=light]{
   --bg:#f0eef7;--surface:#ffffff;--surface2:#f4f2fb;--surface3:#eceaf5;
   --border:rgba(0,0,0,.07);--border2:rgba(0,0,0,.14);
   --text:#1a1828;--text2:#6a6480;--text3:#9a94b0;--white:#0a0818;
-  --civil:#c04070;--civil-dim:rgba(192,64,112,.1);--civil-mid:rgba(192,64,112,.18);
-  --const:#5060c8;--const-dim:rgba(80,96,200,.1);--const-mid:rgba(80,96,200,.18);
-  --proc:#2088b0;--proc-dim:rgba(32,136,176,.1);--proc-mid:rgba(32,136,176,.18);
-  --penal:#b85030;--penal-dim:rgba(184,80,48,.1);--penal-mid:rgba(184,80,48,.18);
-  --eca:#289050;--eca-dim:rgba(40,144,80,.1);--eca-mid:rgba(40,144,80,.18);
-  --gold:#987020;--gold-dim:rgba(152,112,32,.1)}
+  --hist:#7b5fc8;--hist-dim:rgba(123,95,200,.10);--hist-mid:rgba(123,95,200,.18);
+  --fund:#289050;--fund-dim:rgba(40,144,80,.10);--fund-mid:rgba(40,144,80,.18);
+  --vida:#c04070;--vida-dim:rgba(192,64,112,.10);--vida-mid:rgba(192,64,112,.18);
+  --educ:#2888c0;--educ-dim:rgba(40,136,192,.10);--educ-mid:rgba(40,136,192,.18);
+}
 [data-theme=light] body::before{opacity:.18}
-[data-theme=light] .disc-pill{background:transparent}
-
-/* ── THEME TOGGLE ── */
+[data-theme=light] p{color:#3a3632}
+[data-theme=light] li{color:#3a3632}
+[data-theme=light] .co{color:#3a3632}
 .theme-toggle{position:fixed;bottom:1.75rem;right:1.75rem;z-index:100;width:40px;height:40px;border-radius:50%;background:var(--surface2);border:1px solid var(--border2);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text2);transition:background .2s,border-color .2s,color .2s,box-shadow .2s}
 .theme-toggle:hover{background:var(--surface);color:var(--text);box-shadow:0 4px 20px rgba(0,0,0,.18)}
-.theme-toggle:focus-visible{outline:2px solid var(--gold,#d4a843);outline-offset:3px}
+.theme-toggle:focus-visible{outline:2px solid var(--hist,#9b7fe8);outline-offset:3px}
 .theme-toggle svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;display:block}
 .icon-sun{display:none}.icon-moon{display:block}
-[data-theme=light] .icon-sun{display:block}[data-theme=light] .icon-moon{display:none}</style>
+[data-theme=light] .icon-sun{display:block}[data-theme=light] .icon-moon{display:none}
+@media(prefers-reduced-motion:reduce){.mod{animation:none}.sp{animation:none}}
+</style>
 </head>
 <body>
-<div class="wrap">
+
+<div class="hdr">
   <a class="back" href="../../index.html">&#8592; Central de Resumos</a>
   <div class="ey">Dir. Criança e Adolescente &mdash; Prova 1 &middot; UFN 2026/1</div>
-  <h1 class="htitle">Proteção Integral<br><em>e Ato Infracional</em></h1>
-  <div class="disc-pill"><span class="dot"></span>Dir. Criança e Adolescente</div>
-  <div class="wip">
-    <div class="wip-icon" aria-hidden="true"></div>
-    <div class="wip-title">Resumo em preparação</div>
-    <div class="wip-text">O conteúdo deste resumo será adicionado em breve.<br>Volte quando o material estiver disponível.</div>
-    <div class="accent-line"></div>
-    <div class="topics">
-      <span class="topic">Doutrina da proteção integral</span>
-      <span class="topic">Art. 227 CF</span>
-      <span class="topic">Ato infracional · art. 103 ECA</span>
-      <span class="topic">Medidas socioeducativas</span>
-      <span class="topic">Internação · art. 121 ECA</span>
-      <span class="topic">Semiliberdade</span>
-      <span class="topic">Conselho Tutelar</span>
+  <h1 class="htitle">Direito da Criança<br><em>e do Adolescente I</em></h1>
+  <div class="hsub">ECA (Lei 8.069/1990) &middot; Historicidade &middot; Fundamentos &middot; Direitos Fundamentais &middot; Banca UFN</div>
+  <div class="banca-pill"><span class="p"></span>Banca UFN &mdash; Estilo de Questões Identificado</div>
+  <div class="sw" role="search">
+    <span class="sic" aria-hidden="true">&#x2315;</span>
+    <input class="si" type="text" placeholder="Buscar neste resumo..." oninput="doSearch(this.value)" aria-label="Buscar conceito" autocomplete="off">
+  </div>
+</div>
+
+<nav class="mnav">
+  <button class="nb active" data-m="hist" onclick="switchMod('hist',this)"><span class="d"></span>Historicidade</button>
+  <button class="nb" data-m="fund" onclick="switchMod('fund',this)"><span class="d"></span>Fundamentos</button>
+  <button class="nb" data-m="vida" onclick="switchMod('vida',this)"><span class="d"></span>Vida, Saúde e Integridade</button>
+  <button class="nb" data-m="educ" onclick="switchMod('educ',this)"><span class="d"></span>Educação e Trabalho</button>
+  <button class="nb" data-m="quiz" onclick="switchMod('quiz',this)"><span class="d"></span>Quiz</button>
+</nav>
+
+<main class="main">
+
+<!-- ═══ MÓDULO 1: HISTORICIDADE ═══ -->
+<div class="mod active" id="mod-hist">
+  <div class="mhd" data-c="hist">
+    <div class="mi" data-c="hist">📜</div>
+    <div>
+      <div class="mnum">Módulo 01</div>
+      <div class="mtitle">Historicidade</div>
+      <div class="mdesc">Da situação irregular à proteção integral. Construção normativa do DCA brasileiro.</div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="hist" onclick="switchTab(this,'h1t1')">Situação Irregular</button>
+      <button class="stab" data-c="hist" onclick="switchTab(this,'h1t2')">Proteção Integral</button>
+      <button class="stab" data-c="hist" onclick="switchTab(this,'h1t3')">Base Normativa Tripla</button>
+    </div>
+
+    <div class="sp active" id="h1t1">
+      <div class="sl">Código de Menores de 1979</div>
+      <p>Antes da CF/88, o ordenamento brasileiro adotava a <span class="hl">doutrina da situação irregular</span>, codificada no Código de Menores de 1979. Nessa lógica, a criança e o adolescente eram tratados como <span class="hl">objetos de intervenção estatal</span> — e não como sujeitos de direitos.</p>
+      <p>O alcance era <span class="hl">discriminatório e excludente</span>: atingia apenas os "menores em situação irregular" — pobres, abandonados, infratores — deixando intocada a infância das classes médias e altas. A intervenção estatal era arbitrária, sem garantias processuais, e frequentemente punia a pobreza com institucionalização.</p>
+      <div class="g2">
+        <div class="card ch">
+          <div class="ct">Características da Doutrina</div>
+          <ul>
+            <li>Criança/adolescente como <strong>objeto</strong> de intervenção</li>
+            <li>Foco nos "menores em situação irregular"</li>
+            <li>Caráter discriminatório e seletivo</li>
+            <li>Intervenção estatal arbitrária</li>
+            <li>Ausência de garantias processuais</li>
+          </ul>
+        </div>
+        <div class="card ch">
+          <div class="ct">Hipóteses de "Situação Irregular"</div>
+          <ul>
+            <li>Abandono material ou moral</li>
+            <li>Vítima de maus-tratos</li>
+            <li>Em perigo moral</li>
+            <li>Privado de representação legal</li>
+            <li>Com desvio de conduta ou infrator</li>
+          </ul>
+        </div>
+      </div>
+      <div class="co cw"><span class="co-ico">⚠</span><div><strong>Ponto crítico:</strong> A doutrina da situação irregular equiparava "menor abandonado" e "menor infrator" sob a mesma categoria. Isso legitimava a institucionalização de crianças pobres sem qualquer ato infracional.</div></div>
+    </div>
+
+    <div class="sp" id="h1t2">
+      <div class="sl">A Ruptura Histórica</div>
+      <p>A <span class="hl">doutrina da proteção integral</span> rompe completamente com o paradigma anterior. Toda criança e adolescente, <span class="hl">independentemente de classe social, raça, condição econômica ou familiar</span>, é titular de direitos fundamentais que devem ser efetivados com prioridade absoluta.</p>
+      <div class="tw"><table>
+        <thead><tr><th>Ano</th><th>Instrumento</th><th>Contribuição</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1988</strong></td><td>CF/88 — art. 227</td><td>Constitucionalização da proteção integral; responsabilidade tripartite (família + sociedade + Estado)</td></tr>
+          <tr><td><strong>1989</strong></td><td>Convenção ONU sobre Direitos da Criança</td><td>Internacionalização; criança como sujeito de direito internacional; ratificada pelo Brasil em 1990</td></tr>
+          <tr><td><strong>1990</strong></td><td>ECA — Lei 8.069/1990</td><td>Regulamentação detalhada; sistema de garantias; papéis do CT, MP e Judiciário. Vigência: 14/10/1990</td></tr>
+        </tbody>
+      </table></div>
+      <div class="co cs"><span class="co-ico">✓</span><div><strong>Proteção integral:</strong> Não é proteção apenas dos vulneráveis ou infratores — é proteção de <em>toda</em> criança e adolescente, universalmente, como sujeitos plenos de direitos.</div></div>
+    </div>
+
+    <div class="sp" id="h1t3">
+      <div class="sl">Base Normativa Tripla</div>
+      <p>O sistema de proteção integral repousa sobre três pilares que se complementam e se reforçam mutuamente:</p>
+      <div class="g3">
+        <div class="card ch">
+          <div class="ct">Art. 227 CF/88</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Dever da <strong>família</strong>, da <strong>sociedade</strong> e do <strong>Estado</strong> de assegurar à criança e ao adolescente, com absoluta prioridade, os direitos fundamentais. Proteção contra negligência, discriminação, exploração, violência e opressão.</p>
+        </div>
+        <div class="card ch">
+          <div class="ct">Convenção ONU 1989</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Adotada em 20/11/1989; ratificada pelo Brasil em 1990. Quatro princípios: <strong>não discriminação</strong>, <strong>melhor interesse</strong>, <strong>sobrevivência e desenvolvimento</strong> e <strong>participação</strong>.</p>
+        </div>
+        <div class="card ch">
+          <div class="ct">ECA — Lei 8.069/1990</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Regulamentação infraconstitucional detalhada. Define criança/adolescente, direitos, medidas de proteção e socioeducativas, papel do CT, MP e Judiciário.</p>
+        </div>
+      </div>
+      <div class="co ci"><span class="co-ico">ℹ</span><div><strong>Para a prova:</strong> A base normativa tripla é <strong>CF/88 (art. 227) + Convenção ONU sobre Direitos da Criança (1989) + ECA (Lei 8.069/1990)</strong>.</div></div>
     </div>
   </div>
 </div>
-<footer class="ft">
-  <span>Guto Ceolin &middot; UFN &middot; Dir. Criança e Adolescente &middot; 2026/1</span>
-  <a href="../../index.html">← Voltar ao Hub</a>
+
+<!-- ═══ MÓDULO 2: FUNDAMENTOS ═══ -->
+<div class="mod" id="mod-fund">
+  <div class="mhd" data-c="fund">
+    <div class="mi" data-c="fund">⚖️</div>
+    <div>
+      <div class="mnum">Módulo 02</div>
+      <div class="mtitle">Fundamentos e Princípios</div>
+      <div class="mdesc">Conceitos essenciais, princípios estruturantes e novidades legislativas do ECA.</div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="fund" onclick="switchTab(this,'f1t1')">Criança vs Adolescente</button>
+      <button class="stab" data-c="fund" onclick="switchTab(this,'f1t2')">Prioridade Absoluta</button>
+      <button class="stab" data-c="fund" onclick="switchTab(this,'f1t3')">Outros Princípios</button>
+    </div>
+
+    <div class="sp active" id="f1t1">
+      <div class="sl">Definições — Art. 2º ECA</div>
+      <div class="g2">
+        <div class="card cf">
+          <div class="ct">Criança</div>
+          <ul>
+            <li>Pessoa com <strong>até 12 anos incompletos</strong></li>
+            <li>Ato infracional → <strong>medidas de proteção</strong></li>
+            <li>Aplicadas pelo <strong>Conselho Tutelar</strong> (art. 105)</li>
+            <li>Não recebe medida socioeducativa</li>
+          </ul>
+        </div>
+        <div class="card cf">
+          <div class="ct">Adolescente</div>
+          <ul>
+            <li>Pessoa com <strong>12 a 18 anos</strong></li>
+            <li>Ato infracional → <strong>medidas socioeducativas</strong></li>
+            <li>Aplicadas pelo <strong>Judiciário</strong> (JIJ)</li>
+            <li>Caráter pedagógico e sancionatório</li>
+          </ul>
+        </div>
+      </div>
+      <div class="co cw"><span class="co-ico">⚠</span><div><strong>Art. 2º, §único ECA:</strong> O ECA aplica-se excepcionalmente a pessoas entre <strong>18 e 21 anos</strong> nos casos expressos em lei. Exemplo: medida socioeducativa iniciada antes dos 18 anos pode continuar até os 21.</div></div>
+      <div class="sl">Consequências Práticas da Distinção</div>
+      <div class="tw"><table>
+        <thead><tr><th>Critério</th><th>Criança (até 12 incompletos)</th><th>Adolescente (12–18 anos)</th></tr></thead>
+        <tbody>
+          <tr><td>Ato infracional</td><td>Medidas de proteção (art. 101)</td><td>Medidas socioeducativas (art. 112)</td></tr>
+          <tr><td>Órgão competente</td><td>Conselho Tutelar</td><td>Juiz da Infância e Juventude</td></tr>
+          <tr><td>Internação</td><td>Não cabível</td><td>Cabível (art. 121)</td></tr>
+          <tr><td>Remissão (MP)</td><td>Não aplicável</td><td>MP pode conceder (art. 126)</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="sp" id="f1t2">
+      <div class="sl">Prioridade Absoluta — Art. 4º ECA / Art. 227 CF</div>
+      <p>À criança e ao adolescente deve ser assegurada, com <span class="hl">prioridade absoluta</span>, a efetivação dos direitos fundamentais. Essa prioridade se traduz em <span class="hl">quatro dimensões concretas</span>:</p>
+      <div class="g2">
+        <div class="card cf">
+          <div class="ct">Dimensão (a)</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65"><strong>Primazia de proteção</strong> em qualquer circunstância — em caso de colisão, a criança prevalece.</p>
+        </div>
+        <div class="card cf">
+          <div class="ct">Dimensão (b)</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65"><strong>Precedência no atendimento</strong> em serviços públicos e atendimento de urgência.</p>
+        </div>
+        <div class="card cf">
+          <div class="ct">Dimensão (c)</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65"><strong>Preferência na formulação</strong> de políticas públicas sociais — orçamento, programas governamentais.</p>
+        </div>
+        <div class="card cf">
+          <div class="ct">Dimensão (d)</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65"><strong>Destinação privilegiada de recursos</strong> públicos nas áreas de proteção da infância e juventude.</p>
+        </div>
+      </div>
+      <div class="sl">Lei 15.240/2025 — Parentalidade Responsável</div>
+      <p>Detalhou as dimensões da prioridade absoluta no <span class="art">§1º do art. 4º ECA</span> e introduziu a <span class="hl">parentalidade responsável</span> (§2º): dever dos pais de prestar <span class="hl">assistência afetiva</span> ao filho, compreendendo:</p>
+      <ul>
+        <li>Orientação sobre principais escolhas profissionais, educacionais e culturais</li>
+        <li>Solidariedade e apoio nos momentos de sofrimento</li>
+        <li>Presença física quando solicitada pela criança e possível de ser atendida</li>
+      </ul>
+    </div>
+
+    <div class="sp" id="f1t3">
+      <div class="sl">Melhor Interesse da Criança</div>
+      <p>Toda decisão judicial, administrativa ou legislativa que envolva criança ou adolescente deve ser orientada pelo que <span class="hl">melhor atende ao seu superior interesse</span>. Cláusula aberta, aplicada casuisticamente, que prevalece sobre os interesses dos pais, do Estado ou de terceiros.</p>
+      <div class="co ci"><span class="co-ico">ℹ</span><div><strong>Origem:</strong> Princípio do <em>best interest of the child</em> — Convenção ONU sobre Direitos da Criança (art. 3º), incorporada ao ordenamento brasileiro e reforçada pelo ECA.</div></div>
+      <div class="sl">Condição Peculiar de Pessoa em Desenvolvimento</div>
+      <p>Fundamento de todo tratamento diferenciado dado à criança e ao adolescente. Por estarem em processo de formação física, psíquica, moral e social, merecem <span class="hl">proteção reforçada</span>. Justifica:</p>
+      <ul>
+        <li>Proibição de trabalho antes dos 16 anos (exceto aprendiz a partir dos 14)</li>
+        <li>Medidas socioeducativas como alternativa à pena criminal</li>
+        <li>Procedimentos especiais de escuta de vítimas de violência</li>
+        <li>Prioridade no atendimento em saúde e educação</li>
+      </ul>
+      <div class="sl">Responsabilidade Tripartite</div>
+      <p>O <span class="art">art. 227 CF/88</span> e o <span class="art">art. 4º ECA</span> impõem o dever à <span class="hl">família</span>, à <span class="hl">sociedade</span> e ao <span class="hl">Estado</span>. Não apenas ao Estado: qualquer pessoa pode — e alguns devem — comunicar violações ao Conselho Tutelar.</p>
+      <div class="co cs"><span class="co-ico">✓</span><div><strong>Síntese:</strong> Prioridade Absoluta (art. 4º ECA) + Melhor Interesse (Conv. ONU, art. 3º) + Condição Peculiar de Pessoa em Desenvolvimento = os três pilares de toda decisão envolvendo criança e adolescente.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MÓDULO 3: VIDA, SAÚDE E INTEGRIDADE ═══ -->
+<div class="mod" id="mod-vida">
+  <div class="mhd" data-c="vida">
+    <div class="mi" data-c="vida">🏥</div>
+    <div>
+      <div class="mnum">Módulo 03</div>
+      <div class="mtitle">Vida, Saúde e Integridade</div>
+      <div class="mdesc">Direito à saúde, integridade física e psíquica. Arts. 7–18-B ECA.</div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="vida" onclick="switchTab(this,'v1t1')">Vida e Saúde</button>
+      <button class="stab" data-c="vida" onclick="switchTab(this,'v1t2')">Liberdade, Respeito e Dignidade</button>
+      <button class="stab" data-c="vida" onclick="switchTab(this,'v1t3')">Violência e Escuta Especializada</button>
+    </div>
+
+    <div class="sp active" id="v1t1">
+      <div class="sl">Direito à Saúde — Arts. 7–14 ECA</div>
+      <p>Acesso integral à saúde via SUS, com atenção especial à gestante, ao recém-nascido e à criança com deficiência.</p>
+      <div class="sl">Direitos da Gestante</div>
+      <ul>
+        <li>Orientação sobre planejamento reprodutivo</li>
+        <li>Pré-natal com acompanhamento médico</li>
+        <li>Vinculação ao estabelecimento de parto no último trimestre</li>
+        <li>Parto humanizado (cesariana somente quando medicamente indicada)</li>
+        <li>Acompanhante no pré-natal e pós-parto imediato</li>
+        <li>Alta hospitalar responsável</li>
+      </ul>
+      <div class="sl">Aleitamento Materno</div>
+      <div class="g2">
+        <div class="card cv">
+          <div class="ct">CLT — Art. 396</div>
+          <ul>
+            <li>Dois descansos de <strong>30 min</strong> por jornada</li>
+            <li>Até o filho completar <strong>6 meses</strong></li>
+            <li>Prorrogável por razões de saúde</li>
+          </ul>
+        </div>
+        <div class="card cv">
+          <div class="ct">Estabelecimento Penal (LEP art. 83, §2º)</div>
+          <ul>
+            <li>Berçário obrigatório</li>
+            <li>Até os <strong>6 meses</strong> do bebê</li>
+            <li>Garante aleitamento em cárcere</li>
+          </ul>
+        </div>
+      </div>
+      <div class="sl">Deveres do Hospital</div>
+      <ul>
+        <li>Manter prontuários por <strong>18 anos</strong></li>
+        <li>Identificar o recém-nascido (impressão plantar + digital da mãe)</li>
+        <li>Triagem metabólica — <strong>teste do pezinho</strong></li>
+        <li>Fornecer declaração de nascimento</li>
+        <li>Manter alojamento conjunto (mãe e filho no mesmo ambiente)</li>
+      </ul>
+      <div class="co ce-box"><span class="co-ico">!</span><div><strong>Art. 13 ECA:</strong> Todos os profissionais que atuam com crianças têm obrigação de comunicar ao CT casos de maus-tratos. <strong>Art. 245 ECA:</strong> Professor e responsável por estabelecimento de ensino — descumprimento = infração administrativa.</div></div>
+    </div>
+
+    <div class="sp" id="v1t2">
+      <div class="sl">Liberdade, Respeito e Dignidade — Arts. 15–18-B</div>
+      <div class="g3">
+        <div class="card cv">
+          <div class="ct">Liberdade (art. 16)</div>
+          <ul>
+            <li>Ir, vir e estar em logradouros</li>
+            <li>Opinião e expressão</li>
+            <li>Crença e culto religioso</li>
+            <li>Brincar e praticar esportes</li>
+            <li>Vida familiar, comunitária e política</li>
+            <li>Buscar refúgio e orientação</li>
+          </ul>
+        </div>
+        <div class="card cv">
+          <div class="ct">Respeito (art. 17)</div>
+          <ul>
+            <li>Inviolabilidade da integridade física, psíquica e moral</li>
+            <li>Preservação da imagem e identidade</li>
+            <li>Autonomia, valores e espaços pessoais</li>
+          </ul>
+        </div>
+        <div class="card cv">
+          <div class="ct">Dignidade (art. 18)</div>
+          <ul>
+            <li>Dever de <strong>todos</strong> (não só do Estado)</li>
+            <li>Proibição de tratamento desumano</li>
+            <li>Proibição de tratamento violento ou aterrorizante</li>
+            <li>Proibição de tratamento vexatório</li>
+          </ul>
+        </div>
+      </div>
+      <div class="sl">Lei 13.010/2014 — Lei da Palmada (Arts. 18-A e 18-B)</div>
+      <p>Proíbe <span class="hl">castigo físico</span> ou <span class="hl">tratamento cruel e degradante</span> como forma de educação. Aplica-se a pais, família ampliada, responsáveis, agentes socioeducativos e qualquer cuidador.</p>
+      <div class="g2">
+        <div class="card cv">
+          <div class="ct">Castigo Físico</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Uso de força física que resulte em <strong>sofrimento físico ou lesão</strong>.</p>
+        </div>
+        <div class="card cv">
+          <div class="ct">Tratamento Cruel ou Degradante</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Conduta que <strong>humilhe</strong>, ameace gravemente ou <strong>ridicularize</strong> a criança.</p>
+        </div>
+      </div>
+      <p style="margin-top:.82rem">Medidas do <span class="art">art. 18-B</span> (CT): encaminhamento a programas de proteção, tratamento psicológico, cursos de orientação, encaminhamento a tratamento especializado, advertência.</p>
+      <div class="co cw"><span class="co-ico">⚠</span><div><strong>Pegadinha:</strong> A Lei 13.010/2014 <em>não criminaliza</em> o castigo físico — prevê medidas protetivas. A responsabilidade penal (lesão corporal, tortura) advém do Código Penal.</div></div>
+    </div>
+
+    <div class="sp" id="v1t3">
+      <div class="sl">Lei 13.431/2017 — 5 Tipos de Violência</div>
+      <div class="tw"><table>
+        <thead><tr><th>Tipo</th><th>Definição / Exemplos</th></tr></thead>
+        <tbody>
+          <tr><td><strong>I — Física</strong></td><td>Ofensa à integridade corporal ou saúde; sofrimento físico</td></tr>
+          <tr><td><strong>II — Psicológica</strong></td><td>Bullying, alienação parental, exposição à violência doméstica, humilhação, manipulação</td></tr>
+          <tr><td><strong>III — Sexual</strong></td><td>Abuso presencial ou eletrônico, exploração sexual comercial, tráfico para fins sexuais</td></tr>
+          <tr><td><strong>IV — Institucional</strong></td><td>Praticada por instituição pública ou conveniada; inclui revitimização pelo próprio Estado</td></tr>
+          <tr><td><strong>V — Patrimonial</strong></td><td>Retenção, subtração ou destruição de documentos e bens (Lei 14.344/2022)</td></tr>
+        </tbody>
+      </table></div>
+      <div class="sl">Escuta Especializada vs. Depoimento Especial</div>
+      <div class="g2">
+        <div class="card cv">
+          <div class="ct">Escuta Especializada (art. 7º)</div>
+          <ul>
+            <li>Realizada por <strong>órgão da rede de proteção</strong></li>
+            <li>Ex: assistência social, saúde</li>
+            <li>Limitada ao estritamente necessário</li>
+            <li><strong>Não é produção de prova judicial</strong></li>
+            <li>Finalidade exclusivamente protetiva</li>
+          </ul>
+        </div>
+        <div class="card cv">
+          <div class="ct">Depoimento Especial (art. 8º)</div>
+          <ul>
+            <li>Perante <strong>autoridade policial ou judiciária</strong></li>
+            <li>Deve ocorrer <strong>uma única vez</strong></li>
+            <li>Produção antecipada de prova (cautelar)</li>
+            <li>Local acolhedor; sem contato visual com o agressor (art. 9º)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="co ce-box"><span class="co-ico">!</span><div><strong>Rito cautelar obrigatório (art. 11, §1º):</strong> Quando a criança tem <strong>menos de 7 anos</strong> ou quando se tratar de <strong>violência sexual</strong>.</div></div>
+      <div class="co ci"><span class="co-ico">ℹ</span><div><strong>Revitimização:</strong> Violência institucional (tipo IV) praticada pelo próprio Estado ao expor novamente a criança ao trauma. A Lei 13.431/2017 surgiu para prevenir exatamente isso.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MÓDULO 4: EDUCAÇÃO E TRABALHO ═══ -->
+<div class="mod" id="mod-educ">
+  <div class="mhd" data-c="educ">
+    <div class="mi" data-c="educ">📚</div>
+    <div>
+      <div class="mnum">Módulo 04</div>
+      <div class="mtitle">Educação e Trabalho</div>
+      <div class="mdesc">Direito à educação, profissionalização e contrato de aprendizagem. Arts. 53–69 ECA.</div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="educ" onclick="switchTab(this,'e1t1')">Direito à Educação</button>
+      <button class="stab" data-c="educ" onclick="switchTab(this,'e1t2')">Profissionalização e Trabalho</button>
+      <button class="stab" data-c="educ" onclick="switchTab(this,'e1t3')">Contrato de Aprendizagem</button>
+    </div>
+
+    <div class="sp active" id="e1t1">
+      <div class="sl">Estrutura Federativa — Arts. 53–59 ECA</div>
+      <div class="tw"><table>
+        <thead><tr><th>Ente</th><th>Responsabilidade prioritária</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Município</strong></td><td>Educação infantil (0–5 anos) e ensino fundamental; prover creche e pré-escola a toda criança</td></tr>
+          <tr><td><strong>Estado</strong></td><td>Ensino fundamental (complementar) e ensino médio (obrigatório)</td></tr>
+          <tr><td><strong>União</strong></td><td>Ensino superior e assistência técnica e financeira aos demais entes</td></tr>
+        </tbody>
+      </table></div>
+      <div class="sl">Princípios e Garantias</div>
+      <ul>
+        <li><strong>Georreferenciamento (art. 53, V):</strong> direito à vaga na escola mais próxima da residência</li>
+        <li>Sem vaga na rede pública: Estado deve prover vaga em instituição privada (art. 213 CF/88)</li>
+        <li>Direito de contestar critérios avaliativos e recorrer em caso de reprovação</li>
+      </ul>
+      <div class="sl">Deveres das Escolas</div>
+      <ul>
+        <li>Comunicar ao CT: maus-tratos contra alunos</li>
+        <li>Comunicar ao CT: reiteração de faltas injustificadas</li>
+        <li>Comunicar ao CT: elevados níveis de repetência</li>
+        <li><strong>FICAI</strong> — Ficha de Comunicação de Aluno Infrequente: após <strong>7 dias consecutivos</strong> de falta injustificada</li>
+      </ul>
+      <div class="co cs"><span class="co-ico">✓</span><div><strong>Art. 245 ECA:</strong> Professor e responsável por estabelecimento de ensino têm obrigação legal de comunicar ao CT casos de maus-tratos. Descumprimento = infração administrativa.</div></div>
+    </div>
+
+    <div class="sp" id="e1t2">
+      <div class="sl">Base Constitucional — Art. 7º, XXXIII CF/88</div>
+      <div class="g2">
+        <div class="card ce">
+          <div class="ct">Proibições Absolutas (&lt; 18 anos)</div>
+          <ul>
+            <li>Trabalho <strong>noturno</strong></li>
+            <li>Trabalho <strong>perigoso</strong></li>
+            <li>Trabalho <strong>insalubre</strong></li>
+          </ul>
+        </div>
+        <div class="card ce">
+          <div class="ct">Proibição Geral (&lt; 16 anos)</div>
+          <ul>
+            <li>Qualquer trabalho antes dos 16 anos</li>
+            <li><strong>Exceção:</strong> aprendiz a partir dos 14 anos</li>
+            <li>Trabalho artístico: alvará judicial necessário</li>
+          </ul>
+        </div>
+      </div>
+      <div class="sl">Arts. 60–69 ECA</div>
+      <p>O ECA reitera as vedações constitucionais e proíbe trabalho em locais prejudiciais à formação e ao desenvolvimento físico, psíquico, moral e social do adolescente.</p>
+      <div class="co cw"><span class="co-ico">⚠</span><div><strong>Atenção:</strong> O menor de 16 anos <em>não pode</em> se emancipar por relação de emprego — a CF/88 proíbe qualquer trabalho antes dos 16 anos (salvo aprendiz a partir dos 14).</div></div>
+    </div>
+
+    <div class="sp" id="e1t3">
+      <div class="sl">Contrato de Aprendizagem — Art. 428 CLT; Decreto 9.579/2018</div>
+      <p>Contrato especial que permite ao adolescente a partir dos 14 anos integrar o mercado de trabalho de forma protegida.</p>
+      <div class="tw"><table>
+        <thead><tr><th>Característica</th><th>Regra</th></tr></thead>
+        <tbody>
+          <tr><td>Faixa etária</td><td>14 a 24 anos (sem limite para pessoas com deficiência)</td></tr>
+          <tr><td>Prazo máximo</td><td>2 anos — escrito, por prazo determinado</td></tr>
+          <tr><td>Jornada</td><td>Até 6h diárias; até 8h se concluiu ensino fundamental (computada a teoria)</td></tr>
+          <tr><td>Vedações</td><td>Prorrogação e compensação de jornada</td></tr>
+          <tr><td>Salário</td><td>Mínimo-hora garantido</td></tr>
+          <tr><td>FGTS</td><td>Alíquota reduzida de <strong>2%</strong></td></tr>
+          <tr><td>Férias</td><td>Preferencialmente nas férias escolares</td></tr>
+          <tr><td>Cota de aprendizes</td><td>5% a 15% dos empregados cujas funções demandem formação profissional</td></tr>
+        </tbody>
+      </table></div>
+      <div class="sl">Entidades Habilitadas</div>
+      <ul>
+        <li>SENAI, SENAC, SENAR, SENAT, SESCOOP (Sistema S)</li>
+        <li>Escolas técnicas de educação</li>
+        <li>Entidades sem fins lucrativos registradas no <strong>CMDCA</strong></li>
+      </ul>
+      <div class="sl">Extinção Antecipada</div>
+      <ul>
+        <li>Desempenho insuficiente ou inadaptação</li>
+        <li>Falta disciplinar grave</li>
+        <li>Perda do ano letivo por falta injustificada</li>
+        <li>Pedido do próprio aprendiz</li>
+      </ul>
+      <div class="co ci"><span class="co-ico">ℹ</span><div><strong>Extensão para 24 anos:</strong> Lei 10.097/2000 regulamentou o contrato original (até 18 anos). A extensão até 24 anos veio com a Lei 11.180/2005. Para pessoas com deficiência, não há limite etário superior.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MÓDULO QUIZ ═══ -->
+<div class="mod" id="mod-quiz">
+  <div class="mhd" data-c="fund">
+    <div class="mi" data-c="fund">📝</div>
+    <div>
+      <div class="mnum">Quiz</div>
+      <div class="mtitle">Questões — Banca UFN</div>
+      <div class="mdesc">Historicidade · Fundamentos · Vida, Saúde e Integridade · Educação e Trabalho</div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="quiz-placeholder">
+      <div class="qp-icon">🔍</div>
+      <div class="qp-title">Questões em Elaboração</div>
+      <p class="qp-text">As questões serão adicionadas após análise das provas anteriores da banca UFN.<br>Volte em breve!</p>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer class="hub-footer">
+  <div class="ft-left">Guto Ceolin &middot; UFN &middot; Dir. Criança e Adolescente &middot; 2026/1</div>
+  <div class="ft-right"><a href="../../index.html">← Voltar ao Hub</a></div>
 </footer>
+
 <script>
-function toggleTheme(){var h=document.documentElement;var l=h.getAttribute('data-theme')==='light';h.setAttribute('data-theme',l?'dark':'light');localStorage.setItem('theme',l?'dark':'light');}
-</script><button class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar modo claro/escuro" title="Modo claro/escuro">
+function switchMod(m,btn){
+  document.querySelectorAll('.mod').forEach(d=>d.classList.remove('active'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
+  document.getElementById('mod-'+m).classList.add('active');
+  btn.classList.add('active');
+}
+function switchTab(btn,panelId){
+  const mbody=btn.closest('.mbody');
+  mbody.querySelectorAll('.stab').forEach(b=>b.classList.remove('active'));
+  mbody.querySelectorAll('.sp').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(panelId).classList.add('active');
+}
+function doSearch(v){
+  if(!v){document.querySelectorAll('mark').forEach(m=>{const p=m.parentNode;p.replaceChild(document.createTextNode(m.textContent),m);p.normalize();});return;}
+}
+</script>
+<button class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar modo claro/escuro" title="Modo claro/escuro">
   <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
   <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-</button></body>
+</button>
+</body>
 </html>
