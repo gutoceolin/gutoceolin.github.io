@@ -201,7 +201,7 @@ hr.dv{border:none;border-top:1px solid var(--border);margin:1.35rem 0}
 .qfb.ng{background:var(--morte-dim);border:1px solid rgba(224,110,140,.26)}.qfb.ng strong{color:var(--morte)}
 .qnav{display:flex;align-items:center;justify-content:space-between;margin-top:1.35rem}
 .qbn{padding:.55rem 1.25rem;border-radius:100px;font-family:'Outfit',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.02em;cursor:pointer;transition:all .2s;border:none}
-.qbn-next{background:var(--eca);color:#fff;display:none}.qbn-next:hover{opacity:.88}.qbn-next.show{display:block}
+.qbn-next{background:#5cc98a;color:#fff;display:none}.qbn-next:hover{opacity:.88}.qbn-next.show{display:block}
 .qbn-rs{background:var(--surface2);border:1px solid var(--border);color:var(--text2)}.qbn-rs:hover{border-color:var(--border2);color:var(--text)}
 .qres{display:none;text-align:center;padding:2.5rem 0}.qres.show{display:block;animation:fu .28s ease}
 .rscore{font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:700;color:var(--white);line-height:1}
@@ -940,7 +940,7 @@ function buildQ(){
     const bf=q.banca?'<span class="bflag">Banca Real</span>':'';
     const lets=['A','B','C','D','E'];
     const opts=q.opts.map((o,oi)=>`<button class="qopt" onclick="selA(${i},${oi})" id="o${i}_${oi}"><span class="ql">${lets[oi]}</span><span class="qt">${o}</span></button>`).join('');
-    div.innerHTML=`<div class="qnum">Questão ${i+1} de ${QS.length} ${bf}</div><div class="qtext">${q.q}</div><div class="qopts">${opts}</div><div class="qfb" id="fb${i}"></div><div class="qnav"><div></div><button class="qbn qbn-next" id="nx${i}" onclick="nxtQ(${i})">${i<QS.length-1?'Próxima →':'Ver resultado →'}</button></div>`;
+    div.innerHTML=`<div class="qnum">Questão ${i+1} de ${QS.length} ${bf}</div><div class="qtext">${q.q}</div><div class="qopts">${opts}</div><div class="qfb" id="fb${i}"></div><div class="qnav"><button class="qbn qbn-rs" onclick="restartQ()">Reiniciar</button><button class="qbn qbn-next" id="nx${i}" onclick="nxtQ(${i})">${i<QS.length-1?'Próxima →':'Ver resultado →'}</button></div>`;
     C.appendChild(div);
   });
 }
