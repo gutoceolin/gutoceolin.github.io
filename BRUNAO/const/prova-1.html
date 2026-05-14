@@ -111,10 +111,10 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.012
 .qwrap{padding:1.5rem 2rem 2rem}
 .qtop{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.4rem}
 .qtitle{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:700;color:var(--white)}
-'Outfit',sans-serif;font-size:.65rem;padding:.26rem .72rem;border-radius:100px;background:var(--surface2);border:1px solid var(--border);color:var(--text2)}
+.sbadge{font-family:'Outfit',sans-serif;font-size:.65rem;padding:.26rem .72rem;border-radius:100px;background:var(--surface2);border:1px solid var(--border);color:var(--text2)}
 .qdots{display:flex;gap:.28rem;flex-wrap:wrap;margin-bottom:1.2rem}
 .qdot{width:7px;height:7px;border-radius:50%;background:var(--border2);transition:all .2s}
-.qdot.cur{background:var(--text2)}.qdot.ok{background:var(--dom)}.qdot.err{background:var(--morte)}
+.qdot.cur{background:var(--text2)}.qdot.ok{background:#5cc98a}.qdot.err{background:#e06e8c}
 .qq{display:none;animation:fu .26s ease}.qq.active{display:block}
 .qnum{font-family:'JetBrains Mono',monospace;font-size:.56rem;color:var(--text3);letter-spacing:.1em;margin-bottom:.6rem}
 .qtext{font-size:.96rem;color:var(--white);line-height:1.68;margin-bottom:1.15rem;font-weight:400}
@@ -131,8 +131,8 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.012
 .qfb.ok{background:var(--dom-dim);border:1px solid rgba(92,201,138,.26)}.qfb.ok strong{color:var(--dom)}
 .qfb.ng{background:var(--morte-dim);border:1px solid rgba(123,143,232,.26)}.qfb.ng strong{color:var(--morte)}
 .qnav{display:flex;align-items:center;justify-content:space-between;margin-top:1.35rem}
-'Outfit',sans-serif;font-size:.6rem;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;transition:all .2s;border:none}
-.qbn-next{background:var(--eca);color:#fff;display:none;border-radius:100px}.qbn-next:hover{opacity:.88}.qbn-next.show{display:block}
+.qbn{font-family:'Outfit',sans-serif;font-size:.6rem;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;transition:all .2s;border:none;padding:.52rem 1.1rem;border-radius:100px}
+.qbn-next{background:#5cc98a;color:#fff;display:none;border-radius:100px}.qbn-next:hover{opacity:.88}.qbn-next.show{display:block}
 .qbn-rs{background:var(--surface2);border:1px solid var(--border);color:var(--text2)}.qbn-rs:hover{border-color:var(--border2);color:var(--text)}
 .qres{display:none;text-align:center;padding:2.5rem 0}.qres.show{display:block}
 .rscore{font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:700;color:var(--white);line-height:1}
@@ -170,6 +170,8 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.012
   --gold:#987020;--gold-dim:rgba(152,112,32,.1)}
 [data-theme=light] body::before{opacity:.18}
 [data-theme=light] .disc-pill{background:transparent}
+[data-theme=light] .qdot.ok{background:#289050}
+[data-theme=light] .qdot.err{background:#c04070}
 
 /* ── THEME TOGGLE ── */
 .theme-toggle{position:fixed;bottom:1.75rem;right:1.75rem;z-index:100;width:40px;height:40px;border-radius:50%;background:var(--surface2);border:1px solid var(--border2);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text2);transition:background .2s,border-color .2s,color .2s,box-shadow .2s}
@@ -473,15 +475,16 @@ const questions=[
   {q:"O poder constituinte originário, segundo a doutrina majoritária, é:",opts:["A) Limitado, condicionado e derivado","B) Inicial, ilimitado juridicamente e incondicionado","C) Limitado pelos direitos naturais e pela Constituição anterior","D) Exercido apenas por representantes eleitos diretamente"],ans:1,fb:"As características clássicas do PCO são: <strong>inicial</strong> (inaugura nova ordem), <strong>ilimitado juridicamente</strong> (não vinculado ao direito positivo anterior) e <strong>incondicionado</strong> (não segue forma preestabelecida)."}
 ];
 
-let cur=0,score=0,answered=[];
+let cur=0,score=0,answered=[],SQ=[];
 const zone=document.getElementById('qzone');
 const dots=document.getElementById('qdots');
 const sc=document.getElementById('qscore');
-function buildDots(){dots.innerHTML='';questions.forEach((_,i)=>{const d=document.createElement('div');d.className='qdot'+(i===0?' cur':'');d.id='dot'+i;dots.appendChild(d);});}
-function renderQ(i){if(i>=questions.length){showResult();return;}const q=questions[i];let html=`<div class="qq active"><div class="qnum">Questão ${i+1} de ${questions.length}</div><div class="qtext">${q.q}</div><div class="qopts">`;q.opts.forEach((o,j)=>{html+=`<button class="qopt" onclick="pick(${i},${j})"><span class="ql">${String.fromCharCode(65+j)}</span><span class="qt">${o}</span></button>`;});html+=`</div><div class="qfb" id="fb${i}"></div><div class="qnav"><button class="qbn qbn-rs" onclick="resetQuiz()">Reiniciar</button><button class="qbn qbn-next" id="nx${i}" onclick="nextQ(${i+1})">Próxima →</button></div></div>`;zone.innerHTML=html;}
-function pick(qi,oi){if(answered[qi]!==undefined)return;answered[qi]=oi;const q=questions[qi];const opts=document.querySelectorAll('.qopt');opts.forEach((o,j)=>{o.classList.add('disabled');if(j===q.ans)o.classList.add('correct');else if(j===oi)o.classList.add('wrong');});const fb=document.getElementById('fb'+qi);if(oi===q.ans){score++;fb.className='qfb ok show';fb.innerHTML='<strong>Correto!</strong> '+q.fb;}else{fb.className='qfb ng show';fb.innerHTML='<strong>Incorreto.</strong> '+q.fb;}document.getElementById('dot'+qi).className='qdot '+(oi===q.ans?'ok':'err');if(qi+1<questions.length){const d=document.getElementById('dot'+(qi+1));if(d)d.classList.add('cur');}sc.textContent=score+' / '+questions.length;document.getElementById('nx'+qi).classList.add('show');}
+function shuffleOpts(q){const idx=Array.from({length:q.opts.length},(_,i)=>i);for(let i=idx.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[idx[i],idx[j]]=[idx[j],idx[i]];}return{...q,opts:idx.map(i=>q.opts[i]),ans:idx.indexOf(q.ans)};}
+function buildDots(){SQ=questions.map(shuffleOpts);dots.innerHTML='';SQ.forEach((_,i)=>{const d=document.createElement('div');d.className='qdot'+(i===0?' cur':'');d.id='dot'+i;dots.appendChild(d);});}
+function renderQ(i){if(i>=SQ.length){showResult();return;}const q=SQ[i];let html=`<div class="qq active" id="qq${i}"><div class="qnum">Questão ${i+1} de ${SQ.length}</div><div class="qtext">${q.q}</div><div class="qopts">`;q.opts.forEach((o,j)=>{html+=`<button class="qopt" onclick="pick(${i},${j})"><span class="ql">${String.fromCharCode(65+j)}</span><span class="qt">${o}</span></button>`;});html+=`</div><div class="qfb" id="fb${i}"></div><div class="qnav"><button class="qbn qbn-rs" onclick="resetQuiz()">Reiniciar</button><button class="qbn qbn-next" id="nx${i}" onclick="nextQ(${i+1})">Próxima →</button></div></div>`;zone.innerHTML=html;}
+function pick(qi,oi){if(answered[qi]!==undefined)return;answered[qi]=oi;const q=SQ[qi];const opts=document.querySelectorAll(`#qq${qi} .qopt`);opts.forEach((o,j)=>{o.classList.add('disabled');if(j===q.ans)o.classList.add('correct');else if(j===oi)o.classList.add('wrong');});const fb=document.getElementById('fb'+qi);if(oi===q.ans){score++;fb.className='qfb ok show';fb.innerHTML='<strong>Correto!</strong> '+q.fb;}else{fb.className='qfb ng show';fb.innerHTML='<strong>Incorreto.</strong> '+q.fb;}document.getElementById('dot'+qi).className='qdot '+(oi===q.ans?'ok':'err');if(qi+1<SQ.length){const d=document.getElementById('dot'+(qi+1));if(d)d.classList.add('cur');}sc.textContent=score+' / '+SQ.length;document.getElementById('nx'+qi).classList.add('show');}
 function nextQ(i){cur=i;renderQ(i);}
-function showResult(){const pct=Math.round(score/questions.length*100);zone.innerHTML=`<div class="qres show"><div class="rscore">${score}<span style="font-size:2rem;color:var(--text2)">/${questions.length}</span></div><div class="rlabel">${pct}% de acerto</div><div style="margin-top:1.2rem;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--text2)">${pct>=70?'Aprovado!':'Continue revisando.'}</div><div class="qnav" style="justify-content:center;margin-top:1.5rem"><button class="qbn qbn-rs" onclick="resetQuiz()">Refazer Quiz</button></div></div>`;try{const _k='quiz_'+location.pathname.split('/').slice(-2).join('/').replace('.html','').replace('/','_');localStorage.setItem(_k,JSON.stringify({score,total:questions.length,pct,ts:Date.now()}));}catch(_e){}}
+function showResult(){const pct=Math.round(score/SQ.length*100);zone.innerHTML=`<div class="qres show"><div class="rscore">${score}<span style="font-size:2rem;color:var(--text2)">/${SQ.length}</span></div><div class="rlabel">${pct}% de acerto</div><div style="margin-top:1.2rem;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--text2)">${pct>=70?'Aprovado!':'Continue revisando.'}</div><div class="qnav" style="justify-content:center;margin-top:1.5rem"><button class="qbn qbn-rs" onclick="resetQuiz()">Refazer Quiz</button></div></div>`;try{const _k='quiz_'+location.pathname.split('/').slice(-2).join('/').replace('.html','').replace('/','_');localStorage.setItem(_k,JSON.stringify({score,total:SQ.length,pct,ts:Date.now()}));}catch(_e){}}
 function resetQuiz(){cur=0;score=0;answered=[];sc.textContent='0 / '+questions.length;buildDots();renderQ(0);}
 function switchMod(m,btn){document.querySelectorAll('.mod').forEach(d=>d.classList.remove('active'));document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));document.getElementById('mod-'+m).classList.add('active');btn.classList.add('active');}
 function switchTab(btn,panelId){const mbody=btn.closest('.mbody');mbody.querySelectorAll('.stab').forEach(b=>b.classList.remove('active'));mbody.querySelectorAll('.sp').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById(panelId).classList.add('active');}

@@ -121,10 +121,10 @@ hr.dv{border:none;border-top:1px solid var(--border);margin:1.35rem 0}
 .qwrap{padding:1.5rem 2rem 2rem}
 .qtop{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.4rem}
 .qtitle{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:700;color:var(--white)}
-'Outfit',sans-serif;font-size:.65rem;padding:.26rem .72rem;border-radius:100px;background:var(--surface2);border:1px solid var(--border);color:var(--text2)}
+.sbadge{font-family:'Outfit',sans-serif;font-size:.65rem;padding:.26rem .72rem;border-radius:100px;background:var(--surface2);border:1px solid var(--border);color:var(--text2)}
 .qdots{display:flex;gap:.28rem;flex-wrap:wrap;margin-bottom:1.2rem}
 .qdot{width:7px;height:7px;border-radius:50%;background:var(--border2);transition:all .2s}
-.qdot.cur{background:var(--text2)}.qdot.ok{background:var(--eman)}.qdot.err{background:var(--nat)}
+.qdot.cur{background:var(--text2)}.qdot.ok{background:#5cc98a}.qdot.err{background:#e06e8c}
 .qq{display:none;animation:fu .26s ease}.qq.active{display:block}
 .qnum{font-family:'JetBrains Mono',monospace;font-size:.56rem;color:var(--text3);letter-spacing:.1em;margin-bottom:.6rem}
 .bflag{display:inline-flex;align-items:center;gap:.32rem;font-family:'JetBrains Mono',monospace;font-size:.56rem;padding:.13rem .5rem;border-radius:3px;background:rgba(212,168,67,.1);border:1px solid rgba(212,168,67,.24);color:var(--dir);margin-left:.45rem;vertical-align:middle;letter-spacing:.04em}
@@ -143,7 +143,7 @@ hr.dv{border:none;border-top:1px solid var(--border);margin:1.35rem 0}
 .qfb.ok{background:var(--eman-dim);border:1px solid rgba(92,201,138,.26)}.qfb.ok strong{color:var(--eman)}
 .qfb.ng{background:var(--nat-dim);border:1px solid rgba(224,110,140,.26)}.qfb.ng strong{color:var(--nat)}
 .qnav{display:flex;align-items:center;justify-content:space-between;margin-top:1.35rem}
-'Outfit',sans-serif;font-size:.6rem;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;transition:all .2s;border:none}
+.qbn{font-family:'Outfit',sans-serif;font-size:.6rem;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;transition:all .2s;border:none;padding:.52rem 1.1rem;border-radius:100px}
 .qbn-next{background:#5cc98a;color:#fff;display:none;border-radius:100px}.qbn-next:hover{opacity:.88}.qbn-next.show{display:block}
 .qbn-rs{background:var(--surface2);border:1px solid var(--border);color:var(--text2)}.qbn-rs:hover{border-color:var(--border2);color:var(--text)}
 .qres{display:none;text-align:center;padding:2.5rem 0}.qres.show{display:block;animation:fu .28s ease}
@@ -187,6 +187,8 @@ hr.dv{border:none;border-top:1px solid var(--border);margin:1.35rem 0}
   --gold:#987020;--gold-dim:rgba(152,112,32,.1)}
 [data-theme=light] body::before{opacity:.18}
 [data-theme=light] .disc-pill{background:transparent}
+[data-theme=light] .qdot.ok{background:#289050}
+[data-theme=light] .qdot.err{background:#c04070}
 
 /* ── THEME TOGGLE ── */
 .theme-toggle{position:fixed;bottom:1.75rem;right:1.75rem;z-index:100;width:40px;height:40px;border-radius:50%;background:var(--surface2);border:1px solid var(--border2);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text2);transition:background .2s,border-color .2s,color .2s,box-shadow .2s}
@@ -602,17 +604,19 @@ const questions=[
   ,{q:"O Código Civil de 1916 (Lei 3.071/1916) foi elaborado por:",opts:["A) Teixeira de Freitas","B) Rui Barbosa","C) Miguel Reale","D) Clóvis Beviláqua"],ans:3,fb:"O projeto de <strong>Clóvis Beviláqua</strong> foi o aprovado como CC 1916. Teixeira de Freitas elaborou o Esboço (influenciou a Argentina), mas seu projeto não foi adotado. Miguel Reale presidiu a comissão do CC 2002."}
 ];
 
-let cur=0,score=0,answered=[];
+let cur=0,score=0,answered=[],SQ=[];
 const zone=document.getElementById('qzone');
 const dots=document.getElementById('qdots');
 const sc=document.getElementById('qscore');
 
-function buildDots(){dots.innerHTML='';questions.forEach((_,i)=>{const d=document.createElement('div');d.className='qdot'+(i===0?' cur':'');d.id='dot'+i;dots.appendChild(d)});}
+function shuffleOpts(q){const idx=Array.from({length:q.opts.length},(_,i)=>i);for(let i=idx.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[idx[i],idx[j]]=[idx[j],idx[i]];}return{...q,opts:idx.map(i=>q.opts[i]),ans:idx.indexOf(q.ans)};}
+
+function buildDots(){SQ=questions.map(shuffleOpts);dots.innerHTML='';SQ.forEach((_,i)=>{const d=document.createElement('div');d.className='qdot'+(i===0?' cur':'');d.id='dot'+i;dots.appendChild(d);});}
 
 function renderQ(i){
-  if(i>=questions.length){showResult();return;}
-  const q=questions[i];
-  let html=`<div class="qq active" id="qq${i}"><div class="qnum">Questão ${i+1} de ${questions.length}</div><div class="qtext">${q.q}</div><div class="qopts">`;
+  if(i>=SQ.length){showResult();return;}
+  const q=SQ[i];
+  let html=`<div class="qq active" id="qq${i}"><div class="qnum">Questão ${i+1} de ${SQ.length}</div><div class="qtext">${q.q}</div><div class="qopts">`;
   q.opts.forEach((o,j)=>{html+=`<button class="qopt" onclick="pick(${i},${j})"><span class="ql">${String.fromCharCode(65+j)}</span><span class="qt">${o}</span></button>`;});
   html+=`</div><div class="qfb" id="fb${i}"></div><div class="qnav"><button class="qbn qbn-rs" onclick="resetQuiz()">Reiniciar</button><button class="qbn qbn-next" id="nx${i}" onclick="nextQ(${i+1})">Próxima →</button></div></div>`;
   zone.innerHTML=html;
@@ -621,7 +625,7 @@ function renderQ(i){
 function pick(qi,oi){
   if(answered[qi]!==undefined)return;
   answered[qi]=oi;
-  const q=questions[qi];
+  const q=SQ[qi];
   const opts=document.querySelectorAll(`#qq${qi} .qopt`);
   opts.forEach((o,j)=>{o.classList.add('disabled');if(j===q.ans)o.classList.add('correct');else if(j===oi)o.classList.add('wrong');});
   const fb=document.getElementById('fb'+qi);
@@ -629,17 +633,17 @@ function pick(qi,oi){
   else{fb.className='qfb ng show';fb.innerHTML='<strong>Incorreto.</strong> '+q.fb;}
   const dot=document.getElementById('dot'+qi);
   dot.className='qdot '+(oi===q.ans?'ok':'err');
-  if(qi+1<questions.length){const dot2=document.getElementById('dot'+(qi+1));if(dot2)dot2.classList.add('cur');}
-  sc.textContent=score+' / '+questions.length;
+  if(qi+1<SQ.length){const dot2=document.getElementById('dot'+(qi+1));if(dot2)dot2.classList.add('cur');}
+  sc.textContent=score+' / '+SQ.length;
   document.getElementById('nx'+qi).classList.add('show');
 }
 
 function nextQ(i){cur=i;renderQ(i);}
 
 function showResult(){
-  const pct=Math.round(score/questions.length*100);
-  zone.innerHTML=`<div class="qres show"><div class="rscore">${score}<span style="font-size:2rem;color:var(--text2)">/${questions.length}</span></div><div class="rlabel">${pct}% de acerto</div><div style="margin-top:1.2rem;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--text2)">${pct>=70?'Aprovado — bom desempenho!':'Continue revisando o conteúdo.'}</div><div class="qnav" style="justify-content:center;margin-top:1.5rem"><button class="qbn qbn-rs" onclick="resetQuiz()">Refazer Quiz</button></div></div>`;
-  try{const _k='quiz_'+location.pathname.split('/').slice(-2).join('/').replace('.html','').replace('/','_');localStorage.setItem(_k,JSON.stringify({score,total:questions.length,pct,ts:Date.now()}));}catch(_e){}
+  const pct=Math.round(score/SQ.length*100);
+  zone.innerHTML=`<div class="qres show"><div class="rscore">${score}<span style="font-size:2rem;color:var(--text2)">/${SQ.length}</span></div><div class="rlabel">${pct}% de acerto</div><div style="margin-top:1.2rem;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--text2)">${pct>=70?'Aprovado — bom desempenho!':'Continue revisando o conteúdo.'}</div><div class="qnav" style="justify-content:center;margin-top:1.5rem"><button class="qbn qbn-rs" onclick="resetQuiz()">Refazer Quiz</button></div></div>`;
+  try{const _k='quiz_'+location.pathname.split('/').slice(-2).join('/').replace('.html','').replace('/','_');localStorage.setItem(_k,JSON.stringify({score,total:SQ.length,pct,ts:Date.now()}));}catch(_e){}
 }
 
 function resetQuiz(){cur=0;score=0;answered=[];sc.textContent='0 / '+questions.length;buildDots();renderQ(0);}
@@ -649,7 +653,6 @@ function switchMod(m,btn){
   document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
   document.getElementById('mod-'+m).classList.add('active');
   btn.classList.add('active');
-  updateProgress();
 }
 
 function switchTab(btn,panelId){
