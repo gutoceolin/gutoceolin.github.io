@@ -1,88 +1,819 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<script>(function(){var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');if(t==='light')document.documentElement.setAttribute('data-theme','light');})();</script>
+<script>
+function toggleTheme(){var h=document.documentElement;var l=h.getAttribute('data-theme')==='light';h.setAttribute('data-theme',l?'dark':'light');localStorage.setItem('theme',l?'dark':'light');}
+(function(){var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');if(t==='light')document.documentElement.setAttribute('data-theme','light');})();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dir. Processual Civil — Prova 1</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@300;400;500;600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#111118;--surface:#1c1c26;--surface2:#242430;--border:rgba(255,255,255,.07);--border2:rgba(255,255,255,.12);--text:#e8e4f0;--text2:#9490a8;--text3:#56526a;--white:#f5f2ff;--accent:#5cb8e0;--accent-dim:rgba(92,184,224,.06);}
+:root{
+  --bg:#111118;--surface:#1c1c26;--surface2:#242430;--surface3:#2c2c3a;
+  --border:rgba(255,255,255,.07);--border2:rgba(255,255,255,.12);
+  --text:#e8e4f0;--text2:#9490a8;--text3:#56526a;--white:#f5f2ff;
+  --masc:#5cb8e0;  --masc-dim:rgba(92,184,224,.12);  --masc-mid:rgba(92,184,224,.22);
+  --fases:#7b8fe8; --fases-dim:rgba(123,143,232,.12); --fases-mid:rgba(123,143,232,.22);
+  --cf:#e06e8c;    --cf-dim:rgba(224,110,140,.12);    --cf-mid:rgba(224,110,140,.22);
+  --princ:#d4a843; --princ-dim:rgba(212,168,67,.12);  --princ-mid:rgba(212,168,67,.22);
+  --tempo:#5cc98a; --tempo-dim:rgba(92,201,138,.12);  --tempo-mid:rgba(92,201,138,.22);
+}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-weight:300;min-height:100vh}
-body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse 70% 40% at 10% 0%,var(--accent-dim) 0%,transparent 55%)}
-.wrap{position:relative;z-index:10;max-width:1100px;margin:0 auto;padding:3rem 2rem}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse 70% 40% at 10% 0%,rgba(92,184,224,.03) 0%,transparent 55%),
+             radial-gradient(ellipse 55% 35% at 90% 100%,rgba(92,201,138,.025) 0%,transparent 55%)}
+.hdr{position:relative;z-index:10;padding:3rem 2rem 0;max-width:1100px;margin:0 auto}
 .back{display:inline-flex;align-items:center;gap:.45rem;font-family:'Outfit',sans-serif;font-size:.75rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);text-decoration:none;margin-bottom:1.5rem;padding:.38rem 1rem;border-radius:100px;border:1px solid var(--border);background:var(--surface);transition:all .2s}
-.back:hover{color:var(--text);border-color:var(--border2);background:var(--surface2)}.back:focus-visible{outline:2px solid var(--gold, #d4a843);outline-offset:2px}
+.back:hover{color:var(--text);border-color:var(--border2);background:var(--surface2)}
 .ey{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--text3);margin-bottom:.9rem}
-.htitle{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,6.5vw,4.6rem);font-weight:700;color:var(--white);line-height:.95;letter-spacing:-.02em;margin-bottom:.75rem}
+.htitle{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,6.5vw,4.6rem);font-weight:700;color:var(--white);line-height:.95;letter-spacing:-.02em}
 .htitle em{font-style:italic;color:var(--text2);font-weight:400}
-.disc-pill{display:inline-flex;align-items:center;gap:.38rem;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;padding:.25rem .65rem;border-radius:100px;margin-top:1.1rem;background:rgba(92,184,224,.1);color:var(--accent);border:1px solid rgba(92,184,224,.22)}
-.disc-pill .dot{width:4px;height:4px;border-radius:50%;background:currentColor}
-.wip{margin-top:3rem;padding:3.5rem 2.5rem;background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:0 2px 12px rgba(0,0,0,.25);text-align:center}
-.wip-icon{font-size:0;width:48px;height:48px;margin:0 auto 1.75rem;border-radius:12px;background:var(--surface2);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:5px}.wip-icon::before,.wip-icon::after{content:"";display:block;border-radius:2px;background:var(--accent);opacity:.55}.wip-icon::before{width:20px;height:2px}.wip-icon::after{width:13px;height:2px}
-.wip-title{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--white);margin-bottom:.65rem;letter-spacing:-.02em;margin-bottom:.75rem}
-.wip-text{font-family:'Outfit',sans-serif;font-size:.88rem;color:var(--text2);letter-spacing:.07em;line-height:1.85}
-.accent-line{width:48px;height:2px;background:var(--accent);margin:1.1rem auto 0;border-radius:2px;opacity:.5}
-.topics{display:flex;gap:.4rem;flex-wrap:wrap;justify-content:center;margin-top:1.5rem}
-.topic{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.04em;background:var(--surface2);border:1px solid var(--border);color:var(--text2);padding:.18rem .5rem;border-radius:100px}
-.ft{max-width:1100px;margin:4rem auto 0;padding:1.5rem 2rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.85rem;color:var(--text3)}
-.ft a{color:var(--text2);text-decoration:none}.ft a:hover{color:var(--white)}.ft a:focus-visible{outline:2px solid currentColor;outline-offset:3px}
-@media(max-width:600px){.wrap,.ft{padding-left:1rem;padding-right:1rem}}
-
-/* ── LIGHT MODE ── */
+.hsub{margin-top:1.1rem;font-size:.82rem;color:var(--text2);font-family:'JetBrains Mono',monospace;letter-spacing:.04em}
+.banca-pill{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.2rem;padding:.42rem .95rem;background:var(--princ-dim);border:1px solid rgba(212,168,67,.28);border-radius:100px;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.07em;color:var(--princ);text-transform:uppercase}
+.banca-pill .p{width:5px;height:5px;border-radius:50%;background:var(--princ);animation:pu 2s infinite}
+@keyframes pu{0%,100%{opacity:1}50%{opacity:.35}}
+.pw{display:flex;align-items:center;gap:1rem;margin-top:1.6rem;padding:.85rem 1.2rem;background:var(--surface);border:1px solid var(--border);border-radius:10px}
+.pl{font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);white-space:nowrap}
+.pt{flex:1;height:4px;background:var(--border);border-radius:10px;overflow:hidden}
+.pf{height:100%;background:linear-gradient(90deg,var(--masc),var(--fases),var(--princ),var(--tempo));width:0%;transition:width .5s cubic-bezier(.4,0,.2,1);border-radius:10px}
+.pc{font-size:.65rem;font-weight:600;color:var(--text2);white-space:nowrap}
+.sw{margin-top:.85rem;position:relative}
+.si{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:100px;padding:.68rem 1rem .68rem 2.5rem;color:var(--text);font-family:'Outfit',sans-serif;font-size:.85rem;outline:none;transition:border-color .2s;min-height:44px}
+.si::placeholder{color:var(--text3)}.si:focus{border-color:var(--border2)}
+.sic{position:absolute;left:.85rem;top:50%;transform:translateY(-50%);color:var(--text3);font-size:.88rem;pointer-events:none}
+.scc{position:absolute;right:.9rem;top:50%;transform:translateY(-50%);font-family:'JetBrains Mono',monospace;font-size:.56rem;color:var(--text3)}
+mark{background:rgba(212,168,67,.28);color:var(--white);border-radius:2px;padding:0 2px}
+.mnav{display:flex;gap:.4rem;flex-wrap:wrap;margin:1.9rem auto 0;max-width:1100px;padding:0 2rem;position:relative;z-index:10}
+.nb{display:flex;align-items:center;gap:.5rem;padding:.5rem .95rem;border:1px solid var(--border);border-radius:100px;background:var(--surface);color:var(--text2);font-family:'Outfit',sans-serif;font-size:.75rem;font-weight:500;cursor:pointer;transition:all .2s;min-height:36px}
+.nb:hover{border-color:var(--border2);color:var(--text)}
+.nb .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.nb[data-m=masc].d,.nb[data-m=masc] .d{background:var(--masc)}
+.nb[data-m=fases] .d{background:var(--fases)}
+.nb[data-m=cf] .d{background:var(--cf)}
+.nb[data-m=princ] .d{background:var(--princ)}
+.nb[data-m=tempo] .d{background:var(--tempo)}
+.nb[data-m=quiz] .d{background:var(--white)}
+.nb.active{color:var(--white)}
+.nb[data-m=masc].active{border-color:var(--masc);background:var(--masc-dim)}
+.nb[data-m=fases].active{border-color:var(--fases);background:var(--fases-dim)}
+.nb[data-m=cf].active{border-color:var(--cf);background:var(--cf-dim)}
+.nb[data-m=princ].active{border-color:var(--princ);background:var(--princ-dim)}
+.nb[data-m=tempo].active{border-color:var(--tempo);background:var(--tempo-dim)}
+.nb[data-m=quiz].active{border-color:rgba(255,255,255,.28);background:rgba(255,255,255,.04)}
+.nb:focus-visible{outline:2px solid var(--princ);outline-offset:2px}
+.main{position:relative;z-index:5;max-width:1100px;margin:1.8rem auto 5rem;padding:0 2rem}
+.mod{display:none;animation:fu .3s ease both}.mod.active{display:block}
+@keyframes fu{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.mhd{display:flex;align-items:flex-start;gap:1.4rem;padding:1.75rem 2rem;border-radius:14px 14px 0 0;border:1px solid var(--border);border-bottom:none;box-shadow:0 4px 20px rgba(0,0,0,.25)}
+.mhd[data-c=masc]{background:var(--masc-dim);border-color:rgba(92,184,224,.28)}
+.mhd[data-c=fases]{background:var(--fases-dim);border-color:rgba(123,143,232,.28)}
+.mhd[data-c=cf]{background:var(--cf-dim);border-color:rgba(224,110,140,.28)}
+.mhd[data-c=princ]{background:var(--princ-dim);border-color:rgba(212,168,67,.28)}
+.mhd[data-c=tempo]{background:var(--tempo-dim);border-color:rgba(92,201,138,.28)}
+.mi{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:700;font-family:'Cormorant Garamond',serif;flex-shrink:0}
+.mi[data-c=masc]{background:var(--masc-mid);color:var(--masc)}
+.mi[data-c=fases]{background:var(--fases-mid);color:var(--fases)}
+.mi[data-c=cf]{background:var(--cf-mid);color:var(--cf)}
+.mi[data-c=princ]{background:var(--princ-mid);color:var(--princ)}
+.mi[data-c=tempo]{background:var(--tempo-mid);color:var(--tempo)}
+.mnum{font-family:'Outfit',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);margin-bottom:.25rem}
+.mtitle{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--white);line-height:1}
+.mdesc{margin-top:.42rem;font-size:.82rem;color:var(--text2);line-height:1.62}
+.atags{display:flex;gap:.3rem;flex-wrap:wrap;margin-top:.65rem}
+.at{font-family:'JetBrains Mono',monospace;font-size:.56rem;padding:.16rem .5rem;border-radius:100px;letter-spacing:.04em}
+.at-masc{background:var(--masc-mid);color:var(--masc)}.at-fases{background:var(--fases-mid);color:var(--fases)}
+.at-cf{background:var(--cf-mid);color:var(--cf)}.at-princ{background:var(--princ-mid);color:var(--princ)}.at-tempo{background:var(--tempo-mid);color:var(--tempo)}
+.mbody{border:1px solid var(--border);border-top:none;border-radius:0 0 14px 14px;background:var(--surface);overflow:hidden}
+.stabs{display:flex;border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
+.stabs::-webkit-scrollbar{display:none}
+.stab{padding:.78rem 1.15rem;font-family:'Outfit',sans-serif;font-size:.78rem;font-weight:500;color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;background:none;border-top:none;border-left:none;border-right:none;margin-bottom:-1px;min-height:44px}
+.stab:hover{color:var(--text)}.stab.active{color:var(--white)}
+.stab.active[data-c=masc]{border-bottom-color:var(--masc)}.stab.active[data-c=fases]{border-bottom-color:var(--fases)}
+.stab.active[data-c=cf]{border-bottom-color:var(--cf)}.stab.active[data-c=princ]{border-bottom-color:var(--princ)}.stab.active[data-c=tempo]{border-bottom-color:var(--tempo)}
+.sp{display:none;padding:2rem 2.25rem;animation:fu .22s ease}.sp.active{display:block}
+.sl{font-family:'Outfit',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);margin-bottom:.58rem;margin-top:1.55rem;display:flex;align-items:center;gap:.5rem}
+.sl::after{content:'';flex:1;height:1px;background:var(--border)}.sl:first-child{margin-top:0}
+p{font-size:.9375rem;color:#b5b0be;line-height:1.88}p+p{margin-top:.65rem}
+.hl{color:var(--white);font-weight:500}
+.art{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--princ);font-weight:500}
+ul,ol{padding-left:1.25rem;margin-top:.48rem}
+li{font-size:.9rem;color:#aeaab8;line-height:1.82;margin-bottom:.2rem}li strong{color:var(--white);font-weight:500}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:.88rem;margin-top:.68rem}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:.72rem;margin-top:.68rem}
+@media(max-width:640px){.g2,.g3{grid-template-columns:1fr}}
+.card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:1rem;box-shadow:0 2px 8px rgba(0,0,0,.18);transition:border-color .2s,box-shadow .2s}.card:hover{border-color:var(--border2);box-shadow:0 4px 16px rgba(0,0,0,.28)}
+.ct{font-family:'Outfit',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.55rem;display:flex;align-items:center;gap:.4rem}
+.ct::before{content:'';width:3px;height:11px;border-radius:2px;flex-shrink:0}
+.cm .ct{color:var(--masc)}.cm .ct::before{background:var(--masc)}
+.cf2 .ct{color:var(--fases)}.cf2 .ct::before{background:var(--fases)}
+.cc .ct{color:var(--cf)}.cc .ct::before{background:var(--cf)}
+.cp .ct{color:var(--princ)}.cp .ct::before{background:var(--princ)}
+.ct2 .ct{color:var(--tempo)}.ct2 .ct::before{background:var(--tempo)}
+.comp{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-top:.68rem}
+@media(max-width:520px){.comp{grid-template-columns:1fr}}
+.cc2{padding:1rem}.cc2:first-child{border-right:1px solid var(--border)}
+.cctitle{font-family:'Outfit',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.62rem;padding-bottom:.42rem;border-bottom:1px solid var(--border)}
+.co{display:flex;gap:.75rem;padding:.88rem 1rem;border-radius:10px;margin-top:.82rem;font-size:.83rem;line-height:1.72;color:#aeaab8}
+.co-ico{font-size:.92rem;flex-shrink:0;margin-top:.05rem}.co strong{font-weight:500}
+.cw{background:var(--princ-dim);border:1px solid rgba(212,168,67,.2)}.cw strong{color:var(--princ)}
+.ci{background:var(--masc-dim);border:1px solid rgba(92,184,224,.2)}.ci strong{color:var(--masc)}
+.ce{background:var(--cf-dim);border:1px solid rgba(224,110,140,.2)}.ce strong{color:var(--cf)}
+.cs{background:var(--tempo-dim);border:1px solid rgba(92,201,138,.2)}.cs strong{color:var(--tempo)}
+.cfi{background:var(--fases-dim);border:1px solid rgba(123,143,232,.2)}.cfi strong{color:var(--fases)}
+.tw{overflow-x:auto;margin-top:.68rem;border-radius:10px;border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:.82rem}
+th{font-family:'Outfit',sans-serif;font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);padding:.68rem 1rem;background:var(--surface2);border-bottom:1px solid var(--border);text-align:left;white-space:nowrap}
+td{padding:.62rem 1rem;border-bottom:1px solid var(--border);color:#aeaab8;vertical-align:top;line-height:1.6}
+tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.012)}td strong{color:var(--white);font-weight:500}
+.xi{border:1px solid var(--border);border-radius:10px;margin-top:.52rem;overflow:hidden;transition:border-color .2s}.xi:hover{border-color:var(--border2)}
+.xt{display:flex;align-items:center;justify-content:space-between;padding:.82rem 1rem;cursor:pointer;background:var(--surface2);user-select:none;border-radius:10px}
+.xl{font-size:.85rem;color:var(--text);display:flex;align-items:center;gap:.55rem}
+.xa{font-size:.6rem;color:var(--text3);transition:transform .22s}.xi.open .xa{transform:rotate(180deg)}
+.xc{max-height:0;overflow:hidden;transition:max-height .32s cubic-bezier(.4,0,.2,1)}
+.xin{padding:1rem;border-top:1px solid var(--border);font-size:.84rem;color:#aeaab8;line-height:1.78}
+.xin ul{padding-left:1rem}.xin li{font-size:.82rem;margin-bottom:.28rem}
+hr.dv{border:none;border-top:1px solid var(--border);margin:1.35rem 0}
+.qwrap{padding:1.5rem 2rem 2rem}
+.qtop{display:flex;align-items:center;justify-content:space-between;margin-bottom:.9rem}
+.qtitle{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:700;color:var(--white)}
+.sbadge{font-family:'Outfit',sans-serif;font-size:.65rem;font-weight:500;padding:.26rem .72rem;border-radius:100px;background:var(--surface2);border:1px solid var(--border);color:var(--text2)}
+.qdots{display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:1.2rem}
+.qdot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.22);transition:all .2s}
+.qdot.cur{background:rgba(255,255,255,.55)}.qdot.ok{background:#5cc98a}.qdot.err{background:#e06e8c}
+.qq{display:none;animation:fu .26s ease}.qq.active{display:block}
+.qnum{font-family:'JetBrains Mono',monospace;font-size:.56rem;color:var(--text3);letter-spacing:.1em;margin-bottom:.6rem}
+.bflag{display:inline-flex;align-items:center;gap:.32rem;font-family:'JetBrains Mono',monospace;font-size:.56rem;padding:.13rem .5rem;border-radius:3px;background:var(--princ-dim);border:1px solid rgba(212,168,67,.24);color:var(--princ);margin-left:.45rem;vertical-align:middle;letter-spacing:.04em}
+.bflag::before{content:'●';font-size:.45rem}
+.qtext{font-size:.96rem;color:var(--white);line-height:1.68;margin-bottom:1.15rem;font-weight:400}
+.qopts{display:flex;flex-direction:column;gap:.42rem}
+.qopt{display:flex;align-items:flex-start;gap:.65rem;padding:.82rem .92rem;border:1px solid var(--border);border-radius:10px;cursor:pointer;transition:all .2s;background:var(--surface2);text-align:left;width:100%}
+.qopt:hover:not(:disabled){border-color:var(--border2)}
+.ql{font-family:'JetBrains Mono',monospace;font-size:.6rem;width:20px;height:20px;border-radius:6px;background:var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--text2);transition:all .2s}
+.qt{font-size:.84rem;color:#aeaab8;line-height:1.6}
+.qopt.correct{border-color:var(--tempo);background:var(--tempo-dim)}.qopt.correct .ql{background:var(--tempo);color:#000}.qopt.correct .qt{color:var(--white)}
+.qopt.wrong{border-color:var(--cf);background:var(--cf-dim)}.qopt.wrong .ql{background:var(--cf);color:#fff}
+.qopt.disabled{cursor:default;opacity:.54}.qopt.disabled.correct{opacity:1}
+.qfb{display:none;margin-top:.88rem;padding:.88rem 1rem;border-radius:10px;font-size:.83rem;line-height:1.68;color:#aeaab8}
+.qfb.show{display:block;animation:fu .18s ease}
+.qfb.ok{background:var(--tempo-dim);border:1px solid rgba(92,201,138,.26)}.qfb.ok strong{color:var(--tempo)}
+.qfb.ng{background:var(--cf-dim);border:1px solid rgba(224,110,140,.26)}.qfb.ng strong{color:var(--cf)}
+.qnav{display:flex;align-items:center;justify-content:space-between;margin-top:1.35rem}
+.qbn{padding:.55rem 1.25rem;border-radius:100px;font-family:'Outfit',sans-serif;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .2s;border:none}
+.qbn-next{background:var(--tempo);color:#fff;display:none}.qbn-next:hover{opacity:.88}.qbn-next.show{display:block}
+.qbn-rs{background:var(--surface2);border:1px solid var(--border);color:var(--text2)}.qbn-rs:hover{border-color:var(--border2);color:var(--text)}
+.qres{display:none;text-align:center;padding:2.5rem 0}.qres.show{display:block;animation:fu .28s ease}
+.rscore{font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:700;color:var(--white);line-height:1}
+.rlabel{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--text3);letter-spacing:.15em;text-transform:uppercase;margin-top:.4rem}
+.rmsg{font-size:.9rem;color:var(--text2);margin:1rem 0 1.5rem}
+.ft{max-width:1100px;margin:0 auto;padding:1.5rem 2rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;font-family:'Outfit',sans-serif;font-size:.72rem;color:var(--text3);position:relative;z-index:5;flex-wrap:wrap;gap:.75rem}
+.ft a{color:var(--text2);text-decoration:none;font-weight:500;transition:color .2s}.ft a:hover{color:var(--white)}
+@media(max-width:600px){.hdr,.mnav,.main{padding-left:1rem;padding-right:1rem}.sp{padding:1.2rem 1rem}.qwrap{padding:1rem 1rem 1.5rem}.mhd{flex-direction:column;gap:.85rem;padding:1.2rem 1rem}}
+.nb:focus-visible,.stab:focus-visible{outline:2px solid var(--princ);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){.mod,.sp{animation:none}@keyframes pu{0%,100%{opacity:1}}}
 [data-theme=light]{
   --bg:#f0eef7;--surface:#ffffff;--surface2:#f4f2fb;--surface3:#eceaf5;
   --border:rgba(0,0,0,.07);--border2:rgba(0,0,0,.14);
   --text:#1a1828;--text2:#6a6480;--text3:#9a94b0;--white:#0a0818;
-  --civil:#c04070;--civil-dim:rgba(192,64,112,.1);--civil-mid:rgba(192,64,112,.18);
-  --const:#5060c8;--const-dim:rgba(80,96,200,.1);--const-mid:rgba(80,96,200,.18);
-  --proc:#2088b0;--proc-dim:rgba(32,136,176,.1);--proc-mid:rgba(32,136,176,.18);
-  --penal:#b85030;--penal-dim:rgba(184,80,48,.1);--penal-mid:rgba(184,80,48,.18);
-  --eca:#289050;--eca-dim:rgba(40,144,80,.1);--eca-mid:rgba(40,144,80,.18);
-  --gold:#987020;--gold-dim:rgba(152,112,32,.1)}
-[data-theme=light] body::before{opacity:.18}
-[data-theme=light] .disc-pill{background:transparent}
-
-/* ── THEME TOGGLE ── */
-.theme-toggle{position:fixed;bottom:1.75rem;right:1.75rem;z-index:100;width:40px;height:40px;border-radius:50%;background:var(--surface2);border:1px solid var(--border2);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text2);transition:background .2s,border-color .2s,color .2s,box-shadow .2s}
-.theme-toggle:hover{background:var(--surface);color:var(--text);box-shadow:0 4px 20px rgba(0,0,0,.18)}
-.theme-toggle:focus-visible{outline:2px solid var(--gold,#d4a843);outline-offset:3px}
+  --masc:#2088b0;--masc-dim:rgba(32,136,176,.1);--masc-mid:rgba(32,136,176,.18);
+  --fases:#4858c0;--fases-dim:rgba(72,88,192,.1);--fases-mid:rgba(72,88,192,.18);
+  --cf:#b84268;--cf-dim:rgba(184,66,104,.1);--cf-mid:rgba(184,66,104,.18);
+  --princ:#906820;--princ-dim:rgba(144,104,32,.1);--princ-mid:rgba(144,104,32,.18);
+  --tempo:#289050;--tempo-dim:rgba(40,144,80,.1);--tempo-mid:rgba(40,144,80,.18)}
+[data-theme=light] body::before{opacity:.12}
+[data-theme=light] .qdot{background:rgba(0,0,0,.18)}
+[data-theme=light] .qdot.cur{background:rgba(0,0,0,.4)}
+[data-theme=light] .qdot.ok{background:#289050}[data-theme=light] .qdot.err{background:#b84268}
+[data-theme=light] p{color:#3a3632}[data-theme=light] li{color:#3a3632}[data-theme=light] .co{color:#3a3632}
+.theme-toggle{position:fixed;bottom:1.75rem;right:1.75rem;z-index:100;width:40px;height:40px;border-radius:50%;background:var(--surface);border:1px solid var(--border2);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text2);transition:all .2s;box-shadow:0 2px 12px rgba(0,0,0,.3)}
+.theme-toggle:hover{color:var(--text);box-shadow:0 4px 20px rgba(0,0,0,.4)}
+.theme-toggle:focus-visible{outline:2px solid var(--princ);outline-offset:3px}
 .theme-toggle svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;display:block}
 .icon-sun{display:none}.icon-moon{display:block}
-[data-theme=light] .icon-sun{display:block}[data-theme=light] .icon-moon{display:none}</style>
+[data-theme=light] .icon-sun{display:block}[data-theme=light] .icon-moon{display:none}
+</style>
 </head>
 <body>
-<div class="wrap">
+
+<header class="hdr">
   <a class="back" href="../../index.html">&#8592; Central de Resumos</a>
-  <div class="ey">Dir. Processual Civil &mdash; Prova 1 &middot; UFN 2026/1</div>
-  <h1 class="htitle">Princípios e Normas<br><em>Fundamentais do CPC</em></h1>
-  <div class="disc-pill"><span class="dot"></span>Dir. Processual Civil</div>
-  <div class="wip">
-    <div class="wip-icon" aria-hidden="true"></div>
-    <div class="wip-title">Resumo em preparação</div>
-    <div class="wip-text">O conteúdo deste resumo será adicionado em breve.<br>Volte quando o material estiver disponível.</div>
-    <div class="accent-line"></div>
-    <div class="topics">
-      <span class="topic">Arts. 1–12 CPC</span>
-      <span class="topic">Contraditório · art. 9º</span>
-      <span class="topic">Boa-fé processual</span>
-      <span class="topic">Cooperação · art. 6º</span>
-      <span class="topic">Razoável duração</span>
-      <span class="topic">Mediação e Conciliação</span>
-      <span class="topic">Instrumentalismo</span>
+  <div class="ey">Dir. Processual Civil &middot; UFN &middot; 2026/1</div>
+  <h1 class="htitle">Princípios e Normas<br><em>Fundamentais</em></h1>
+  <div class="hsub">Modos de Solução &middot; Fases Evolutivas &middot; CF/88 &middot; Princípios &middot; Lei no Tempo</div>
+  <div class="banca-pill"><span class="p"></span>Quiz no estilo da Banca UFN</div>
+  <div class="pw">
+    <span class="pl">Progresso quiz</span>
+    <div class="pt"><div class="pf" id="PF"></div></div>
+    <span class="pc" id="PC">0 / 20</span>
+  </div>
+  <div class="sw" role="search">
+    <span class="sic" aria-hidden="true">⌕</span>
+    <input class="si" type="text" placeholder="Buscar conceito, princípio, artigo..." aria-label="Buscar" id="SI" autocomplete="off">
+    <span class="scc" id="SC"></span>
+  </div>
+</header>
+
+<nav class="mnav">
+  <button class="nb active" data-m="masc"  onclick="swM('masc',this)"><span class="d"></span>Modos de Solução</button>
+  <button class="nb"        data-m="fases" onclick="swM('fases',this)"><span class="d"></span>Fases Evolutivas</button>
+  <button class="nb"        data-m="cf"    onclick="swM('cf',this)"><span class="d"></span>Processo e CF/88</button>
+  <button class="nb"        data-m="princ" onclick="swM('princ',this)"><span class="d"></span>Princípios</button>
+  <button class="nb"        data-m="tempo" onclick="swM('tempo',this)"><span class="d"></span>Lei no Tempo</button>
+  <button class="nb"        data-m="quiz"  onclick="swM('quiz',this)" style="margin-left:auto"><span class="d"></span>Quiz UFN</button>
+</nav>
+
+<main class="main">
+
+<!-- ══ BLOCO 1 — MODOS DE SOLUÇÃO ══ -->
+<div class="mod active" id="mod-masc">
+  <div class="mhd" data-c="masc">
+    <div class="mi" data-c="masc">01</div>
+    <div>
+      <div class="mnum">Módulo 01</div>
+      <div class="mtitle">Modos de Solução de Conflitos</div>
+      <div class="mdesc">Autonomia (autotutela e autocomposição) e heteronomia (jurisdição e arbitragem). MASC: mediação, conciliação, negociação e arbitragem.</div>
+      <div class="atags">
+        <span class="at at-masc">Art. 3º CPC</span>
+        <span class="at at-masc">Lei 13.140/15</span>
+        <span class="at at-masc">Lei 9.307/96</span>
+        <span class="at at-masc">Arts. 165–175 CPC</span>
+      </div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="masc" onclick="swS(this,'masc-aut')">Autonomia × Heteronomia</button>
+      <button class="stab"        data-c="masc" onclick="swS(this,'masc-masc')">MASC</button>
+      <button class="stab"        data-c="masc" onclick="swS(this,'masc-med')">Mediação × Conciliação</button>
+      <button class="stab"        data-c="masc" onclick="swS(this,'masc-prova')">Para a Prova</button>
+    </div>
+    <div class="sp active" id="masc-aut">
+      <div class="sl">Autonomia — as próprias partes resolvem</div>
+      <div class="g2">
+        <div class="card cm"><div class="ct">Autotutela (autodefesa)</div>
+          <p style="font-size:.83rem;color:#aeaab8">A parte resolve o conflito com suas <strong>próprias forças</strong>, sem intervenção de terceiro. <strong>Regra: vedada</strong> — <span class="art">art. 345 CP</span> (exercício arbitrário das próprias razões).</p>
+          <p style="font-size:.83rem;color:#aeaab8;margin-top:.5rem"><strong>Exceções legais:</strong> legítima defesa <span class="art">art. 25 CP</span>, desforço possessório imediato <span class="art">art. 1.210 §1º CC</span>, direito de retenção, corte de raízes <span class="art">art. 1.283 CC</span>.</p>
+        </div>
+        <div class="card cm"><div class="ct">Autocomposição</div>
+          <p style="font-size:.83rem;color:#aeaab8">As próprias partes chegam a um acordo. Pode ser <strong>voluntária</strong> (sem interferência) ou <strong>estimulada</strong> (com mediador/conciliador).</p>
+          <p style="font-size:.83rem;color:#aeaab8;margin-top:.5rem"><strong>Formas:</strong> renúncia (autor), reconhecimento do pedido (réu), transação (concessões mútuas — <span class="art">art. 840 CC</span>).</p>
+        </div>
+      </div>
+      <div class="sl">Heteronomia — terceiro decide</div>
+      <div class="g2">
+        <div class="card cm"><div class="ct">Jurisdição estatal</div>
+          <p style="font-size:.83rem;color:#aeaab8">O <strong>Estado</strong>, por meio do Poder Judiciário, substitui a vontade das partes com força de coisa julgada.</p>
+        </div>
+        <div class="card cm"><div class="ct">Arbitragem</div>
+          <p style="font-size:.83rem;color:#aeaab8">Terceiro privado (árbitro) decide. <span class="art">Lei 9.307/96</span>. Sentença arbitral = <strong>título executivo judicial</strong> <span class="art">art. 515, VII CPC</span>. O Judiciário não revisa o mérito.</p>
+        </div>
+      </div>
+      <div class="co cw"><span class="co-ico">⚠</span><div><strong>Autotutela ≠ Autocomposição:</strong> autotutela é unilateral e imposta pela força (vedada em regra). Autocomposição é bilateral e voluntária (incentivada pelo CPC — <span class="art">art. 3º §§2º e 3º</span>).</div></div>
+    </div>
+    <div class="sp" id="masc-masc">
+      <div class="sl">MASC — Meios Adequados de Solução de Conflitos</div>
+      <p>O <span class="art">art. 3º §3º CPC</span> impõe ao juiz, advogados, defensores e MP que estimulem a autocomposição. Base: <span class="art">arts. 165–175 CPC</span>, <span class="art">Lei 13.140/2015</span> (mediação), <span class="art">Lei 9.307/96</span> (arbitragem).</p>
+      <div class="tw"><table>
+        <thead><tr><th>Meio</th><th>Terceiro</th><th>Papel do terceiro</th><th>Resultado</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Negociação</strong></td><td>Nenhum</td><td>Partes negociam diretamente</td><td>Acordo ou não</td></tr>
+          <tr><td><strong>Mediação</strong></td><td>Mediador</td><td>Facilita o diálogo — NÃO sugere soluções</td><td>Partes constroem o acordo</td></tr>
+          <tr><td><strong>Conciliação</strong></td><td>Conciliador</td><td>PODE propor soluções e sugerir acordos</td><td>Acordo facilitado</td></tr>
+          <tr><td><strong>Arbitragem</strong></td><td>Árbitro</td><td>Decide (juiz privado)</td><td>Sentença arbitral vinculante</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <div class="sp" id="masc-med">
+      <div class="sl">Distinção — Mediação × Conciliação</div>
+      <div class="comp">
+        <div class="cc2">
+          <div class="cctitle" style="color:var(--masc)">Mediação</div>
+          <ul>
+            <li>Terceiro <strong>facilita</strong> o diálogo</li>
+            <li><strong>Não sugere</strong> soluções nem propõe acordos</li>
+            <li>Adequada para <strong>vínculo continuado</strong>: vizinhos, familiares, sócios</li>
+            <li>Foco: restabelecer a comunicação</li>
+            <li><span class="art">Lei 13.140/2015</span>; <span class="art">arts. 165 e 170 CPC</span></li>
+          </ul>
+        </div>
+        <div class="cc2">
+          <div class="cctitle" style="color:var(--masc)">Conciliação</div>
+          <ul>
+            <li>Terceiro <strong>propõe soluções</strong> ativamente</li>
+            <li>Adequada para <strong>relações esporádicas</strong> sem vínculo prévio</li>
+            <li>Foco: chegar rapidamente ao acordo</li>
+            <li>Ex: acidente de trânsito, relação de consumo</li>
+            <li><span class="art">Arts. 165–167 CPC</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="co cw"><span class="co-ico">⚠</span><div><strong>Ponto mais cobrado:</strong> mediador NUNCA propõe — só facilita. Conciliador PODE propor. Mediação = vínculo continuado. Conciliação = sem vínculo prévio. Cobrado frequentemente de forma invertida.</div></div>
+    </div>
+    <div class="sp" id="masc-prova">
+      <div class="xi"><div class="xt" onclick="xp(this)"><span class="xl">A arbitragem é autocomposição ou heterocomposição?</span><span class="xa">▾</span></div><div class="xc"><div class="xin"><strong>Heterocomposição.</strong> O árbitro (terceiro) decide e impõe a solução — como um juiz privado. Não há acordo voluntário entre as partes. O fato de as partes escolherem o árbitro não transforma a arbitragem em autocomposição.</div></div></div>
+      <div class="xi"><div class="xt" onclick="xp(this)"><span class="xl">Qual a diferença entre autocomposição voluntária e estimulada?</span><span class="xa">▾</span></div><div class="xc"><div class="xin"><strong>Voluntária:</strong> as próprias partes chegam ao acordo por iniciativa própria, sem qualquer terceiro.<br><strong>Estimulada:</strong> há mediador ou conciliador facilitando ou propondo, mas a decisão final é das partes — o acordo ainda é voluntário, não há imposição.</div></div></div>
     </div>
   </div>
 </div>
+
+<!-- ══ BLOCO 2 — FASES ══ -->
+<div class="mod" id="mod-fases">
+  <div class="mhd" data-c="fases">
+    <div class="mi" data-c="fases">02</div>
+    <div>
+      <div class="mnum">Módulo 02</div>
+      <div class="mtitle">Dir. Material × Processual + Fases</div>
+      <div class="mdesc">Distinção entre direito material e processual. Leis mistas (CDC, CLT). As quatro fases evolutivas do processo civil.</div>
+      <div class="atags">
+        <span class="at at-fases">Bülow 1868</span>
+        <span class="at at-fases">CDC · CLT</span>
+        <span class="at at-fases">Art. 1º CPC</span>
+        <span class="at at-fases">4 Fases</span>
+      </div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="fases" onclick="swS(this,'fases-mat')">Material × Processual</button>
+      <button class="stab"        data-c="fases" onclick="swS(this,'fases-faz')">As 4 Fases</button>
+      <button class="stab"        data-c="fases" onclick="swS(this,'fases-prova')">Para a Prova</button>
+    </div>
+    <div class="sp active" id="fases-mat">
+      <div class="sl">Direito Material × Processual</div>
+      <div class="g2">
+        <div class="card cf2"><div class="ct">Direito Material</div>
+          <p style="font-size:.83rem;color:#aeaab8">Regula as relações jurídicas <strong>substantivas</strong>: define quais direitos e obrigações existem (quem tem o quê e deve o quê). Ex: CC, CP, CLT — parte material.</p>
+        </div>
+        <div class="card cf2"><div class="ct">Direito Processual</div>
+          <p style="font-size:.83rem;color:#aeaab8">Regula o <strong>exercício da jurisdição</strong>: instrumento para realização dos direitos materiais. Define como se obtém a tutela jurisdicional. Ex: CPC, CPP, CLT — parte processual.</p>
+        </div>
+      </div>
+      <div class="sl">Leis Mistas</div>
+      <div class="g2">
+        <div class="card cf2"><div class="ct">CDC — Lei 8.078/90</div>
+          <ul>
+            <li><strong>Material:</strong> direitos do consumidor, práticas abusivas</li>
+            <li><strong>Processual:</strong> <span class="art">art. 6º VIII</span> — inversão do ônus da prova; <span class="art">art. 101 I</span> — foro do domicílio do consumidor</li>
+          </ul>
+        </div>
+        <div class="card cf2"><div class="ct">CLT — Dec.-Lei 5.452/43</div>
+          <ul>
+            <li><strong>Material:</strong> contrato de trabalho, férias, FGTS, verbas</li>
+            <li><strong>Processual:</strong> processo do trabalho, prazos, recursos</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="sp" id="fases-faz">
+      <div class="sl">As Quatro Fases Evolutivas</div>
+      <div class="tw"><table>
+        <thead><tr><th>Fase</th><th>Período</th><th>Característica central</th><th>Marco</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1. Sincretismo</strong></td><td>Até séc. XIX</td><td>Processo confundido com o direito material; sem autonomia científica</td><td>Direito romano; glosadores</td></tr>
+          <tr><td><strong>2. Autonomista</strong></td><td>1868 em diante</td><td>Processo como relação jurídica autônoma; ação abstrata; pressupostos processuais</td><td>Von Bülow (1868); Chiovenda</td></tr>
+          <tr><td><strong>3. Instrumental</strong></td><td>Séc. XX</td><td>Processo como instrumento — não fim em si; efetividade; acesso à justiça</td><td>Dinamarco (1987)</td></tr>
+          <tr><td><strong>4. Neoconstitucional</strong></td><td>CPC/2015</td><td>Constitucionalização do processo; arts. 1–12 CPC como normas fundamentais</td><td>Art. 1º CPC; Marinoni</td></tr>
+        </tbody>
+      </table></div>
+      <div class="co cw"><span class="co-ico">⚠</span><div><strong>Art. 1º CPC/2015:</strong> "O processo civil será ordenado, disciplinado e interpretado conforme os valores e as normas fundamentais estabelecidos na Constituição." Símbolo da fase neoconstitucional.</div></div>
+    </div>
+    <div class="sp" id="fases-prova">
+      <div class="xi"><div class="xt" onclick="xp(this)"><span class="xl">Por que a fase instrumental NÃO confunde processo com direito material?</span><span class="xa">▾</span></div><div class="xc"><div class="xin">A instrumental mantém a autonomia conquistada na fase autonomista. O processo é autônomo, mas não é um fim em si — é instrumento a serviço do direito material e da pacificação social. Consequência: instrumentalidade das formas (art. 188 CPC) — se o ato atingiu sua finalidade, não se anula por vício formal.</div></div></div>
+      <div class="xi"><div class="xt" onclick="xp(this)"><span class="xl">O que diferencia a fase neoconstitucional da instrumental?</span><span class="xa">▾</span></div><div class="xc"><div class="xin">A instrumental focava na efetividade. A neoconstitucional vai além: o processo é lido à luz dos direitos fundamentais constitucionais. Toda norma processual deve ser interpretada conforme a CF. O CPC/2015 começa com 12 artigos de normas fundamentais que são os princípios constitucionais transpostos para o processo.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ BLOCO 3 — CF/88 ══ -->
+<div class="mod" id="mod-cf">
+  <div class="mhd" data-c="cf">
+    <div class="mi" data-c="cf">03</div>
+    <div>
+      <div class="mnum">Módulo 03</div>
+      <div class="mtitle">Processo Civil e CF/88</div>
+      <div class="mdesc">Tutela constitucional do processo. Controle difuso e concentrado. Ações constitucionais. Regras × princípios e ponderação.</div>
+      <div class="atags">
+        <span class="at at-cf">Art. 5º XXXV CF</span>
+        <span class="at at-cf">Art. 5º LIV/LV CF</span>
+        <span class="at at-cf">Controle difuso</span>
+        <span class="at at-cf">ADI · ADC · ADPF</span>
+      </div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="cf" onclick="swS(this,'cf-tutela')">Tutela Constitucional</button>
+      <button class="stab"        data-c="cf" onclick="swS(this,'cf-jur')">Jurisdição Constitucional</button>
+      <button class="stab"        data-c="cf" onclick="swS(this,'cf-reg')">Regras × Princípios</button>
+      <button class="stab"        data-c="cf" onclick="swS(this,'cf-prova')">Para a Prova</button>
+    </div>
+    <div class="sp active" id="cf-tutela">
+      <div class="sl">Dispositivos constitucionais do processo</div>
+      <div class="tw"><table>
+        <thead><tr><th>Dispositivo</th><th>Princípio</th><th>Conteúdo essencial</th></tr></thead>
+        <tbody>
+          <tr><td><span class="art">Art. 5º XXXV</span></td><td>Inafastabilidade</td><td>A lei não excluirá da apreciação do Judiciário lesão ou ameaça a direito</td></tr>
+          <tr><td><span class="art">Art. 5º XXXVII</span></td><td>Juiz natural</td><td>Não haverá juízo ou tribunal de exceção</td></tr>
+          <tr><td><span class="art">Art. 5º LIII</span></td><td>Juiz natural</td><td>Ninguém será processado senão pela autoridade competente</td></tr>
+          <tr><td><span class="art">Art. 5º LIV</span></td><td>Devido processo legal</td><td>Ninguém privado da liberdade ou bens sem o devido processo</td></tr>
+          <tr><td><span class="art">Art. 5º LV</span></td><td>Contraditório e ampla defesa</td><td>Litigantes: contraditório e ampla defesa com recursos</td></tr>
+          <tr><td><span class="art">Art. 5º LXXVIII</span></td><td>Duração razoável</td><td>Duração razoável + meios para celeridade — EC 45/2004</td></tr>
+          <tr><td><span class="art">Art. 93 IX</span></td><td>Motivação e publicidade</td><td>Decisões fundamentadas; publicidade como regra</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <div class="sp" id="cf-jur">
+      <div class="sl">Controle de Constitucionalidade</div>
+      <div class="comp">
+        <div class="cc2">
+          <div class="cctitle" style="color:var(--cf)">Controle Difuso</div>
+          <ul>
+            <li>Qualquer <strong>juiz ou tribunal</strong></li>
+            <li>Caso <strong>concreto</strong>, incidental</li>
+            <li>Efeito <strong>inter partes</strong> (regra)</li>
+            <li>Reserva de plenário: <span class="art">art. 97 CF</span></li>
+          </ul>
+        </div>
+        <div class="cc2">
+          <div class="cctitle" style="color:var(--cf)">Controle Concentrado</div>
+          <ul>
+            <li>Exclusivamente o <strong>STF</strong></li>
+            <li>Controle <strong>abstrato</strong></li>
+            <li>Efeito <strong>erga omnes e vinculante</strong></li>
+            <li>ADI · ADC · ADPF · ADO</li>
+          </ul>
+        </div>
+      </div>
+      <div class="sl">Ações Constitucionais</div>
+      <div class="tw"><table>
+        <thead><tr><th>Ação</th><th>Hipótese</th><th>Base</th></tr></thead>
+        <tbody>
+          <tr><td><strong>HC</strong></td><td>Ameaça à liberdade de locomoção</td><td><span class="art">Art. 5º LXVIII</span></td></tr>
+          <tr><td><strong>MS</strong></td><td>Direito líquido e certo — ato de autoridade</td><td><span class="art">Art. 5º LXIX</span></td></tr>
+          <tr><td><strong>MI</strong></td><td>Omissão normativa — exercício de direito</td><td><span class="art">Art. 5º LXXI</span></td></tr>
+          <tr><td><strong>HD</strong></td><td>Conhecer e retificar dados pessoais</td><td><span class="art">Art. 5º LXXII</span></td></tr>
+          <tr><td><strong>AP</strong></td><td>Ato lesivo ao patrimônio público</td><td><span class="art">Art. 5º LXXIII</span></td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <div class="sp" id="cf-reg">
+      <div class="sl">Regras × Princípios</div>
+      <div class="comp">
+        <div class="cc2">
+          <div class="cctitle" style="color:var(--cf)">Regras (Dworkin)</div>
+          <ul>
+            <li>Aplicação <strong>tudo ou nada</strong></li>
+            <li>Subsunção ao fato</li>
+            <li>Conflito: hierarquia, especialidade ou cronologia</li>
+            <li>Ex: prazo de 15 dias — ou aplica ou não</li>
+          </ul>
+        </div>
+        <div class="cc2">
+          <div class="cctitle" style="color:var(--cf)">Princípios (Alexy)</div>
+          <ul>
+            <li><strong>Mandados de otimização</strong> — realizados na maior medida possível</li>
+            <li>Conflito: <strong>ponderação</strong> (proporcionalidade)</li>
+            <li>Proporcionalidade: adequação + necessidade + proporcionalidade em sentido estrito</li>
+          </ul>
+        </div>
+      </div>
+      <div class="co cw"><span class="co-ico">⚠</span><div><strong>Ponderação no processo:</strong> publicidade vs. intimidade → segredo de justiça. Celeridade vs. contraditório → tutela de urgência. O art. 489 §2º CPC exige que o juiz demonstre as razões da ponderação na fundamentação.</div></div>
+    </div>
+    <div class="sp" id="cf-prova">
+      <div class="xi"><div class="xt" onclick="xp(this)"><span class="xl">A criação de varas especializadas viola o juiz natural?</span><span class="xa">▾</span></div><div class="xc"><div class="xin"><strong>Não viola.</strong> O juiz natural proíbe tribunais de exceção (criados pós-fato para caso específico). Varas especializadas são constitucionais: a competência é fixada previamente, de forma abstrata e geral, para toda uma categoria de casos — não há direcionamento para caso ou pessoa específica.</div></div></div>
+      <div class="xi"><div class="xt" onclick="xp(this)"><span class="xl">Controle difuso no STF: há efeito erga omnes?</span><span class="xa">▾</span></div><div class="xc"><div class="xin">Em regra, não — efeito inter partes. Porém, após decisão do STF em controle difuso, o Senado pode suspender a lei (art. 52 X CF), gerando efeito erga omnes. Há também a tendência de abstrativização: decisões do STF em Pleno no controle difuso têm eficácia expansiva pela autoridade do Tribunal.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ BLOCO 4 — PRINCÍPIOS ══ -->
+<div class="mod" id="mod-princ">
+  <div class="mhd" data-c="princ">
+    <div class="mi" data-c="princ">04</div>
+    <div>
+      <div class="mnum">Módulo 04</div>
+      <div class="mtitle">Os 15 Princípios Fundamentais</div>
+      <div class="mdesc">Os 15 princípios fundamentais do processo civil com bases legais (arts. CPC e CF/88).</div>
+      <div class="atags">
+        <span class="at at-princ">Arts. 1–12 CPC</span>
+        <span class="at at-princ">Art. 5º CF</span>
+        <span class="at at-princ">Art. 93 IX CF</span>
+        <span class="at at-princ">15 Princípios</span>
+      </div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="princ" onclick="swS(this,'princ-1')">Princípios 1–7</button>
+      <button class="stab"        data-c="princ" onclick="swS(this,'princ-2')">Princípios 8–15</button>
+      <button class="stab"        data-c="princ" onclick="swS(this,'princ-prova')">Para a Prova</button>
+    </div>
+    <div class="sp active" id="princ-1">
+      <div class="sl">1 — Igualdade</div>
+      <p><span class="art">Art. 5º caput CF</span> / <span class="art">Art. 7º CPC</span>. Igualdade <span class="hl">formal</span> (tratamento igual) e <span class="hl">material</span> (tratar desigualmente os desiguais). Ex: prazo em dobro para Defensoria Pública e MP — <span class="art">art. 229 CPC</span>.</p>
+      <div class="sl">2 — Acesso à Justiça (Inafastabilidade)</div>
+      <p><span class="art">Art. 5º XXXV CF</span> / <span class="art">Art. 3º CPC</span>. Tutela tanto repressiva (lesão) quanto preventiva (ameaça). Ondas de Cappelletti: (1ª) assistência judiciária; (2ª) interesses difusos; (3ª) tutela adequada e efetiva.</p>
+      <div class="sl">3 — Juiz Natural</div>
+      <p><span class="art">Art. 5º XXXVII e LIII CF</span>. Proibição de tribunal de exceção (post factum) + competência predefinida por lei de forma abstrata e impessoal.</p>
+      <div class="sl">4 — Imparcialidade</div>
+      <div class="comp">
+        <div class="cc2">
+          <div class="cctitle" style="color:var(--princ)">Impedimento — art. 144 CPC</div>
+          <ul>
+            <li>Causas <strong>objetivas</strong> e taxativas</li>
+            <li>Absoluto — <strong>insanável</strong> (até ação rescisória)</li>
+            <li>Nulidade <strong>absoluta</strong></li>
+            <li>Ex: cônjuge, parente até 3º grau, interesse próprio</li>
+          </ul>
+        </div>
+        <div class="cc2">
+          <div class="cctitle" style="color:var(--princ)">Suspeição — art. 145 CPC</div>
+          <ul>
+            <li>Causas <strong>subjetivas</strong></li>
+            <li>Relativo — <strong>preclude</strong> se não arguido</li>
+            <li>Nulidade <strong>relativa</strong></li>
+            <li>Ex: amizade íntima, inimizade</li>
+          </ul>
+        </div>
+      </div>
+      <div class="sl">5 — Inércia + Impulso Oficial</div>
+      <p><span class="art">Art. 2º CPC</span>. <span class="hl">Ne procedat judex ex officio</span>: processo não começa sem parte. + <span class="hl">Impulso oficial</span>: após iniciado, juiz conduz de ofício.</p>
+      <div class="sl">6 — Devido Processo Legal</div>
+      <p><span class="art">Art. 5º LIV CF</span> / <span class="art">Art. 8º CPC</span>. Dimensão <span class="hl">adjetiva</span>: garantias do processo justo (contraditório, ampla defesa, juiz natural). Dimensão <span class="hl">substantiva</span>: razoabilidade e proporcionalidade das leis materiais.</p>
+      <div class="sl">7 — Contraditório</div>
+      <p><span class="art">Art. 5º LV CF</span> / <span class="art">Arts. 9º e 10 CPC</span>. Informação + reação + <span class="hl">influência</span> (contraditório dinâmico). <span class="art">Art. 10 CPC</span> proíbe a <span class="hl">decisão surpresa</span>: juiz não pode fundar decisão em fundamento não debatido.</p>
+    </div>
+    <div class="sp" id="princ-2">
+      <div class="sl">8 — Ampla Defesa</div>
+      <p><span class="art">Art. 5º LV CF</span>. Todos os meios e recursos admitidos. Inclui defesa técnica (advogado) e autodefesa. Complementa o contraditório.</p>
+      <div class="sl">9 — Motivação (Fundamentação)</div>
+      <p><span class="art">Art. 93 IX CF</span> / <span class="art">Arts. 11 e 489 CPC</span>. Decisões fundamentadas sob pena de nulidade. <span class="art">Art. 489 §1º</span>: lista o que NÃO é fundamentação (reproduzir lei sem análise, usar conceito indeterminado sem aplicar ao caso, motivos genéricos).</p>
+      <div class="sl">10 — Publicidade</div>
+      <p><span class="art">Art. 93 IX CF</span> / <span class="art">Arts. 8º e 189 CPC</span>. Regra: atos públicos. Exceção: segredo de justiça (<span class="art">art. 189 CPC</span>) — intimidade, processos de família, adoção.</p>
+      <div class="sl">11 — Ônus da Prova</div>
+      <p><span class="art">Art. 373 CPC</span>. Regra: ao <span class="hl">autor</span> incumbe o fato <strong>constitutivo</strong>; ao <span class="hl">réu</span>, os fatos <strong>impeditivos, modificativos ou extintivos</strong>. Inversão: <span class="hl">dinâmica</span> (<span class="art">art. 373 §1º</span>) e <span class="hl">legal</span> (<span class="art">CDC art. 6º VIII</span>).</p>
+      <div class="sl">12 — Duração Razoável</div>
+      <p><span class="art">Art. 5º LXXVIII CF</span> — EC 45/2004 / <span class="art">Art. 4º CPC</span>. Solução integral do mérito em prazo razoável, incluindo a atividade satisfativa.</p>
+      <div class="sl">13 — Boa-Fé Processual</div>
+      <p><span class="art">Art. 5º CPC</span>. Alcança <span class="hl">todos os participantes</span>: partes, juiz, MP, peritos. Litigância de má-fé: <span class="art">art. 80 CPC</span> — multa 1–10% + indenização.</p>
+      <div class="sl">14 — Adstrição ao Pedido (Congruência)</div>
+      <p><span class="art">Arts. 141, 490 e 492 CPC</span>. Vedado: <span class="hl">ultra petita</span> (além), <span class="hl">extra petita</span> (fora), <span class="hl">citra petita</span> (aquém). <em>Iura novit curia</em> não viola — o juiz aplica o direito correto aos fatos.</p>
+      <div class="sl">15 — Independência das Jurisdições</div>
+      <p><span class="art">Art. 935 CC</span> / <span class="art">Art. 66 CPP</span>. Instâncias cível, penal e administrativa são <span class="hl">independentes</span>. Exceção: condenação penal faz coisa julgada no cível quanto à autoria e materialidade.</p>
+    </div>
+    <div class="sp" id="princ-prova">
+      <div class="xi"><div class="xt" onclick="xp(this)"><span class="xl">Qual a diferença entre contraditório e ampla defesa?</span><span class="xa">▾</span></div><div class="xc"><div class="xin"><strong>Contraditório:</strong> bilateralidade — toda ação produz reação possível; as partes informam e influem na decisão.<br><strong>Ampla defesa:</strong> amplitude dos meios disponíveis — todos os meios e recursos admitidos. O contraditório é a estrutura bilateral; a ampla defesa é o conteúdo instrumental da defesa.</div></div></div>
+      <div class="xi"><div class="xt" onclick="xp(this)"><span class="xl">Impedimento sem arguição da parte: o que ocorre?</span><span class="xa">▾</span></div><div class="xc"><div class="xin">Impedimento é absolutamente insanável — pode ser arguido a qualquer tempo e grau, inclusive após o trânsito em julgado (ação rescisória, art. 966 II CPC). Suspeição preclude se não arguida na primeira oportunidade (arts. 146 e 148 CPC).</div></div></div>
+      <div class="xi"><div class="xt" onclick="xp(this)"><span class="xl">Mapa resumido dos princípios e artigos</span><span class="xa">▾</span></div><div class="xc"><div class="xin">
+        <div class="tw"><table><thead><tr><th>Princípio</th><th>CPC</th><th>CF</th></tr></thead><tbody>
+          <tr><td>Igualdade</td><td>Art. 7º</td><td>Art. 5º caput</td></tr>
+          <tr><td>Acesso à Justiça</td><td>Art. 3º</td><td>Art. 5º XXXV</td></tr>
+          <tr><td>Juiz Natural</td><td>—</td><td>Art. 5º XXXVII e LIII</td></tr>
+          <tr><td>Inércia + Impulso</td><td>Art. 2º</td><td>—</td></tr>
+          <tr><td>Devido Processo</td><td>Art. 8º</td><td>Art. 5º LIV</td></tr>
+          <tr><td>Contraditório</td><td>Arts. 9º e 10</td><td>Art. 5º LV</td></tr>
+          <tr><td>Ampla Defesa</td><td>—</td><td>Art. 5º LV</td></tr>
+          <tr><td>Motivação</td><td>Arts. 11, 489</td><td>Art. 93 IX</td></tr>
+          <tr><td>Publicidade</td><td>Arts. 8º, 189</td><td>Art. 93 IX</td></tr>
+          <tr><td>Ônus da Prova</td><td>Art. 373</td><td>—</td></tr>
+          <tr><td>Duração Razoável</td><td>Art. 4º</td><td>Art. 5º LXXVIII</td></tr>
+          <tr><td>Boa-fé</td><td>Arts. 5º, 80</td><td>—</td></tr>
+          <tr><td>Adstrição ao Pedido</td><td>Arts. 141, 490, 492</td><td>—</td></tr>
+          <tr><td>Independência</td><td>—</td><td>Art. 935 CC</td></tr>
+        </tbody></table></div>
+      </div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ BLOCO 5 — LEI NO TEMPO ══ -->
+<div class="mod" id="mod-tempo">
+  <div class="mhd" data-c="tempo">
+    <div class="mi" data-c="tempo">05</div>
+    <div>
+      <div class="mnum">Módulo 05</div>
+      <div class="mtitle">Lei Processual no Tempo</div>
+      <div class="mdesc">Arts. 13, 14 e 1.046 CPC. Três sistemas. Brasil adota o isolamento dos atos processuais. Ultratividade.</div>
+      <div class="atags">
+        <span class="at at-tempo">Art. 13 CPC</span>
+        <span class="at at-tempo">Art. 14 CPC</span>
+        <span class="at at-tempo">Art. 1.046 CPC</span>
+        <span class="at at-tempo">Isolamento dos atos</span>
+      </div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="tempo" onclick="swS(this,'tempo-art')">Artigos e Regras</button>
+      <button class="stab"        data-c="tempo" onclick="swS(this,'tempo-sis')">3 Sistemas</button>
+      <button class="stab"        data-c="tempo" onclick="swS(this,'tempo-prova')">Para a Prova</button>
+    </div>
+    <div class="sp active" id="tempo-art">
+      <div class="sl">Art. 13 — Territorialidade</div>
+      <p>A jurisdição civil é regida pelas <span class="hl">normas processuais brasileiras</span>, ressalvados tratados internacionais. Processo no Brasil → CPC, mesmo que o direito material discutido seja estrangeiro.</p>
+      <div class="sl">Art. 14 — Aplicação imediata</div>
+      <p>"A norma processual não retroagirá e será <span class="hl">aplicável imediatamente</span> aos processos em curso, respeitados os atos processuais praticados e as situações jurídicas consolidadas sob a vigência da norma revogada."</p>
+      <div class="co cs"><span class="co-ico">✔</span><div><strong>Três ressalvas do art. 14:</strong> (1) atos já praticados; (2) ato jurídico perfeito; (3) direito adquirido e coisa julgada. A lei nova alcança atos futuros, mas não desfaz os passados.</div></div>
+      <div class="sl">Art. 1.046, §1º — Ultratividade</div>
+      <p>"As disposições da lei processual civil anterior ainda em vigor permanecerão em vigor até que por outra lei sejam substituídas." Procedimentos especiais regidos por lei especial continuam sendo por ela regidos mesmo após o CPC/2015.</p>
+    </div>
+    <div class="sp" id="tempo-sis">
+      <div class="sl">Os três sistemas</div>
+      <div class="tw"><table>
+        <thead><tr><th>Sistema</th><th>Regra</th><th>Adotado?</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1. Unidade processual</strong></td><td>Lei do início rege todo o processo até o fim</td><td>Não</td></tr>
+          <tr><td><strong>2. Fases processuais</strong></td><td>Cada fase rege-se pela lei em vigor quando iniciada</td><td>Não</td></tr>
+          <tr><td><strong>3. Isolamento dos atos</strong></td><td>Cada ato rege-se pela lei em vigor no <strong>momento de sua prática</strong></td><td><strong>Brasil — art. 14 CPC</strong></td></tr>
+        </tbody>
+      </table></div>
+      <div class="co cw"><span class="co-ico">⚠</span><div><strong>Distinção essencial:</strong> retroatividade = lei nova alcança atos passados (vedada). Aplicação imediata = lei nova alcança atos futuros (regra art. 14). Ultratividade = lei revogada persiste para atos futuros em casos específicos (exceção art. 1.046 §1º).</div></div>
+    </div>
+    <div class="sp" id="tempo-prova">
+      <div class="xi"><div class="xt" onclick="xp(this)"><span class="xl">Exemplo prático: processo de 2014 sob o CPC/1973</span><span class="xa">▾</span></div><div class="xc"><div class="xin">Processo proposto em 2014 sob o CPC/1973. Em março/2016 entra o CPC/2015.<br><br>Pelo isolamento dos atos: atos praticados antes de março/2016 permanecem válidos (CPC/1973). Atos praticados a partir de março/2016 regem-se pelo CPC/2015 — prazos, recursos, audiências seguem a lei nova. O processo não recomeça; atos passados não são invalidados.</div></div></div>
+      <div class="xi"><div class="xt" onclick="xp(this)"><span class="xl">A lei processual pode retroagir para prejudicar as partes?</span><span class="xa">▾</span></div><div class="xc"><div class="xin"><strong>Não.</strong> Art. 14 CPC: a norma processual não retroagirá. Art. 5º XXXVI CF protege o ato jurídico perfeito, o direito adquirido e a coisa julgada. Uma lei que encurtasse prazo já em curso violaria o ato jurídico perfeito — o início do prazo gerou expectativa de seu integral transcurso.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ QUIZ ══ -->
+<div class="mod" id="mod-quiz">
+  <div class="mhd" style="background:rgba(255,255,255,.025);border-color:var(--border2)">
+    <div class="mi" style="background:rgba(255,255,255,.05);color:var(--text2);font-family:'Cormorant Garamond',serif">Q</div>
+    <div>
+      <div class="mnum">Quiz</div>
+      <div class="mtitle">Simulado — Estilo Banca UFN</div>
+      <div class="mdesc">20 questões sobre Modos de Solução, Fases Evolutivas, CF/88, Princípios e Lei no Tempo. Opções embaralhadas a cada tentativa.</div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="qwrap">
+      <div class="qtop">
+        <div class="qtitle">Dir. Processual Civil — Simulado UFN</div>
+        <div class="sbadge" id="SB">0 acertos</div>
+      </div>
+      <div class="qdots" id="QD"></div>
+      <div id="QC"></div>
+      <div class="qres" id="QR">
+        <div class="rscore" id="RS">0/20</div>
+        <div class="rlabel">Resultado final</div>
+        <div class="rmsg" id="RM"></div>
+        <button class="qbn qbn-rs" onclick="restartQ()">↺ Recomeçar quiz</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
 <footer class="ft">
-  <span>Guto Ceolin &middot; UFN &middot; Dir. Processual Civil &middot; 2026/1</span>
-  <a href="../../index.html">← Voltar ao Hub</a>
+  <span>Dir. Processual Civil &middot; UFN &middot; 2026/1</span>
+  <a href="../../index.html">&#8592; Voltar ao Hub</a>
 </footer>
+
 <script>
-function toggleTheme(){var h=document.documentElement;var l=h.getAttribute('data-theme')==='light';h.setAttribute('data-theme',l?'dark':'light');localStorage.setItem('theme',l?'dark':'light');}
-</script><button class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar modo claro/escuro" title="Modo claro/escuro">
+function swM(id,btn){
+  document.querySelectorAll('.mod').forEach(m=>m.classList.remove('active'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
+  document.getElementById('mod-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+function swS(btn,pid){
+  const body=btn.closest('.mbody');
+  body.querySelectorAll('.stab').forEach(t=>t.classList.remove('active'));
+  body.querySelectorAll('.sp').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(pid).classList.add('active');
+}
+function xp(trigger){
+  const item=trigger.closest('.xi');
+  const content=item.querySelector('.xc');
+  const inner=item.querySelector('.xin');
+  const open=item.classList.contains('open');
+  item.classList.toggle('open');
+  content.style.maxHeight=open?'0':inner.scrollHeight+'px';
+}
+const SI=document.getElementById('SI');
+SI.addEventListener('input',function(){
+  clearHL();
+  const q=this.value.trim().toLowerCase();
+  if(!q){document.getElementById('SC').textContent='';return;}
+  let n=0;
+  document.querySelectorAll('.sp p,.sp li,.xin,.tw td,.card p,.co').forEach(el=>{
+    if(el.textContent.toLowerCase().includes(q)){hlEl(el,q);n++;}
+  });
+  document.getElementById('SC').textContent=n?n+' resultados':'sem resultado';
+});
+function hlEl(el,q){
+  const walk=node=>{
+    if(node.nodeType===3){const i=node.textContent.toLowerCase().indexOf(q);if(i>=0){const s=document.createElement('mark');s.textContent=node.textContent.substr(i,q.length);const a=node.splitText(i);a.textContent=a.textContent.substr(q.length);a.parentNode.insertBefore(s,a);}}
+    else if(node.nodeType===1&&node.tagName!=='MARK'){Array.from(node.childNodes).forEach(walk);}
+  };walk(el);
+}
+function clearHL(){document.querySelectorAll('mark').forEach(m=>{const p=m.parentNode;p.replaceChild(document.createTextNode(m.textContent),m);p.normalize();});}
+
+const QS=[
+  {q:"Autotutela é vedada como regra porque:",opts:["Depende do Estado para ser válida","A parte usa suas próprias forças sem controle estatal, violando a ordem jurídica","É forma de heterocomposição","Exige homologação judicial","A CF proíbe qualquer solução extrajudicial"],ans:1,banca:false,exp:"A autotutela é vedada em regra (art. 345 CP — exercício arbitrário das próprias razões). Exceções legais: legítima defesa (art. 25 CP), desforço possessório imediato (art. 1.210 §1º CC). O ordenamento optou pela jurisdição estatal como mecanismo principal."},
+  {q:"Na mediação, o papel do terceiro é:",opts:["Decidir o conflito com força de título executivo","Propor soluções e estimular as partes a aceitar um acordo","Facilitar o diálogo para que as próprias partes construam a solução","Representar o Estado na composição do litígio","Substituir os advogados durante as sessões"],ans:2,banca:true,exp:"O mediador é facilitador — não sugere nem propõe soluções. Auxilia as partes a identificar seus interesses reais e construir a solução. Adequada para conflitos com vínculo continuado. Art. 165 §3º CPC e Lei 13.140/2015."},
+  {q:"A principal diferença entre mediação e conciliação é:",opts:["A mediação tem força vinculante; a conciliação, não","O mediador pode propor soluções; o conciliador apenas facilita","O conciliador pode propor soluções; o mediador apenas facilita o diálogo","A conciliação é adequada para vínculos continuados; a mediação, para relações esporádicas","A mediação exige homologação judicial; a conciliação, não"],ans:2,banca:true,exp:"Distinção essencial: mediador NÃO sugere soluções (vínculo continuado). Conciliador PODE propor (relações sem vínculo prévio). Arts. 165–167 CPC. Cobrada frequentemente de forma invertida nas provas."},
+  {q:"A arbitragem é classificada como forma de:",opts:["Autocomposição, pois as partes escolhem o árbitro","Autotutela, pois dispensa o Poder Judiciário","Heterocomposição, pois terceiro decide a controvérsia","Autocomposição estimulada pelo Estado","Jurisdição voluntária equiparada à estatal"],ans:2,banca:true,exp:"Arbitragem é heterocomposição: o árbitro impõe a solução como juiz privado. Sentença arbitral = título executivo judicial (art. 515, VII CPC; Lei 9.307/96). Escolher o árbitro não torna a arbitragem autocomposição — as partes não decidem, o árbitro decide."},
+  {q:"São exemplos de leis mistas:",opts:["CC e CP","CPC e CPP","CDC e CLT","Lei de Arbitragem e CPC","Constituição Federal e CC"],ans:2,banca:false,exp:"Leis mistas contêm normas materiais E processuais no mesmo diploma. CDC: normas materiais (relação de consumo) + processuais (art. 6º VIII — inversão do ônus; art. 101 I — foro do consumidor). CLT: contrato de trabalho (material) + processo do trabalho (processual)."},
+  {q:"A fase autonomista do direito processual tem como marco:",opts:["O surgimento do CPC/1973","A promulgação do CPC/2015","A obra de Oskar von Bülow de 1868","A criação dos Juizados Especiais","A Constituição Federal de 1988"],ans:2,banca:true,exp:"Em 1868, Von Bülow publicou 'Teoria dos Pressupostos Processuais e das Exceções Dilatórias', separando o processo (relação jurídica pública autônoma) do direito material. Conceitos: pressupostos processuais, ação abstrata, processo como relação trilateral."},
+  {q:"A fase instrumental defende que:",opts:["O processo é um fim em si mesmo com rigor formal","O processo é instrumento do direito material — as formas servem a uma finalidade","O processo deve ser subordinado integralmente à CF","O processo civil e penal devem ser unificados","A jurisdição pertence exclusivamente ao Estado"],ans:1,banca:false,exp:"Na fase instrumental (Dinamarco, 1987), o processo não é fim em si — é instrumento a serviço do direito material e da pacificação social. Consequência: instrumentalidade das formas (art. 188 CPC) — se o ato atingiu sua finalidade, não se anula por vício formal."},
+  {q:"O princípio da inafastabilidade (art. 5º XXXV CF) garante acesso ao Judiciário:",opts:["Apenas para lesões consumadas","Tanto para lesões quanto para ameaças a direito","Apenas para cidadãos brasileiros no Brasil","Apenas em matéria criminal","Somente após esgotamento da via administrativa"],ans:1,banca:true,exp:"Art. 5º XXXV CF: 'a lei não excluirá da apreciação do Judiciário lesão OU AMEAÇA a direito.' Tutela repressiva (lesão consumada) e preventiva (ameaça). O esgotamento administrativo prévio é exceção constitucional expressa (ex: art. 217 §1º para o esporte)."},
+  {q:"Impedimento (art. 144 CPC) e suspeição (art. 145 CPC) distinguem-se porque:",opts:["Impedimento é menos grave e preclude se não arguido","Suspeição tem causas objetivas e é insanável","Impedimento tem causas objetivas e é absoluto; suspeição tem causas subjetivas e é relativa","Ambos têm os mesmos efeitos","Impedimento aplica-se ao juiz; suspeição, apenas ao MP"],ans:2,banca:true,exp:"Impedimento (art. 144): causas objetivas e taxativas, absolutamente insanável — arguível a qualquer tempo inclusive em ação rescisória (art. 966 II CPC). Suspeição (art. 145): causas subjetivas, relativa — preclude se não arguída no prazo."},
+  {q:"O contraditório dinâmico (arts. 9º e 10 CPC/2015) acrescenta:",opts:["Apenas o direito de ser informado","O direito de reação, antes ignorado","O direito de influir efetivamente na decisão — proibição de decisão surpresa","Obrigatoriedade de o juiz responder a cada manifestação","Possibilidade de qualquer pessoa intervir no processo"],ans:2,banca:true,exp:"O contraditório evoluiu: informação + reação + influência. O art. 10 CPC proíbe a decisão surpresa: juiz não pode fundar decisão em fundamento não debatido, mesmo em matéria de ofício. É a dimensão participativa — as partes influem no convencimento do juiz."},
+  {q:"O princípio da inércia (art. 2º CPC) significa que:",opts:["O juiz não pratica nenhum ato sem provocação, mesmo após iniciado o processo","O processo só começa por iniciativa da parte; após o início, juiz o impulsiona de ofício","O MP nunca pode iniciar ação de ofício","O juiz pode indeferir petição sem ouvir a parte","A inércia é absoluta em todos os casos"],ans:1,banca:false,exp:"Art. 2º CPC: dois elementos. (1) Ne procedat judex ex officio: processo civil começa apenas por provocação. (2) Impulso oficial: após iniciado, o juiz conduz sem depender de ato da parte para cada etapa."},
+  {q:"O ônus da prova (art. 373 CPC) distribui-se como regra:",opts:["Ao réu incumbe provar todos os fatos","Ao autor incumbe o fato constitutivo; ao réu, os fatos impeditivos, modificativos ou extintivos","Ao juiz cabe a produção das provas","Ao autor incumbe provar todos os fatos da demanda","A distribuição fica ao critério do juiz"],ans:1,banca:true,exp:"Art. 373 CPC: ao autor = fato constitutivo do direito; ao réu = fatos impeditivos, modificativos ou extintivos. Inversão dinâmica (§1º — quando impossível/difícil provar ou a outra parte tem maior facilidade) e legal (CDC art. 6º VIII)."},
+  {q:"O princípio da adstrição ao pedido veda ao juiz:",opts:["Aplicar norma jurídica diferente da invocada pela parte","Julgar além (ultra), fora (extra) ou aquém (citra) do pedido","Conceder tutela de urgência sem pedido em qualquer caso","Reconhecer nulidades absolutas de ofício","Produzir provas de ofício"],ans:1,banca:true,exp:"Arts. 141, 490 e 492 CPC: ultra petita (além), extra petita (fora), citra petita (omissão). Iura novit curia não viola — o juiz aplica o direito correto aos fatos narrados, mesmo que a parte tenha invocado dispositivo errado."},
+  {q:"Qual sistema de conflito da lei processual no tempo o Brasil adota?",opts:["Unidade processual: lei do início rege tudo","Fases processuais: cada fase rege-se pela lei em vigor quando iniciada","Isolamento dos atos: cada ato rege-se pela lei em vigor quando praticado","Retroatividade plena: lei nova se aplica a todos os atos","Irretroatividade absoluta: lei nova nunca se aplica a processos em curso"],ans:2,banca:true,exp:"Art. 14 CPC: isolamento dos atos processuais. A norma processual nova se aplica imediatamente, mas respeita os atos já praticados. Cada ato futuro do processo passa a ser regido pela lei nova."},
+  {q:"A ultratividade no direito processual (art. 1.046, §1º CPC) significa:",opts:["Aplicação retroativa da lei nova a processos encerrados","Lei revogada continua regendo procedimentos especiais em curso","A lei nova se aplica além do território nacional","Validade da lei além dos limites constitucionais","Aplicação da lei estrangeira ao processo nacional"],ans:1,banca:false,exp:"Art. 1.046, §1º CPC: disposições da lei anterior ainda em vigor permanecem até serem substituídas por lei específica. Procedimentos especiais regidos por lei especial continuam sendo por ela regidos mesmo após o CPC/2015."},
+  {q:"O princípio da boa-fé processual (art. 5º CPC) impõe deveres a:",opts:["Apenas às partes e advogados","Apenas ao juiz e auxiliares","Todos os participantes do processo: partes, juiz, MP, peritos e terceiros","Somente ao réu","Apenas ao MP como fiscal da lei"],ans:2,banca:false,exp:"Art. 5º CPC: 'Aquele que de qualquer forma participa do processo deve comportar-se de acordo com a boa-fé.' Alcance universal: partes, advogados, juiz, MP, peritos e auxiliares. Litigância de má-fé (art. 80 CPC): multa 1–10% + indenização."},
+  {q:"O devido processo legal em sua dimensão substantiva significa:",opts:["Direito de ser processado segundo normas procedimentais vigentes","Estado só priva alguém com garantias procedimentais adequadas","As leis materiais devem ser razoáveis e proporcionais — controle do conteúdo das normas","Obrigatoriedade de processo judicial para atos administrativos","Igualdade de tratamento entre as partes"],ans:2,banca:true,exp:"Duas dimensões: adjetiva/procedimental (garantias do processo justo) e substantiva (razoabilidade e proporcionalidade das leis materiais — lei pode ser inconstitucional por arbitrária ou desproporcional). Origem norte-americana: due process of law."},
+  {q:"A criação de varas especializadas viola o juiz natural?",opts:["Sim, pois todo juiz é competente para qualquer matéria","Sim, pois cria distinção entre magistrados","Não, pois a competência é definida previamente, de forma abstrata e impessoal","Sim, apenas lei complementar pode criar varas especializadas","Não, desde que aprovadas pelo CNJ"],ans:2,banca:true,exp:"Varas especializadas são constitucionais. O juiz natural proíbe tribunais de exceção (criados pós-fato para caso específico). Varas especializadas têm competência fixada previamente, de forma abstrata e impessoal para toda uma categoria de casos."},
+  {q:"A fase neoconstitucional do processo civil caracteriza-se por:",opts:["Prioridade das formas processuais sobre o direito material","Separação rígida entre processo e CF","Constitucionalização do processo — filtragem constitucional das normas processuais","Retorno ao sincretismo processual","Autonomia absoluta do processo em relação aos direitos fundamentais"],ans:2,banca:false,exp:"A fase neoconstitucional reconhece o processo como fenômeno constitucional. O CPC/2015 começa com 12 artigos de normas fundamentais (princípios constitucionais transpostos). Art. 1º CPC: o processo é ordenado conforme os valores da CF."},
+  {q:"O princípio da independência das jurisdições (art. 935 CC) estabelece que:",opts:["Sentença penal sempre vincula o cível","Instâncias cível, penal e administrativa são independentes, com exceções","Absolvição penal impede ação cível posterior","Juízo administrativo vincula o cível","Instância cível é subordinada à criminal"],ans:1,banca:false,exp:"Art. 935 CC: responsabilidades civil e criminal são independentes. Regra: decisão em uma esfera não vincula a outra. Exceção: condenação penal faz coisa julgada no cível quanto à autoria e existência do crime (art. 935 in fine). Absolvição por negativa de autoria ou inexistência do fato também vincula o cível (art. 66 CPP)."},
+];
+
+let cur=0,score=0,answered=[],qd=false,SQ=[];
+
+function shuffleOpts(q){
+  const idx=Array.from({length:q.opts.length},(_,i)=>i);
+  for(let i=idx.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[idx[i],idx[j]]=[idx[j],idx[i]];}
+  return{...q,opts:idx.map(i=>q.opts[i]),ans:idx.indexOf(q.ans)};
+}
+
+function buildQ(){
+  const C=document.getElementById('QC');
+  const D=document.getElementById('QD');
+  C.innerHTML='';D.innerHTML='';
+  SQ=QS.map(shuffleOpts);
+  SQ.forEach((q,i)=>{
+    const dot=document.createElement('div');dot.className='qdot'+(i===0?' cur':'');dot.id='dot'+i;D.appendChild(dot);
+    const div=document.createElement('div');div.className='qq'+(i===0?' active':'');div.id='qq'+i;
+    const bf=q.banca?'<span class="bflag">Banca Real</span>':'';
+    const lets=['A','B','C','D','E'];
+    const opts=q.opts.map((o,oi)=>`<button class="qopt" onclick="selA(${i},${oi})" id="o${i}_${oi}"><span class="ql">${lets[oi]}</span><span class="qt">${o}</span></button>`).join('');
+    div.innerHTML=`<div class="qnum">Questão ${i+1} de ${QS.length} ${bf}</div><div class="qtext">${q.q}</div><div class="qopts">${opts}</div><div class="qfb" id="fb${i}"></div><div class="qnav"><div></div><button class="qbn qbn-next" id="nx${i}" onclick="nxtQ(${i})">${i<QS.length-1?'Próxima →':'Ver resultado →'}</button></div>`;
+    C.appendChild(div);
+  });
+}
+
+function selA(qi,oi){
+  if(answered[qi]!==undefined)return;
+  answered[qi]=oi;
+  const q=SQ[qi];const ok=oi===q.ans;if(ok)score++;
+  q.opts.forEach((_,i)=>{const b=document.getElementById(`o${qi}_${i}`);b.disabled=true;b.classList.add('disabled');if(i===q.ans)b.classList.add('correct');if(i===oi&&!ok)b.classList.add('wrong');});
+  const fb=document.getElementById('fb'+qi);
+  fb.className='qfb show '+(ok?'ok':'ng');
+  fb.innerHTML=`<strong>${ok?'✓ Correto!':'✗ Incorreto.'}</strong> ${QS[qi].exp}`;
+  document.getElementById('nx'+qi).classList.add('show');
+  const dot=document.getElementById('dot'+qi);dot.classList.remove('cur');dot.classList.add(ok?'ok':'err');
+  if(qi+1<QS.length){const d=document.getElementById('dot'+(qi+1));if(d)d.classList.add('cur');}
+  document.getElementById('SB').textContent=`${score} acerto${score!==1?'s':''}`;
+  updP();
+}
+
+function nxtQ(c){
+  document.getElementById('qq'+c).classList.remove('active');
+  if(c+1<QS.length)document.getElementById('qq'+(c+1)).classList.add('active');
+  else showR();
+}
+
+function updP(){
+  const done=answered.filter(a=>a!==undefined).length;
+  const p=done/QS.length*100;
+  document.getElementById('PF').style.width=p+'%';
+  document.getElementById('PC').textContent=`${done} / ${QS.length}`;
+}
+
+function showR(){
+  document.getElementById('QR').classList.add('show');
+  const p=Math.round(score/QS.length*100);
+  document.getElementById('RS').textContent=`${score}/${QS.length}`;
+  let msg='';
+  if(p>=90)msg=`${p}% — Excelente! Você dominou este conteúdo.`;
+  else if(p>=70)msg=`${p}% — Bom! Revise os pontos errados e está pronto.`;
+  else if(p>=50)msg=`${p}% — Mediano. Vale reler os módulos com mais atenção.`;
+  else msg=`${p}% — Precisa reforçar. Volte aos módulos antes da prova.`;
+  document.getElementById('RM').textContent=msg;
+  try{const _k='quiz_'+location.pathname.split('/').slice(-2).join('/').replace('.html','').replace('/','_');localStorage.setItem(_k,JSON.stringify({score,total:QS.length,pct:p,ts:Date.now()}));}catch(_e){}
+}
+
+function restartQ(){
+  score=0;answered=[];qd=false;
+  document.getElementById('QR').classList.remove('show');
+  document.getElementById('SB').textContent='0 acertos';
+  buildQ();updP();
+}
+
+buildQ();updP();
+</script>
+<button class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar modo claro/escuro" title="Modo claro/escuro">
   <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
   <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-</button></body>
+</button>
+</body>
 </html>
