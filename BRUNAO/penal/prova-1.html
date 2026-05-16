@@ -1,88 +1,767 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<script>(function(){var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');if(t==='light')document.documentElement.setAttribute('data-theme','light');})();</script>
+<script>
+function toggleTheme(){var h=document.documentElement;var l=h.getAttribute('data-theme')==='light';h.setAttribute('data-theme',l?'dark':'light');localStorage.setItem('theme',l?'dark':'light');}
+(function(){var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');if(t==='light')document.documentElement.setAttribute('data-theme','light');})();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Direito Penal I — Prova 1</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@300;400;500;600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#111118;--surface:#1c1c26;--surface2:#242430;--border:rgba(255,255,255,.07);--border2:rgba(255,255,255,.12);--text:#e8e4f0;--text2:#9490a8;--text3:#56526a;--white:#f5f2ff;--accent:#e07a5c;--accent-dim:rgba(224,122,92,.06);}
+:root{
+  --bg:#111118;--surface:#1c1c26;--surface2:#242430;--surface3:#1c1c24;
+  --border:rgba(255,255,255,.07);--border2:rgba(255,255,255,.12);
+  --text:#e8e4f0;--text2:#9490a8;--text3:#56526a;--white:#f5f2ff;
+  --ili:#e07a5c;--ili-dim:rgba(224,122,92,.10);--ili-mid:rgba(224,122,92,.22);
+  --ned:#5c9ee0;--ned-dim:rgba(92,158,224,.10);--ned-mid:rgba(92,158,224,.22);
+  --lde:#5cc98a;--lde-dim:rgba(92,201,138,.10);--lde-mid:rgba(92,201,138,.22);
+  --dem:#d4a843;--dem-dim:rgba(212,168,67,.10);--dem-mid:rgba(212,168,67,.22);
+  --exs:#e06e8c;--exs-dim:rgba(224,110,140,.10);--exs-mid:rgba(224,110,140,.22);
+}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-weight:300;min-height:100vh}
-body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse 70% 40% at 10% 0%,var(--accent-dim) 0%,transparent 55%)}
-.wrap{position:relative;z-index:10;max-width:1100px;margin:0 auto;padding:3rem 2rem}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse 70% 40% at 10% 0%,rgba(224,122,92,.04) 0%,transparent 55%),
+             radial-gradient(ellipse 55% 35% at 90% 100%,rgba(224,110,140,.03) 0%,transparent 55%)}
+.hdr{position:relative;z-index:10;padding:3rem 2rem 0;max-width:1100px;margin:0 auto}
 .back{display:inline-flex;align-items:center;gap:.45rem;font-family:'Outfit',sans-serif;font-size:.75rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);text-decoration:none;margin-bottom:1.5rem;padding:.38rem 1rem;border-radius:100px;border:1px solid var(--border);background:var(--surface);transition:all .2s}
-.back:hover{color:var(--text);border-color:var(--border2);background:var(--surface2)}.back:focus-visible{outline:2px solid var(--gold, #d4a843);outline-offset:2px}
+.back:hover{color:var(--text);border-color:var(--border2);background:var(--surface2)}
 .ey{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--text3);margin-bottom:.9rem}
-.htitle{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,6.5vw,4.6rem);font-weight:700;color:var(--white);line-height:.95;letter-spacing:-.02em;margin-bottom:.75rem}
+.htitle{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,6.5vw,4.6rem);font-weight:700;color:var(--white);line-height:.95;letter-spacing:-.02em}
 .htitle em{font-style:italic;color:var(--text2);font-weight:400}
-.disc-pill{display:inline-flex;align-items:center;gap:.38rem;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;padding:.25rem .65rem;border-radius:100px;margin-top:1.1rem;background:rgba(224,122,92,.1);color:var(--accent);border:1px solid rgba(224,122,92,.22)}
-.disc-pill .dot{width:4px;height:4px;border-radius:50%;background:currentColor}
-.wip{margin-top:3rem;padding:3.5rem 2.5rem;background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:0 2px 12px rgba(0,0,0,.25);text-align:center}
-.wip-icon{font-size:0;width:48px;height:48px;margin:0 auto 1.75rem;border-radius:12px;background:var(--surface2);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:5px}.wip-icon::before,.wip-icon::after{content:"";display:block;border-radius:2px;background:var(--accent);opacity:.55}.wip-icon::before{width:20px;height:2px}.wip-icon::after{width:13px;height:2px}
-.wip-title{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--white);margin-bottom:.65rem;letter-spacing:-.02em;margin-bottom:.75rem}
-.wip-text{font-family:'Outfit',sans-serif;font-size:.88rem;color:var(--text2);letter-spacing:.07em;line-height:1.85}
-.accent-line{width:48px;height:2px;background:var(--accent);margin:1.1rem auto 0;border-radius:2px;opacity:.5}
-.topics{display:flex;gap:.4rem;flex-wrap:wrap;justify-content:center;margin-top:1.5rem}
-.topic{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.04em;background:var(--surface2);border:1px solid var(--border);color:var(--text2);padding:.18rem .5rem;border-radius:100px}
-.ft{max-width:1100px;margin:4rem auto 0;padding:1.5rem 2rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.85rem;color:var(--text3)}
-.ft a{color:var(--text2);text-decoration:none}.ft a:hover{color:var(--white)}.ft a:focus-visible{outline:2px solid currentColor;outline-offset:3px}
-@media(max-width:600px){.wrap,.ft{padding-left:1rem;padding-right:1rem}}
-
-/* ── LIGHT MODE ── */
+.hsub{margin-top:1.1rem;font-size:.8rem;color:var(--text2);font-family:'JetBrains Mono',monospace;letter-spacing:.04em}
+.banca-pill{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.2rem;padding:.42rem .95rem;background:rgba(224,122,92,.08);border:1px solid rgba(224,122,92,.25);border-radius:100px;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.07em;color:var(--ili);text-transform:uppercase}
+.banca-pill .p{width:5px;height:5px;border-radius:50%;background:var(--ili);animation:pu 2s infinite}
+@keyframes pu{0%,100%{opacity:1}50%{opacity:.35}}
+.sw{margin-top:.85rem;position:relative}
+.si{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:100px;padding:.68rem 1rem .68rem 2.5rem;color:var(--text);font-family:'Outfit',sans-serif;font-size:.85rem;outline:none;transition:border-color .2s}
+.si::placeholder{color:var(--text3)}.si:focus{border-color:var(--border2)}
+.sic{position:absolute;left:.82rem;top:50%;transform:translateY(-50%);color:var(--text3);font-size:.88rem;pointer-events:none}
+mark{background:rgba(224,122,92,.28);color:var(--white);border-radius:2px;padding:0 2px}
+.mnav{display:flex;gap:.42rem;flex-wrap:wrap;margin:1.9rem auto 0;max-width:1100px;padding:0 2rem;position:relative;z-index:10}
+.nb{display:flex;align-items:center;gap:.5rem;padding:.52rem .95rem;border:1px solid var(--border);border-radius:100px;background:var(--surface);color:var(--text2);font-family:'Outfit',sans-serif;font-size:.75rem;font-weight:500;letter-spacing:.02em;cursor:pointer;transition:all .2s;text-transform:none;min-height:36px}
+.nb:hover{border-color:var(--border2);color:var(--text)}
+.nb .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.nb[data-m=ili] .d{background:var(--ili)}.nb[data-m=ned] .d{background:var(--ned)}
+.nb[data-m=lde] .d{background:var(--lde)}.nb[data-m=dem] .d{background:var(--dem)}
+.nb[data-m=exs] .d{background:var(--exs)}.nb[data-m=quiz] .d{background:var(--white)}
+.nb.active{color:var(--white)}
+.nb[data-m=ili].active{border-color:var(--ili);background:var(--ili-dim)}
+.nb[data-m=ned].active{border-color:var(--ned);background:var(--ned-dim)}
+.nb[data-m=lde].active{border-color:var(--lde);background:var(--lde-dim)}
+.nb[data-m=dem].active{border-color:var(--dem);background:var(--dem-dim)}
+.nb[data-m=exs].active{border-color:var(--exs);background:var(--exs-dim)}
+.nb[data-m=quiz].active{border-color:rgba(255,255,255,.28);background:rgba(255,255,255,.04)}
+.main{position:relative;z-index:5;max-width:1100px;margin:1.8rem auto 5rem;padding:0 2rem}
+.mod{display:none;animation:fu .3s ease both}.mod.active{display:block}
+@keyframes fu{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.mhd{display:flex;align-items:flex-start;gap:1.4rem;padding:1.75rem 2rem;border-radius:14px 14px 0 0;border:1px solid var(--border);border-bottom:none;box-shadow:0 4px 20px rgba(0,0,0,.25)}
+.mhd[data-c=ili]{background:var(--ili-dim);border-color:rgba(224,122,92,.28)}
+.mhd[data-c=ned]{background:var(--ned-dim);border-color:rgba(92,158,224,.28)}
+.mhd[data-c=lde]{background:var(--lde-dim);border-color:rgba(92,201,138,.28)}
+.mhd[data-c=dem]{background:var(--dem-dim);border-color:rgba(212,168,67,.28)}
+.mhd[data-c=exs]{background:var(--exs-dim);border-color:rgba(224,110,140,.28)}
+.mi{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
+.mi[data-c=ili]{background:var(--ili-mid)}.mi[data-c=ned]{background:var(--ned-mid)}
+.mi[data-c=lde]{background:var(--lde-mid)}.mi[data-c=dem]{background:var(--dem-mid)}
+.mi[data-c=exs]{background:var(--exs-mid)}
+.mnum{font-family:'Outfit',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.12em;color:var(--text3);text-transform:uppercase;margin-bottom:.25rem}
+.mtitle{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--white);line-height:1}
+.mdesc{margin-top:.42rem;font-size:.82rem;color:var(--text2);line-height:1.62}
+.mbody{border:1px solid var(--border);border-top:none;border-radius:0 0 14px 14px;background:var(--surface);overflow:hidden}
+.stabs{display:flex;border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
+.stabs::-webkit-scrollbar{display:none}
+.stab{padding:.78rem 1.15rem;font-family:'Outfit',sans-serif;font-size:.78rem;font-weight:500;letter-spacing:.01em;text-transform:none;color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;background:none;border-top:none;border-left:none;border-right:none;margin-bottom:-1px;min-height:44px}
+.stab:hover{color:var(--text)}.stab.active{color:var(--white)}
+.stab.active[data-c=ili]{border-bottom-color:var(--ili)}.stab.active[data-c=ned]{border-bottom-color:var(--ned)}
+.stab.active[data-c=lde]{border-bottom-color:var(--lde)}.stab.active[data-c=dem]{border-bottom-color:var(--dem)}
+.stab.active[data-c=exs]{border-bottom-color:var(--exs)}
+.sp{display:none;padding:2rem 2.25rem;animation:fu .22s ease}.sp.active{display:block}
+.sl{font-family:'Outfit',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);margin-bottom:.58rem;margin-top:1.55rem;display:flex;align-items:center;gap:.5rem}
+.sl::after{content:'';flex:1;height:1px;background:var(--border)}.sl:first-child{margin-top:0}
+p{font-size:.9375rem;color:#b5b0be;line-height:1.88}p+p{margin-top:.65rem}
+.hl{color:var(--white);font-weight:500}
+.art{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--ili);font-weight:500}
+ul,ol{padding-left:1.25rem;margin-top:.48rem}
+li{font-size:.9rem;color:#aeaab8;line-height:1.82;margin-bottom:.2rem}li strong{color:var(--white);font-weight:500}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:.88rem;margin-top:.68rem}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:.72rem;margin-top:.68rem}
+@media(max-width:640px){.g2,.g3{grid-template-columns:1fr}}
+.card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:1rem;box-shadow:0 2px 8px rgba(0,0,0,.18);transition:border-color .2s,box-shadow .2s}.card:hover{border-color:var(--border2);box-shadow:0 4px 16px rgba(0,0,0,.28)}
+.ct{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.55rem;display:flex;align-items:center;gap:.4rem}
+.ct::before{content:'';width:3px;height:11px;border-radius:2px;flex-shrink:0}
+.ci .ct{color:var(--ili)}.ci .ct::before{background:var(--ili)}
+.cn .ct{color:var(--ned)}.cn .ct::before{background:var(--ned)}
+.cl .ct{color:var(--lde)}.cl .ct::before{background:var(--lde)}
+.cd .ct{color:var(--dem)}.cd .ct::before{background:var(--dem)}
+.ce .ct{color:var(--exs)}.ce .ct::before{background:var(--exs)}
+.co{display:flex;gap:.75rem;padding:.88rem 1rem;border-radius:10px;margin-top:.82rem;font-size:.83rem;line-height:1.72;color:#aeaab8}
+.co-ico{font-size:.92rem;flex-shrink:0;margin-top:.05rem}.co strong{font-weight:500}
+.cw{background:rgba(212,168,67,.07);border:1px solid rgba(212,168,67,.2)}.cw strong{color:var(--dem)}
+.cb{background:rgba(92,158,224,.07);border:1px solid rgba(92,158,224,.2)}.cb strong{color:var(--ned)}
+.cr{background:rgba(224,122,92,.07);border:1px solid rgba(224,122,92,.2)}.cr strong{color:var(--ili)}
+.cg{background:rgba(92,201,138,.07);border:1px solid rgba(92,201,138,.2)}.cg strong{color:var(--lde)}
+.cp{background:rgba(224,110,140,.07);border:1px solid rgba(224,110,140,.2)}.cp strong{color:var(--exs)}
+.tw{overflow-x:auto;margin-top:.68rem;border-radius:10px;border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:.82rem}
+th{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);padding:.68rem 1rem;background:var(--surface2);border-bottom:1px solid var(--border);text-align:left;white-space:nowrap}
+td{padding:.62rem 1rem;border-bottom:1px solid var(--border);color:#aeaab8;vertical-align:top;line-height:1.6}
+tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.012)}td strong{color:var(--white);font-weight:500}
+.hub-footer{position:relative;z-index:5;max-width:1100px;margin:3rem auto 0;padding:1.5rem 2rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.ft-left{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--text3);letter-spacing:.08em}
+.ft-right{font-family:'JetBrains Mono',monospace;font-size:.55rem;color:var(--text3)}.ft-right a{color:var(--text2);text-decoration:none}.ft-right a:hover{color:var(--white)}
+.qwrap{padding:1.5rem 2rem 2rem}
+.qtop{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.4rem}
+.qtitle{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:700;color:var(--white)}
+.sbadge{font-family:'Outfit',sans-serif;font-size:.65rem;padding:.26rem .72rem;border-radius:100px;background:var(--surface2);border:1px solid var(--border);color:var(--text2)}
+.qdots{display:flex;gap:.28rem;flex-wrap:wrap;margin-bottom:1.2rem}
+.qdot{width:7px;height:7px;border-radius:50%;background:var(--border2);transition:all .2s}
+.qdot.cur{background:var(--text2)}.qdot.ok{background:#5cc98a}.qdot.err{background:#e06e8c}
+[data-theme=light] .qdot.ok{background:#289050}[data-theme=light] .qdot.err{background:#c04070}
+.qq{display:none;animation:fu .26s ease}.qq.active{display:block}
+.qnum{font-family:'JetBrains Mono',monospace;font-size:.56rem;color:var(--text3);letter-spacing:.1em;margin-bottom:.6rem}
+.qtext{font-size:.96rem;color:var(--white);line-height:1.68;margin-bottom:1.15rem;font-weight:400}
+.qopts{display:flex;flex-direction:column;gap:.42rem}
+.qopt{display:flex;align-items:flex-start;gap:.65rem;padding:.82rem .92rem;border:1px solid var(--border);border-radius:10px;cursor:pointer;transition:all .2s;background:var(--surface2);text-align:left;width:100%}
+.qopt:hover:not(:disabled){border-color:var(--border2)}
+.ql{font-family:'JetBrains Mono',monospace;font-size:.6rem;width:20px;height:20px;border-radius:6px;background:var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--text2);transition:all .2s}
+.qt{font-size:.84rem;color:#aeaab8;line-height:1.6}
+.qopt.correct{border-color:#5cc98a;background:rgba(92,201,138,.10)}.qopt.correct .ql{background:#5cc98a;color:#000}.qopt.correct .qt{color:var(--white)}
+.qopt.wrong{border-color:#e06e8c;background:rgba(224,110,140,.10)}.qopt.wrong .ql{background:#e06e8c;color:#fff}
+.qopt.disabled{cursor:default;opacity:.54}.qopt.disabled.correct{opacity:1}
+.qfb{display:none;margin-top:.88rem;padding:.88rem 1rem;border-radius:5px;font-size:.83rem;line-height:1.68;color:#aeaab8}
+.qfb.show{display:block;animation:fu .18s ease}
+.qfb.ok{background:rgba(92,201,138,.08);border:1px solid rgba(92,201,138,.26)}.qfb.ok strong{color:#5cc98a}
+.qfb.ng{background:rgba(224,110,140,.08);border:1px solid rgba(224,110,140,.26)}.qfb.ng strong{color:#e06e8c}
+.qnav{display:flex;align-items:center;justify-content:space-between;margin-top:1.35rem}
+.qbn{padding:.68rem 1.45rem;font-family:'Outfit',sans-serif;font-size:.6rem;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;transition:all .2s;border:none;border-radius:100px}
+.qbn-next{background:#5cc98a;color:#000;display:none}.qbn-next:hover{opacity:.88}.qbn-next.show{display:block}
+.qbn-rs{background:var(--surface2);border:1px solid var(--border);color:var(--text2)}.qbn-rs:hover{border-color:var(--border2);color:var(--text)}
+.qres{display:none;text-align:center;padding:2.5rem 0}.qres.show{display:block;animation:fu .28s ease}
+.rscore{font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:700;color:var(--white);line-height:1}
+.rlabel{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--text3);letter-spacing:.15em;text-transform:uppercase;margin-top:.4rem}
+.rbar{margin:1.5rem auto 0;max-width:260px;display:flex;align-items:center;gap:.75rem}
+.rbt{flex:1;height:5px;background:var(--border2);border-radius:10px;overflow:hidden}
+.rbf{height:100%;background:linear-gradient(90deg,var(--ili),var(--lde));border-radius:10px;transition:width 1s ease}
+@media(max-width:600px){.hdr,.main,.mnav{padding-left:1rem;padding-right:1rem}.hub-footer{padding:1.5rem 1rem}}
 [data-theme=light]{
   --bg:#f0eef7;--surface:#ffffff;--surface2:#f4f2fb;--surface3:#eceaf5;
   --border:rgba(0,0,0,.07);--border2:rgba(0,0,0,.14);
   --text:#1a1828;--text2:#6a6480;--text3:#9a94b0;--white:#0a0818;
-  --civil:#c04070;--civil-dim:rgba(192,64,112,.1);--civil-mid:rgba(192,64,112,.18);
-  --const:#5060c8;--const-dim:rgba(80,96,200,.1);--const-mid:rgba(80,96,200,.18);
-  --proc:#2088b0;--proc-dim:rgba(32,136,176,.1);--proc-mid:rgba(32,136,176,.18);
-  --penal:#b85030;--penal-dim:rgba(184,80,48,.1);--penal-mid:rgba(184,80,48,.18);
-  --eca:#289050;--eca-dim:rgba(40,144,80,.1);--eca-mid:rgba(40,144,80,.18);
-  --gold:#987020;--gold-dim:rgba(152,112,32,.1)}
+  --ili:#c05030;--ili-dim:rgba(192,80,48,.10);--ili-mid:rgba(192,80,48,.18);
+  --ned:#2888c0;--ned-dim:rgba(40,136,192,.10);--ned-mid:rgba(40,136,192,.18);
+  --lde:#289050;--lde-dim:rgba(40,144,80,.10);--lde-mid:rgba(40,144,80,.18);
+  --dem:#987020;--dem-dim:rgba(152,112,32,.10);--dem-mid:rgba(152,112,32,.18);
+  --exs:#c04070;--exs-dim:rgba(192,64,112,.10);--exs-mid:rgba(192,64,112,.18);
+}
 [data-theme=light] body::before{opacity:.18}
-[data-theme=light] .disc-pill{background:transparent}
-
-/* ── THEME TOGGLE ── */
+[data-theme=light] p{color:#3a3632}
+[data-theme=light] li{color:#3a3632}
+[data-theme=light] .co{color:#3a3632}
 .theme-toggle{position:fixed;bottom:1.75rem;right:1.75rem;z-index:100;width:40px;height:40px;border-radius:50%;background:var(--surface2);border:1px solid var(--border2);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text2);transition:background .2s,border-color .2s,color .2s,box-shadow .2s}
 .theme-toggle:hover{background:var(--surface);color:var(--text);box-shadow:0 4px 20px rgba(0,0,0,.18)}
-.theme-toggle:focus-visible{outline:2px solid var(--gold,#d4a843);outline-offset:3px}
+.theme-toggle:focus-visible{outline:2px solid var(--ili,#e07a5c);outline-offset:3px}
 .theme-toggle svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;display:block}
 .icon-sun{display:none}.icon-moon{display:block}
-[data-theme=light] .icon-sun{display:block}[data-theme=light] .icon-moon{display:none}</style>
+[data-theme=light] .icon-sun{display:block}[data-theme=light] .icon-moon{display:none}
+@media(prefers-reduced-motion:reduce){.mod{animation:none}.sp{animation:none}@keyframes fu{from{opacity:1;transform:none}to{opacity:1;transform:none}}}
+</style>
 </head>
 <body>
-<div class="wrap">
+
+<div class="hdr">
   <a class="back" href="../../index.html">&#8592; Central de Resumos</a>
   <div class="ey">Direito Penal I &mdash; Prova 1 &middot; UFN 2026/1</div>
-  <h1 class="htitle">Princípios e<br><em>Lei Penal</em></h1>
-  <div class="disc-pill"><span class="dot"></span>Direito Penal I</div>
-  <div class="wip">
-    <div class="wip-icon" aria-hidden="true"></div>
-    <div class="wip-title">Resumo em preparação</div>
-    <div class="wip-text">O conteúdo deste resumo será adicionado em breve.<br>Volte quando o material estiver disponível.</div>
-    <div class="accent-line"></div>
-    <div class="topics">
-      <span class="topic">Princípio da legalidade</span>
-      <span class="topic">Intervenção mínima</span>
-      <span class="topic">Culpabilidade</span>
-      <span class="topic">Lei penal no tempo</span>
-      <span class="topic">Retroatividade benéfica</span>
-      <span class="topic">Lei penal no espaço</span>
-      <span class="topic">Territorialidade · art. 5º CP</span>
+  <h1 class="htitle">Ilicitude<br><em>e Excludentes de Ilicitude</em></h1>
+  <div class="hsub">Arts. 23–25 CP &middot; Estado de Necessidade &middot; Legítima Defesa &middot; Consentimento do Ofendido &middot; Excesso &middot; Banca UFN</div>
+  <div class="banca-pill"><span class="p"></span>Banca UFN &mdash; Estilo de Questões Identificado</div>
+  <div class="sw" role="search">
+    <span class="sic" aria-hidden="true">&#x2315;</span>
+    <input class="si" type="text" placeholder="Buscar neste resumo..." oninput="doSearch(this.value)" aria-label="Buscar conceito" autocomplete="off">
+  </div>
+</div>
+
+<nav class="mnav">
+  <button class="nb active" data-m="ili" onclick="switchMod('ili',this)"><span class="d"></span>Ilicitude</button>
+  <button class="nb" data-m="ned" onclick="switchMod('ned',this)"><span class="d"></span>Estado de Necessidade</button>
+  <button class="nb" data-m="lde" onclick="switchMod('lde',this)"><span class="d"></span>Legítima Defesa</button>
+  <button class="nb" data-m="dem" onclick="switchMod('dem',this)"><span class="d"></span>Demais Excludentes</button>
+  <button class="nb" data-m="exs" onclick="switchMod('exs',this)"><span class="d"></span>Excesso</button>
+  <button class="nb" data-m="quiz" onclick="switchMod('quiz',this)"><span class="d"></span>Quiz (15 q.)</button>
+</nav>
+
+<main class="main">
+
+<!-- ═══ MÓDULO 1: ILICITUDE ═══ -->
+<div class="mod active" id="mod-ili">
+  <div class="mhd" data-c="ili">
+    <div class="mi" data-c="ili">⚖️</div>
+    <div>
+      <div class="mnum">Módulo 01</div>
+      <div class="mtitle">Ilicitude</div>
+      <div class="mdesc">Segundo substrato do crime. Antijuridicidade formal e material. Art. 23 CP.</div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="ili" onclick="switchTab(this,'i1t1')">Conceito</button>
+      <button class="stab" data-c="ili" onclick="switchTab(this,'i1t2')">Formal e Material</button>
+      <button class="stab" data-c="ili" onclick="switchTab(this,'i1t3')">Relação com Tipicidade</button>
+    </div>
+
+    <div class="sp active" id="i1t1">
+      <div class="sl">Conceito de Ilicitude</div>
+      <p>A <span class="hl">ilicitude</span> (ou antijuridicidade) é o <span class="hl">segundo substrato do crime</span>, correspondente à contradição entre o fato típico e o ordenamento jurídico como um todo. Um fato é ilícito quando não é amparado por nenhuma causa de justificação.</p>
+      <p>Na teoria tripartida do crime (tipicidade + ilicitude + culpabilidade), adotada majoritariamente no Brasil, a ilicitude é analisada após a tipicidade. A presença de uma <span class="hl">causa de exclusão de ilicitude</span> (excludente ou justificante) afasta o crime desde a segunda fase, sem necessidade de analisar a culpabilidade.</p>
+      <div class="sl">Art. 23 CP — Excludentes Legais</div>
+      <p>O <span class="art">art. 23 CP</span> prevê as causas legais de exclusão de ilicitude:</p>
+      <div class="g2">
+        <div class="card ci">
+          <div class="ct">Causas Legais (art. 23 CP)</div>
+          <ul>
+            <li><strong>Estado de necessidade</strong> (art. 24 CP)</li>
+            <li><strong>Legítima defesa</strong> (art. 25 CP)</li>
+            <li><strong>Estrito cumprimento do dever legal</strong></li>
+            <li><strong>Exercício regular de direito</strong></li>
+          </ul>
+        </div>
+        <div class="card ci">
+          <div class="ct">Causa Supralegal</div>
+          <ul>
+            <li><strong>Consentimento do ofendido</strong></li>
+            <li>Não previsto no CP, mas aceito pela doutrina e jurisprudência</li>
+            <li>Requisito: bem jurídico disponível</li>
+          </ul>
+        </div>
+      </div>
+      <div class="co cr"><span class="co-ico">!</span><div><strong>Efeito das excludentes:</strong> Presente uma excludente de ilicitude, o fato é lícito — não há crime. Terceiros não podem invocar legítima defesa contra quem age amparado por excludente. Não gera obrigação de indenizar (em regra).</div></div>
+    </div>
+
+    <div class="sp" id="i1t2">
+      <div class="sl">Antijuridicidade Formal</div>
+      <p>A <span class="hl">antijuridicidade formal</span> é a mera contradição entre a conduta e a norma jurídica, sem apreciação do conteúdo valorativo do ato. Para essa concepção, basta que o fato contrarie o ordenamento — independentemente de efetiva lesão ao bem jurídico.</p>
+      <div class="sl">Antijuridicidade Material</div>
+      <p>A <span class="hl">antijuridicidade material</span> exige a <span class="hl">lesão ou perigo concreto ao bem jurídico tutelado</span> — a chamada danosidade social. Para essa concepção (adotada por Roxin e pela doutrina moderna), um fato só é verdadeiramente antijurídico se lesionar ou colocar em perigo um bem jurídico relevante.</p>
+      <div class="g2">
+        <div class="card ci">
+          <div class="ct">Formal</div>
+          <ul>
+            <li>Contrariedade à norma jurídica</li>
+            <li>Independe de lesão real ao bem jurídico</li>
+            <li>Visão mais positivista</li>
+          </ul>
+        </div>
+        <div class="card ci">
+          <div class="ct">Material</div>
+          <ul>
+            <li>Lesão ou perigo concreto ao bem jurídico</li>
+            <li>Danosidade social real</li>
+            <li>Base para o princípio da insignificância</li>
+          </ul>
+        </div>
+      </div>
+      <div class="co cg"><span class="co-ico">✓</span><div><strong>Princípio da insignificância:</strong> Fundado na antijuridicidade material — se a lesão ao bem jurídico for ínfima (furto de um chiclete, por ex.), o fato típico não é materialmente antijurídico, podendo ser atipicidade material.</div></div>
+    </div>
+
+    <div class="sp" id="i1t3">
+      <div class="sl">Teorias sobre a Relação Tipicidade–Ilicitude</div>
+      <div class="tw"><table>
+        <thead><tr><th>Teoria</th><th>Relação</th><th>Consequência</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Autonomia</strong></td><td>Tipicidade e ilicitude são completamente independentes</td><td>Fato típico não diz nada sobre a ilicitude</td></tr>
+          <tr><td><strong>Indício (ratio cognoscendi)</strong><br><em>Mayer / Mezger</em></td><td>Tipicidade é indício (presunção relativa) de ilicitude</td><td>Todo fato típico presume-se ilícito — salvo se presente excludente</td></tr>
+          <tr><td><strong>Identidade (ratio essendi)</strong><br><em>Zaffaroni</em></td><td>Tipicidade já contém o juízo de ilicitude</td><td>Tipo conglobante: fato com excludente não é sequer típico</td></tr>
+        </tbody>
+      </table></div>
+      <div class="co cb"><span class="co-ico">ℹ</span><div><strong>Posição adotada pelo CP:</strong> O CP adota implicitamente a <strong>teoria do indício</strong> (ratio cognoscendi) — todo fato típico é presumivelmente ilícito, salvo quando presente uma das excludentes do art. 23. O elemento subjetivo das justificantes é exigido.</div></div>
+      <div class="sl">Elemento Subjetivo das Justificantes</div>
+      <p>O agente deve <span class="hl">conhecer a situação de justificação</span> e agir com a intenção de repelir agressão, salvar direito etc. Quem, por acaso, mata alguém que ia matá-lo (sem saber) não age em legítima defesa — pois falta o elemento subjetivo.</p>
     </div>
   </div>
 </div>
-<footer class="ft">
-  <span>Guto Ceolin &middot; UFN &middot; Direito Penal I &middot; 2026/1</span>
-  <a href="../../index.html">← Voltar ao Hub</a>
+
+<!-- ═══ MÓDULO 2: ESTADO DE NECESSIDADE ═══ -->
+<div class="mod" id="mod-ned">
+  <div class="mhd" data-c="ned">
+    <div class="mi" data-c="ned">🛡</div>
+    <div>
+      <div class="mnum">Módulo 02</div>
+      <div class="mtitle">Estado de Necessidade</div>
+      <div class="mdesc">Art. 24 CP. Perigo atual, inevitabilidade, proporcionalidade e teorias.</div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="ned" onclick="switchTab(this,'n1t1')">Conceito e Requisitos</button>
+      <button class="stab" data-c="ned" onclick="switchTab(this,'n1t2')">Teorias</button>
+      <button class="stab" data-c="ned" onclick="switchTab(this,'n1t3')">Espécies e Quadro Comparativo</button>
+    </div>
+
+    <div class="sp active" id="n1t1">
+      <div class="sl">Art. 24 CP</div>
+      <p><em>"Considera-se em estado de necessidade quem pratica o fato para salvar de <span class="hl">perigo atual</span>, que não provocou por sua vontade, nem podia de outro modo evitar, direito próprio ou alheio, cujo sacrifício, nas circunstâncias, não era razoável exigir-se."</em></p>
+      <div class="sl">Requisitos do Estado de Necessidade</div>
+      <ol>
+        <li><strong>Perigo atual</strong> — não admite perigo passado (encerrado) nem futuro (ainda não iniciado)</li>
+        <li><strong>Que não provocou por sua vontade</strong> — provocação dolosa afasta o EN; provocação culposa é controversa (maioria afasta o EN justificante, admite redução de pena)</li>
+        <li><strong>Inevitabilidade</strong> — não havia outro meio de evitar o perigo (subsidiariedade)</li>
+        <li><strong>Direito próprio ou alheio</strong> — pode agir em EN para salvar bem de terceiro (<em>estado de necessidade de terceiro</em>)</li>
+        <li><strong>Proporcionalidade</strong> — o bem sacrificado deve ser de valor igual ou menor ao bem salvo (ponderação valorativa)</li>
+        <li><strong>Não obrigação de enfrentar o perigo</strong> — o garante (art. 13, §2º CP) não pode invocar EN para não agir</li>
+      </ol>
+      <div class="co cw"><span class="co-ico">⚠</span><div><strong>Art. 24, §1º CP:</strong> Se o sacrifício do bem era razoável exigir — ou seja, o bem sacrificado era de valor superior — o juiz pode <strong>reduzir a pena de um a dois terços</strong>. Não exclui o crime, apenas atenua a pena.</div></div>
+      <div class="co cb"><span class="co-ico">ℹ</span><div><strong>Art. 24, §2º CP:</strong> Embora o texto use "embora", a interpretação é: o agente cujo dever é enfrentar o perigo (bombeiro, policial) não pode invocar EN. Admite-se EN para bens pessoais quando o perigo for extraordinário.</div></div>
+    </div>
+
+    <div class="sp" id="n1t2">
+      <div class="sl">Teoria Unitária (Monista)</div>
+      <p>Adotada pelo CP brasileiro. O estado de necessidade é <span class="hl">sempre causa de justificação</span> (exclui ilicitude), independentemente da relação de valor entre os bens. Não há distinção entre EN justificante e EN exculpante na lei. Se o sacrifício era razoável exigir, não se exclui o crime — mas há diminuição de pena (art. 24, §1º).</p>
+      <div class="sl">Teoria Diferenciadora (Alemã)</div>
+      <p>Distingue o EN em duas modalidades com consequências distintas:</p>
+      <div class="g2">
+        <div class="card cn">
+          <div class="ct">EN Justificante</div>
+          <ul>
+            <li>Bem salvo > bem sacrificado</li>
+            <li>Exclui a <strong>ilicitude</strong></li>
+            <li>Fato é lícito</li>
+            <li>Terceiros não podem reagir em LD</li>
+          </ul>
+        </div>
+        <div class="card cn">
+          <div class="ct">EN Exculpante</div>
+          <ul>
+            <li>Bens iguais ou salvo &lt; sacrificado</li>
+            <li>Exclui a <strong>culpabilidade</strong> (inexigibilidade)</li>
+            <li>Fato é ilícito mas não culpável</li>
+            <li>Terceiros podem reagir em LD</li>
+          </ul>
+        </div>
+      </div>
+      <div class="co cr"><span class="co-ico">!</span><div><strong>Para provas brasileiras:</strong> O CP adota a <strong>teoria unitária</strong>. A teoria diferenciadora é doutrina estrangeira (alemã). Saber a distinção é importante, mas aplicar a unitária quando a questão perguntar sobre o CP.</div></div>
+    </div>
+
+    <div class="sp" id="n1t3">
+      <div class="sl">Espécies de Estado de Necessidade</div>
+      <div class="g2">
+        <div class="card cn">
+          <div class="ct">EN Defensivo</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">O agente destrói ou sacrifica o <strong>bem do próprio gerador do perigo</strong>. Ex: cachorro feroz ataca pessoa; ela mata o animal para se defender.</p>
+        </div>
+        <div class="card cn">
+          <div class="ct">EN Agressivo</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">O agente destrói bem de <strong>terceiro inocente</strong> para salvar seu próprio bem. Ex: naufrago que empurra outro para ficar com a tábua. Gera dever de indenizar o terceiro.</p>
+        </div>
+      </div>
+      <div class="sl">Quadro Comparativo: EN vs. Legítima Defesa</div>
+      <div class="tw"><table>
+        <thead><tr><th>Critério</th><th>Estado de Necessidade</th><th>Legítima Defesa</th></tr></thead>
+        <tbody>
+          <tr><td>Origem do perigo</td><td>Situação de perigo (qualquer causa)</td><td>Agressão humana injusta</td></tr>
+          <tr><td>Bens em conflito</td><td>Dois bens legítimos em colisão</td><td>Bem legítimo vs agressão injusta</td></tr>
+          <tr><td>Perigo</td><td>Apenas <strong>atual</strong></td><td>Atual <strong>ou iminente</strong></td></tr>
+          <tr><td>Provocação</td><td>Não pode ter provocado dolosamente</td><td>Pode reagir mesmo sendo o provocador inicial</td></tr>
+          <tr><td>Reação de terceiros</td><td>Podem agir em EN contra o agente</td><td>Não podem agir em LD contra o agente</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MÓDULO 3: LEGÍTIMA DEFESA ═══ -->
+<div class="mod" id="mod-lde">
+  <div class="mhd" data-c="lde">
+    <div class="mi" data-c="lde">🗡</div>
+    <div>
+      <div class="mnum">Módulo 03</div>
+      <div class="mtitle">Legítima Defesa</div>
+      <div class="mdesc">Art. 25 CP. Requisitos, casos especiais e diferenças com estado de necessidade.</div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="lde" onclick="switchTab(this,'l1t1')">Conceito e Requisitos</button>
+      <button class="stab" data-c="lde" onclick="switchTab(this,'l1t2')">Elementos Detalhados</button>
+      <button class="stab" data-c="lde" onclick="switchTab(this,'l1t3')">Casos Especiais</button>
+    </div>
+
+    <div class="sp active" id="l1t1">
+      <div class="sl">Art. 25 CP</div>
+      <p><em>"Entende-se em legítima defesa quem, usando <span class="hl">moderadamente</span> dos <span class="hl">meios necessários</span>, repele <span class="hl">injusta agressão</span>, <span class="hl">atual ou iminente</span>, a <span class="hl">direito seu ou de outrem</span>."</em></p>
+      <div class="sl">Requisitos da Legítima Defesa</div>
+      <div class="g2">
+        <div class="card cl">
+          <div class="ct">Requisitos Objetivos</div>
+          <ol>
+            <li>Agressão <strong>injusta</strong> (ilícita — não precisa ser crime)</li>
+            <li>Agressão <strong>atual ou iminente</strong> (não passada)</li>
+            <li>A direito <strong>próprio ou alheio</strong></li>
+            <li>Uso dos <strong>meios necessários</strong></li>
+            <li>Uso <strong>moderado</strong> dos meios</li>
+          </ol>
+        </div>
+        <div class="card cl">
+          <div class="ct">Requisito Subjetivo</div>
+          <ul>
+            <li>Conhecimento da situação de agressão</li>
+            <li>Vontade de defender-se (ou a terceiro)</li>
+            <li>Ânimo de defesa — não de vingança</li>
+            <li>Ausência: exclui a justificante mesmo que objetivamente presentes os demais requisitos</li>
+          </ul>
+        </div>
+      </div>
+      <div class="co cg"><span class="co-ico">✓</span><div><strong>Legítima defesa de terceiro:</strong> Qualquer pessoa pode agir em legítima defesa de outrem, mesmo sem qualquer vínculo com o terceiro atacado. Não se exige relação familiar ou parentesco.</div></div>
+    </div>
+
+    <div class="sp" id="l1t2">
+      <div class="sl">Agressão Injusta</div>
+      <p>A agressão deve ser <span class="hl">injusta</span> — contrária ao direito. Não precisa ser crime. Pode ser praticada por inimputável (louco, menor). Não há LD contra ato lícito (quem está em EN ou em LD não pode ser objeto de LD).</p>
+      <div class="sl">Meios Necessários</div>
+      <p>São os meios <span class="hl">menos lesivos disponíveis</span> que sejam eficazes para repelir a agressão. O agente não é obrigado a usar o meio menos letal se isso o colocar em risco — deve usar o meio necessário eficaz mais moderado.</p>
+      <div class="sl">Uso Moderado</div>
+      <p>Mesmo usando o meio necessário, o agente deve usá-lo com <span class="hl">proporcionalidade</span>. Ir além do necessário para cessar a agressão configura <span class="hl">excesso</span>. Exemplo: o agressor cai e desiste — continuar a agressão é excesso.</p>
+      <div class="sl">Atual ou Iminente</div>
+      <div class="g2">
+        <div class="card cl">
+          <div class="ct">Agressão Atual</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Em curso no momento da defesa. Admite LD enquanto dura a agressão.</p>
+        </div>
+        <div class="card cl">
+          <div class="ct">Agressão Iminente</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Prestes a ocorrer, imediatamente. Permite antecipação da defesa. Não confundir com agressão futura (não admite LD).</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sp" id="l1t3">
+      <div class="sl">Legítima Defesa Putativa</div>
+      <p>O agente <span class="hl">imagina erroneamente</span> que está sendo agredido injustamente. Não há agressão real — apenas na mente do agente. Configura <span class="hl">erro de tipo permissivo</span> (erro sobre pressuposto fático de excludente): exclui o dolo, podendo restar a culpa se o erro foi evitável.</p>
+      <div class="sl">Legítima Defesa Recíproca</div>
+      <p>Em regra, <span class="hl">não é possível</span>. Ninguém pode estar em legítima defesa contra quem está em legítima defesa — pois a agressão de quem está em LD não é "injusta". Exceção: LD de terceiro contra o <span class="hl">excesso</span> do agressor inicial (a vítima do excesso reage ao excesso, não à LD original).</p>
+      <div class="sl">Legítima Defesa Sucessiva</div>
+      <p>É possível. A vítima da agressão inicial, ao exercer sua LD, pode exceder — e então o agressor original pode agir em LD contra o <span class="hl">excesso</span> da vítima. A LD sucessiva é contra o excesso, não contra a LD.</p>
+      <div class="co cr"><span class="co-ico">!</span><div><strong>Legítima defesa subjetiva:</strong> Excesso causado por medo, susto ou perturbação em situação real de perigo. Doutrina entende que pode excluir a culpabilidade (causa supralegal de inexigibilidade). Distinção: putativa = agressão imaginária; subjetiva = agressão real + excesso por perturbação.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MÓDULO 4: DEMAIS EXCLUDENTES ═══ -->
+<div class="mod" id="mod-dem">
+  <div class="mhd" data-c="dem">
+    <div class="mi" data-c="dem">📋</div>
+    <div>
+      <div class="mnum">Módulo 04</div>
+      <div class="mtitle">Demais Excludentes</div>
+      <div class="mdesc">Estrito cumprimento do dever legal, exercício regular de direito e consentimento do ofendido.</div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="dem" onclick="switchTab(this,'d1t1')">Estrito Cumprimento</button>
+      <button class="stab" data-c="dem" onclick="switchTab(this,'d1t2')">Exercício Regular de Direito</button>
+      <button class="stab" data-c="dem" onclick="switchTab(this,'d1t3')">Consentimento do Ofendido</button>
+    </div>
+
+    <div class="sp active" id="d1t1">
+      <div class="sl">Estrito Cumprimento do Dever Legal</div>
+      <p>Age acobertado por esta excludente quem pratica um fato típico no cumprimento de um <span class="hl">dever imposto por lei</span>. O ordenamento, ao mesmo tempo que tipifica a conduta, impõe a alguns agentes o dever de praticá-la.</p>
+      <div class="g2">
+        <div class="card cd">
+          <div class="ct">Exemplos</div>
+          <ul>
+            <li>Policial que prende em flagrante (cárcere privado lícito)</li>
+            <li>Carrasco que executa pena de morte (homicídio lícito, onde vigente)</li>
+            <li>Soldado que mata em guerra regular</li>
+            <li>Oficial de justiça que penhor judicial</li>
+          </ul>
+        </div>
+        <div class="card cd">
+          <div class="ct">Requisitos</div>
+          <ul>
+            <li>Dever imposto por <strong>lei</strong> (não basta regulamento ou ordem ilegal)</li>
+            <li>Agir dentro dos limites do dever — <strong>estrito</strong></li>
+            <li>Qualquer excesso descaracteriza a excludente</li>
+            <li>Elemento subjetivo: conhecer que age no cumprimento do dever</li>
+          </ul>
+        </div>
+      </div>
+      <div class="co cw"><span class="co-ico">⚠</span><div><strong>Ordem ilegal:</strong> O cumprimento de ordem manifestamente ilegal não é acobertado pelo estrito cumprimento do dever legal — ao contrário, quem a cumpre responde pelo crime. Só afasta a responsabilidade se a ilegalidade não era manifesta e o agente agiu de boa-fé.</div></div>
+    </div>
+
+    <div class="sp" id="d1t2">
+      <div class="sl">Exercício Regular de Direito</div>
+      <p>Quem age dentro dos limites de um <span class="hl">direito reconhecido pelo ordenamento jurídico</span> não comete crime, mesmo que a conduta seja formalmente típica. O fundamento está no brocardo <em>qui iure suo utitur neminem laedit</em> (quem usa seu direito a ninguém prejudica).</p>
+      <div class="g2">
+        <div class="card cd">
+          <div class="ct">Exemplos</div>
+          <ul>
+            <li>Cirurgião que faz operação (lesão corporal lícita)</li>
+            <li>Advogado que imputa fato ao réu ou testemunha em juízo</li>
+            <li>Desporto violento (boxe, MMA, futebol) — lesões no curso regular</li>
+            <li>Intervenção corretiva moderada dos pais (poder familiar — polêmico após Lei da Palmada)</li>
+            <li>Caçador que abate animal em temporada legal</li>
+          </ul>
+        </div>
+        <div class="card cd">
+          <div class="ct">Requisitos</div>
+          <ul>
+            <li>Direito reconhecido pelo ordenamento</li>
+            <li>Exercício <strong>regular</strong> — dentro dos limites</li>
+            <li>Excesso configura ilicitude</li>
+            <li>Conhecimento da situação justificante</li>
+          </ul>
+        </div>
+      </div>
+      <div class="co cg"><span class="co-ico">✓</span><div><strong>Esportes de contato:</strong> As lesões decorrentes do exercício regular das regras do esporte são lícitas. Lesão intencional fora das regras (pancada maliciosa) não é acobertada — pode ser crime.</div></div>
+    </div>
+
+    <div class="sp" id="d1t3">
+      <div class="sl">Consentimento do Ofendido</div>
+      <p>Causa <span class="hl">supralegal</span> de exclusão de ilicitude — não prevista no art. 23 CP, mas reconhecida pela doutrina e jurisprudência. O consentimento do titular do bem jurídico afasta a ilicitude quando o bem é disponível.</p>
+      <div class="sl">Requisitos do Consentimento</div>
+      <ol>
+        <li><strong>Bem jurídico disponível</strong> — a vida é indisponível (eutanásia ativa não é lícita); integridade corporal é parcialmente disponível; patrimônio é disponível</li>
+        <li><strong>Capacidade de consentir</strong> — titular com discernimento; menor ou incapaz não pode consentir eficazmente</li>
+        <li><strong>Consentimento anterior ou contemporâneo</strong> ao fato — consentimento posterior é irrelevante para a ilicitude (pode excluir representação)</li>
+        <li><strong>Ausência de vício de vontade</strong> — não pode ser obtido por fraude, coação ou erro</li>
+        <li><strong>Consentimento expresso ou inequivocamente tácito</strong></li>
+      </ol>
+      <div class="g2">
+        <div class="card cd">
+          <div class="ct">Exemplos Lícitos</div>
+          <ul>
+            <li>Tatuagem e body piercing</li>
+            <li>Cirurgia estética eletiva</li>
+            <li>Lesões em lutas com consentimento</li>
+            <li>Subtração de bem próprio com autorização</li>
+          </ul>
+        </div>
+        <div class="card cd">
+          <div class="ct">Limites</div>
+          <ul>
+            <li>Homicídio a pedido: crime (vida indisponível)</li>
+            <li>Lesão grave ou gravíssima: art. 13, §3º,<em>b</em> CP — tráfico pode afastar o consentimento</li>
+            <li>Crimes contra a dignidade sexual do menor: sem eficácia</li>
+          </ul>
+        </div>
+      </div>
+      <div class="co cr"><span class="co-ico">!</span><div><strong>Atenção:</strong> O consentimento pode funcionar como excludente de tipicidade (quando o tipo exige ausência de consentimento — ex: violação de domicílio) ou de ilicitude (quando o tipo não menciona o consentimento como elementar).</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MÓDULO 5: EXCESSO ═══ -->
+<div class="mod" id="mod-exs">
+  <div class="mhd" data-c="exs">
+    <div class="mi" data-c="exs">⚡</div>
+    <div>
+      <div class="mnum">Módulo 05</div>
+      <div class="mtitle">Excesso</div>
+      <div class="mdesc">Art. 23, §único CP. Excesso doloso, culposo e exculpante.</div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="exs" onclick="switchTab(this,'e1t1')">Excesso Doloso</button>
+      <button class="stab" data-c="exs" onclick="switchTab(this,'e1t2')">Excesso Culposo</button>
+      <button class="stab" data-c="exs" onclick="switchTab(this,'e1t3')">Excesso Exculpante</button>
+    </div>
+
+    <div class="sp active" id="e1t1">
+      <div class="sl">Art. 23, §único CP</div>
+      <p><em>"O agente, em qualquer das causas de justificação, <span class="hl">responderá pelo excesso doloso ou culposo</span>."</em></p>
+      <p>O excesso ocorre quando o agente, originalmente em situação de justificante, vai <span class="hl">além do necessário</span> para afastar o perigo ou repelir a agressão. A excludente deixa de protegê-lo no ponto em que ultrapassa os limites.</p>
+      <div class="sl">Excesso Doloso (Intensivo)</div>
+      <p>O agente, de forma <span class="hl">consciente e deliberada</span>, continua a agressão após cessada a necessidade de defesa ou após neutralizado o perigo. Age com vontade de lesar além do necessário.</p>
+      <div class="g2">
+        <div class="card ce">
+          <div class="ct">Características</div>
+          <ul>
+            <li>Consciência de que o perigo/agressão cessou</li>
+            <li>Vontade de continuar a conduta lesiva</li>
+            <li>Motivação: vingança, ira, crueldade</li>
+          </ul>
+        </div>
+        <div class="card ce">
+          <div class="ct">Consequências</div>
+          <ul>
+            <li>Responde pelo resultado <strong>a título de dolo</strong></li>
+            <li>A excludente vale até o ponto de excesso; o excesso é crime</li>
+            <li>Ex: após desarmar o agressor, continua espancando-o</li>
+          </ul>
+        </div>
+      </div>
+      <div class="co cp"><span class="co-ico">⚠</span><div><strong>Cuidado:</strong> O excesso doloso pode gerar homicídio doloso qualificado se praticado com crueldade ou por motivo torpe. A qualificadora incide sobre o excesso, não sobre a defesa inicial.</div></div>
+    </div>
+
+    <div class="sp" id="e1t2">
+      <div class="sl">Excesso Culposo (Extensivo)</div>
+      <p>O agente excede os limites da justificante por <span class="hl">imprudência, negligência ou imperícia</span> — não por vontade, mas por falta de cuidado no momento da reação. O excesso é involuntário.</p>
+      <div class="g2">
+        <div class="card ce">
+          <div class="ct">Características</div>
+          <ul>
+            <li>Excesso não intencional — por descuido ou pânico momentâneo</li>
+            <li>Agente queria apenas afastar o perigo, mas foi longe demais</li>
+            <li>Causas: nervosismo, avaliação incorreta da situação</li>
+          </ul>
+        </div>
+        <div class="card ce">
+          <div class="ct">Consequências</div>
+          <ul>
+            <li>Responde pelo resultado <strong>a título de culpa</strong></li>
+            <li>Somente se houver previsão legal de crime culposo</li>
+            <li>Ex: em pânico, dispara mais vezes do que o necessário</li>
+          </ul>
+        </div>
+      </div>
+      <div class="co cp"><span class="co-ico">⚠</span><div><strong>Ausência de modalidade culposa:</strong> Se o crime resultante do excesso não admite modalidade culposa (ex: dano culposo não é crime no CP), o agente não responde penalmente — embora possa haver responsabilidade civil.</div></div>
+    </div>
+
+    <div class="sp" id="e1t3">
+      <div class="sl">Excesso Exculpante (Intensivo por Perturbação)</div>
+      <p>O excesso causado por <span class="hl">medo, susto, perturbação ou terror</span> em situação de perigo real e grave. Não está previsto expressamente no CP, mas é reconhecido pela doutrina majoritária como <span class="hl">causa supralegal de exclusão da culpabilidade</span> (inexigibilidade de conduta diversa).</p>
+      <div class="g2">
+        <div class="card ce">
+          <div class="ct">Características</div>
+          <ul>
+            <li>Agressão ou perigo real e grave</li>
+            <li>Excesso causado por estado emocional intenso</li>
+            <li>Agente não consegue controlar a reação</li>
+            <li>Não há dolo nem culpa no excesso — há perturbação</li>
+          </ul>
+        </div>
+        <div class="card ce">
+          <div class="ct">Efeito Jurídico</div>
+          <ul>
+            <li>Exclui a <strong>culpabilidade</strong> (não a ilicitude)</li>
+            <li>Fato é típico e ilícito, mas não culpável</li>
+            <li>Causa supralegal — divergência doutrinária</li>
+            <li>Alguns reconhecem apenas atenuação da pena</li>
+          </ul>
+        </div>
+      </div>
+      <div class="co cg"><span class="co-ico">✓</span><div><strong>Distinção com legítima defesa subjetiva:</strong> Ambos envolvem perturbação, mas: na LD subjetiva a agressão ainda existe e o excesso é involuntário por medo; no excesso exculpante o agente conscientemente sabe que excede, mas não consegue controlar-se por terror.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MÓDULO QUIZ ═══ -->
+<div class="mod" id="mod-quiz">
+  <div class="mhd" data-c="ili">
+    <div class="mi" data-c="ili">📝</div>
+    <div>
+      <div class="mnum">Quiz</div>
+      <div class="mtitle">15 Questões — Banca UFN</div>
+      <div class="mdesc">Ilicitude · Estado de Necessidade · Legítima Defesa · Demais Excludentes · Excesso</div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="qwrap">
+      <div class="qtop">
+        <div class="qtitle">Simulado</div>
+        <div class="sbadge" id="qscore">0 / 15</div>
+      </div>
+      <div class="qdots" id="qdots"></div>
+      <div id="qzone"></div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer class="hub-footer">
+  <div class="ft-left">Guto Ceolin &middot; UFN &middot; Direito Penal I &middot; 2026/1</div>
+  <div class="ft-right"><a href="../../index.html">← Voltar ao Hub</a></div>
 </footer>
+
 <script>
-function toggleTheme(){var h=document.documentElement;var l=h.getAttribute('data-theme')==='light';h.setAttribute('data-theme',l?'dark':'light');localStorage.setItem('theme',l?'dark':'light');}
-</script><button class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar modo claro/escuro" title="Modo claro/escuro">
+const questions=[
+  {q:"Segundo a teoria do tipo indício (ratio cognoscendi), o fato típico é:",opts:["A) Sempre ilícito, sem possibilidade de justificação","B) Indício relativo de ilicitude, afastável por excludente","C) Irrelevante para a análise da ilicitude","D) Pressuposto absoluto de culpabilidade"],ans:1,fb:"Pela <strong>teoria do indício (ratio cognoscendi)</strong>, todo fato típico presume-se ilícito — é um indício relativo. Essa presunção cai quando presente uma causa de justificação (art. 23 CP)."},
+  {q:"O art. 23 do Código Penal prevê como causas legais de exclusão de ilicitude:",opts:["A) Estado de necessidade, legítima defesa, estrito cumprimento do dever legal e exercício regular de direito","B) Estado de necessidade, legítima defesa e consentimento do ofendido","C) Legítima defesa, coação moral irresistível e estrito cumprimento do dever legal","D) Estado de necessidade, embriaguez fortuita e exercício regular de direito"],ans:0,fb:"O <strong>art. 23 CP</strong> elenca quatro excludentes: estado de necessidade, legítima defesa, estrito cumprimento do dever legal e exercício regular de direito. O consentimento do ofendido é causa <em>supralegal</em>, não está no art. 23."},
+  {q:"No estado de necessidade (art. 24 CP), o perigo deve ser:",opts:["A) Futuro e inevitável","B) Atual e não provocado dolosamente pelo agente","C) Iminente ou atual, podendo ter sido provocado","D) Passado ou atual, desde que grave"],ans:1,fb:"O <strong>art. 24 CP</strong> exige perigo <strong>atual</strong> (não futuro nem passado) e que o agente não o tenha provocado por sua <strong>vontade</strong> (provocação dolosa afasta o EN). Perigo iminente — ao contrário da LD — não está expressamente previsto no EN."},
+  {q:"Nos termos do art. 24, §1º CP, quando o sacrifício do bem era razoável exigir, o juiz:",opts:["A) Absolve o réu por excludente de ilicitude","B) Aplica causa de diminuição de pena de um a dois terços","C) Declara extinta a punibilidade","D) Condena com agravante de motivo fútil"],ans:1,fb:"O <strong>art. 24, §1º CP</strong> prevê que, se o sacrifício era razoável exigir (bem sacrificado de valor superior), não há excludente — mas o juiz pode <strong>reduzir a pena de 1 a 2/3</strong>."},
+  {q:"A teoria diferenciadora do estado de necessidade distingue:",opts:["A) EN justificante (exclui ilicitude) de EN exculpante (exclui culpabilidade)","B) EN defensivo de EN agressivo","C) EN próprio de EN de terceiro","D) EN doloso de EN culposo"],ans:0,fb:"A <strong>teoria diferenciadora</strong> (alemã) distingue o EN em: <strong>justificante</strong> (bem salvo > bem sacrificado — exclui ilicitude) e <strong>exculpante</strong> (bens iguais ou salvo menor — exclui culpabilidade). O CP brasileiro adota a teoria unitária."},
+  {q:"A legítima defesa (art. 25 CP) admite repelir agressão:",opts:["A) Apenas atual — não iminente","B) Atual ou iminente, mas não futura","C) Passada, atual ou iminente","D) Futura, se o perigo for grave"],ans:1,fb:"O <strong>art. 25 CP</strong> admite LD contra agressão <strong>atual ou iminente</strong>. Agressão passada (encerrada) não justifica LD — seria vingança. Agressão futura também não é admitida para fins de LD."},
+  {q:"'Meios necessários' na legítima defesa são:",opts:["A) Qualquer meio capaz de cessar a agressão, sem limitação","B) Os meios mais lesivos disponíveis ao agente","C) Os menos lesivos meios eficazes para repelir a agressão","D) Apenas armas de fogo registradas"],ans:2,fb:"<strong>Meios necessários</strong> são os <strong>menos lesivos eficazes disponíveis</strong>. O agente deve escolher, dentre os meios capazes de afastar a agressão, o que cause menor dano ao agressor. Usar meio desproporcional configura excesso."},
+  {q:"A legítima defesa putativa ocorre quando:",opts:["A) O agente exerce LD real mas usa meios excessivos","B) O agente imagina erroneamente que está sendo agredido injustamente","C) Dois agentes simultaneamente se creem em LD recíproca real","D) A agressão é futura e certa"],ans:1,fb:"Na <strong>legítima defesa putativa</strong>, não há agressão real — o agente <strong>imagina erroneamente</strong> a situação de agressão. Configura <strong>erro de tipo permissivo</strong>: exclui o dolo; pode restar culpa se o erro era evitável."},
+  {q:"O estrito cumprimento do dever legal exige que o dever decorra de:",opts:["A) Ordem de superior hierárquico, ainda que ilegal","B) Lei — não basta regulamento ou ordem manifestamente ilegal","C) Convenção coletiva de trabalho","D) Regulamento interno da corporação policial"],ans:1,fb:"O <strong>estrito cumprimento do dever legal</strong> exige dever imposto por <strong>lei</strong>. Regulamento e ordem manifestamente ilegal não fundamentam a excludente. Quem cumpre ordem ilegal manifesta responde pelo crime."},
+  {q:"O consentimento do ofendido como excludente supralegal de ilicitude exige:",opts:["A) Bem jurídico disponível e capacidade de consentir do titular","B) Apenas a manifestação verbal do ofendido, qualquer que seja o bem","C) Homologação judicial prévia","D) Bem jurídico indisponível e consentimento expresso"],ans:0,fb:"O <strong>consentimento do ofendido</strong> requer: (1) bem jurídico <strong>disponível</strong>; (2) capacidade de consentir; (3) consentimento anterior ou contemporâneo; (4) ausência de vício de vontade. Vida é indisponível — não admite consentimento eficaz."},
+  {q:"O excesso doloso na legítima defesa (art. 23, §único CP) gera para o agente:",opts:["A) Absolvição por erro de tipo","B) Responsabilidade penal a título de dolo pelo resultado excedente","C) Redução de pena de um a dois terços","D) Inimputabilidade relativa"],ans:1,fb:"O <strong>excesso doloso</strong> ocorre quando o agente, conscientemente, vai além do necessário. Ele <strong>responde pelo resultado excedente a título de dolo</strong>. A excludente valia até o ponto de excesso; a partir daí, é crime doloso."},
+  {q:"O excesso culposo difere do doloso porque:",opts:["A) No culposo, o agente excede por imprudência, não por vontade","B) No culposo, o agente desconhece a situação de justificante","C) O culposo não gera responsabilidade penal","D) O culposo só ocorre no estado de necessidade"],ans:0,fb:"No <strong>excesso culposo</strong>, o agente ultrapassa os limites por <strong>imprudência, negligência ou imperícia</strong> — não intencionalmente. Responde pelo resultado a título de culpa, se houver previsão de crime culposo."},
+  {q:"A legítima defesa recíproca (LD contra LD) é:",opts:["A) Sempre possível entre dois agressores simultâneos","B) Em regra impossível, pois não há agressão injusta contra quem está em LD; é possível contra o excesso","C) Admitida quando ambos agirem com dolo eventual","D) Admitida apenas em crimes contra o patrimônio"],ans:1,fb:"A <strong>legítima defesa recíproca</strong> é, em regra, <strong>impossível</strong> — quem está em LD não pratica agressão injusta. Porém, é possível reagir em LD contra o <strong>excesso</strong> de quem originalmente estava em LD (LD sucessiva)."},
+  {q:"O exercício regular de direito como excludente de ilicitude aplica-se, por exemplo, ao:",opts:["A) Cirurgião que realiza operação autorizada pelo paciente","B) Funcionário público que recebe propina","C) Jogador de futebol que lesiona adversário intencionalmente","D) Advogado que falsifica documentos para defender cliente"],ans:0,fb:"O <strong>exercício regular de direito</strong> justifica, por exemplo, a conduta do cirurgião que realiza operação autorizada — a lesão corporal é lícita porque decorre do exercício regular da medicina. Lesão intencional em esporte ou crime de advogado não são amparados."},
+  {q:"O excesso exculpante (por medo, susto ou perturbação) na legítima defesa real:",opts:["A) Exclui a tipicidade do fato","B) É causa legal de exclusão de ilicitude prevista no art. 23, §único","C) É causa supralegal de exclusão da culpabilidade, por inexigibilidade de conduta diversa","D) Gera aumento de pena por motivo de relevante valor moral"],ans:2,fb:"O <strong>excesso exculpante</strong> (por medo, terror ou perturbação) não está expressamente previsto no CP, sendo reconhecido como <strong>causa supralegal de exclusão da culpabilidade</strong> — inexigibilidade de conduta diversa. O fato permanece típico e ilícito, mas não há culpabilidade."}
+];
+
+let cur=0,score=0,answered=[];
+const zone=document.getElementById('qzone');
+const dots=document.getElementById('qdots');
+const sc=document.getElementById('qscore');
+
+function buildDots(){dots.innerHTML='';questions.forEach((_,i)=>{const d=document.createElement('div');d.className='qdot'+(i===0?' cur':'');d.id='dot'+i;dots.appendChild(d)});}
+
+function renderQ(i){
+  if(i>=questions.length){showResult();return;}
+  const q=questions[i];
+  let html=`<div class="qq active" id="qq${i}"><div class="qnum">Questão ${i+1} de ${questions.length}</div><div class="qtext">${q.q}</div><div class="qopts">`;
+  q.opts.forEach((o,j)=>{html+=`<button class="qopt" onclick="pick(${i},${j})"><span class="ql">${String.fromCharCode(65+j)}</span><span class="qt">${o}</span></button>`;});
+  html+=`</div><div class="qfb" id="fb${i}"></div><div class="qnav"><button class="qbn qbn-rs" onclick="resetQuiz()">Reiniciar</button><button class="qbn qbn-next" id="nx${i}" onclick="nextQ(${i+1})">Próxima →</button></div></div>`;
+  zone.innerHTML=html;
+}
+
+function pick(qi,oi){
+  if(answered[qi]!==undefined)return;
+  answered[qi]=oi;
+  const q=questions[qi];
+  const opts=document.querySelectorAll(`#qq${qi} .qopt`);
+  opts.forEach((o,j)=>{o.classList.add('disabled');if(j===q.ans)o.classList.add('correct');else if(j===oi)o.classList.add('wrong');});
+  const fb=document.getElementById('fb'+qi);
+  if(oi===q.ans){score++;fb.className='qfb ok show';fb.innerHTML='<strong>Correto!</strong> '+q.fb;}
+  else{fb.className='qfb ng show';fb.innerHTML='<strong>Incorreto.</strong> '+q.fb;}
+  document.getElementById('dot'+qi).className='qdot '+(oi===q.ans?'ok':'err');
+  if(qi+1<questions.length){const d2=document.getElementById('dot'+(qi+1));if(d2)d2.classList.add('cur');}
+  sc.textContent=score+' / '+questions.length;
+  document.getElementById('nx'+qi).classList.add('show');
+}
+
+function nextQ(i){cur=i;renderQ(i);}
+
+function showResult(){
+  const pct=Math.round(score/questions.length*100);
+  zone.innerHTML=`<div class="qres show"><div class="rscore">${score}<span style="font-size:2rem;color:var(--text2)">/${questions.length}</span></div><div class="rlabel">${pct}% de acerto</div><div style="margin-top:1.2rem;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--text2)">${pct>=70?'Aprovado — bom desempenho!':'Continue revisando o conteúdo.'}</div><div class="qnav" style="justify-content:center;margin-top:1.5rem"><button class="qbn qbn-rs" onclick="resetQuiz()">Refazer Quiz</button></div></div>`;
+  try{const _k='quiz_'+location.pathname.split('/').slice(-2).join('/').replace('.html','').replace('/','_');localStorage.setItem(_k,JSON.stringify({score,total:questions.length,pct,ts:Date.now()}));}catch(_e){}
+}
+
+function resetQuiz(){cur=0;score=0;answered=[];sc.textContent='0 / '+questions.length;buildDots();renderQ(0);}
+
+function switchMod(m,btn){
+  document.querySelectorAll('.mod').forEach(d=>d.classList.remove('active'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
+  document.getElementById('mod-'+m).classList.add('active');
+  btn.classList.add('active');
+}
+
+function switchTab(btn,panelId){
+  const mbody=btn.closest('.mbody');
+  mbody.querySelectorAll('.stab').forEach(b=>b.classList.remove('active'));
+  mbody.querySelectorAll('.sp').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(panelId).classList.add('active');
+}
+
+function doSearch(v){
+  if(!v){document.querySelectorAll('mark').forEach(m=>{const p=m.parentNode;p.replaceChild(document.createTextNode(m.textContent),m);p.normalize();});return;}
+}
+
+buildDots();renderQ(0);
+</script>
+<button class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar modo claro/escuro" title="Modo claro/escuro">
   <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
   <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-</button></body>
+</button>
+</body>
 </html>
