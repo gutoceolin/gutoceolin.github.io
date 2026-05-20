@@ -18,6 +18,7 @@ function toggleTheme(){var h=document.documentElement;var l=h.getAttribute('data
   --cri:#5cc98a;--cri-dim:rgba(92,201,138,.10);--cri-mid:rgba(92,201,138,.22);
   --mod:#d4a843;--mod-dim:rgba(212,168,67,.10);--mod-mid:rgba(212,168,67,.22);
   --inc:#e06e8c;--inc-dim:rgba(224,110,140,.10);--inc-mid:rgba(224,110,140,.22);
+  --jur:#9b7fe8;--jur-dim:rgba(155,127,232,.10);--jur-mid:rgba(155,127,232,.22);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -46,12 +47,13 @@ mark{background:rgba(92,184,224,.28);color:var(--white);border-radius:2px;paddin
 .nb .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
 .nb[data-m=con] .d{background:var(--con)}.nb[data-m=cri] .d{background:var(--cri)}
 .nb[data-m=mod] .d{background:var(--mod)}.nb[data-m=inc] .d{background:var(--inc)}
-.nb[data-m=quiz] .d{background:var(--white)}
+.nb[data-m=jur] .d{background:var(--jur)}.nb[data-m=quiz] .d{background:var(--white)}
 .nb.active{color:var(--white)}
 .nb[data-m=con].active{border-color:var(--con);background:var(--con-dim)}
 .nb[data-m=cri].active{border-color:var(--cri);background:var(--cri-dim)}
 .nb[data-m=mod].active{border-color:var(--mod);background:var(--mod-dim)}
 .nb[data-m=inc].active{border-color:var(--inc);background:var(--inc-dim)}
+.nb[data-m=jur].active{border-color:var(--jur);background:var(--jur-dim)}
 .nb[data-m=quiz].active{border-color:rgba(255,255,255,.28);background:rgba(255,255,255,.04)}
 .main{position:relative;z-index:5;max-width:1100px;margin:1.8rem auto 5rem;padding:0 2rem}
 .mod{display:none;animation:fu .3s ease both}.mod.active{display:block}
@@ -61,9 +63,11 @@ mark{background:rgba(92,184,224,.28);color:var(--white);border-radius:2px;paddin
 .mhd[data-c=cri]{background:var(--cri-dim);border-color:rgba(92,201,138,.28)}
 .mhd[data-c=mod]{background:var(--mod-dim);border-color:rgba(212,168,67,.28)}
 .mhd[data-c=inc]{background:var(--inc-dim);border-color:rgba(224,110,140,.28)}
+.mhd[data-c=jur]{background:var(--jur-dim);border-color:rgba(155,127,232,.28)}
 .mi{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
 .mi[data-c=con]{background:var(--con-mid)}.mi[data-c=cri]{background:var(--cri-mid)}
 .mi[data-c=mod]{background:var(--mod-mid)}.mi[data-c=inc]{background:var(--inc-mid)}
+.mi[data-c=jur]{background:var(--jur-mid)}
 .mnum{font-family:'Outfit',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.12em;color:var(--text3);text-transform:uppercase;margin-bottom:.25rem}
 .mtitle{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--white);line-height:1}
 .mdesc{margin-top:.42rem;font-size:.82rem;color:var(--text2);line-height:1.62}
@@ -74,6 +78,7 @@ mark{background:rgba(92,184,224,.28);color:var(--white);border-radius:2px;paddin
 .stab:hover{color:var(--text)}.stab.active{color:var(--white)}
 .stab.active[data-c=con]{border-bottom-color:var(--con)}.stab.active[data-c=cri]{border-bottom-color:var(--cri)}
 .stab.active[data-c=mod]{border-bottom-color:var(--mod)}.stab.active[data-c=inc]{border-bottom-color:var(--inc)}
+.stab.active[data-c=jur]{border-bottom-color:var(--jur)}
 .sp{display:none;padding:2rem 2.25rem;animation:fu .22s ease}.sp.active{display:block}
 .sl{font-family:'Outfit',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);margin-bottom:.58rem;margin-top:1.55rem;display:flex;align-items:center;gap:.5rem}
 .sl::after{content:'';flex:1;height:1px;background:var(--border)}.sl:first-child{margin-top:0}
@@ -92,12 +97,14 @@ li{font-size:.9rem;color:#aeaab8;line-height:1.82;margin-bottom:.2rem}li strong{
 .ck .ct{color:var(--cri)}.ck .ct::before{background:var(--cri)}
 .cm .ct{color:var(--mod)}.cm .ct::before{background:var(--mod)}
 .ci .ct{color:var(--inc)}.ci .ct::before{background:var(--inc)}
+.cj .ct{color:var(--jur)}.cj .ct::before{background:var(--jur)}
 .co{display:flex;gap:.75rem;padding:.88rem 1rem;border-radius:10px;margin-top:.82rem;font-size:.83rem;line-height:1.72;color:#aeaab8}
 .co-ico{font-size:.92rem;flex-shrink:0;margin-top:.05rem}.co strong{font-weight:500}
 .cb{background:rgba(92,184,224,.07);border:1px solid rgba(92,184,224,.2)}.cb strong{color:var(--con)}
 .cg{background:rgba(92,201,138,.07);border:1px solid rgba(92,201,138,.2)}.cg strong{color:var(--cri)}
 .cw{background:rgba(212,168,67,.07);border:1px solid rgba(212,168,67,.2)}.cw strong{color:var(--mod)}
 .cr{background:rgba(224,110,140,.07);border:1px solid rgba(224,110,140,.2)}.cr strong{color:var(--inc)}
+.cp{background:rgba(155,127,232,.07);border:1px solid rgba(155,127,232,.2)}.cp strong{color:var(--jur)}
 .jur{background:var(--surface2);border:1px solid var(--border);border-left:3px solid var(--mod);border-radius:8px;padding:1rem 1.15rem;margin-top:.68rem;font-size:.82rem;line-height:1.72;color:#aeaab8}
 .jur-header{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mod);margin-bottom:.55rem}
 .jur-ementa{font-style:italic;color:var(--text2);font-size:.8rem;line-height:1.65;margin-bottom:.55rem}
@@ -152,6 +159,7 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.012
   --cri:#289050;--cri-dim:rgba(40,144,80,.10);--cri-mid:rgba(40,144,80,.18);
   --mod:#987020;--mod-dim:rgba(152,112,32,.10);--mod-mid:rgba(152,112,32,.18);
   --inc:#c04070;--inc-dim:rgba(192,64,112,.10);--inc-mid:rgba(192,64,112,.18);
+  --jur:#7b5fc8;--jur-dim:rgba(123,95,200,.10);--jur-mid:rgba(123,95,200,.18);
 }
 [data-theme=light] body::before{opacity:.18}
 [data-theme=light] p{color:#3a3632}
@@ -172,8 +180,8 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.012
 <div class="hdr">
   <a class="back" href="../../index.html">&#8592; Central de Resumos</a>
   <div class="ey">Direito Processual Civil &mdash; Prova 2 &middot; UFN 2026/1</div>
-  <h1 class="htitle">Competência<br><em>Jurisdicional</em></h1>
-  <div class="hsub">Arts. 42–67 CPC &middot; Classificação &middot; Modificação &middot; Cooperação Jurídica Nacional &middot; Banca UFN</div>
+  <h1 class="htitle">Jurisdição<br><em>e Competência</em></h1>
+  <div class="hsub">Arts. 16–17 CPC &middot; Arts. 42–67 CPC &middot; Jurisdição contenciosa e voluntária &middot; Banca UFN</div>
   <div class="banca-pill"><span class="p"></span>Banca UFN &mdash; Estilo de Questões Identificado</div>
   <div class="sw" role="search">
     <span class="sic" aria-hidden="true">&#x2315;</span>
@@ -182,21 +190,113 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.012
 </div>
 
 <nav class="mnav">
-  <button class="nb active" data-m="con" onclick="switchMod('con',this)"><span class="d"></span>Conceito e Classificação</button>
+  <button class="nb active" data-m="jur" onclick="switchMod('jur',this)"><span class="d"></span>Jurisdição</button>
+  <button class="nb" data-m="con" onclick="switchMod('con',this)"><span class="d"></span>Conceito e Classificação</button>
   <button class="nb" data-m="cri" onclick="switchMod('cri',this)"><span class="d"></span>Critérios</button>
   <button class="nb" data-m="mod" onclick="switchMod('mod',this)"><span class="d"></span>Modificação</button>
   <button class="nb" data-m="inc" onclick="switchMod('inc',this)"><span class="d"></span>Incompetência e Cooperação</button>
-  <button class="nb" data-m="quiz" onclick="switchMod('quiz',this)"><span class="d"></span>Quiz (14 q.)</button>
+  <button class="nb" data-m="quiz" onclick="switchMod('quiz',this)"><span class="d"></span>Quiz (18 q.)</button>
 </nav>
 
 <main class="main">
 
-<!-- ═══ MÓDULO 1: CONCEITO E CLASSIFICAÇÃO ═══ -->
-<div class="mod active" id="mod-con">
+<!-- ═══ MÓDULO 1: JURISDIÇÃO ═══ -->
+<div class="mod active" id="mod-jur">
+  <div class="mhd" data-c="jur">
+    <div class="mi" data-c="jur">🏛</div>
+    <div>
+      <div class="mnum">Módulo 01</div>
+      <div class="mtitle">Jurisdição</div>
+      <div class="mdesc">Conceito, características, princípios e espécies. Arts. 16–17 CPC e art. 5º, XXXV CF.</div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="jur" onclick="switchTab(this,'j1t1')">Conceito e Características</button>
+      <button class="stab" data-c="jur" onclick="switchTab(this,'j1t2')">Princípios</button>
+      <button class="stab" data-c="jur" onclick="switchTab(this,'j1t3')">Contenciosa vs. Voluntária</button>
+    </div>
+
+    <div class="sp active" id="j1t1">
+      <div class="sl">Conceito</div>
+      <p>Jurisdição é a <span class="hl">função estatal de aplicar o direito ao caso concreto</span>, de forma coativa e definitiva, por meio do processo. O Estado substitui a vontade das partes em conflito pela autoridade da lei, eliminando a autotutela.</p>
+      <p>Trata-se de um <span class="hl">poder-dever</span>: o Estado monopolizou a solução de conflitos (art. 5º, XXXV CF — inafastabilidade) e, em contrapartida, tem o dever de prestar a tutela jurisdicional a quem a invoque.</p>
+      <div class="sl">Características da Jurisdição</div>
+      <div class="g2">
+        <div class="card cj">
+          <div class="ct">Inércia</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65"><em>Ne procedat iudex ex officio</em> — o juiz não age sem provocação da parte. A jurisdição é inerte: só se movimenta quando acionada (art. 2º CPC). Excepcionalmente há atuação de ofício (ex: tutela de urgência antecipada de ofício em casos urgentes).</p>
+        </div>
+        <div class="card cj">
+          <div class="ct">Substitutividade</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">O Estado <strong>substitui</strong> a vontade das partes pela decisão judicial. Não importa se as partes querem ou não o resultado — a decisão as vincula. É o traço que diferencia a jurisdição de outros métodos de solução de conflitos (mediação, negociação).</p>
+        </div>
+        <div class="card cj">
+          <div class="ct">Definitividade</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">A decisão jurisdicional, ao transitar em julgado, produz <strong>coisa julgada</strong> — imutabilidade e indiscutibilidade do conteúdo decisório. Nenhum outro poder do Estado pode rever a decisão transitada em julgado.</p>
+        </div>
+        <div class="card cj">
+          <div class="ct">Imparcialidade</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">O juiz não tem interesse pessoal no resultado da demanda. A imparcialidade é garantida pelos institutos da suspeição e impedimento (arts. 144–148 CPC), que afastam o juiz quando comprometida sua neutralidade.</p>
+        </div>
+      </div>
+      <div class="co cp"><span class="co-ico">ℹ</span><div><strong>Unicidade:</strong> A jurisdição é una — há um único poder jurisdicional do Estado. A divisão em "civil", "penal", "trabalhista" etc. é apenas <em>distribuição de competência</em>, não fragmentação da jurisdição em si.</div></div>
+    </div>
+
+    <div class="sp" id="j1t2">
+      <div class="sl">Princípios da Jurisdição</div>
+      <div class="tw"><table>
+        <thead><tr><th>Princípio</th><th>Conteúdo</th><th>Base</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Investidura</strong></td><td>A jurisdição só pode ser exercida por quem foi regularmente investido na função de juiz (concurso público ou nomeação constitucional)</td><td>CF/88</td></tr>
+          <tr><td><strong>Aderência ao Território</strong></td><td>O juiz exerce jurisdição nos limites do território nacional. Para atos fora de sua comarca, usa cartas precatórias ou rogatórias</td><td>Art. 16 CPC</td></tr>
+          <tr><td><strong>Indelegabilidade</strong></td><td>A função jurisdicional não pode ser delegada a outro órgão ou pessoa. O juiz não pode transferir seu poder de decidir (distingue-se da carta de ordem, que delega apenas atos materiais)</td><td>CF/88</td></tr>
+          <tr><td><strong>Inevitabilidade</strong></td><td>As partes estão sujeitas à jurisdição independentemente de sua vontade. A sentença vale mesmo para o réu revel</td><td>CPC</td></tr>
+          <tr><td><strong>Inafastabilidade</strong></td><td>A lei não excluirá da apreciação do Poder Judiciário lesão ou ameaça a direito — acesso à justiça garantido</td><td>Art. 5º, XXXV CF</td></tr>
+          <tr><td><strong>Juiz Natural</strong></td><td>Proibição de tribunal de exceção (art. 5º, XXXVII CF) e direito a julgamento pelo juiz constitucionalmente competente (art. 5º, LIII CF)</td><td>Art. 5º, XXXVII e LIII CF</td></tr>
+        </tbody>
+      </table></div>
+      <div class="co cp"><span class="co-ico">⚠</span><div><strong>Indelegabilidade vs. Carta de Ordem:</strong> A carta de ordem (tribunal → juiz vinculado) delega apenas a <em>prática de atos materiais</em>, não o poder de decidir. O poder decisório permanece com o órgão que expediu a carta.</div></div>
+    </div>
+
+    <div class="sp" id="j1t3">
+      <div class="sl">Jurisdição Contenciosa</div>
+      <p>É a jurisdição típica: pressupõe <span class="hl">lide real</span> (conflito de interesses qualificado por uma pretensão resistida) entre partes antagônicas. O Estado resolve o conflito, substituindo as vontades das partes por sua decisão. Produz <span class="hl">coisa julgada material</span>.</p>
+      <div class="sl">Jurisdição Voluntária</div>
+      <p>Também chamada de <span class="hl">administração pública de interesses privados</span>. Não há lide — o Estado apenas homologa, autoriza ou certifica situações jurídicas que a lei exige intervenção judicial. Há partes, mas não adversárias.</p>
+      <div class="g2">
+        <div class="card cj">
+          <div class="ct">Exemplos de JV</div>
+          <ul>
+            <li>Separação e divórcio consensuais (quando há incapazes)</li>
+            <li>Interdição consensual</li>
+            <li>Inventário sem conflito entre herdeiros</li>
+            <li>Adoção</li>
+            <li>Abertura, registro e cumprimento de testamento</li>
+            <li>Emancipação judicial</li>
+          </ul>
+        </div>
+        <div class="card cj">
+          <div class="ct">Diferenças Principais</div>
+          <ul>
+            <li><strong>Lide:</strong> presente (JC) / ausente (JV)</li>
+            <li><strong>Partes:</strong> antagônicas (JC) / interessados (JV)</li>
+            <li><strong>Coisa julgada:</strong> material (JC) / divergência na JV — maioria nega CJ material</li>
+            <li><strong>Objetivo:</strong> resolver conflito (JC) / administrar interesses (JV)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="co cg"><span class="co-ico">✓</span><div><strong>Art. 723 CPC — JV:</strong> O juiz não é obrigado a observar critério de legalidade estrita, podendo adotar, em cada caso, a solução que reputar mais conveniente ou oportuna. Discricionariedade excepcional do juiz na jurisdição voluntária.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MÓDULO 2: CONCEITO E CLASSIFICAÇÃO ═══ -->
+<div class="mod" id="mod-con">
   <div class="mhd" data-c="con">
     <div class="mi" data-c="con">⚖️</div>
     <div>
-      <div class="mnum">Módulo 01</div>
+      <div class="mnum">Módulo 02</div>
       <div class="mtitle">Conceito e Classificação</div>
       <div class="mdesc">Poder-dever do órgão, distribuição, perpetuação, prevenção e classificações. Arts. 42–45 CPC.</div>
     </div>
@@ -280,7 +380,7 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.012
   <div class="mhd" data-c="cri">
     <div class="mi" data-c="cri">📐</div>
     <div>
-      <div class="mnum">Módulo 02</div>
+      <div class="mnum">Módulo 03</div>
       <div class="mtitle">Critérios</div>
       <div class="mdesc">Objetivo, funcional e territorial. Arts. 42 e ss. CPC. Regra geral: foro do domicílio do réu (art. 46).</div>
     </div>
@@ -357,7 +457,7 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.012
   <div class="mhd" data-c="mod">
     <div class="mi" data-c="mod">🔗</div>
     <div>
-      <div class="mnum">Módulo 03</div>
+      <div class="mnum">Módulo 04</div>
       <div class="mtitle">Modificação da Competência</div>
       <div class="mdesc">Conexão (art. 55), continência (art. 56) e negócio jurídico processual. Jurisprudência TJRS.</div>
     </div>
@@ -448,7 +548,7 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.012
   <div class="mhd" data-c="inc">
     <div class="mi" data-c="inc">📬</div>
     <div>
-      <div class="mnum">Módulo 04</div>
+      <div class="mnum">Módulo 05</div>
       <div class="mtitle">Incompetência e Cooperação</div>
       <div class="mdesc">Alegação, conflito de competência (art. 66) e cooperação jurídica nacional (arts. 67 e ss.).</div>
     </div>
@@ -548,15 +648,15 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.012
     <div class="mi" data-c="con">📝</div>
     <div>
       <div class="mnum">Quiz</div>
-      <div class="mtitle">14 Questões — Banca UFN</div>
-      <div class="mdesc">Conceito · Classificação · Critérios · Modificação · Incompetência · Cooperação</div>
+      <div class="mtitle">18 Questões — Banca UFN</div>
+      <div class="mdesc">Jurisdição · Conceito · Classificação · Critérios · Modificação · Incompetência · Cooperação</div>
     </div>
   </div>
   <div class="mbody">
     <div class="qwrap">
       <div class="qtop">
         <div class="qtitle">Simulado</div>
-        <div class="sbadge" id="qscore">0 / 14</div>
+        <div class="sbadge" id="qscore">0 / 18</div>
       </div>
       <div class="qdots" id="qdots"></div>
       <div id="qzone"></div>
@@ -573,6 +673,10 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.012
 
 <script>
 const questions=[
+  {q:"A jurisdição, como função estatal, caracteriza-se por:",opts:["A) Ser exercida apenas quando as partes assim convencionarem","B) Substituir a vontade das partes pela decisão do Estado, de forma coativa e definitiva","C) Depender sempre da concordância do réu para produzir efeitos","D) Ser delegável a qualquer órgão público quando houver conveniência"],ans:1,fb:"A <strong>substitutividade</strong> é a característica central da jurisdição: o Estado substitui a vontade das partes pela decisão judicial, independentemente de sua concordância. A decisão é coativa e, ao transitar em julgado, produz coisa julgada."},
+  {q:"O princípio da inafastabilidade da jurisdição está previsto em:",opts:["A) Art. 16 do CPC — aderência ao território","B) Art. 5º, XXXV da CF — a lei não excluirá da apreciação judicial lesão ou ameaça a direito","C) Art. 2º do CPC — princípio da inércia","D) Art. 43 do CPC — perpetuação da jurisdição"],ans:1,fb:"A <strong>inafastabilidade</strong> está no <strong>art. 5º, XXXV CF</strong>: 'a lei não excluirá da apreciação do Poder Judiciário lesão ou ameaça a direito'. Garante o acesso à justiça como direito fundamental."},
+  {q:"A jurisdição voluntária distingue-se da contenciosa porque:",opts:["A) Na voluntária há lide real entre partes antagônicas","B) Na voluntária o Estado administra interesses privados sem lide, não produzindo em regra coisa julgada material","C) Na voluntária o juiz aplica critério de legalidade estrita","D) Na voluntária a sentença é sempre declaratória"],ans:1,fb:"Na <strong>jurisdição voluntária</strong> não há lide — o Estado administra interesses privados (ex: separação consensual, interdição consensual, inventário sem conflito). O art. 723 CPC permite ao juiz decidir por conveniência ou oportunidade, e a maioria da doutrina nega coisa julgada material."},
+  {q:"O princípio da indelegabilidade da jurisdição significa que:",opts:["A) O juiz não pode expedir cartas precatórias a outros juízos","B) O poder de decidir não pode ser transferido a outro órgão ou pessoa; apenas atos materiais podem ser delegados via carta de ordem","C) Nenhum ato processual pode ser praticado fora da comarca do juízo","D) As partes não podem renunciar à jurisdição por convenção"],ans:1,fb:"A <strong>indelegabilidade</strong> impede a transferência do poder de decidir. Cartas de ordem delegam apenas a <em>prática de atos materiais</em> (ouvir testemunha, citar pessoa) — o poder decisório permanece com o órgão prolator."},
   {q:"Competência jurisdicional é o poder-dever atribuído a:",opts:["A) Pessoa física do juiz, podendo ser delegada","B) Órgão jurisdicional, em virtude de lei","C) Qualquer servidor do Poder Judiciário","D) Exclusivamente ao STF como guardião da CF"],ans:1,fb:"Competência é do <strong>órgão</strong> — não da pessoa física do juiz. O juiz que se torna incompetente por promoção, por exemplo, não leva a competência consigo."},
   {q:"Nos termos do art. 43 CPC, a perpetuatio jurisdictionis significa que:",opts:["A) A competência pode ser modificada a qualquer tempo por decisão judicial","B) Uma vez proposta a ação, a competência se perpetua, salvo supressão do órgão ou alteração de competência absoluta","C) O juiz prevento tem competência permanente para todos os processos futuros entre as mesmas partes","D) A competência relativa não pode ser modificada após a citação"],ans:1,fb:"A <strong>perpetuação da jurisdição</strong> (art. 43 CPC) garante que a competência fixada no momento da propositura da ação se mantém, mesmo com mudanças fáticas ou jurídicas posteriores. Exceções: supressão do órgão ou alteração de competência absoluta."},
   {q:"A competência absoluta distingue-se da relativa porque:",opts:["A) A absoluta pode ser modificada por eleição de foro; a relativa, não","B) A absoluta protege interesse das partes; a relativa, o interesse público","C) A absoluta não pode ser modificada pelas partes e pode ser conhecida de ofício; a relativa admite prorrogação se não alegada","D) A absoluta prorroga se não arguida; a relativa não preclui"],ans:2,fb:"A <strong>competência absoluta</strong> é fixada no interesse público, não admite modificação pelas partes, pode ser conhecida de ofício e não preclui. A <strong>relativa</strong> protege interesse das partes, admite prorrogação (art. 65) se não alegada na contestação."},
