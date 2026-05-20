@@ -1,88 +1,659 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<script>(function(){var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');if(t==='light')document.documentElement.setAttribute('data-theme','light');})();</script>
+<script>
+function toggleTheme(){var h=document.documentElement;var l=h.getAttribute('data-theme')==='light';h.setAttribute('data-theme',l?'dark':'light');localStorage.setItem('theme',l?'dark':'light');}
+(function(){var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');if(t==='light')document.documentElement.setAttribute('data-theme','light');})();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dir. Processual Civil — Prova 2</title>
+<title>Direito Processual Civil — Prova 2</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@300;400;500;600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#111118;--surface:#1c1c26;--surface2:#242430;--border:rgba(255,255,255,.07);--border2:rgba(255,255,255,.12);--text:#e8e4f0;--text2:#9490a8;--text3:#56526a;--white:#f5f2ff;--accent:#5cb8e0;--accent-dim:rgba(92,184,224,.06);}
+:root{
+  --bg:#111118;--surface:#1c1c26;--surface2:#242430;--surface3:#1c1c24;
+  --border:rgba(255,255,255,.07);--border2:rgba(255,255,255,.12);
+  --text:#e8e4f0;--text2:#9490a8;--text3:#56526a;--white:#f5f2ff;
+  --con:#5cb8e0;--con-dim:rgba(92,184,224,.10);--con-mid:rgba(92,184,224,.22);
+  --cri:#5cc98a;--cri-dim:rgba(92,201,138,.10);--cri-mid:rgba(92,201,138,.22);
+  --mod:#d4a843;--mod-dim:rgba(212,168,67,.10);--mod-mid:rgba(212,168,67,.22);
+  --inc:#e06e8c;--inc-dim:rgba(224,110,140,.10);--inc-mid:rgba(224,110,140,.22);
+}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-weight:300;min-height:100vh}
-body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse 70% 40% at 10% 0%,var(--accent-dim) 0%,transparent 55%)}
-.wrap{position:relative;z-index:10;max-width:1100px;margin:0 auto;padding:3rem 2rem}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse 70% 40% at 10% 0%,rgba(92,184,224,.04) 0%,transparent 55%),
+             radial-gradient(ellipse 55% 35% at 90% 100%,rgba(92,201,138,.03) 0%,transparent 55%)}
+.hdr{position:relative;z-index:10;padding:3rem 2rem 0;max-width:1100px;margin:0 auto}
 .back{display:inline-flex;align-items:center;gap:.45rem;font-family:'Outfit',sans-serif;font-size:.75rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);text-decoration:none;margin-bottom:1.5rem;padding:.38rem 1rem;border-radius:100px;border:1px solid var(--border);background:var(--surface);transition:all .2s}
-.back:hover{color:var(--text);border-color:var(--border2);background:var(--surface2)}.back:focus-visible{outline:2px solid var(--gold, #d4a843);outline-offset:2px}
+.back:hover{color:var(--text);border-color:var(--border2);background:var(--surface2)}
 .ey{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--text3);margin-bottom:.9rem}
-.htitle{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,6.5vw,4.6rem);font-weight:700;color:var(--white);line-height:.95;letter-spacing:-.02em;margin-bottom:.75rem}
+.htitle{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,6.5vw,4.6rem);font-weight:700;color:var(--white);line-height:.95;letter-spacing:-.02em}
 .htitle em{font-style:italic;color:var(--text2);font-weight:400}
-.disc-pill{display:inline-flex;align-items:center;gap:.38rem;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;padding:.25rem .65rem;border-radius:100px;margin-top:1.1rem;background:rgba(92,184,224,.1);color:var(--accent);border:1px solid rgba(92,184,224,.22)}
-.disc-pill .dot{width:4px;height:4px;border-radius:50%;background:currentColor}
-.wip{margin-top:3rem;padding:3.5rem 2.5rem;background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:0 2px 12px rgba(0,0,0,.25);text-align:center}
-.wip-icon{font-size:0;width:48px;height:48px;margin:0 auto 1.75rem;border-radius:12px;background:var(--surface2);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:5px}.wip-icon::before,.wip-icon::after{content:"";display:block;border-radius:2px;background:var(--accent);opacity:.55}.wip-icon::before{width:20px;height:2px}.wip-icon::after{width:13px;height:2px}
-.wip-title{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--white);margin-bottom:.65rem;letter-spacing:-.02em;margin-bottom:.75rem}
-.wip-text{font-family:'Outfit',sans-serif;font-size:.88rem;color:var(--text2);letter-spacing:.07em;line-height:1.85}
-.accent-line{width:48px;height:2px;background:var(--accent);margin:1.1rem auto 0;border-radius:2px;opacity:.5}
-.topics{display:flex;gap:.4rem;flex-wrap:wrap;justify-content:center;margin-top:1.5rem}
-.topic{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.04em;background:var(--surface2);border:1px solid var(--border);color:var(--text2);padding:.18rem .5rem;border-radius:100px}
-.ft{max-width:1100px;margin:4rem auto 0;padding:1.5rem 2rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.85rem;color:var(--text3)}
-.ft a{color:var(--text2);text-decoration:none}.ft a:hover{color:var(--white)}.ft a:focus-visible{outline:2px solid currentColor;outline-offset:3px}
-@media(max-width:600px){.wrap,.ft{padding-left:1rem;padding-right:1rem}}
-
-/* ── LIGHT MODE ── */
+.hsub{margin-top:1.1rem;font-size:.8rem;color:var(--text2);font-family:'JetBrains Mono',monospace;letter-spacing:.04em}
+.banca-pill{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.2rem;padding:.42rem .95rem;background:rgba(92,184,224,.08);border:1px solid rgba(92,184,224,.25);border-radius:100px;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.07em;color:var(--con);text-transform:uppercase}
+.banca-pill .p{width:5px;height:5px;border-radius:50%;background:var(--con);animation:pu 2s infinite}
+@keyframes pu{0%,100%{opacity:1}50%{opacity:.35}}
+.sw{margin-top:.85rem;position:relative}
+.si{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:100px;padding:.68rem 1rem .68rem 2.5rem;color:var(--text);font-family:'Outfit',sans-serif;font-size:.85rem;outline:none;transition:border-color .2s}
+.si::placeholder{color:var(--text3)}.si:focus{border-color:var(--border2)}
+.sic{position:absolute;left:.82rem;top:50%;transform:translateY(-50%);color:var(--text3);font-size:.88rem;pointer-events:none}
+mark{background:rgba(92,184,224,.28);color:var(--white);border-radius:2px;padding:0 2px}
+.mnav{display:flex;gap:.42rem;flex-wrap:wrap;margin:1.9rem auto 0;max-width:1100px;padding:0 2rem;position:relative;z-index:10}
+.nb{display:flex;align-items:center;gap:.5rem;padding:.52rem .95rem;border:1px solid var(--border);border-radius:100px;background:var(--surface);color:var(--text2);font-family:'Outfit',sans-serif;font-size:.75rem;font-weight:500;letter-spacing:.02em;cursor:pointer;transition:all .2s;text-transform:none;min-height:36px}
+.nb:hover{border-color:var(--border2);color:var(--text)}
+.nb .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.nb[data-m=con] .d{background:var(--con)}.nb[data-m=cri] .d{background:var(--cri)}
+.nb[data-m=mod] .d{background:var(--mod)}.nb[data-m=inc] .d{background:var(--inc)}
+.nb[data-m=quiz] .d{background:var(--white)}
+.nb.active{color:var(--white)}
+.nb[data-m=con].active{border-color:var(--con);background:var(--con-dim)}
+.nb[data-m=cri].active{border-color:var(--cri);background:var(--cri-dim)}
+.nb[data-m=mod].active{border-color:var(--mod);background:var(--mod-dim)}
+.nb[data-m=inc].active{border-color:var(--inc);background:var(--inc-dim)}
+.nb[data-m=quiz].active{border-color:rgba(255,255,255,.28);background:rgba(255,255,255,.04)}
+.main{position:relative;z-index:5;max-width:1100px;margin:1.8rem auto 5rem;padding:0 2rem}
+.mod{display:none;animation:fu .3s ease both}.mod.active{display:block}
+@keyframes fu{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.mhd{display:flex;align-items:flex-start;gap:1.4rem;padding:1.75rem 2rem;border-radius:14px 14px 0 0;border:1px solid var(--border);border-bottom:none;box-shadow:0 4px 20px rgba(0,0,0,.25)}
+.mhd[data-c=con]{background:var(--con-dim);border-color:rgba(92,184,224,.28)}
+.mhd[data-c=cri]{background:var(--cri-dim);border-color:rgba(92,201,138,.28)}
+.mhd[data-c=mod]{background:var(--mod-dim);border-color:rgba(212,168,67,.28)}
+.mhd[data-c=inc]{background:var(--inc-dim);border-color:rgba(224,110,140,.28)}
+.mi{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
+.mi[data-c=con]{background:var(--con-mid)}.mi[data-c=cri]{background:var(--cri-mid)}
+.mi[data-c=mod]{background:var(--mod-mid)}.mi[data-c=inc]{background:var(--inc-mid)}
+.mnum{font-family:'Outfit',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.12em;color:var(--text3);text-transform:uppercase;margin-bottom:.25rem}
+.mtitle{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--white);line-height:1}
+.mdesc{margin-top:.42rem;font-size:.82rem;color:var(--text2);line-height:1.62}
+.mbody{border:1px solid var(--border);border-top:none;border-radius:0 0 14px 14px;background:var(--surface);overflow:hidden}
+.stabs{display:flex;border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
+.stabs::-webkit-scrollbar{display:none}
+.stab{padding:.78rem 1.15rem;font-family:'Outfit',sans-serif;font-size:.78rem;font-weight:500;letter-spacing:.01em;text-transform:none;color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;background:none;border-top:none;border-left:none;border-right:none;margin-bottom:-1px;min-height:44px}
+.stab:hover{color:var(--text)}.stab.active{color:var(--white)}
+.stab.active[data-c=con]{border-bottom-color:var(--con)}.stab.active[data-c=cri]{border-bottom-color:var(--cri)}
+.stab.active[data-c=mod]{border-bottom-color:var(--mod)}.stab.active[data-c=inc]{border-bottom-color:var(--inc)}
+.sp{display:none;padding:2rem 2.25rem;animation:fu .22s ease}.sp.active{display:block}
+.sl{font-family:'Outfit',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);margin-bottom:.58rem;margin-top:1.55rem;display:flex;align-items:center;gap:.5rem}
+.sl::after{content:'';flex:1;height:1px;background:var(--border)}.sl:first-child{margin-top:0}
+p{font-size:.9375rem;color:#b5b0be;line-height:1.88}p+p{margin-top:.65rem}
+.hl{color:var(--white);font-weight:500}
+.art{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--con);font-weight:500}
+ul,ol{padding-left:1.25rem;margin-top:.48rem}
+li{font-size:.9rem;color:#aeaab8;line-height:1.82;margin-bottom:.2rem}li strong{color:var(--white);font-weight:500}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:.88rem;margin-top:.68rem}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:.72rem;margin-top:.68rem}
+@media(max-width:640px){.g2,.g3{grid-template-columns:1fr}}
+.card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:1rem;box-shadow:0 2px 8px rgba(0,0,0,.18);transition:border-color .2s,box-shadow .2s}.card:hover{border-color:var(--border2);box-shadow:0 4px 16px rgba(0,0,0,.28)}
+.ct{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.55rem;display:flex;align-items:center;gap:.4rem}
+.ct::before{content:'';width:3px;height:11px;border-radius:2px;flex-shrink:0}
+.cc .ct{color:var(--con)}.cc .ct::before{background:var(--con)}
+.ck .ct{color:var(--cri)}.ck .ct::before{background:var(--cri)}
+.cm .ct{color:var(--mod)}.cm .ct::before{background:var(--mod)}
+.ci .ct{color:var(--inc)}.ci .ct::before{background:var(--inc)}
+.co{display:flex;gap:.75rem;padding:.88rem 1rem;border-radius:10px;margin-top:.82rem;font-size:.83rem;line-height:1.72;color:#aeaab8}
+.co-ico{font-size:.92rem;flex-shrink:0;margin-top:.05rem}.co strong{font-weight:500}
+.cb{background:rgba(92,184,224,.07);border:1px solid rgba(92,184,224,.2)}.cb strong{color:var(--con)}
+.cg{background:rgba(92,201,138,.07);border:1px solid rgba(92,201,138,.2)}.cg strong{color:var(--cri)}
+.cw{background:rgba(212,168,67,.07);border:1px solid rgba(212,168,67,.2)}.cw strong{color:var(--mod)}
+.cr{background:rgba(224,110,140,.07);border:1px solid rgba(224,110,140,.2)}.cr strong{color:var(--inc)}
+.jur{background:var(--surface2);border:1px solid var(--border);border-left:3px solid var(--mod);border-radius:8px;padding:1rem 1.15rem;margin-top:.68rem;font-size:.82rem;line-height:1.72;color:#aeaab8}
+.jur-header{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mod);margin-bottom:.55rem}
+.jur-ementa{font-style:italic;color:var(--text2);font-size:.8rem;line-height:1.65;margin-bottom:.55rem}
+.jur-ratio{color:#b5b0be;font-size:.83rem}
+.tw{overflow-x:auto;margin-top:.68rem;border-radius:10px;border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:.82rem}
+th{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);padding:.68rem 1rem;background:var(--surface2);border-bottom:1px solid var(--border);text-align:left;white-space:nowrap}
+td{padding:.62rem 1rem;border-bottom:1px solid var(--border);color:#aeaab8;vertical-align:top;line-height:1.6}
+tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.012)}td strong{color:var(--white);font-weight:500}
+.hub-footer{position:relative;z-index:5;max-width:1100px;margin:3rem auto 0;padding:1.5rem 2rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.ft-left{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--text3);letter-spacing:.08em}
+.ft-right{font-family:'JetBrains Mono',monospace;font-size:.55rem;color:var(--text3)}.ft-right a{color:var(--text2);text-decoration:none}.ft-right a:hover{color:var(--white)}
+.qwrap{padding:1.5rem 2rem 2rem}
+.qtop{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.4rem}
+.qtitle{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:700;color:var(--white)}
+.sbadge{font-family:'Outfit',sans-serif;font-size:.65rem;padding:.26rem .72rem;border-radius:100px;background:var(--surface2);border:1px solid var(--border);color:var(--text2)}
+.qdots{display:flex;gap:.28rem;flex-wrap:wrap;margin-bottom:1.2rem}
+.qdot{width:7px;height:7px;border-radius:50%;background:var(--border2);transition:all .2s}
+.qdot.cur{background:var(--text2)}.qdot.ok{background:#5cc98a}.qdot.err{background:#e06e8c}
+[data-theme=light] .qdot.ok{background:#289050}[data-theme=light] .qdot.err{background:#c04070}
+.qq{display:none;animation:fu .26s ease}.qq.active{display:block}
+.qnum{font-family:'JetBrains Mono',monospace;font-size:.56rem;color:var(--text3);letter-spacing:.1em;margin-bottom:.6rem}
+.qtext{font-size:.96rem;color:var(--white);line-height:1.68;margin-bottom:1.15rem;font-weight:400}
+.qopts{display:flex;flex-direction:column;gap:.42rem}
+.qopt{display:flex;align-items:flex-start;gap:.65rem;padding:.82rem .92rem;border:1px solid var(--border);border-radius:10px;cursor:pointer;transition:all .2s;background:var(--surface2);text-align:left;width:100%}
+.qopt:hover:not(:disabled){border-color:var(--border2)}
+.ql{font-family:'JetBrains Mono',monospace;font-size:.6rem;width:20px;height:20px;border-radius:6px;background:var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--text2);transition:all .2s}
+.qt{font-size:.84rem;color:#aeaab8;line-height:1.6}
+.qopt.correct{border-color:#5cc98a;background:rgba(92,201,138,.10)}.qopt.correct .ql{background:#5cc98a;color:#000}.qopt.correct .qt{color:var(--white)}
+.qopt.wrong{border-color:#e06e8c;background:rgba(224,110,140,.10)}.qopt.wrong .ql{background:#e06e8c;color:#fff}
+.qopt.disabled{cursor:default;opacity:.54}.qopt.disabled.correct{opacity:1}
+.qfb{display:none;margin-top:.88rem;padding:.88rem 1rem;border-radius:5px;font-size:.83rem;line-height:1.68;color:#aeaab8}
+.qfb.show{display:block;animation:fu .18s ease}
+.qfb.ok{background:rgba(92,201,138,.08);border:1px solid rgba(92,201,138,.26)}.qfb.ok strong{color:#5cc98a}
+.qfb.ng{background:rgba(224,110,140,.08);border:1px solid rgba(224,110,140,.26)}.qfb.ng strong{color:#e06e8c}
+.qnav{display:flex;align-items:center;justify-content:space-between;margin-top:1.35rem}
+.qbn{padding:.68rem 1.45rem;font-family:'Outfit',sans-serif;font-size:.6rem;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;transition:all .2s;border:none;border-radius:100px}
+.qbn-next{background:#5cc98a;color:#000;display:none}.qbn-next:hover{opacity:.88}.qbn-next.show{display:block}
+.qbn-rs{background:var(--surface2);border:1px solid var(--border);color:var(--text2)}.qbn-rs:hover{border-color:var(--border2);color:var(--text)}
+.qres{display:none;text-align:center;padding:2.5rem 0}.qres.show{display:block;animation:fu .28s ease}
+.rscore{font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:700;color:var(--white);line-height:1}
+.rlabel{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--text3);letter-spacing:.15em;text-transform:uppercase;margin-top:.4rem}
+.rbar{margin:1.5rem auto 0;max-width:260px;display:flex;align-items:center;gap:.75rem}
+.rbt{flex:1;height:5px;background:var(--border2);border-radius:10px;overflow:hidden}
+.rbf{height:100%;background:linear-gradient(90deg,var(--con),var(--cri));border-radius:10px;transition:width 1s ease}
+@media(max-width:600px){.hdr,.main,.mnav{padding-left:1rem;padding-right:1rem}.hub-footer{padding:1.5rem 1rem}}
 [data-theme=light]{
   --bg:#f0eef7;--surface:#ffffff;--surface2:#f4f2fb;--surface3:#eceaf5;
   --border:rgba(0,0,0,.07);--border2:rgba(0,0,0,.14);
   --text:#1a1828;--text2:#6a6480;--text3:#9a94b0;--white:#0a0818;
-  --civil:#c04070;--civil-dim:rgba(192,64,112,.1);--civil-mid:rgba(192,64,112,.18);
-  --const:#5060c8;--const-dim:rgba(80,96,200,.1);--const-mid:rgba(80,96,200,.18);
-  --proc:#2088b0;--proc-dim:rgba(32,136,176,.1);--proc-mid:rgba(32,136,176,.18);
-  --penal:#b85030;--penal-dim:rgba(184,80,48,.1);--penal-mid:rgba(184,80,48,.18);
-  --eca:#289050;--eca-dim:rgba(40,144,80,.1);--eca-mid:rgba(40,144,80,.18);
-  --gold:#987020;--gold-dim:rgba(152,112,32,.1)}
+  --con:#2088b0;--con-dim:rgba(32,136,176,.10);--con-mid:rgba(32,136,176,.18);
+  --cri:#289050;--cri-dim:rgba(40,144,80,.10);--cri-mid:rgba(40,144,80,.18);
+  --mod:#987020;--mod-dim:rgba(152,112,32,.10);--mod-mid:rgba(152,112,32,.18);
+  --inc:#c04070;--inc-dim:rgba(192,64,112,.10);--inc-mid:rgba(192,64,112,.18);
+}
 [data-theme=light] body::before{opacity:.18}
-[data-theme=light] .disc-pill{background:transparent}
-
-/* ── THEME TOGGLE ── */
+[data-theme=light] p{color:#3a3632}
+[data-theme=light] li{color:#3a3632}
+[data-theme=light] .co{color:#3a3632}
+[data-theme=light] .jur{color:#3a3632}
 .theme-toggle{position:fixed;bottom:1.75rem;right:1.75rem;z-index:100;width:40px;height:40px;border-radius:50%;background:var(--surface2);border:1px solid var(--border2);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text2);transition:background .2s,border-color .2s,color .2s,box-shadow .2s}
 .theme-toggle:hover{background:var(--surface);color:var(--text);box-shadow:0 4px 20px rgba(0,0,0,.18)}
-.theme-toggle:focus-visible{outline:2px solid var(--gold,#d4a843);outline-offset:3px}
+.theme-toggle:focus-visible{outline:2px solid var(--con,#5cb8e0);outline-offset:3px}
 .theme-toggle svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;display:block}
 .icon-sun{display:none}.icon-moon{display:block}
-[data-theme=light] .icon-sun{display:block}[data-theme=light] .icon-moon{display:none}</style>
+[data-theme=light] .icon-sun{display:block}[data-theme=light] .icon-moon{display:none}
+@media(prefers-reduced-motion:reduce){.mod{animation:none}.sp{animation:none}}
+</style>
 </head>
 <body>
-<div class="wrap">
+
+<div class="hdr">
   <a class="back" href="../../index.html">&#8592; Central de Resumos</a>
-  <div class="ey">Dir. Processual Civil &mdash; Prova 2 &middot; UFN 2026/1</div>
-  <h1 class="htitle">Jurisdição, Ação<br><em>e Competência</em></h1>
-  <div class="disc-pill"><span class="dot"></span>Dir. Processual Civil</div>
-  <div class="wip">
-    <div class="wip-icon" aria-hidden="true"></div>
-    <div class="wip-title">Resumo em preparação</div>
-    <div class="wip-text">O conteúdo deste resumo será adicionado em breve.<br>Volte quando o material estiver disponível.</div>
-    <div class="accent-line"></div>
-    <div class="topics">
-      <span class="topic">Jurisdição · monopólio estatal</span>
-      <span class="topic">Condições da ação</span>
-      <span class="topic">Interesse de agir</span>
-      <span class="topic">Legitimidade ad causam</span>
-      <span class="topic">Competência absoluta</span>
-      <span class="topic">Competência relativa</span>
-      <span class="topic">Foro de eleição</span>
+  <div class="ey">Direito Processual Civil &mdash; Prova 2 &middot; UFN 2026/1</div>
+  <h1 class="htitle">Competência<br><em>Jurisdicional</em></h1>
+  <div class="hsub">Arts. 42–67 CPC &middot; Classificação &middot; Modificação &middot; Cooperação Jurídica Nacional &middot; Banca UFN</div>
+  <div class="banca-pill"><span class="p"></span>Banca UFN &mdash; Estilo de Questões Identificado</div>
+  <div class="sw" role="search">
+    <span class="sic" aria-hidden="true">&#x2315;</span>
+    <input class="si" type="text" placeholder="Buscar neste resumo..." oninput="doSearch(this.value)" aria-label="Buscar conceito" autocomplete="off">
+  </div>
+</div>
+
+<nav class="mnav">
+  <button class="nb active" data-m="con" onclick="switchMod('con',this)"><span class="d"></span>Conceito e Classificação</button>
+  <button class="nb" data-m="cri" onclick="switchMod('cri',this)"><span class="d"></span>Critérios</button>
+  <button class="nb" data-m="mod" onclick="switchMod('mod',this)"><span class="d"></span>Modificação</button>
+  <button class="nb" data-m="inc" onclick="switchMod('inc',this)"><span class="d"></span>Incompetência e Cooperação</button>
+  <button class="nb" data-m="quiz" onclick="switchMod('quiz',this)"><span class="d"></span>Quiz (14 q.)</button>
+</nav>
+
+<main class="main">
+
+<!-- ═══ MÓDULO 1: CONCEITO E CLASSIFICAÇÃO ═══ -->
+<div class="mod active" id="mod-con">
+  <div class="mhd" data-c="con">
+    <div class="mi" data-c="con">⚖️</div>
+    <div>
+      <div class="mnum">Módulo 01</div>
+      <div class="mtitle">Conceito e Classificação</div>
+      <div class="mdesc">Poder-dever do órgão, distribuição, perpetuação, prevenção e classificações. Arts. 42–45 CPC.</div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="con" onclick="switchTab(this,'c1t1')">Conceito</button>
+      <button class="stab" data-c="con" onclick="switchTab(this,'c1t2')">Absoluta e Relativa</button>
+      <button class="stab" data-c="con" onclick="switchTab(this,'c1t3')">Outras Classificações</button>
+    </div>
+
+    <div class="sp active" id="c1t1">
+      <div class="sl">Competência Jurisdicional</div>
+      <p>Competência é o <span class="hl">poder-dever de um órgão jurisdicional</span> para executar a parcela de atividade jurisdicional que lhe foi atribuída em virtude da lei. É do <span class="hl">órgão</span> — não da pessoa física do juiz. A incompetência do juiz não o impede de praticar atos urgentes.</p>
+      <div class="sl">Distribuição da Competência</div>
+      <p>A competência é distribuída por diversas fontes normativas, em ordem hierárquica:</p>
+      <ol>
+        <li><strong>Constituição Federal</strong> — fixa competências originárias do STF, STJ, TRF etc.</li>
+        <li><strong>CPC e diplomas processuais</strong> — regras gerais de competência (arts. 42 e ss.)</li>
+        <li><strong>Leis de organização judiciária</strong> — distribuem competências entre varas e juízos estaduais</li>
+        <li><strong>Regimentos internos dos tribunais</strong> — competências internas das câmaras e turmas</li>
+      </ol>
+      <div class="g2">
+        <div class="card cc">
+          <div class="ct">Perpetuação da Jurisdição — Art. 43 CPC</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Uma vez estabelecida a competência no momento da propositura da ação (<em>perpetuatio jurisdictionis</em>), ela se mantém ainda que ocorra alteração posterior de fato ou de direito. Garante a estabilidade do processo.</p>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.55rem;line-height:1.65"><strong>Exceção:</strong> supressão do órgão ou alteração da competência absoluta.</p>
+        </div>
+        <div class="card cc">
+          <div class="ct">Prevenção — Art. 59 CPC</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">O registro ou a distribuição da petição inicial <strong>torna prevento</strong> o juízo. Se duas ações conexas forem distribuídas a juízos distintos, a reunião se dará perante o juízo prevento — o que primeiro conheceu da causa.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sp" id="c1t2">
+      <div class="sl">b.3) Competência Absoluta vs. Relativa</div>
+      <div class="tw"><table>
+        <thead><tr><th>Critério</th><th>Absoluta</th><th>Relativa</th></tr></thead>
+        <tbody>
+          <tr><td>Interesse protegido</td><td>Público — ordem pública</td><td>Das partes</td></tr>
+          <tr><td>Modificação pelas partes</td><td><strong>Não</strong> — inderrogável</td><td><strong>Sim</strong> — por eleição de foro, conexão, continência</td></tr>
+          <tr><td>Conhecimento de ofício</td><td><strong>Sim</strong> — qualquer tempo e grau</td><td><strong>Não</strong> — depende de alegação da parte</td></tr>
+          <tr><td>Preclusão se não alegada</td><td>Não preclui</td><td>Prorroga — juízo torna-se competente (art. 65)</td></tr>
+          <tr><td>Forma de alegação</td><td>Preliminar de contestação ou de ofício</td><td>Preliminar de contestação (art. 337, II)</td></tr>
+          <tr><td>Exemplos</td><td>Matéria, pessoa (funcional), hierárquica</td><td>Territorial (foro do domicílio do réu — art. 46)</td></tr>
+        </tbody>
+      </table></div>
+      <div class="co cr"><span class="co-ico">!</span><div><strong>Prorrogação da competência relativa (art. 65):</strong> Se o réu não alega incompetência relativa na contestação, ela prorroga — o juízo originalmente incompetente torna-se competente. É a consequência mais cobrada em provas.</div></div>
+    </div>
+
+    <div class="sp" id="c1t3">
+      <div class="sl">b.1) Foro e Juízo</div>
+      <div class="g2">
+        <div class="card cc">
+          <div class="ct">Competência do Foro</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">De natureza <strong>territorial</strong>. Define em qual <strong>comarca ou seção judiciária</strong> o processo tramitará. Ex: foro do domicílio do réu, foro do local do imóvel.</p>
+        </div>
+        <div class="card cc">
+          <div class="ct">Competência do Juízo</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Define qual <strong>vara ou órgão específico</strong> dentro do foro será competente. Ex: 1ª Vara Cível, Vara de Família, Vara da Fazenda Pública.</p>
+        </div>
+      </div>
+      <div class="sl">b.2) Originária e Derivada</div>
+      <div class="g2">
+        <div class="card cc">
+          <div class="ct">Originária</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">O órgão julga a causa <strong>em primeiro grau</strong>, sem que tenha havido julgamento anterior. É a competência normal do juízo de 1º grau — mas também existe competência originária dos tribunais (ex: ação rescisória no TJ).</p>
+        </div>
+        <div class="card cc">
+          <div class="ct">Derivada</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Decorre de <strong>recurso ou remessa necessária</strong>. É exercida em grau superior ao originário — competência dos tribunais para julgamento de apelação, agravo, embargos etc.</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-<footer class="ft">
-  <span>Guto Ceolin &middot; UFN &middot; Dir. Processual Civil &middot; 2026/1</span>
-  <a href="../../index.html">← Voltar ao Hub</a>
+
+<!-- ═══ MÓDULO 2: CRITÉRIOS ═══ -->
+<div class="mod" id="mod-cri">
+  <div class="mhd" data-c="cri">
+    <div class="mi" data-c="cri">📐</div>
+    <div>
+      <div class="mnum">Módulo 02</div>
+      <div class="mtitle">Critérios</div>
+      <div class="mdesc">Objetivo, funcional e territorial. Arts. 42 e ss. CPC. Regra geral: foro do domicílio do réu (art. 46).</div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="cri" onclick="switchTab(this,'r1t1')">Objetivo</button>
+      <button class="stab" data-c="cri" onclick="switchTab(this,'r1t2')">Funcional</button>
+      <button class="stab" data-c="cri" onclick="switchTab(this,'r1t3')">Territorial</button>
+    </div>
+
+    <div class="sp active" id="r1t1">
+      <div class="sl">1) Critério Objetivo</div>
+      <p>Determina a competência com base em características <span class="hl">objetivas da causa ou das partes</span>. Subdivide-se em três subcritérios:</p>
+      <div class="g3">
+        <div class="card ck">
+          <div class="ct">Matéria</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Natureza da causa. Distribuição entre varas especializadas — Vara Cível, de Família, da Fazenda, Criminal, Trabalhista etc.</p>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.55rem;line-height:1.65"><strong>Absoluta</strong> — não pode ser modificada pelas partes.</p>
+        </div>
+        <div class="card ck">
+          <div class="ct">Pessoa / Hierárquica</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Qualidade das partes. Ex: foro privilegiado do Presidente da República (STF), senadores e deputados. Competências privativas pela natureza do sujeito.</p>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.55rem;line-height:1.65"><strong>Absoluta</strong> quando fixada na CF.</p>
+        </div>
+        <div class="card ck">
+          <div class="ct">Valor da Causa (Alçada)</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Distribui causas conforme o valor econômico. Ex: Juizados Especiais (até 40 salários mínimos), competência dos tribunais de alçada.</p>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.55rem;line-height:1.65">Natureza pode ser relativa ou absoluta conforme a lei.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sp" id="r1t2">
+      <div class="sl">2) Critério Funcional</div>
+      <p>Determina a competência com base nas <span class="hl">funções exercidas pelo órgão jurisdicional</span> dentro de um mesmo processo. É de natureza <span class="hl">absoluta</span>.</p>
+      <div class="g2">
+        <div class="card ck">
+          <div class="ct">Aspecto Horizontal</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65"><strong>Divisão entre órgãos do mesmo grau</strong> de jurisdição para atos distintos no mesmo processo. Ex: juiz que pronunciou o réu é competente para presidir o Tribunal do Júri.</p>
+        </div>
+        <div class="card ck">
+          <div class="ct">Aspecto Vertical</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65"><strong>Divisão entre graus de jurisdição</strong> distintos. Ex: competência do tribunal para julgamento do recurso interposto contra sentença do juízo de 1º grau.</p>
+        </div>
+      </div>
+      <div class="co cb"><span class="co-ico">ℹ</span><div><strong>Competência funcional absoluta:</strong> Por ser absoluta, não pode ser modificada por vontade das partes, pode ser declarada de ofício e a decisão proferida por órgão funcionalmente incompetente é nula.</div></div>
+    </div>
+
+    <div class="sp" id="r1t3">
+      <div class="sl">3) Critério Territorial — Arts. 46 a 53 CPC</div>
+      <p>Determina em qual <span class="hl">comarca ou seção judiciária</span> o processo tramitará. É de natureza <span class="hl">relativa</span> — pode ser modificada por convenção das partes ou prorrogação.</p>
+      <div class="sl">Regra Geral — Art. 46 CPC</div>
+      <p><span class="hl">Foro do domicílio do réu</span> — é a regra geral do CPC para ações pessoais e ações reais sobre bens móveis.</p>
+      <div class="sl">Foros Especiais (arts. 47–53)</div>
+      <div class="tw"><table>
+        <thead><tr><th>Hipótese</th><th>Foro Competente</th><th>Art.</th></tr></thead>
+        <tbody>
+          <tr><td>Ação real sobre imóvel</td><td>Situação do imóvel (<em>forum rei sitae</em>) — <strong>absoluto</strong></td><td>47</td></tr>
+          <tr><td>Inventário e partilha</td><td>Último domicílio do falecido</td><td>48</td></tr>
+          <tr><td>Incapaz</td><td>Domicílio do representante ou assistente</td><td>50</td></tr>
+          <tr><td>Pessoa jurídica</td><td>Lugar da sede ou agência/sucursal (se a obrigação emanou desta)</td><td>53, III</td></tr>
+          <tr><td>Ação de reparação de dano</td><td>Domicílio do autor ou local do fato (competência concorrente)</td><td>53, V</td></tr>
+          <tr><td>Divórcio, separação, anulação</td><td>Domicílio do guardião dos filhos / do cônjuge que não propõe</td><td>53, I</td></tr>
+        </tbody>
+      </table></div>
+      <div class="co cg"><span class="co-ico">✓</span><div><strong>Competência territorial relativa:</strong> Pode ser modificada por eleição de foro (cláusula contratual), conexão ou continência. Se o réu não alega na contestação, prorroga-se (art. 65).</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MÓDULO 3: MODIFICAÇÃO ═══ -->
+<div class="mod" id="mod-mod">
+  <div class="mhd" data-c="mod">
+    <div class="mi" data-c="mod">🔗</div>
+    <div>
+      <div class="mnum">Módulo 03</div>
+      <div class="mtitle">Modificação da Competência</div>
+      <div class="mdesc">Conexão (art. 55), continência (art. 56) e negócio jurídico processual. Jurisprudência TJRS.</div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="mod" onclick="switchTab(this,'m1t1')">Conexão e Continência</button>
+      <button class="stab" data-c="mod" onclick="switchTab(this,'m1t2')">Negócio Jurídico Processual</button>
+      <button class="stab" data-c="mod" onclick="switchTab(this,'m1t3')">Jurisprudência TJRS</button>
+    </div>
+
+    <div class="sp active" id="m1t1">
+      <div class="sl">d.1) Conexão — Art. 55 CPC</div>
+      <p>Ocorre quando duas ou mais ações têm o <span class="hl">mesmo pedido ou a mesma causa de pedir</span>. As ações conexas devem ser <span class="hl">reunidas para julgamento conjunto</span>, evitando decisões conflitantes sobre questões comuns.</p>
+      <div class="g2">
+        <div class="card cm">
+          <div class="ct">Requisitos</div>
+          <ul>
+            <li>Duas ou mais ações em curso</li>
+            <li>Mesmo pedido <strong>ou</strong> mesma causa de pedir</li>
+            <li>Não exige identidade de partes</li>
+            <li>Risco de decisões conflitantes</li>
+          </ul>
+        </div>
+        <div class="card cm">
+          <div class="ct">Art. 55, §3º — Conexão Ampliada</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Serão reunidos para julgamento conjunto os processos que possam gerar <strong>decisão inconsistente ou contraditória</strong>, mesmo que não haja identidade de causas de pedir ou pedidos. Admite conexão por afinidade.</p>
+        </div>
+      </div>
+      <div class="sl">d.2) Continência — Art. 56 CPC</div>
+      <p>Ocorre quando entre duas ou mais ações há <span class="hl">identidade de partes e de causa de pedir</span>, mas o pedido de uma, por ser mais amplo, <span class="hl">abrange o das demais</span>.</p>
+      <div class="co cw"><span class="co-ico">⚠</span><div><strong>Distinção conexão vs. continência:</strong> Na <strong>conexão</strong> — mesmo pedido ou mesma causa (não necessariamente ambos). Na <strong>continência</strong> — mesmas partes + mesma causa de pedir, mas pedidos diferentes sendo um mais amplo que o outro. Na continência, a ação mais restrita é extinta (art. 57).</div></div>
+      <div class="tw"><table>
+        <thead><tr><th>Critério</th><th>Conexão (art. 55)</th><th>Continência (art. 56)</th></tr></thead>
+        <tbody>
+          <tr><td>Partes</td><td>Não precisa ser iguais</td><td>Devem ser idênticas</td></tr>
+          <tr><td>Causa de pedir</td><td>Mesma ou diferente</td><td>Idêntica</td></tr>
+          <tr><td>Pedido</td><td>Igual ou diferente</td><td>Um abrange o outro</td></tr>
+          <tr><td>Efeito</td><td>Reunião para julgamento conjunto</td><td>Ação mais restrita extinta (art. 57)</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="sp" id="m1t2">
+      <div class="sl">d.3) Negócio Jurídico Processual — Eleição de Foro</div>
+      <p>As partes podem, por <span class="hl">convenção</span>, modificar a competência <span class="hl">relativa</span>, elegendo foro diverso do legalmente previsto. Trata-se de manifestação da autonomia privada no campo processual.</p>
+      <div class="g2">
+        <div class="card cm">
+          <div class="ct">Requisitos da Eleição de Foro</div>
+          <ul>
+            <li>Negócio jurídico escrito</li>
+            <li>Apenas competência relativa (territorial)</li>
+            <li>Não pode derrogar competência absoluta</li>
+            <li>Deve referir-se a negócio jurídico determinado</li>
+            <li>Não pode ser abusiva (contratos de adesão — art. 63, §3º)</li>
+          </ul>
+        </div>
+        <div class="card cm">
+          <div class="ct">Limite — Art. 63, §3º CPC</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Antes da citação, o juiz pode declinar da competência se a cláusula de eleição de foro for <strong>abusiva</strong> — especialmente em contratos de adesão, quando o foro eleito dificultar excessivamente o acesso à justiça da parte vulnerável.</p>
+        </div>
+      </div>
+      <div class="co cb"><span class="co-ico">ℹ</span><div><strong>NJP no CPC/2015:</strong> O art. 190 ampliou o cabimento dos negócios jurídicos processuais, admitindo que as partes — em causas que admitam autocomposição — estipulem mudanças no procedimento para ajustá-lo às especificidades da causa.</div></div>
+    </div>
+
+    <div class="sp" id="m1t3">
+      <div class="sl">Jurisprudência — TJRS 2020</div>
+
+      <div class="jur">
+        <div class="jur-header">TJRS &middot; Agravo de Instrumento &middot; 2020 &middot; Conexão — Art. 55, §3º CPC</div>
+        <div class="jur-ementa">"AGRAVO DE INSTRUMENTO. CONEXÃO. CORRELAÇÃO ENTRE AS CAUSAS DE PEDIR DE DUAS DEMANDAS, EMBORA NÃO SEJAM IDÊNTICAS. ART. 55, §3º, DO CPC. POSSIBILIDADE REAL DE DECISÕES CONFLITANTES. CONEXÃO RECONHECIDA. RECURSO PROVIDO."</div>
+        <p class="jur-ratio"><em>AI nº 70083383976 — 1ª Câmara Cível, TJRS. Rel. Carlos Roberto Lofego Canibal. 27/04/2020.</em></p>
+        <div class="co cg" style="margin-top:.65rem"><span class="co-ico">✓</span><div><strong>Ratio decidendi:</strong> A conexão foi reconhecida mesmo sem identidade total das causas de pedir — basta a <strong>correlação</strong> entre elas e o risco concreto de decisões conflitantes. Aplicação extensiva do art. 55, §3º.</div></div>
+      </div>
+
+      <div class="jur" style="margin-top:1rem">
+        <div class="jur-header">TJRS &middot; Apelação Cível &middot; 2020 &middot; Continência — Arts. 56 e 57 CPC</div>
+        <div class="jur-ementa">"APELAÇÃO CÍVEL. AÇÃO DE DIVÓRCIO. ANTERIOR AÇÃO DE DIVÓRCIO, CUMULADA COM REGULAMENTAÇÃO DE VISITAS. LITISPENDÊNCIA. AFASTAMENTO. HIPÓTESE DE CONTINÊNCIA. ART. 56 DO CPC. EXTINÇÃO DO FEITO SEM RESOLUÇÃO DE MÉRITO MANTIDA, EMBORA POR FUNDAMENTO DIVERSO."</div>
+        <p class="jur-ratio"><em>AC nº 70083716928 — 8ª Câmara Cível, TJRS. Rel. Luiz Felipe Brasil Santos. 16/04/2020.</em></p>
+        <div class="co cg" style="margin-top:.65rem"><span class="co-ico">✓</span><div><strong>Ratio decidendi:</strong> Identidade de partes e causa de pedir, mas pedidos distintos (um mais amplo que o outro) — configura <strong>continência</strong>, não litispendência. A ação mais restrita foi extinta com fundamento no art. 57, não no art. 485, V.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MÓDULO 4: INCOMPETÊNCIA E COOPERAÇÃO ═══ -->
+<div class="mod" id="mod-inc">
+  <div class="mhd" data-c="inc">
+    <div class="mi" data-c="inc">📬</div>
+    <div>
+      <div class="mnum">Módulo 04</div>
+      <div class="mtitle">Incompetência e Cooperação</div>
+      <div class="mdesc">Alegação, conflito de competência (art. 66) e cooperação jurídica nacional (arts. 67 e ss.).</div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="inc" onclick="switchTab(this,'i1t1')">Da Incompetência</button>
+      <button class="stab" data-c="inc" onclick="switchTab(this,'i1t2')">Conflito de Competência</button>
+      <button class="stab" data-c="inc" onclick="switchTab(this,'i1t3')">Cooperação Jurídica Nacional</button>
+    </div>
+
+    <div class="sp active" id="i1t1">
+      <div class="sl">e) Alegação de Incompetência</div>
+      <p>A incompetência deve ser alegada como <span class="hl">preliminar de contestação</span> (art. 337, II CPC). O regime difere conforme a natureza da incompetência:</p>
+      <div class="g3">
+        <div class="card ci">
+          <div class="ct">Forma de Alegação</div>
+          <ul>
+            <li>Preliminar de contestação (art. 337, II)</li>
+            <li>Absoluta: também de ofício pelo juiz</li>
+            <li>Relativa: somente pela parte</li>
+          </ul>
+        </div>
+        <div class="card ci">
+          <div class="ct">Competência Absoluta</div>
+          <ul>
+            <li>Conhecida de ofício pelo juiz</li>
+            <li>A qualquer tempo e grau de jurisdição</li>
+            <li>Matéria de ordem pública</li>
+            <li>Não preclui</li>
+          </ul>
+        </div>
+        <div class="card ci">
+          <div class="ct">Competência Relativa</div>
+          <ul>
+            <li>Deve ser alegada pela parte</li>
+            <li>Prazo: contestação</li>
+            <li>Se não alegada → <strong>prorrogação</strong> (art. 65)</li>
+            <li>Juízo torna-se competente</li>
+          </ul>
+        </div>
+      </div>
+      <div class="co cr"><span class="co-ico">!</span><div><strong>Exceção de incompetência relativa (pré-CPC/2015):</strong> No CPC/1973, havia a exceção de incompetência relativa como peça autônoma. No CPC/2015, foi eliminada — a incompetência relativa é alegada como <strong>preliminar na própria contestação</strong>.</div></div>
+    </div>
+
+    <div class="sp" id="i1t2">
+      <div class="sl">f) Conflito de Competência — Art. 66 CPC</div>
+      <p>Ocorre quando dois ou mais órgãos jurisdicionais se declaram <span class="hl">competentes</span> (conflito positivo) ou <span class="hl">incompetentes</span> (conflito negativo) para o mesmo processo.</p>
+      <div class="g2">
+        <div class="card ci">
+          <div class="ct">Conflito Positivo</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Dois juízes se declaram <strong>competentes</strong> para o mesmo processo. Menos frequente — juízes normalmente não atraem processos.</p>
+        </div>
+        <div class="card ci">
+          <div class="ct">Conflito Negativo</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Dois juízes se declaram <strong>incompetentes</strong> para o mesmo processo. Mais frequente — juízes declaram incompetência e remetem o processo, que não é aceito pelo destinatário.</p>
+        </div>
+      </div>
+      <div class="sl">Resolução do Conflito</div>
+      <p>O conflito é resolvido pelo <span class="hl">tribunal hierarquicamente superior</span> aos órgãos em conflito. O incidente suspende o processo (exceto quanto a atos urgentes).</p>
+      <div class="tw"><table>
+        <thead><tr><th>Órgãos em conflito</th><th>Órgão competente para resolver</th></tr></thead>
+        <tbody>
+          <tr><td>Juízes do mesmo Estado</td><td>Tribunal de Justiça do Estado</td></tr>
+          <tr><td>Juízes federais do mesmo TRF</td><td>Tribunal Regional Federal</td></tr>
+          <tr><td>Tribunais estaduais ou TRFs entre si</td><td>Superior Tribunal de Justiça (STJ)</td></tr>
+          <tr><td>Tribunais superiores entre si</td><td>Supremo Tribunal Federal (STF)</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="sp" id="i1t3">
+      <div class="sl">Cooperação Jurídica Nacional — Arts. 67 e ss. CPC</div>
+      <p>Instrumento pelo qual os órgãos do Poder Judiciário se auxiliam mutuamente na prática de atos processuais, promovendo <span class="hl">eficiência e celeridade</span> em todo o território nacional.</p>
+      <div class="g3">
+        <div class="card ci">
+          <div class="ct">Carta de Ordem</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Expedida por <strong>tribunal a juízo a ele vinculado</strong> (relação de hierarquia). Ex: STJ determina a um juiz federal que pratique ato processual.</p>
+        </div>
+        <div class="card ci">
+          <div class="ct">Carta Precatória</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Expedida entre <strong>juízos de mesma hierarquia em comarcas distintas</strong>. Ex: juiz de Porto Alegre solicita a juiz de São Paulo que tome depoimento de testemunha.</p>
+        </div>
+        <div class="card ci">
+          <div class="ct">Meios Eletrônicos</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">O CPC prevê utilização de <strong>meios eletrônicos</strong> para atos de cooperação, conferindo maior celeridade — cartas por sistema eletrônico do CNJ.</p>
+        </div>
+      </div>
+      <div class="co cb"><span class="co-ico">ℹ</span><div><strong>Carta Rogatória:</strong> Usada na cooperação jurídica <em>internacional</em> — para cumprimento de atos processuais em território estrangeiro (ou por tribunal estrangeiro no Brasil). Requer exequatur do STJ.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MÓDULO QUIZ ═══ -->
+<div class="mod" id="mod-quiz">
+  <div class="mhd" data-c="con">
+    <div class="mi" data-c="con">📝</div>
+    <div>
+      <div class="mnum">Quiz</div>
+      <div class="mtitle">14 Questões — Banca UFN</div>
+      <div class="mdesc">Conceito · Classificação · Critérios · Modificação · Incompetência · Cooperação</div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="qwrap">
+      <div class="qtop">
+        <div class="qtitle">Simulado</div>
+        <div class="sbadge" id="qscore">0 / 14</div>
+      </div>
+      <div class="qdots" id="qdots"></div>
+      <div id="qzone"></div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer class="hub-footer">
+  <div class="ft-left">Guto Ceolin &middot; UFN &middot; Direito Processual Civil &middot; 2026/1</div>
+  <div class="ft-right"><a href="../../index.html">← Voltar ao Hub</a></div>
 </footer>
+
 <script>
-function toggleTheme(){var h=document.documentElement;var l=h.getAttribute('data-theme')==='light';h.setAttribute('data-theme',l?'dark':'light');localStorage.setItem('theme',l?'dark':'light');}
-</script><button class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar modo claro/escuro" title="Modo claro/escuro">
+const questions=[
+  {q:"Competência jurisdicional é o poder-dever atribuído a:",opts:["A) Pessoa física do juiz, podendo ser delegada","B) Órgão jurisdicional, em virtude de lei","C) Qualquer servidor do Poder Judiciário","D) Exclusivamente ao STF como guardião da CF"],ans:1,fb:"Competência é do <strong>órgão</strong> — não da pessoa física do juiz. O juiz que se torna incompetente por promoção, por exemplo, não leva a competência consigo."},
+  {q:"Nos termos do art. 43 CPC, a perpetuatio jurisdictionis significa que:",opts:["A) A competência pode ser modificada a qualquer tempo por decisão judicial","B) Uma vez proposta a ação, a competência se perpetua, salvo supressão do órgão ou alteração de competência absoluta","C) O juiz prevento tem competência permanente para todos os processos futuros entre as mesmas partes","D) A competência relativa não pode ser modificada após a citação"],ans:1,fb:"A <strong>perpetuação da jurisdição</strong> (art. 43 CPC) garante que a competência fixada no momento da propositura da ação se mantém, mesmo com mudanças fáticas ou jurídicas posteriores. Exceções: supressão do órgão ou alteração de competência absoluta."},
+  {q:"A competência absoluta distingue-se da relativa porque:",opts:["A) A absoluta pode ser modificada por eleição de foro; a relativa, não","B) A absoluta protege interesse das partes; a relativa, o interesse público","C) A absoluta não pode ser modificada pelas partes e pode ser conhecida de ofício; a relativa admite prorrogação se não alegada","D) A absoluta prorroga se não arguida; a relativa não preclui"],ans:2,fb:"A <strong>competência absoluta</strong> é fixada no interesse público, não admite modificação pelas partes, pode ser conhecida de ofício e não preclui. A <strong>relativa</strong> protege interesse das partes, admite prorrogação (art. 65) se não alegada na contestação."},
+  {q:"Segundo o art. 46 CPC, a regra geral de competência territorial para ações pessoais é:",opts:["A) Foro do local do fato","B) Foro do domicílio do autor","C) Foro do domicílio do réu","D) Foro da sede do juízo de 1º grau"],ans:2,fb:"A regra geral do CPC é o <strong>foro do domicílio do réu</strong> (art. 46). Trata-se de competência relativa (territorial), podendo ser modificada por convenção das partes ou prorrogada."},
+  {q:"A competência territorial é classificada como:",opts:["A) Absoluta — não pode ser modificada por vontade das partes","B) Relativa — pode ser modificada por convenção ou prorrogação","C) Funcional — decorre das funções do órgão no processo","D) Objetiva — decorre da matéria da causa"],ans:1,fb:"A <strong>competência territorial</strong> (arts. 46 a 53 CPC) é de natureza <strong>relativa</strong>. Pode ser modificada por eleição de foro (cláusula contratual), conexão, continência ou prorrogação (se o réu não alega na contestação)."},
+  {q:"A competência funcional é de natureza:",opts:["A) Relativa — pode ser derrogada por eleição de foro","B) Absoluta — não pode ser modificada pelas partes","C) Objetiva — decorre do valor da causa","D) Territorial — depende do domicílio das partes"],ans:1,fb:"A <strong>competência funcional</strong> é <strong>absoluta</strong>. Por decorrer das funções atribuídas a cada órgão dentro do processo (aspecto horizontal e vertical), não pode ser derrogada por vontade das partes."},
+  {q:"Conexão (art. 55 CPC) ocorre quando duas ações têm:",opts:["A) Identidade de partes, causa de pedir e pedido — litispendência","B) Identidade de partes e causa de pedir, mas pedidos distintos sendo um mais amplo","C) Mesmo pedido ou mesma causa de pedir","D) Mesmo autor e mesmo réu apenas"],ans:2,fb:"A <strong>conexão</strong> (art. 55) ocorre quando há o <strong>mesmo pedido OU a mesma causa de pedir</strong>. Não exige identidade de partes. O art. 55, §3º amplia o conceito para casos de risco de decisões conflitantes, mesmo sem identidade estrita."},
+  {q:"Continência (art. 56 CPC) ocorre quando:",opts:["A) As ações têm o mesmo pedido, mas causas de pedir distintas","B) As ações têm identidade de partes e causa de pedir, mas o pedido de uma abrange o da outra","C) As ações têm partes distintas mas causa de pedir idêntica","D) Duas ações têm a mesma prova e o mesmo réu"],ans:1,fb:"A <strong>continência</strong> (art. 56) exige: <strong>identidade de partes + identidade de causa de pedir + pedido de uma mais amplo que o da outra</strong>. Efeito: a ação mais restrita é extinta (art. 57), diferente da conexão que reúne as ações."},
+  {q:"Se o réu não alega incompetência relativa na contestação, ocorre:",opts:["A) Nulidade da sentença por vício insanável","B) Prorrogação da competência — o juízo torna-se competente (art. 65)","C) Extinção do processo sem resolução de mérito","D) Remessa automática ao juízo competente"],ans:1,fb:"A falta de alegação oportuna da incompetência relativa gera sua <strong>prorrogação</strong> (art. 65 CPC): o juízo originalmente incompetente torna-se competente para aquele processo. É diferente da incompetência absoluta, que não preclui."},
+  {q:"O conflito de competência negativo (art. 66 CPC) ocorre quando:",opts:["A) Dois juízes se declaram competentes para o mesmo processo","B) Um juiz declara sua incompetência e remete ao STF","C) Dois juízes se declaram incompetentes para o mesmo processo","D) As partes discordam da competência fixada pelo juiz"],ans:2,fb:"O <strong>conflito negativo</strong> ocorre quando dois juízes se declaram <strong>incompetentes</strong> para o mesmo processo. O <strong>positivo</strong> é o inverso: ambos se declaram competentes. Resolve-se pelo tribunal hierarquicamente superior."},
+  {q:"O conflito de competência entre juízes estaduais do mesmo Estado é resolvido pelo:",opts:["A) STF","B) STJ","C) Tribunal de Justiça do Estado","D) Tribunal Regional Federal da região"],ans:2,fb:"O conflito entre juízes do <strong>mesmo Estado</strong> é resolvido pelo <strong>Tribunal de Justiça</strong> daquele Estado. O STJ resolve conflitos entre tribunais estaduais, entre TRFs, e entre tribunal estadual e federal."},
+  {q:"A carta precatória (arts. 67 e ss. CPC) é expedida:",opts:["A) Por tribunal a juízo a ele vinculado hierarquicamente","B) Entre juízos de mesma hierarquia situados em comarcas distintas","C) Para cumprimento de atos em território estrangeiro","D) Apenas pelo STF para cumprimento em outros tribunais"],ans:1,fb:"A <strong>carta precatória</strong> é expedida entre <strong>juízos de mesma hierarquia em comarcas distintas</strong>. A carta de <em>ordem</em> é de tribunal a juízo vinculado. A carta <em>rogatória</em> é para cooperação internacional."},
+  {q:"A eleição de foro como modificação convencional da competência relativa:",opts:["A) Pode derrogar a competência absoluta se as partes concordarem","B) É válida apenas em contratos de adesão","C) É admitida desde que não derogue competência absoluta e não seja abusiva","D) Somente é possível após o ajuizamento da ação"],ans:2,fb:"A <strong>eleição de foro</strong> (art. 63 CPC) é válida para modificar competência <strong>relativa</strong>. Não pode derrogar competência absoluta. Pode ser declarada ineficaz se abusiva em contratos de adesão (art. 63, §3º)."},
+  {q:"No julgado do TJRS (AI 70083383976/2020), a conexão foi reconhecida mesmo sem identidade total das causas de pedir porque:",opts:["A) As partes eram as mesmas em ambas as ações","B) Havia correlação entre as causas e risco real de decisões conflitantes — art. 55, §3º","C) O valor das causas era idêntico","D) Ambas as ações tramitavam na mesma vara"],ans:1,fb:"O TJRS aplicou o <strong>art. 55, §3º CPC</strong>: reconheceu a conexão pela <strong>correlação entre as causas de pedir</strong> e o <strong>risco concreto de decisões conflitantes</strong>, mesmo sem identidade total. Ampliação do conceito de conexão pelo CPC/2015."}
+];
+
+let cur=0,score=0,answered=[];
+const zone=document.getElementById('qzone');
+const dots=document.getElementById('qdots');
+const sc=document.getElementById('qscore');
+
+function buildDots(){dots.innerHTML='';questions.forEach((_,i)=>{const d=document.createElement('div');d.className='qdot'+(i===0?' cur':'');d.id='dot'+i;dots.appendChild(d)});}
+
+function renderQ(i){
+  if(i>=questions.length){showResult();return;}
+  const q=questions[i];
+  let html=`<div class="qq active" id="qq${i}"><div class="qnum">Questão ${i+1} de ${questions.length}</div><div class="qtext">${q.q}</div><div class="qopts">`;
+  q.opts.forEach((o,j)=>{html+=`<button class="qopt" onclick="pick(${i},${j})"><span class="ql">${String.fromCharCode(65+j)}</span><span class="qt">${o}</span></button>`;});
+  html+=`</div><div class="qfb" id="fb${i}"></div><div class="qnav"><button class="qbn qbn-rs" onclick="resetQuiz()">Reiniciar</button><button class="qbn qbn-next" id="nx${i}" onclick="nextQ(${i+1})">Próxima →</button></div></div>`;
+  zone.innerHTML=html;
+}
+
+function pick(qi,oi){
+  if(answered[qi]!==undefined)return;
+  answered[qi]=oi;
+  const q=questions[qi];
+  const opts=document.querySelectorAll(`#qq${qi} .qopt`);
+  opts.forEach((o,j)=>{o.classList.add('disabled');if(j===q.ans)o.classList.add('correct');else if(j===oi)o.classList.add('wrong');});
+  const fb=document.getElementById('fb'+qi);
+  if(oi===q.ans){score++;fb.className='qfb ok show';fb.innerHTML='<strong>Correto!</strong> '+q.fb;}
+  else{fb.className='qfb ng show';fb.innerHTML='<strong>Incorreto.</strong> '+q.fb;}
+  document.getElementById('dot'+qi).className='qdot '+(oi===q.ans?'ok':'err');
+  if(qi+1<questions.length){const d2=document.getElementById('dot'+(qi+1));if(d2)d2.classList.add('cur');}
+  sc.textContent=score+' / '+questions.length;
+  document.getElementById('nx'+qi).classList.add('show');
+}
+
+function nextQ(i){cur=i;renderQ(i);}
+
+function showResult(){
+  const pct=Math.round(score/questions.length*100);
+  zone.innerHTML=`<div class="qres show"><div class="rscore">${score}<span style="font-size:2rem;color:var(--text2)">/${questions.length}</span></div><div class="rlabel">${pct}% de acerto</div><div style="margin-top:1.2rem;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--text2)">${pct>=70?'Aprovado — bom desempenho!':'Continue revisando o conteúdo.'}</div><div class="qnav" style="justify-content:center;margin-top:1.5rem"><button class="qbn qbn-rs" onclick="resetQuiz()">Refazer Quiz</button></div></div>`;
+  try{const _k='quiz_'+location.pathname.split('/').slice(-2).join('/').replace('.html','').replace('/','_');localStorage.setItem(_k,JSON.stringify({score,total:questions.length,pct,ts:Date.now()}));}catch(_e){}
+}
+
+function resetQuiz(){cur=0;score=0;answered=[];sc.textContent='0 / '+questions.length;buildDots();renderQ(0);}
+
+function switchMod(m,btn){
+  document.querySelectorAll('.mod').forEach(d=>d.classList.remove('active'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
+  document.getElementById('mod-'+m).classList.add('active');
+  btn.classList.add('active');
+}
+
+function switchTab(btn,panelId){
+  const mbody=btn.closest('.mbody');
+  mbody.querySelectorAll('.stab').forEach(b=>b.classList.remove('active'));
+  mbody.querySelectorAll('.sp').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(panelId).classList.add('active');
+}
+
+function doSearch(v){
+  if(!v){document.querySelectorAll('mark').forEach(m=>{const p=m.parentNode;p.replaceChild(document.createTextNode(m.textContent),m);p.normalize();});return;}
+}
+
+buildDots();renderQ(0);
+</script>
+<button class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar modo claro/escuro" title="Modo claro/escuro">
   <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
   <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-</button></body>
+</button>
+</body>
 </html>
