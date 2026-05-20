@@ -14,18 +14,16 @@ function toggleTheme(){var h=document.documentElement;var l=h.getAttribute('data
   --bg:#111118;--surface:#1c1c26;--surface2:#242430;--surface3:#1c1c24;
   --border:rgba(255,255,255,.07);--border2:rgba(255,255,255,.12);
   --text:#e8e4f0;--text2:#9490a8;--text3:#56526a;--white:#f5f2ff;
-  --con:#5cb8e0;--con-dim:rgba(92,184,224,.10);--con-mid:rgba(92,184,224,.22);
-  --cri:#5cc98a;--cri-dim:rgba(92,201,138,.10);--cri-mid:rgba(92,201,138,.22);
-  --mod:#d4a843;--mod-dim:rgba(212,168,67,.10);--mod-mid:rgba(212,168,67,.22);
-  --inc:#e06e8c;--inc-dim:rgba(224,110,140,.10);--inc-mid:rgba(224,110,140,.22);
   --jur:#9b7fe8;--jur-dim:rgba(155,127,232,.10);--jur-mid:rgba(155,127,232,.22);
+  --ca:#5cb8e0; --ca-dim:rgba(92,184,224,.10); --ca-mid:rgba(92,184,224,.22);
+  --cb:#d4a843; --cb-dim:rgba(212,168,67,.10);  --cb-mid:rgba(212,168,67,.22);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden}
 body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
-  background:radial-gradient(ellipse 70% 40% at 10% 0%,rgba(92,184,224,.04) 0%,transparent 55%),
-             radial-gradient(ellipse 55% 35% at 90% 100%,rgba(92,201,138,.03) 0%,transparent 55%)}
+  background:radial-gradient(ellipse 70% 40% at 10% 0%,rgba(155,127,232,.04) 0%,transparent 55%),
+             radial-gradient(ellipse 55% 35% at 90% 100%,rgba(92,184,224,.03) 0%,transparent 55%)}
 .hdr{position:relative;z-index:10;padding:3rem 2rem 0;max-width:1100px;margin:0 auto}
 .back{display:inline-flex;align-items:center;gap:.45rem;font-family:'Outfit',sans-serif;font-size:.75rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);text-decoration:none;margin-bottom:1.5rem;padding:.38rem 1rem;border-radius:100px;border:1px solid var(--border);background:var(--surface);transition:all .2s}
 .back:hover{color:var(--text);border-color:var(--border2);background:var(--surface2)}
@@ -33,41 +31,39 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 .htitle{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,6.5vw,4.6rem);font-weight:700;color:var(--white);line-height:.95;letter-spacing:-.02em}
 .htitle em{font-style:italic;color:var(--text2);font-weight:400}
 .hsub{margin-top:1.1rem;font-size:.8rem;color:var(--text2);font-family:'JetBrains Mono',monospace;letter-spacing:.04em}
-.banca-pill{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.2rem;padding:.42rem .95rem;background:rgba(92,184,224,.08);border:1px solid rgba(92,184,224,.25);border-radius:100px;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.07em;color:var(--con);text-transform:uppercase}
-.banca-pill .p{width:5px;height:5px;border-radius:50%;background:var(--con);animation:pu 2s infinite}
+.banca-pill{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.2rem;padding:.42rem .95rem;background:rgba(155,127,232,.08);border:1px solid rgba(155,127,232,.25);border-radius:100px;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.07em;color:var(--jur);text-transform:uppercase}
+.banca-pill .p{width:5px;height:5px;border-radius:50%;background:var(--jur);animation:pu 2s infinite}
 @keyframes pu{0%,100%{opacity:1}50%{opacity:.35}}
 .sw{margin-top:.85rem;position:relative}
 .si{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:100px;padding:.68rem 1rem .68rem 2.5rem;color:var(--text);font-family:'Outfit',sans-serif;font-size:.85rem;outline:none;transition:border-color .2s}
 .si::placeholder{color:var(--text3)}.si:focus{border-color:var(--border2)}
 .sic{position:absolute;left:.82rem;top:50%;transform:translateY(-50%);color:var(--text3);font-size:.88rem;pointer-events:none}
-mark{background:rgba(92,184,224,.28);color:var(--white);border-radius:2px;padding:0 2px}
+mark{background:rgba(155,127,232,.28);color:var(--white);border-radius:2px;padding:0 2px}
 .mnav{display:flex;gap:.42rem;flex-wrap:wrap;margin:1.9rem auto 0;max-width:1100px;padding:0 2rem;position:relative;z-index:10}
 .nb{display:flex;align-items:center;gap:.5rem;padding:.52rem .95rem;border:1px solid var(--border);border-radius:100px;background:var(--surface);color:var(--text2);font-family:'Outfit',sans-serif;font-size:.75rem;font-weight:500;letter-spacing:.02em;cursor:pointer;transition:all .2s;text-transform:none;min-height:36px}
 .nb:hover{border-color:var(--border2);color:var(--text)}
 .nb .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
-.nb[data-m=con] .d{background:var(--con)}.nb[data-m=cri] .d{background:var(--cri)}
-.nb[data-m=mod] .d{background:var(--mod)}.nb[data-m=inc] .d{background:var(--inc)}
-.nb[data-m=jur] .d{background:var(--jur)}.nb[data-m=quiz] .d{background:var(--white)}
+.nb[data-m=jur] .d{background:var(--jur)}
+.nb[data-m=ca]  .d{background:var(--ca)}
+.nb[data-m=cb]  .d{background:var(--cb)}
+.nb[data-m=quiz].d{background:var(--white)}
+.nb[data-m=quiz] .d{background:var(--white)}
 .nb.active{color:var(--white)}
-.nb[data-m=con].active{border-color:var(--con);background:var(--con-dim)}
-.nb[data-m=cri].active{border-color:var(--cri);background:var(--cri-dim)}
-.nb[data-m=mod].active{border-color:var(--mod);background:var(--mod-dim)}
-.nb[data-m=inc].active{border-color:var(--inc);background:var(--inc-dim)}
 .nb[data-m=jur].active{border-color:var(--jur);background:var(--jur-dim)}
+.nb[data-m=ca].active{border-color:var(--ca);background:var(--ca-dim)}
+.nb[data-m=cb].active{border-color:var(--cb);background:var(--cb-dim)}
 .nb[data-m=quiz].active{border-color:rgba(255,255,255,.28);background:rgba(255,255,255,.04)}
 .main{position:relative;z-index:5;max-width:1100px;margin:1.8rem auto 5rem;padding:0 2rem}
 .mod{display:none;animation:fu .3s ease both}.mod.active{display:block}
 @keyframes fu{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .mhd{display:flex;align-items:flex-start;gap:1.4rem;padding:1.75rem 2rem;border-radius:14px 14px 0 0;border:1px solid var(--border);border-bottom:none;box-shadow:0 4px 20px rgba(0,0,0,.25)}
-.mhd[data-c=con]{background:var(--con-dim);border-color:rgba(92,184,224,.28)}
-.mhd[data-c=cri]{background:var(--cri-dim);border-color:rgba(92,201,138,.28)}
-.mhd[data-c=mod]{background:var(--mod-dim);border-color:rgba(212,168,67,.28)}
-.mhd[data-c=inc]{background:var(--inc-dim);border-color:rgba(224,110,140,.28)}
 .mhd[data-c=jur]{background:var(--jur-dim);border-color:rgba(155,127,232,.28)}
+.mhd[data-c=ca] {background:var(--ca-dim); border-color:rgba(92,184,224,.28)}
+.mhd[data-c=cb] {background:var(--cb-dim); border-color:rgba(212,168,67,.28)}
 .mi{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
-.mi[data-c=con]{background:var(--con-mid)}.mi[data-c=cri]{background:var(--cri-mid)}
-.mi[data-c=mod]{background:var(--mod-mid)}.mi[data-c=inc]{background:var(--inc-mid)}
 .mi[data-c=jur]{background:var(--jur-mid)}
+.mi[data-c=ca] {background:var(--ca-mid)}
+.mi[data-c=cb] {background:var(--cb-mid)}
 .mnum{font-family:'Outfit',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.12em;color:var(--text3);text-transform:uppercase;margin-bottom:.25rem}
 .mtitle{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--white);line-height:1}
 .mdesc{margin-top:.42rem;font-size:.82rem;color:var(--text2);line-height:1.62}
@@ -76,15 +72,15 @@ mark{background:rgba(92,184,224,.28);color:var(--white);border-radius:2px;paddin
 .stabs::-webkit-scrollbar{display:none}
 .stab{padding:.78rem 1.15rem;font-family:'Outfit',sans-serif;font-size:.78rem;font-weight:500;letter-spacing:.01em;text-transform:none;color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;background:none;border-top:none;border-left:none;border-right:none;margin-bottom:-1px;min-height:44px}
 .stab:hover{color:var(--text)}.stab.active{color:var(--white)}
-.stab.active[data-c=con]{border-bottom-color:var(--con)}.stab.active[data-c=cri]{border-bottom-color:var(--cri)}
-.stab.active[data-c=mod]{border-bottom-color:var(--mod)}.stab.active[data-c=inc]{border-bottom-color:var(--inc)}
 .stab.active[data-c=jur]{border-bottom-color:var(--jur)}
+.stab.active[data-c=ca] {border-bottom-color:var(--ca)}
+.stab.active[data-c=cb] {border-bottom-color:var(--cb)}
 .sp{display:none;padding:2rem 2.25rem;animation:fu .22s ease}.sp.active{display:block}
 .sl{font-family:'Outfit',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);margin-bottom:.58rem;margin-top:1.55rem;display:flex;align-items:center;gap:.5rem}
 .sl::after{content:'';flex:1;height:1px;background:var(--border)}.sl:first-child{margin-top:0}
 p{font-size:.9375rem;color:#b5b0be;line-height:1.88}p+p{margin-top:.65rem}
 .hl{color:var(--white);font-weight:500}
-.art{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--con);font-weight:500}
+.art{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--jur);font-weight:500}
 ul,ol{padding-left:1.25rem;margin-top:.48rem}
 li{font-size:.9rem;color:#aeaab8;line-height:1.82;margin-bottom:.2rem}li strong{color:var(--white);font-weight:500}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:.88rem;margin-top:.68rem}
@@ -93,22 +89,19 @@ li{font-size:.9rem;color:#aeaab8;line-height:1.82;margin-bottom:.2rem}li strong{
 .card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:1rem;box-shadow:0 2px 8px rgba(0,0,0,.18);transition:border-color .2s,box-shadow .2s}.card:hover{border-color:var(--border2);box-shadow:0 4px 16px rgba(0,0,0,.28)}
 .ct{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.55rem;display:flex;align-items:center;gap:.4rem}
 .ct::before{content:'';width:3px;height:11px;border-radius:2px;flex-shrink:0}
-.cc .ct{color:var(--con)}.cc .ct::before{background:var(--con)}
-.ck .ct{color:var(--cri)}.ck .ct::before{background:var(--cri)}
-.cm .ct{color:var(--mod)}.cm .ct::before{background:var(--mod)}
-.ci .ct{color:var(--inc)}.ci .ct::before{background:var(--inc)}
 .cj .ct{color:var(--jur)}.cj .ct::before{background:var(--jur)}
+.ca .ct{color:var(--ca)}.ca  .ct::before{background:var(--ca)}
+.cb .ct{color:var(--cb)}.cb  .ct::before{background:var(--cb)}
 .co{display:flex;gap:.75rem;padding:.88rem 1rem;border-radius:10px;margin-top:.82rem;font-size:.83rem;line-height:1.72;color:#aeaab8}
 .co-ico{font-size:.92rem;flex-shrink:0;margin-top:.05rem}.co strong{font-weight:500}
-.cb{background:rgba(92,184,224,.07);border:1px solid rgba(92,184,224,.2)}.cb strong{color:var(--con)}
-.cg{background:rgba(92,201,138,.07);border:1px solid rgba(92,201,138,.2)}.cg strong{color:var(--cri)}
-.cw{background:rgba(212,168,67,.07);border:1px solid rgba(212,168,67,.2)}.cw strong{color:var(--mod)}
-.cr{background:rgba(224,110,140,.07);border:1px solid rgba(224,110,140,.2)}.cr strong{color:var(--inc)}
 .cp{background:rgba(155,127,232,.07);border:1px solid rgba(155,127,232,.2)}.cp strong{color:var(--jur)}
-.jur{background:var(--surface2);border:1px solid var(--border);border-left:3px solid var(--mod);border-radius:8px;padding:1rem 1.15rem;margin-top:.68rem;font-size:.82rem;line-height:1.72;color:#aeaab8}
-.jur-header{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mod);margin-bottom:.55rem}
+.cb-box{background:rgba(92,184,224,.07);border:1px solid rgba(92,184,224,.2)}.cb-box strong{color:var(--ca)}
+.cw{background:rgba(212,168,67,.07);border:1px solid rgba(212,168,67,.2)}.cw strong{color:var(--cb)}
+.cg{background:rgba(92,201,138,.07);border:1px solid rgba(92,201,138,.2)}.cg strong{color:#5cc98a}
+.cr{background:rgba(224,110,140,.07);border:1px solid rgba(224,110,140,.2)}.cr strong{color:#e06e8c}
+.jur-box{background:var(--surface2);border:1px solid var(--border);border-left:3px solid var(--cb);border-radius:8px;padding:1rem 1.15rem;margin-top:.68rem;font-size:.82rem;line-height:1.72;color:#aeaab8}
+.jur-header{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cb);margin-bottom:.55rem}
 .jur-ementa{font-style:italic;color:var(--text2);font-size:.8rem;line-height:1.65;margin-bottom:.55rem}
-.jur-ratio{color:#b5b0be;font-size:.83rem}
 .tw{overflow-x:auto;margin-top:.68rem;border-radius:10px;border:1px solid var(--border)}
 table{width:100%;border-collapse:collapse;font-size:.82rem}
 th{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);padding:.68rem 1rem;background:var(--surface2);border-bottom:1px solid var(--border);text-align:left;white-space:nowrap}
@@ -147,28 +140,20 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.012
 .qres{display:none;text-align:center;padding:2.5rem 0}.qres.show{display:block;animation:fu .28s ease}
 .rscore{font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:700;color:var(--white);line-height:1}
 .rlabel{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--text3);letter-spacing:.15em;text-transform:uppercase;margin-top:.4rem}
-.rbar{margin:1.5rem auto 0;max-width:260px;display:flex;align-items:center;gap:.75rem}
-.rbt{flex:1;height:5px;background:var(--border2);border-radius:10px;overflow:hidden}
-.rbf{height:100%;background:linear-gradient(90deg,var(--con),var(--cri));border-radius:10px;transition:width 1s ease}
 @media(max-width:600px){.hdr,.main,.mnav{padding-left:1rem;padding-right:1rem}.hub-footer{padding:1.5rem 1rem}}
 [data-theme=light]{
   --bg:#f0eef7;--surface:#ffffff;--surface2:#f4f2fb;--surface3:#eceaf5;
   --border:rgba(0,0,0,.07);--border2:rgba(0,0,0,.14);
   --text:#1a1828;--text2:#6a6480;--text3:#9a94b0;--white:#0a0818;
-  --con:#2088b0;--con-dim:rgba(32,136,176,.10);--con-mid:rgba(32,136,176,.18);
-  --cri:#289050;--cri-dim:rgba(40,144,80,.10);--cri-mid:rgba(40,144,80,.18);
-  --mod:#987020;--mod-dim:rgba(152,112,32,.10);--mod-mid:rgba(152,112,32,.18);
-  --inc:#c04070;--inc-dim:rgba(192,64,112,.10);--inc-mid:rgba(192,64,112,.18);
   --jur:#7b5fc8;--jur-dim:rgba(123,95,200,.10);--jur-mid:rgba(123,95,200,.18);
+  --ca:#2088b0;--ca-dim:rgba(32,136,176,.10);--ca-mid:rgba(32,136,176,.18);
+  --cb:#987020;--cb-dim:rgba(152,112,32,.10);--cb-mid:rgba(152,112,32,.18);
 }
 [data-theme=light] body::before{opacity:.18}
-[data-theme=light] p{color:#3a3632}
-[data-theme=light] li{color:#3a3632}
-[data-theme=light] .co{color:#3a3632}
-[data-theme=light] .jur{color:#3a3632}
+[data-theme=light] p{color:#3a3632}[data-theme=light] li{color:#3a3632}[data-theme=light] .co{color:#3a3632}[data-theme=light] .jur-box{color:#3a3632}
 .theme-toggle{position:fixed;bottom:1.75rem;right:1.75rem;z-index:100;width:40px;height:40px;border-radius:50%;background:var(--surface2);border:1px solid var(--border2);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text2);transition:background .2s,border-color .2s,color .2s,box-shadow .2s}
 .theme-toggle:hover{background:var(--surface);color:var(--text);box-shadow:0 4px 20px rgba(0,0,0,.18)}
-.theme-toggle:focus-visible{outline:2px solid var(--con,#5cb8e0);outline-offset:3px}
+.theme-toggle:focus-visible{outline:2px solid var(--jur,#9b7fe8);outline-offset:3px}
 .theme-toggle svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;display:block}
 .icon-sun{display:none}.icon-moon{display:block}
 [data-theme=light] .icon-sun{display:block}[data-theme=light] .icon-moon{display:none}
@@ -191,10 +176,8 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.012
 
 <nav class="mnav">
   <button class="nb active" data-m="jur" onclick="switchMod('jur',this)"><span class="d"></span>Jurisdição</button>
-  <button class="nb" data-m="con" onclick="switchMod('con',this)"><span class="d"></span>Conceito e Classificação</button>
-  <button class="nb" data-m="cri" onclick="switchMod('cri',this)"><span class="d"></span>Critérios</button>
-  <button class="nb" data-m="mod" onclick="switchMod('mod',this)"><span class="d"></span>Modificação</button>
-  <button class="nb" data-m="inc" onclick="switchMod('inc',this)"><span class="d"></span>Incompetência e Cooperação</button>
+  <button class="nb" data-m="ca" onclick="switchMod('ca',this)"><span class="d"></span>Competência I — Conceito e Critérios</button>
+  <button class="nb" data-m="cb" onclick="switchMod('cb',this)"><span class="d"></span>Competência II — Modificação e Conflitos</button>
   <button class="nb" data-m="quiz" onclick="switchMod('quiz',this)"><span class="d"></span>Quiz (18 q.)</button>
 </nav>
 
@@ -207,449 +190,396 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.012
     <div>
       <div class="mnum">Módulo 01</div>
       <div class="mtitle">Jurisdição</div>
-      <div class="mdesc">Conceito, características, princípios e espécies. Arts. 16–17 CPC e art. 5º, XXXV CF.</div>
+      <div class="mdesc">O poder do Estado de resolver conflitos com força de lei. Conceito, características, princípios e espécies.</div>
     </div>
   </div>
   <div class="mbody">
     <div class="stabs">
-      <button class="stab active" data-c="jur" onclick="switchTab(this,'j1t1')">Conceito e Características</button>
+      <button class="stab active" data-c="jur" onclick="switchTab(this,'j1t1')">O que é Jurisdição?</button>
       <button class="stab" data-c="jur" onclick="switchTab(this,'j1t2')">Princípios</button>
       <button class="stab" data-c="jur" onclick="switchTab(this,'j1t3')">Contenciosa vs. Voluntária</button>
     </div>
 
     <div class="sp active" id="j1t1">
-      <div class="sl">Conceito</div>
-      <p>Jurisdição é a <span class="hl">função estatal de aplicar o direito ao caso concreto</span>, de forma coativa e definitiva, por meio do processo. O Estado substitui a vontade das partes em conflito pela autoridade da lei, eliminando a autotutela.</p>
-      <p>Trata-se de um <span class="hl">poder-dever</span>: o Estado monopolizou a solução de conflitos (art. 5º, XXXV CF — inafastabilidade) e, em contrapartida, tem o dever de prestar a tutela jurisdicional a quem a invoque.</p>
-      <div class="sl">Características da Jurisdição</div>
+      <div class="sl">A ideia central</div>
+      <p>Imagine dois vizinhos em disputa pelo limite de um terreno. Se não chegam a um acordo, uma das opções é levar o caso ao juiz — que ouvirá os dois lados e dirá, com força de lei, onde começa o terreno de cada um. Isso é <span class="hl">jurisdição</span>: o Estado assumindo o poder de resolver o conflito no lugar das partes.</p>
+      <p>Mais formalmente: jurisdição é a <span class="hl">função estatal de aplicar o direito ao caso concreto</span>, de forma imparcial e definitiva, por meio do processo. O Estado tomou para si o monopólio de resolver conflitos — em troca, garantiu que ninguém ficará sem resposta (art. 5º, XXXV CF).</p>
+      <div class="sl">Por que o Estado monopolizou isso?</div>
+      <p>Antes do Estado moderno, quem tinha mais força resolvia os conflitos pela autotutela (fazer justiça com as próprias mãos). Isso gerava instabilidade e injustiça. O Estado substituiu esse modelo pela <span class="hl">heterocomposição imparcial</span>: um terceiro (o juiz), sem interesse no resultado, decide com base na lei.</p>
+      <div class="sl">As 4 características que definem a jurisdição</div>
       <div class="g2">
         <div class="card cj">
           <div class="ct">Inércia</div>
-          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65"><em>Ne procedat iudex ex officio</em> — o juiz não age sem provocação da parte. A jurisdição é inerte: só se movimenta quando acionada (art. 2º CPC). Excepcionalmente há atuação de ofício (ex: tutela de urgência antecipada de ofício em casos urgentes).</p>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">O juiz não age por conta própria — precisa ser provocado. Isso evita um judiciário invasivo. Só há processo porque alguém ajuizou uma ação (art. 2º CPC: <em>"o processo começa por iniciativa da parte"</em>).</p>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.5rem;line-height:1.65"><strong>Exceção:</strong> medidas de urgência podem ser concedidas de ofício em casos excepcionais.</p>
         </div>
         <div class="card cj">
           <div class="ct">Substitutividade</div>
-          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">O Estado <strong>substitui</strong> a vontade das partes pela decisão judicial. Não importa se as partes querem ou não o resultado — a decisão as vincula. É o traço que diferencia a jurisdição de outros métodos de solução de conflitos (mediação, negociação).</p>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">O Estado <strong>substitui</strong> a vontade das partes pela decisão do juiz. Não importa se o réu concorda ou não — a sentença vale e pode ser executada à força se necessário.</p>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.5rem;line-height:1.65">É o que diferencia o processo judicial da mediação (onde as partes chegam a um acordo voluntário).</p>
         </div>
         <div class="card cj">
           <div class="ct">Definitividade</div>
-          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">A decisão jurisdicional, ao transitar em julgado, produz <strong>coisa julgada</strong> — imutabilidade e indiscutibilidade do conteúdo decisório. Nenhum outro poder do Estado pode rever a decisão transitada em julgado.</p>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Depois de esgotados todos os recursos, a decisão transita em julgado e vira <strong>coisa julgada</strong>: ninguém mais pode discutir aquele mesmo conflito. A questão está encerrada.</p>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.5rem;line-height:1.65">Exceção: ação rescisória pode desconstituir coisa julgada em casos gravíssimos (art. 966 CPC).</p>
         </div>
         <div class="card cj">
           <div class="ct">Imparcialidade</div>
-          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">O juiz não tem interesse pessoal no resultado da demanda. A imparcialidade é garantida pelos institutos da suspeição e impedimento (arts. 144–148 CPC), que afastam o juiz quando comprometida sua neutralidade.</p>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">O juiz não pode ter interesse no resultado. Se tiver (ex: é parente de uma das partes, conhece o caso de forma pessoal), deve se declarar impedido ou suspeito (arts. 144–148 CPC).</p>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.5rem;line-height:1.65">É o que diferencia o juiz de um árbitro privado pago pelas partes.</p>
         </div>
       </div>
-      <div class="co cp"><span class="co-ico">ℹ</span><div><strong>Unicidade:</strong> A jurisdição é una — há um único poder jurisdicional do Estado. A divisão em "civil", "penal", "trabalhista" etc. é apenas <em>distribuição de competência</em>, não fragmentação da jurisdição em si.</div></div>
+      <div class="co cp"><span class="co-ico">ℹ</span><div><strong>A jurisdição é una:</strong> Há apenas um poder jurisdicional do Estado. Quando dizemos "jurisdição cível", "penal" ou "trabalhista", estamos apenas indicando a <em>competência</em> de cada juízo para cada tipo de causa — não são jurisdições distintas.</div></div>
     </div>
 
     <div class="sp" id="j1t2">
-      <div class="sl">Princípios da Jurisdição</div>
+      <div class="sl">Os 6 princípios da jurisdição</div>
       <div class="tw"><table>
-        <thead><tr><th>Princípio</th><th>Conteúdo</th><th>Base</th></tr></thead>
+        <thead><tr><th>Princípio</th><th>O que significa na prática</th><th>Base</th></tr></thead>
         <tbody>
-          <tr><td><strong>Investidura</strong></td><td>A jurisdição só pode ser exercida por quem foi regularmente investido na função de juiz (concurso público ou nomeação constitucional)</td><td>CF/88</td></tr>
-          <tr><td><strong>Aderência ao Território</strong></td><td>O juiz exerce jurisdição nos limites do território nacional. Para atos fora de sua comarca, usa cartas precatórias ou rogatórias</td><td>Art. 16 CPC</td></tr>
-          <tr><td><strong>Indelegabilidade</strong></td><td>A função jurisdicional não pode ser delegada a outro órgão ou pessoa. O juiz não pode transferir seu poder de decidir (distingue-se da carta de ordem, que delega apenas atos materiais)</td><td>CF/88</td></tr>
-          <tr><td><strong>Inevitabilidade</strong></td><td>As partes estão sujeitas à jurisdição independentemente de sua vontade. A sentença vale mesmo para o réu revel</td><td>CPC</td></tr>
-          <tr><td><strong>Inafastabilidade</strong></td><td>A lei não excluirá da apreciação do Poder Judiciário lesão ou ameaça a direito — acesso à justiça garantido</td><td>Art. 5º, XXXV CF</td></tr>
-          <tr><td><strong>Juiz Natural</strong></td><td>Proibição de tribunal de exceção (art. 5º, XXXVII CF) e direito a julgamento pelo juiz constitucionalmente competente (art. 5º, LIII CF)</td><td>Art. 5º, XXXVII e LIII CF</td></tr>
+          <tr><td><strong>Investidura</strong></td><td>Só quem foi aprovado em concurso público ou nomeado constitucionalmente pode exercer jurisdição. Um professor de Direito não pode "julgar" uma causa, por mais competente que seja.</td><td>CF/88</td></tr>
+          <tr><td><strong>Aderência ao Território</strong></td><td>O juiz de Porto Alegre não pode ir a São Paulo colher um depoimento. Para atos fora de sua comarca, ele envia uma carta precatória para o juiz de lá. A jurisdição tem limites territoriais.</td><td>Art. 16 CPC</td></tr>
+          <tr><td><strong>Indelegabilidade</strong></td><td>O juiz não pode entregar o poder de <em>decidir</em> a outra pessoa. Pode delegar a <em>prática de atos materiais</em> (ex: uma carta de ordem para outro juiz citar alguém), mas a sentença ele mesmo deve proferir.</td><td>CF/88</td></tr>
+          <tr><td><strong>Inevitabilidade</strong></td><td>As partes não têm escolha — uma vez ajuizada a ação, o réu está sujeito à sentença independentemente de querer. O réu revel (que não responde) também pode ser condenado.</td><td>CPC</td></tr>
+          <tr><td><strong>Inafastabilidade</strong></td><td>Nenhuma lei pode proibir alguém de ir ao juiz. Se você tem um direito lesado ou ameaçado, o Judiciário sempre pode ser acionado — mesmo que um contrato diga o contrário.</td><td>Art. 5º, XXXV CF</td></tr>
+          <tr><td><strong>Juiz Natural</strong></td><td>Dois desdobramentos: (1) é proibido criar um tribunal especial <em>após</em> o fato (ex: "vamos criar um tribunal só para julgar esse réu") — art. 5º, XXXVII CF; (2) o réu tem direito ao juiz legalmente competente antes do fato — art. 5º, LIII CF.</td><td>Art. 5º, XXXVII e LIII CF</td></tr>
         </tbody>
       </table></div>
-      <div class="co cp"><span class="co-ico">⚠</span><div><strong>Indelegabilidade vs. Carta de Ordem:</strong> A carta de ordem (tribunal → juiz vinculado) delega apenas a <em>prática de atos materiais</em>, não o poder de decidir. O poder decisório permanece com o órgão que expediu a carta.</div></div>
+      <div class="co cw"><span class="co-ico">⚠</span><div><strong>Indelegabilidade ≠ proibição de cartas:</strong> Quando um tribunal expede uma carta de ordem para um juiz praticar um ato (ex: ouvir uma testemunha), ele não está delegando o poder de <em>decidir</em> — apenas pedindo que um ato material seja praticado. O poder decisório continua com o tribunal.</div></div>
     </div>
 
     <div class="sp" id="j1t3">
-      <div class="sl">Jurisdição Contenciosa</div>
-      <p>É a jurisdição típica: pressupõe <span class="hl">lide real</span> (conflito de interesses qualificado por uma pretensão resistida) entre partes antagônicas. O Estado resolve o conflito, substituindo as vontades das partes por sua decisão. Produz <span class="hl">coisa julgada material</span>.</p>
-      <div class="sl">Jurisdição Voluntária</div>
-      <p>Também chamada de <span class="hl">administração pública de interesses privados</span>. Não há lide — o Estado apenas homologa, autoriza ou certifica situações jurídicas que a lei exige intervenção judicial. Há partes, mas não adversárias.</p>
+      <div class="sl">Jurisdição Contenciosa — a regra</div>
+      <p>É a jurisdição <span class="hl">típica</span>: há uma <span class="hl">lide real</span> — alguém quer algo que outro se recusa a dar. O juiz é chamado para resolver esse conflito. Exemplos: cobrança de dívida, divórcio litigioso, indenização por acidente, ação penal.</p>
+      <p>Aqui há <strong>partes antagônicas</strong> (autor × réu), contraditório pleno e, ao final, a sentença produz <span class="hl">coisa julgada material</span> — ninguém pode rediscutir o mesmo conflito.</p>
+      <div class="sl">Jurisdição Voluntária — a exceção</div>
+      <p>Aqui não há conflito. As partes não são inimigas — elas simplesmente precisam de uma <span class="hl">chancela judicial</span> para que determinado ato produza efeitos. O Estado administra interesses privados que a lei exige intervenção do juiz.</p>
       <div class="g2">
         <div class="card cj">
-          <div class="ct">Exemplos de JV</div>
+          <div class="ct">Exemplos de Jurisdição Voluntária</div>
           <ul>
-            <li>Separação e divórcio consensuais (quando há incapazes)</li>
-            <li>Interdição consensual</li>
+            <li>Separação/divórcio consensual (quando há filhos menores)</li>
+            <li>Interdição de pessoa incapaz (quando todos concordam)</li>
             <li>Inventário sem conflito entre herdeiros</li>
             <li>Adoção</li>
             <li>Abertura, registro e cumprimento de testamento</li>
             <li>Emancipação judicial</li>
+            <li>Suprimento de consentimento (menor que quer casar sem autorização dos pais)</li>
           </ul>
         </div>
         <div class="card cj">
-          <div class="ct">Diferenças Principais</div>
-          <ul>
-            <li><strong>Lide:</strong> presente (JC) / ausente (JV)</li>
-            <li><strong>Partes:</strong> antagônicas (JC) / interessados (JV)</li>
-            <li><strong>Coisa julgada:</strong> material (JC) / divergência na JV — maioria nega CJ material</li>
-            <li><strong>Objetivo:</strong> resolver conflito (JC) / administrar interesses (JV)</li>
-          </ul>
+          <div class="ct">Por que precisa do juiz se não há conflito?</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">A lei exige a participação judicial para proteger interesses de pessoas vulneráveis (incapazes, herdeiros, adotandos) ou para dar segurança jurídica a atos de grande relevância.</p>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.5rem;line-height:1.65">O juiz aqui age quase como um notário com poderes ampliados — homologa, autoriza, certifica.</p>
         </div>
       </div>
-      <div class="co cg"><span class="co-ico">✓</span><div><strong>Art. 723 CPC — JV:</strong> O juiz não é obrigado a observar critério de legalidade estrita, podendo adotar, em cada caso, a solução que reputar mais conveniente ou oportuna. Discricionariedade excepcional do juiz na jurisdição voluntária.</div></div>
+      <div class="tw" style="margin-top:1.2rem"><table>
+        <thead><tr><th>Critério</th><th>Contenciosa</th><th>Voluntária</th></tr></thead>
+        <tbody>
+          <tr><td>Há lide?</td><td><strong>Sim</strong> — partes em conflito</td><td><strong>Não</strong> — partes com interesse comum</td></tr>
+          <tr><td>Quem são as partes?</td><td>Autor e réu (antagônicos)</td><td>Interessados (não há adversário)</td></tr>
+          <tr><td>Papel do juiz</td><td>Resolver o conflito aplicando o direito</td><td>Administrar/homologar interesses privados</td></tr>
+          <tr><td>Coisa julgada material?</td><td><strong>Sim</strong></td><td>Doutrina majoritária: <strong>não</strong> produz CJ material</td></tr>
+          <tr><td>Critério de decisão</td><td>Legalidade estrita</td><td>Pode usar conveniência/oportunidade (art. 723 CPC)</td></tr>
+        </tbody>
+      </table></div>
+      <div class="co cp"><span class="co-ico">ℹ</span><div><strong>Art. 723 CPC — JV:</strong> "O juiz não é obrigado a observar critério de legalidade estrita, podendo adotar em cada caso a solução que reputar mais conveniente ou oportuna." Essa flexibilidade só existe na jurisdição voluntária.</div></div>
     </div>
   </div>
 </div>
 
-<!-- ═══ MÓDULO 2: CONCEITO E CLASSIFICAÇÃO ═══ -->
-<div class="mod" id="mod-con">
-  <div class="mhd" data-c="con">
-    <div class="mi" data-c="con">⚖️</div>
+<!-- ═══ MÓDULO 2: COMPETÊNCIA I ═══ -->
+<div class="mod" id="mod-ca">
+  <div class="mhd" data-c="ca">
+    <div class="mi" data-c="ca">⚖️</div>
     <div>
       <div class="mnum">Módulo 02</div>
-      <div class="mtitle">Conceito e Classificação</div>
-      <div class="mdesc">Poder-dever do órgão, distribuição, perpetuação, prevenção e classificações. Arts. 42–45 CPC.</div>
+      <div class="mtitle">Competência I</div>
+      <div class="mdesc">Conceito, classificação, perpetuação, prevenção e critérios de determinação. Arts. 42–53 CPC.</div>
     </div>
   </div>
   <div class="mbody">
     <div class="stabs">
-      <button class="stab active" data-c="con" onclick="switchTab(this,'c1t1')">Conceito</button>
-      <button class="stab" data-c="con" onclick="switchTab(this,'c1t2')">Absoluta e Relativa</button>
-      <button class="stab" data-c="con" onclick="switchTab(this,'c1t3')">Outras Classificações</button>
+      <button class="stab active" data-c="ca" onclick="switchTab(this,'a1t1')">Conceito e Distribuição</button>
+      <button class="stab" data-c="ca" onclick="switchTab(this,'a1t2')">Absoluta vs. Relativa</button>
+      <button class="stab" data-c="ca" onclick="switchTab(this,'a1t3')">Critérios: Objetivo e Funcional</button>
+      <button class="stab" data-c="ca" onclick="switchTab(this,'a1t4')">Critério Territorial</button>
     </div>
 
-    <div class="sp active" id="c1t1">
-      <div class="sl">Competência Jurisdicional</div>
-      <p>Competência é o <span class="hl">poder-dever de um órgão jurisdicional</span> para executar a parcela de atividade jurisdicional que lhe foi atribuída em virtude da lei. É do <span class="hl">órgão</span> — não da pessoa física do juiz. A incompetência do juiz não o impede de praticar atos urgentes.</p>
-      <div class="sl">Distribuição da Competência</div>
-      <p>A competência é distribuída por diversas fontes normativas, em ordem hierárquica:</p>
+    <div class="sp active" id="a1t1">
+      <div class="sl">Conceito</div>
+      <p>Se jurisdição é o poder de julgar, <span class="hl">competência</span> é a <span class="hl">parcela desse poder atribuída a cada órgão</span>. É do órgão — não da pessoa física do juiz. O juiz promovido leva sua pessoa, não a competência do cargo anterior.</p>
+      <div class="sl">Como a competência é distribuída</div>
       <ol>
-        <li><strong>Constituição Federal</strong> — fixa competências originárias do STF, STJ, TRF etc.</li>
-        <li><strong>CPC e diplomas processuais</strong> — regras gerais de competência (arts. 42 e ss.)</li>
-        <li><strong>Leis de organização judiciária</strong> — distribuem competências entre varas e juízos estaduais</li>
+        <li><strong>Constituição Federal</strong> — fixa as competências originárias do STF, STJ e Tribunais</li>
+        <li><strong>CPC e diplomas processuais</strong> — regras gerais (arts. 42 e ss.)</li>
+        <li><strong>Leis de organização judiciária</strong> — distribuem varas e juízos estaduais</li>
         <li><strong>Regimentos internos dos tribunais</strong> — competências internas das câmaras e turmas</li>
       </ol>
       <div class="g2">
-        <div class="card cc">
-          <div class="ct">Perpetuação da Jurisdição — Art. 43 CPC</div>
-          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Uma vez estabelecida a competência no momento da propositura da ação (<em>perpetuatio jurisdictionis</em>), ela se mantém ainda que ocorra alteração posterior de fato ou de direito. Garante a estabilidade do processo.</p>
-          <p style="font-size:.82rem;color:#aeaab8;margin-top:.55rem;line-height:1.65"><strong>Exceção:</strong> supressão do órgão ou alteração da competência absoluta.</p>
+        <div class="card ca">
+          <div class="ct">Perpetuação da Jurisdição — Art. 43</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Uma vez ajuizada a ação, a competência se <strong>congela</strong>: mesmo que a lei mude depois, ou que o domicílio do réu mude, o processo continua no mesmo juízo. Garante estabilidade.</p>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.5rem;line-height:1.65"><strong>Exceção:</strong> se o órgão for suprimido, ou se a alteração for de competência absoluta.</p>
         </div>
-        <div class="card cc">
-          <div class="ct">Prevenção — Art. 59 CPC</div>
-          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">O registro ou a distribuição da petição inicial <strong>torna prevento</strong> o juízo. Se duas ações conexas forem distribuídas a juízos distintos, a reunião se dará perante o juízo prevento — o que primeiro conheceu da causa.</p>
+        <div class="card ca">
+          <div class="ct">Prevenção — Art. 59</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Quando duas ações conexas estão em juízos distintos e precisam ser reunidas, vai para o juízo que <strong>primeiro conheceu da causa</strong> — o prevento. O registro ou distribuição da petição torna o juízo prevento.</p>
         </div>
       </div>
     </div>
 
-    <div class="sp" id="c1t2">
-      <div class="sl">b.3) Competência Absoluta vs. Relativa</div>
+    <div class="sp" id="a1t2">
+      <div class="sl">A distinção mais cobrada em provas</div>
       <div class="tw"><table>
         <thead><tr><th>Critério</th><th>Absoluta</th><th>Relativa</th></tr></thead>
         <tbody>
           <tr><td>Interesse protegido</td><td>Público — ordem pública</td><td>Das partes</td></tr>
-          <tr><td>Modificação pelas partes</td><td><strong>Não</strong> — inderrogável</td><td><strong>Sim</strong> — por eleição de foro, conexão, continência</td></tr>
-          <tr><td>Conhecimento de ofício</td><td><strong>Sim</strong> — qualquer tempo e grau</td><td><strong>Não</strong> — depende de alegação da parte</td></tr>
-          <tr><td>Preclusão se não alegada</td><td>Não preclui</td><td>Prorroga — juízo torna-se competente (art. 65)</td></tr>
-          <tr><td>Forma de alegação</td><td>Preliminar de contestação ou de ofício</td><td>Preliminar de contestação (art. 337, II)</td></tr>
-          <tr><td>Exemplos</td><td>Matéria, pessoa (funcional), hierárquica</td><td>Territorial (foro do domicílio do réu — art. 46)</td></tr>
+          <tr><td>Pode ser modificada?</td><td><strong>Não</strong> — inderrogável pelas partes</td><td><strong>Sim</strong> — por eleição de foro, conexão, continência</td></tr>
+          <tr><td>Juiz pode reconhecer de ofício?</td><td><strong>Sim</strong> — a qualquer tempo e grau</td><td><strong>Não</strong> — depende de alegação da parte</td></tr>
+          <tr><td>Se não for alegada a tempo?</td><td>Não preclui nunca</td><td><strong>Prorroga</strong> — juízo incompetente torna-se competente (art. 65)</td></tr>
+          <tr><td>Forma de alegar</td><td>Preliminar de contestação ou de ofício</td><td>Preliminar de contestação (art. 337, II)</td></tr>
+          <tr><td>Exemplos</td><td>Matéria, pessoa, funcional</td><td>Territorial (foro do domicílio — art. 46)</td></tr>
         </tbody>
       </table></div>
-      <div class="co cr"><span class="co-ico">!</span><div><strong>Prorrogação da competência relativa (art. 65):</strong> Se o réu não alega incompetência relativa na contestação, ela prorroga — o juízo originalmente incompetente torna-se competente. É a consequência mais cobrada em provas.</div></div>
-    </div>
-
-    <div class="sp" id="c1t3">
-      <div class="sl">b.1) Foro e Juízo</div>
+      <div class="co cr"><span class="co-ico">!</span><div><strong>Prorrogação (art. 65):</strong> Se o réu não alega incompetência relativa na contestação, ela prorroga — o juízo originalmente incompetente <em>torna-se</em> competente. É a consequência mais cobrada em provas sobre competência relativa.</div></div>
+      <div class="sl">Outras classificações</div>
       <div class="g2">
-        <div class="card cc">
-          <div class="ct">Competência do Foro</div>
-          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">De natureza <strong>territorial</strong>. Define em qual <strong>comarca ou seção judiciária</strong> o processo tramitará. Ex: foro do domicílio do réu, foro do local do imóvel.</p>
-        </div>
-        <div class="card cc">
-          <div class="ct">Competência do Juízo</div>
-          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Define qual <strong>vara ou órgão específico</strong> dentro do foro será competente. Ex: 1ª Vara Cível, Vara de Família, Vara da Fazenda Pública.</p>
-        </div>
-      </div>
-      <div class="sl">b.2) Originária e Derivada</div>
-      <div class="g2">
-        <div class="card cc">
-          <div class="ct">Originária</div>
-          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">O órgão julga a causa <strong>em primeiro grau</strong>, sem que tenha havido julgamento anterior. É a competência normal do juízo de 1º grau — mas também existe competência originária dos tribunais (ex: ação rescisória no TJ).</p>
-        </div>
-        <div class="card cc">
-          <div class="ct">Derivada</div>
-          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Decorre de <strong>recurso ou remessa necessária</strong>. É exercida em grau superior ao originário — competência dos tribunais para julgamento de apelação, agravo, embargos etc.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══ MÓDULO 2: CRITÉRIOS ═══ -->
-<div class="mod" id="mod-cri">
-  <div class="mhd" data-c="cri">
-    <div class="mi" data-c="cri">📐</div>
-    <div>
-      <div class="mnum">Módulo 03</div>
-      <div class="mtitle">Critérios</div>
-      <div class="mdesc">Objetivo, funcional e territorial. Arts. 42 e ss. CPC. Regra geral: foro do domicílio do réu (art. 46).</div>
-    </div>
-  </div>
-  <div class="mbody">
-    <div class="stabs">
-      <button class="stab active" data-c="cri" onclick="switchTab(this,'r1t1')">Objetivo</button>
-      <button class="stab" data-c="cri" onclick="switchTab(this,'r1t2')">Funcional</button>
-      <button class="stab" data-c="cri" onclick="switchTab(this,'r1t3')">Territorial</button>
-    </div>
-
-    <div class="sp active" id="r1t1">
-      <div class="sl">1) Critério Objetivo</div>
-      <p>Determina a competência com base em características <span class="hl">objetivas da causa ou das partes</span>. Subdivide-se em três subcritérios:</p>
-      <div class="g3">
-        <div class="card ck">
-          <div class="ct">Matéria</div>
-          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Natureza da causa. Distribuição entre varas especializadas — Vara Cível, de Família, da Fazenda, Criminal, Trabalhista etc.</p>
-          <p style="font-size:.82rem;color:#aeaab8;margin-top:.55rem;line-height:1.65"><strong>Absoluta</strong> — não pode ser modificada pelas partes.</p>
-        </div>
-        <div class="card ck">
-          <div class="ct">Pessoa / Hierárquica</div>
-          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Qualidade das partes. Ex: foro privilegiado do Presidente da República (STF), senadores e deputados. Competências privativas pela natureza do sujeito.</p>
-          <p style="font-size:.82rem;color:#aeaab8;margin-top:.55rem;line-height:1.65"><strong>Absoluta</strong> quando fixada na CF.</p>
-        </div>
-        <div class="card ck">
-          <div class="ct">Valor da Causa (Alçada)</div>
-          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Distribui causas conforme o valor econômico. Ex: Juizados Especiais (até 40 salários mínimos), competência dos tribunais de alçada.</p>
-          <p style="font-size:.82rem;color:#aeaab8;margin-top:.55rem;line-height:1.65">Natureza pode ser relativa ou absoluta conforme a lei.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="sp" id="r1t2">
-      <div class="sl">2) Critério Funcional</div>
-      <p>Determina a competência com base nas <span class="hl">funções exercidas pelo órgão jurisdicional</span> dentro de um mesmo processo. É de natureza <span class="hl">absoluta</span>.</p>
-      <div class="g2">
-        <div class="card ck">
-          <div class="ct">Aspecto Horizontal</div>
-          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65"><strong>Divisão entre órgãos do mesmo grau</strong> de jurisdição para atos distintos no mesmo processo. Ex: juiz que pronunciou o réu é competente para presidir o Tribunal do Júri.</p>
-        </div>
-        <div class="card ck">
-          <div class="ct">Aspecto Vertical</div>
-          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65"><strong>Divisão entre graus de jurisdição</strong> distintos. Ex: competência do tribunal para julgamento do recurso interposto contra sentença do juízo de 1º grau.</p>
-        </div>
-      </div>
-      <div class="co cb"><span class="co-ico">ℹ</span><div><strong>Competência funcional absoluta:</strong> Por ser absoluta, não pode ser modificada por vontade das partes, pode ser declarada de ofício e a decisão proferida por órgão funcionalmente incompetente é nula.</div></div>
-    </div>
-
-    <div class="sp" id="r1t3">
-      <div class="sl">3) Critério Territorial — Arts. 46 a 53 CPC</div>
-      <p>Determina em qual <span class="hl">comarca ou seção judiciária</span> o processo tramitará. É de natureza <span class="hl">relativa</span> — pode ser modificada por convenção das partes ou prorrogação.</p>
-      <div class="sl">Regra Geral — Art. 46 CPC</div>
-      <p><span class="hl">Foro do domicílio do réu</span> — é a regra geral do CPC para ações pessoais e ações reais sobre bens móveis.</p>
-      <div class="sl">Foros Especiais (arts. 47–53)</div>
-      <div class="tw"><table>
-        <thead><tr><th>Hipótese</th><th>Foro Competente</th><th>Art.</th></tr></thead>
-        <tbody>
-          <tr><td>Ação real sobre imóvel</td><td>Situação do imóvel (<em>forum rei sitae</em>) — <strong>absoluto</strong></td><td>47</td></tr>
-          <tr><td>Inventário e partilha</td><td>Último domicílio do falecido</td><td>48</td></tr>
-          <tr><td>Incapaz</td><td>Domicílio do representante ou assistente</td><td>50</td></tr>
-          <tr><td>Pessoa jurídica</td><td>Lugar da sede ou agência/sucursal (se a obrigação emanou desta)</td><td>53, III</td></tr>
-          <tr><td>Ação de reparação de dano</td><td>Domicílio do autor ou local do fato (competência concorrente)</td><td>53, V</td></tr>
-          <tr><td>Divórcio, separação, anulação</td><td>Domicílio do guardião dos filhos / do cônjuge que não propõe</td><td>53, I</td></tr>
-        </tbody>
-      </table></div>
-      <div class="co cg"><span class="co-ico">✓</span><div><strong>Competência territorial relativa:</strong> Pode ser modificada por eleição de foro (cláusula contratual), conexão ou continência. Se o réu não alega na contestação, prorroga-se (art. 65).</div></div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══ MÓDULO 3: MODIFICAÇÃO ═══ -->
-<div class="mod" id="mod-mod">
-  <div class="mhd" data-c="mod">
-    <div class="mi" data-c="mod">🔗</div>
-    <div>
-      <div class="mnum">Módulo 04</div>
-      <div class="mtitle">Modificação da Competência</div>
-      <div class="mdesc">Conexão (art. 55), continência (art. 56) e negócio jurídico processual. Jurisprudência TJRS.</div>
-    </div>
-  </div>
-  <div class="mbody">
-    <div class="stabs">
-      <button class="stab active" data-c="mod" onclick="switchTab(this,'m1t1')">Conexão e Continência</button>
-      <button class="stab" data-c="mod" onclick="switchTab(this,'m1t2')">Negócio Jurídico Processual</button>
-      <button class="stab" data-c="mod" onclick="switchTab(this,'m1t3')">Jurisprudência TJRS</button>
-    </div>
-
-    <div class="sp active" id="m1t1">
-      <div class="sl">d.1) Conexão — Art. 55 CPC</div>
-      <p>Ocorre quando duas ou mais ações têm o <span class="hl">mesmo pedido ou a mesma causa de pedir</span>. As ações conexas devem ser <span class="hl">reunidas para julgamento conjunto</span>, evitando decisões conflitantes sobre questões comuns.</p>
-      <div class="g2">
-        <div class="card cm">
-          <div class="ct">Requisitos</div>
+        <div class="card ca">
+          <div class="ct">Foro vs. Juízo</div>
           <ul>
-            <li>Duas ou mais ações em curso</li>
-            <li>Mesmo pedido <strong>ou</strong> mesma causa de pedir</li>
-            <li>Não exige identidade de partes</li>
-            <li>Risco de decisões conflitantes</li>
+            <li><strong>Foro:</strong> qual comarca/seção judiciária (território)</li>
+            <li><strong>Juízo:</strong> qual vara específica dentro do foro</li>
+            <li>Ex: foro = Comarca de Santa Maria; juízo = 1ª Vara Cível</li>
           </ul>
         </div>
-        <div class="card cm">
-          <div class="ct">Art. 55, §3º — Conexão Ampliada</div>
-          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Serão reunidos para julgamento conjunto os processos que possam gerar <strong>decisão inconsistente ou contraditória</strong>, mesmo que não haja identidade de causas de pedir ou pedidos. Admite conexão por afinidade.</p>
+        <div class="card ca">
+          <div class="ct">Originária vs. Derivada</div>
+          <ul>
+            <li><strong>Originária:</strong> julga em 1º grau, sem julgamento anterior</li>
+            <li><strong>Derivada:</strong> decorre de recurso — competência dos tribunais para apelações, agravos etc.</li>
+            <li>Tribunais também têm competência originária (ex: ação rescisória no TJ)</li>
+          </ul>
         </div>
       </div>
-      <div class="sl">d.2) Continência — Art. 56 CPC</div>
-      <p>Ocorre quando entre duas ou mais ações há <span class="hl">identidade de partes e de causa de pedir</span>, mas o pedido de uma, por ser mais amplo, <span class="hl">abrange o das demais</span>.</p>
-      <div class="co cw"><span class="co-ico">⚠</span><div><strong>Distinção conexão vs. continência:</strong> Na <strong>conexão</strong> — mesmo pedido ou mesma causa (não necessariamente ambos). Na <strong>continência</strong> — mesmas partes + mesma causa de pedir, mas pedidos diferentes sendo um mais amplo que o outro. Na continência, a ação mais restrita é extinta (art. 57).</div></div>
+    </div>
+
+    <div class="sp" id="a1t3">
+      <div class="sl">1) Critério Objetivo — "qual é a causa?"</div>
+      <p>Define a competência com base em características <span class="hl">objetivas da própria causa</span>. É de natureza <span class="hl">absoluta</span>.</p>
+      <div class="g3">
+        <div class="card ca">
+          <div class="ct">Matéria</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">A <em>natureza jurídica</em> da causa define para qual vara vai. Causa de família → Vara de Família. Causa envolvendo a Fazenda → Vara da Fazenda. Causa penal → Vara Criminal.</p>
+        </div>
+        <div class="card ca">
+          <div class="ct">Pessoa / Hierárquica</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">A <em>qualidade</em> de quem é parte define o órgão. Ex: o Presidente da República só pode ser julgado pelo STF; senadores e deputados pelo STF em crimes comuns. O "foro privilegiado" é esse critério.</p>
+        </div>
+        <div class="card ca">
+          <div class="ct">Valor da Causa (Alçada)</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">O <em>valor econômico</em> distribui causas. Ex: Juizados Especiais Cíveis aceitam causas de até 40 salários mínimos. Acima disso, vai para a vara comum.</p>
+        </div>
+      </div>
+      <div class="sl">2) Critério Funcional — "qual é o papel do órgão no processo?"</div>
+      <p>Define a competência pela <span class="hl">função que o órgão exerce dentro de um mesmo processo</span>. É de natureza <span class="hl">absoluta</span>.</p>
+      <div class="g2">
+        <div class="card ca">
+          <div class="ct">Horizontal</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Divisão de funções entre órgãos do <strong>mesmo grau</strong>. Ex: o juiz que pronunciou o réu é o competente para presidir o julgamento pelo Tribunal do Júri.</p>
+        </div>
+        <div class="card ca">
+          <div class="ct">Vertical</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Divisão entre <strong>graus distintos</strong>. Ex: 1º grau julga a causa; o TJ julga o recurso; o STJ julga o recurso especial. Cada grau tem sua função.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sp" id="a1t4">
+      <div class="sl">3) Critério Territorial — "em qual comarca?" (Arts. 46–53 CPC)</div>
+      <p>Define <span class="hl">onde geograficamente</span> o processo tramitará. É de natureza <span class="hl">relativa</span> — pode ser modificada por convenção ou por prorrogação.</p>
+      <div class="sl">Regra Geral — Art. 46: Foro do Domicílio do Réu</div>
+      <p>Para ações pessoais e ações reais sobre bens móveis, o réu é processado onde mora. Facilita sua defesa — ele não precisa se deslocar para uma comarca distante.</p>
+      <div class="sl">Foros Especiais (regras que se sobrepõem à geral)</div>
+      <div class="tw"><table>
+        <thead><tr><th>Tipo de causa</th><th>Foro competente</th><th>Art.</th></tr></thead>
+        <tbody>
+          <tr><td>Ação real sobre <strong>imóvel</strong></td><td>Situação do imóvel — <strong>absoluto</strong> (<em>forum rei sitae</em>)</td><td>47</td></tr>
+          <tr><td>Inventário e partilha</td><td>Último domicílio do falecido</td><td>48</td></tr>
+          <tr><td>Incapaz</td><td>Domicílio do representante ou assistente</td><td>50</td></tr>
+          <tr><td>Pessoa jurídica</td><td>Sede; ou agência/filial (se a obrigação emanou dela)</td><td>53, III</td></tr>
+          <tr><td>Reparação de dano (acidente)</td><td>Domicílio do autor <strong>ou</strong> local do fato (alternativo)</td><td>53, V</td></tr>
+          <tr><td>Divórcio, separação, anulação</td><td>Domicílio do guardião dos filhos; ou do cônjuge que não propõe</td><td>53, I</td></tr>
+        </tbody>
+      </table></div>
+      <div class="co cb-box"><span class="co-ico">ℹ</span><div><strong>Ação real sobre imóvel é absoluta:</strong> É um dos poucos casos em que a competência territorial é absoluta (art. 47, §1º CPC). As partes não podem eleger outro foro por cláusula contratual.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MÓDULO 3: COMPETÊNCIA II ═══ -->
+<div class="mod" id="mod-cb">
+  <div class="mhd" data-c="cb">
+    <div class="mi" data-c="cb">🔗</div>
+    <div>
+      <div class="mnum">Módulo 03</div>
+      <div class="mtitle">Competência II</div>
+      <div class="mdesc">Modificação (conexão e continência), incompetência, conflito de competência e cooperação. Arts. 54–67 CPC.</div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="cb" onclick="switchTab(this,'b1t1')">Conexão e Continência</button>
+      <button class="stab" data-c="cb" onclick="switchTab(this,'b1t2')">Negócio Jurídico Processual</button>
+      <button class="stab" data-c="cb" onclick="switchTab(this,'b1t3')">Incompetência — Como Alegar</button>
+      <button class="stab" data-c="cb" onclick="switchTab(this,'b1t4')">Conflito e Cooperação</button>
+    </div>
+
+    <div class="sp active" id="b1t1">
+      <div class="sl">Por que a competência pode ser modificada?</div>
+      <p>A competência relativa pode mudar quando reunir dois processos num mesmo juízo for <span class="hl">mais eficiente e evitar decisões contraditórias</span>. Isso acontece nos casos de conexão e continência.</p>
+      <div class="sl">Conexão — Art. 55 CPC</div>
+      <p>Duas ações são conexas quando têm o <span class="hl">mesmo pedido</span> ou a <span class="hl">mesma causa de pedir</span>. O efeito é a <strong>reunião dos processos</strong> para julgamento conjunto no juízo prevento.</p>
+      <div class="g2">
+        <div class="card cb">
+          <div class="ct">Exemplo prático</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">João ajuíza ação de indenização contra empresa X pela mesma causa que Maria. Se julgadas separadas, João pode ganhar e Maria perder. A conexão permite julgamento conjunto — mesma causa de pedir.</p>
+        </div>
+        <div class="card cb">
+          <div class="ct">Art. 55, §3º — Conexão Ampliada</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Mesmo sem identidade de pedido ou causa de pedir, os processos são reunidos se houver <strong>risco real de decisões contraditórias</strong>. Aplicação extensiva — conexão por afinidade.</p>
+        </div>
+      </div>
+      <div class="sl">Continência — Art. 56 CPC</div>
+      <p>Há continência quando as ações têm <span class="hl">mesmas partes</span> e <span class="hl">mesma causa de pedir</span>, mas o <span class="hl">pedido de uma abrange o da outra</span>. Efeito: a ação mais restrita é extinta (art. 57) — só a mais ampla continua.</p>
       <div class="tw"><table>
         <thead><tr><th>Critério</th><th>Conexão (art. 55)</th><th>Continência (art. 56)</th></tr></thead>
         <tbody>
-          <tr><td>Partes</td><td>Não precisa ser iguais</td><td>Devem ser idênticas</td></tr>
-          <tr><td>Causa de pedir</td><td>Mesma ou diferente</td><td>Idêntica</td></tr>
+          <tr><td>Partes iguais?</td><td>Não exige</td><td><strong>Sim</strong> — devem ser idênticas</td></tr>
+          <tr><td>Causa de pedir</td><td>Mesma <em>ou</em> diferente</td><td><strong>Idêntica</strong></td></tr>
           <tr><td>Pedido</td><td>Igual ou diferente</td><td>Um abrange o outro</td></tr>
-          <tr><td>Efeito</td><td>Reunião para julgamento conjunto</td><td>Ação mais restrita extinta (art. 57)</td></tr>
+          <tr><td>Efeito</td><td>Reunião para julgamento conjunto</td><td>Ação mais restrita é extinta (art. 57)</td></tr>
         </tbody>
       </table></div>
+      <div class="jur-box">
+        <div class="jur-header">TJRS · 2020 · AI 70083383976 — Conexão pelo art. 55, §3º</div>
+        <div class="jur-ementa">"Correlação entre causas de pedir de duas demandas, embora não idênticas. Possibilidade real de decisões conflitantes. Conexão reconhecida."</div>
+        <div class="co cg" style="margin-top:.6rem"><span class="co-ico">✓</span><div><strong>Ratio:</strong> A conexão foi reconhecida sem identidade total das causas de pedir — bastou a correlação e o risco concreto de decisões conflitantes. Aplicação do §3º do art. 55.</div></div>
+      </div>
     </div>
 
-    <div class="sp" id="m1t2">
-      <div class="sl">d.3) Negócio Jurídico Processual — Eleição de Foro</div>
-      <p>As partes podem, por <span class="hl">convenção</span>, modificar a competência <span class="hl">relativa</span>, elegendo foro diverso do legalmente previsto. Trata-se de manifestação da autonomia privada no campo processual.</p>
+    <div class="sp" id="b1t2">
+      <div class="sl">Eleição de Foro — Art. 63 CPC</div>
+      <p>As partes podem, por <span class="hl">cláusula contratual escrita</span>, escolher um foro diferente do legalmente previsto para resolver eventuais conflitos daquele contrato. Isso é a <span class="hl">eleição de foro</span> — uma das formas de modificar a competência relativa.</p>
       <div class="g2">
-        <div class="card cm">
-          <div class="ct">Requisitos da Eleição de Foro</div>
+        <div class="card cb">
+          <div class="ct">O que pode</div>
           <ul>
-            <li>Negócio jurídico escrito</li>
-            <li>Apenas competência relativa (territorial)</li>
-            <li>Não pode derrogar competência absoluta</li>
-            <li>Deve referir-se a negócio jurídico determinado</li>
-            <li>Não pode ser abusiva (contratos de adesão — art. 63, §3º)</li>
+            <li>Eleger qualquer comarca do Brasil</li>
+            <li>Apenas competência <strong>relativa</strong> (territorial)</li>
+            <li>Cláusula escrita no contrato</li>
+            <li>Para litígios daquele negócio específico</li>
           </ul>
         </div>
-        <div class="card cm">
-          <div class="ct">Limite — Art. 63, §3º CPC</div>
-          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Antes da citação, o juiz pode declinar da competência se a cláusula de eleição de foro for <strong>abusiva</strong> — especialmente em contratos de adesão, quando o foro eleito dificultar excessivamente o acesso à justiça da parte vulnerável.</p>
+        <div class="card cb">
+          <div class="ct">O que não pode</div>
+          <ul>
+            <li>Derrogar competência <strong>absoluta</strong></li>
+            <li>Ser abusiva em contrato de adesão (art. 63, §3º)</li>
+            <li>Excluir o Judiciário (viola inafastabilidade)</li>
+            <li>Ser eleição genérica para qualquer litígio</li>
+          </ul>
         </div>
       </div>
-      <div class="co cb"><span class="co-ico">ℹ</span><div><strong>NJP no CPC/2015:</strong> O art. 190 ampliou o cabimento dos negócios jurídicos processuais, admitindo que as partes — em causas que admitam autocomposição — estipulem mudanças no procedimento para ajustá-lo às especificidades da causa.</div></div>
+      <div class="co cw"><span class="co-ico">⚠</span><div><strong>Art. 63, §3º CPC — contrato de adesão:</strong> Antes da citação, o juiz pode <em>recusar</em> a cláusula de eleição de foro se ela for abusiva — especialmente em contratos de adesão nos quais o foro eleito dificulta o acesso à justiça da parte mais fraca. Proteção ao hipossuficiente.</div></div>
+      <div class="co cb-box"><span class="co-ico">ℹ</span><div><strong>Negócio jurídico processual (art. 190):</strong> O CPC/2015 ampliou a autonomia das partes: em causas que admitem autocomposição, elas podem estipular mudanças no procedimento, nos prazos e em outras regras processuais — não apenas no foro.</div></div>
     </div>
 
-    <div class="sp" id="m1t3">
-      <div class="sl">Jurisprudência — TJRS 2020</div>
-
-      <div class="jur">
-        <div class="jur-header">TJRS &middot; Agravo de Instrumento &middot; 2020 &middot; Conexão — Art. 55, §3º CPC</div>
-        <div class="jur-ementa">"AGRAVO DE INSTRUMENTO. CONEXÃO. CORRELAÇÃO ENTRE AS CAUSAS DE PEDIR DE DUAS DEMANDAS, EMBORA NÃO SEJAM IDÊNTICAS. ART. 55, §3º, DO CPC. POSSIBILIDADE REAL DE DECISÕES CONFLITANTES. CONEXÃO RECONHECIDA. RECURSO PROVIDO."</div>
-        <p class="jur-ratio"><em>AI nº 70083383976 — 1ª Câmara Cível, TJRS. Rel. Carlos Roberto Lofego Canibal. 27/04/2020.</em></p>
-        <div class="co cg" style="margin-top:.65rem"><span class="co-ico">✓</span><div><strong>Ratio decidendi:</strong> A conexão foi reconhecida mesmo sem identidade total das causas de pedir — basta a <strong>correlação</strong> entre elas e o risco concreto de decisões conflitantes. Aplicação extensiva do art. 55, §3º.</div></div>
-      </div>
-
-      <div class="jur" style="margin-top:1rem">
-        <div class="jur-header">TJRS &middot; Apelação Cível &middot; 2020 &middot; Continência — Arts. 56 e 57 CPC</div>
-        <div class="jur-ementa">"APELAÇÃO CÍVEL. AÇÃO DE DIVÓRCIO. ANTERIOR AÇÃO DE DIVÓRCIO, CUMULADA COM REGULAMENTAÇÃO DE VISITAS. LITISPENDÊNCIA. AFASTAMENTO. HIPÓTESE DE CONTINÊNCIA. ART. 56 DO CPC. EXTINÇÃO DO FEITO SEM RESOLUÇÃO DE MÉRITO MANTIDA, EMBORA POR FUNDAMENTO DIVERSO."</div>
-        <p class="jur-ratio"><em>AC nº 70083716928 — 8ª Câmara Cível, TJRS. Rel. Luiz Felipe Brasil Santos. 16/04/2020.</em></p>
-        <div class="co cg" style="margin-top:.65rem"><span class="co-ico">✓</span><div><strong>Ratio decidendi:</strong> Identidade de partes e causa de pedir, mas pedidos distintos (um mais amplo que o outro) — configura <strong>continência</strong>, não litispendência. A ação mais restrita foi extinta com fundamento no art. 57, não no art. 485, V.</div></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══ MÓDULO 4: INCOMPETÊNCIA E COOPERAÇÃO ═══ -->
-<div class="mod" id="mod-inc">
-  <div class="mhd" data-c="inc">
-    <div class="mi" data-c="inc">📬</div>
-    <div>
-      <div class="mnum">Módulo 05</div>
-      <div class="mtitle">Incompetência e Cooperação</div>
-      <div class="mdesc">Alegação, conflito de competência (art. 66) e cooperação jurídica nacional (arts. 67 e ss.).</div>
-    </div>
-  </div>
-  <div class="mbody">
-    <div class="stabs">
-      <button class="stab active" data-c="inc" onclick="switchTab(this,'i1t1')">Da Incompetência</button>
-      <button class="stab" data-c="inc" onclick="switchTab(this,'i1t2')">Conflito de Competência</button>
-      <button class="stab" data-c="inc" onclick="switchTab(this,'i1t3')">Cooperação Jurídica Nacional</button>
-    </div>
-
-    <div class="sp active" id="i1t1">
-      <div class="sl">e) Alegação de Incompetência</div>
-      <p>A incompetência deve ser alegada como <span class="hl">preliminar de contestação</span> (art. 337, II CPC). O regime difere conforme a natureza da incompetência:</p>
+    <div class="sp" id="b1t3">
+      <div class="sl">Como alegar incompetência — art. 337, II CPC</div>
+      <p>A incompetência deve ser arguida como <span class="hl">preliminar de contestação</span>. O regime muda conforme o tipo:</p>
       <div class="g3">
-        <div class="card ci">
-          <div class="ct">Forma de Alegação</div>
+        <div class="card cb">
+          <div class="ct">Absoluta</div>
           <ul>
-            <li>Preliminar de contestação (art. 337, II)</li>
-            <li>Absoluta: também de ofício pelo juiz</li>
-            <li>Relativa: somente pela parte</li>
-          </ul>
-        </div>
-        <div class="card ci">
-          <div class="ct">Competência Absoluta</div>
-          <ul>
-            <li>Conhecida de ofício pelo juiz</li>
-            <li>A qualquer tempo e grau de jurisdição</li>
-            <li>Matéria de ordem pública</li>
+            <li>Arguida de ofício <em>ou</em> pela parte</li>
+            <li>A qualquer tempo e grau</li>
             <li>Não preclui</li>
+            <li>Matéria de ordem pública</li>
           </ul>
         </div>
-        <div class="card ci">
-          <div class="ct">Competência Relativa</div>
+        <div class="card cb">
+          <div class="ct">Relativa</div>
           <ul>
-            <li>Deve ser alegada pela parte</li>
-            <li>Prazo: contestação</li>
+            <li>Só pela parte — juiz <strong>não</strong> pode de ofício</li>
+            <li>Na contestação, sob pena de preclusão</li>
             <li>Se não alegada → <strong>prorrogação</strong> (art. 65)</li>
-            <li>Juízo torna-se competente</li>
+          </ul>
+        </div>
+        <div class="card cb">
+          <div class="ct">Efeito da Incompetência</div>
+          <ul>
+            <li>Juízo declina e remete ao competente</li>
+            <li>Os atos decisórios são nulos (absoluta)</li>
+            <li>Os atos não-decisórios são aproveitados</li>
+            <li>Conserva-se a eficácia das provas</li>
           </ul>
         </div>
       </div>
-      <div class="co cr"><span class="co-ico">!</span><div><strong>Exceção de incompetência relativa (pré-CPC/2015):</strong> No CPC/1973, havia a exceção de incompetência relativa como peça autônoma. No CPC/2015, foi eliminada — a incompetência relativa é alegada como <strong>preliminar na própria contestação</strong>.</div></div>
+      <div class="co cr"><span class="co-ico">!</span><div><strong>Mudança do CPC/2015:</strong> No CPC/1973 havia a "exceção de incompetência relativa" como peça autônoma. Hoje ela não existe mais — a incompetência relativa é alegada como <strong>simples preliminar na contestação</strong>, junto com as demais matérias.</div></div>
     </div>
 
-    <div class="sp" id="i1t2">
-      <div class="sl">f) Conflito de Competência — Art. 66 CPC</div>
-      <p>Ocorre quando dois ou mais órgãos jurisdicionais se declaram <span class="hl">competentes</span> (conflito positivo) ou <span class="hl">incompetentes</span> (conflito negativo) para o mesmo processo.</p>
+    <div class="sp" id="b1t4">
+      <div class="sl">Conflito de Competência — Art. 66 CPC</div>
+      <p>Às vezes dois juízes discordam sobre quem deve julgar o processo. Isso é o <span class="hl">conflito de competência</span>.</p>
       <div class="g2">
-        <div class="card ci">
+        <div class="card cb">
           <div class="ct">Conflito Positivo</div>
-          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Dois juízes se declaram <strong>competentes</strong> para o mesmo processo. Menos frequente — juízes normalmente não atraem processos.</p>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Dois juízes <strong>afirmam</strong> ser competentes para o mesmo processo. Menos comum — nenhum quer "perder" o processo.</p>
         </div>
-        <div class="card ci">
+        <div class="card cb">
           <div class="ct">Conflito Negativo</div>
-          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Dois juízes se declaram <strong>incompetentes</strong> para o mesmo processo. Mais frequente — juízes declaram incompetência e remetem o processo, que não é aceito pelo destinatário.</p>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Dois juízes <strong>recusam</strong> a competência. O processo fica "passando de mão em mão" sem ninguém aceitar julgá-lo. É o mais frequente.</p>
         </div>
       </div>
-      <div class="sl">Resolução do Conflito</div>
-      <p>O conflito é resolvido pelo <span class="hl">tribunal hierarquicamente superior</span> aos órgãos em conflito. O incidente suspende o processo (exceto quanto a atos urgentes).</p>
+      <p style="margin-top:.82rem">O conflito é solucionado pelo <span class="hl">tribunal hierarquicamente superior</span> aos dois juízes em conflito. O processo fica suspenso enquanto isso (exceto atos urgentes).</p>
       <div class="tw"><table>
-        <thead><tr><th>Órgãos em conflito</th><th>Órgão competente para resolver</th></tr></thead>
+        <thead><tr><th>Juízes em conflito</th><th>Quem resolve</th></tr></thead>
         <tbody>
-          <tr><td>Juízes do mesmo Estado</td><td>Tribunal de Justiça do Estado</td></tr>
-          <tr><td>Juízes federais do mesmo TRF</td><td>Tribunal Regional Federal</td></tr>
-          <tr><td>Tribunais estaduais ou TRFs entre si</td><td>Superior Tribunal de Justiça (STJ)</td></tr>
-          <tr><td>Tribunais superiores entre si</td><td>Supremo Tribunal Federal (STF)</td></tr>
+          <tr><td>Dois juízes estaduais do mesmo Estado</td><td>Tribunal de Justiça</td></tr>
+          <tr><td>Dois juízes federais do mesmo TRF</td><td>Tribunal Regional Federal</td></tr>
+          <tr><td>Tribunais estaduais ou TRFs entre si</td><td>STJ</td></tr>
+          <tr><td>Tribunais superiores entre si</td><td>STF</td></tr>
         </tbody>
       </table></div>
-    </div>
-
-    <div class="sp" id="i1t3">
       <div class="sl">Cooperação Jurídica Nacional — Arts. 67 e ss. CPC</div>
-      <p>Instrumento pelo qual os órgãos do Poder Judiciário se auxiliam mutuamente na prática de atos processuais, promovendo <span class="hl">eficiência e celeridade</span> em todo o território nacional.</p>
+      <p>Como o juiz tem limites territoriais (princípio da aderência ao território), quando precisa praticar um ato fora de sua comarca usa os <span class="hl">instrumentos de cooperação</span>:</p>
       <div class="g3">
-        <div class="card ci">
+        <div class="card cb">
           <div class="ct">Carta de Ordem</div>
-          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Expedida por <strong>tribunal a juízo a ele vinculado</strong> (relação de hierarquia). Ex: STJ determina a um juiz federal que pratique ato processual.</p>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Tribunal → juiz a ele <strong>vinculado</strong> (relação hierárquica). Ex: STJ manda um juiz federal praticar um ato.</p>
         </div>
-        <div class="card ci">
+        <div class="card cb">
           <div class="ct">Carta Precatória</div>
-          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Expedida entre <strong>juízos de mesma hierarquia em comarcas distintas</strong>. Ex: juiz de Porto Alegre solicita a juiz de São Paulo que tome depoimento de testemunha.</p>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Juízo → juízo de <strong>mesma hierarquia</strong> em comarca diferente. Ex: juiz de Santa Maria pede ao juiz de SP que ouça uma testemunha.</p>
         </div>
-        <div class="card ci">
-          <div class="ct">Meios Eletrônicos</div>
-          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">O CPC prevê utilização de <strong>meios eletrônicos</strong> para atos de cooperação, conferindo maior celeridade — cartas por sistema eletrônico do CNJ.</p>
+        <div class="card cb">
+          <div class="ct">Carta Rogatória</div>
+          <p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Para atos a serem praticados em <strong>outro país</strong> (cooperação internacional). Precisa de exequatur do STJ para ter eficácia no Brasil.</p>
         </div>
       </div>
-      <div class="co cb"><span class="co-ico">ℹ</span><div><strong>Carta Rogatória:</strong> Usada na cooperação jurídica <em>internacional</em> — para cumprimento de atos processuais em território estrangeiro (ou por tribunal estrangeiro no Brasil). Requer exequatur do STJ.</div></div>
     </div>
   </div>
 </div>
 
 <!-- ═══ MÓDULO QUIZ ═══ -->
 <div class="mod" id="mod-quiz">
-  <div class="mhd" data-c="con">
-    <div class="mi" data-c="con">📝</div>
+  <div class="mhd" data-c="jur">
+    <div class="mi" data-c="jur">📝</div>
     <div>
       <div class="mnum">Quiz</div>
       <div class="mtitle">18 Questões — Banca UFN</div>
-      <div class="mdesc">Jurisdição · Conceito · Classificação · Critérios · Modificação · Incompetência · Cooperação</div>
+      <div class="mdesc">Jurisdição · Competência: conceito, critérios, modificação, incompetência, cooperação</div>
     </div>
   </div>
   <div class="mbody">
@@ -675,22 +605,22 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.012
 const questions=[
   {q:"A jurisdição, como função estatal, caracteriza-se por:",opts:["A) Ser exercida apenas quando as partes assim convencionarem","B) Substituir a vontade das partes pela decisão do Estado, de forma coativa e definitiva","C) Depender sempre da concordância do réu para produzir efeitos","D) Ser delegável a qualquer órgão público quando houver conveniência"],ans:1,fb:"A <strong>substitutividade</strong> é a característica central da jurisdição: o Estado substitui a vontade das partes pela decisão judicial, independentemente de sua concordância. A decisão é coativa e, ao transitar em julgado, produz coisa julgada."},
   {q:"O princípio da inafastabilidade da jurisdição está previsto em:",opts:["A) Art. 16 do CPC — aderência ao território","B) Art. 5º, XXXV da CF — a lei não excluirá da apreciação judicial lesão ou ameaça a direito","C) Art. 2º do CPC — princípio da inércia","D) Art. 43 do CPC — perpetuação da jurisdição"],ans:1,fb:"A <strong>inafastabilidade</strong> está no <strong>art. 5º, XXXV CF</strong>: 'a lei não excluirá da apreciação do Poder Judiciário lesão ou ameaça a direito'. Garante o acesso à justiça como direito fundamental."},
-  {q:"A jurisdição voluntária distingue-se da contenciosa porque:",opts:["A) Na voluntária há lide real entre partes antagônicas","B) Na voluntária o Estado administra interesses privados sem lide, não produzindo em regra coisa julgada material","C) Na voluntária o juiz aplica critério de legalidade estrita","D) Na voluntária a sentença é sempre declaratória"],ans:1,fb:"Na <strong>jurisdição voluntária</strong> não há lide — o Estado administra interesses privados (ex: separação consensual, interdição consensual, inventário sem conflito). O art. 723 CPC permite ao juiz decidir por conveniência ou oportunidade, e a maioria da doutrina nega coisa julgada material."},
-  {q:"O princípio da indelegabilidade da jurisdição significa que:",opts:["A) O juiz não pode expedir cartas precatórias a outros juízos","B) O poder de decidir não pode ser transferido a outro órgão ou pessoa; apenas atos materiais podem ser delegados via carta de ordem","C) Nenhum ato processual pode ser praticado fora da comarca do juízo","D) As partes não podem renunciar à jurisdição por convenção"],ans:1,fb:"A <strong>indelegabilidade</strong> impede a transferência do poder de decidir. Cartas de ordem delegam apenas a <em>prática de atos materiais</em> (ouvir testemunha, citar pessoa) — o poder decisório permanece com o órgão prolator."},
-  {q:"Competência jurisdicional é o poder-dever atribuído a:",opts:["A) Pessoa física do juiz, podendo ser delegada","B) Órgão jurisdicional, em virtude de lei","C) Qualquer servidor do Poder Judiciário","D) Exclusivamente ao STF como guardião da CF"],ans:1,fb:"Competência é do <strong>órgão</strong> — não da pessoa física do juiz. O juiz que se torna incompetente por promoção, por exemplo, não leva a competência consigo."},
-  {q:"Nos termos do art. 43 CPC, a perpetuatio jurisdictionis significa que:",opts:["A) A competência pode ser modificada a qualquer tempo por decisão judicial","B) Uma vez proposta a ação, a competência se perpetua, salvo supressão do órgão ou alteração de competência absoluta","C) O juiz prevento tem competência permanente para todos os processos futuros entre as mesmas partes","D) A competência relativa não pode ser modificada após a citação"],ans:1,fb:"A <strong>perpetuação da jurisdição</strong> (art. 43 CPC) garante que a competência fixada no momento da propositura da ação se mantém, mesmo com mudanças fáticas ou jurídicas posteriores. Exceções: supressão do órgão ou alteração de competência absoluta."},
+  {q:"A jurisdição voluntária distingue-se da contenciosa porque:",opts:["A) Na voluntária há lide real entre partes antagônicas","B) Na voluntária o Estado administra interesses privados sem lide, sem produzir em regra coisa julgada material","C) Na voluntária o juiz aplica critério de legalidade estrita","D) Na voluntária a sentença é sempre declaratória"],ans:1,fb:"Na <strong>jurisdição voluntária</strong> não há lide — o Estado administra interesses privados (ex: divórcio consensual, interdição consensual). O art. 723 CPC permite ao juiz decidir por conveniência, e a maioria da doutrina nega coisa julgada material."},
+  {q:"O princípio da indelegabilidade da jurisdição significa que:",opts:["A) O juiz não pode expedir cartas precatórias a outros juízos","B) O poder de decidir não pode ser transferido; apenas atos materiais podem ser delegados via carta","C) Nenhum ato processual pode ser praticado fora da comarca do juízo","D) As partes não podem renunciar à jurisdição por convenção"],ans:1,fb:"A <strong>indelegabilidade</strong> impede a transferência do poder de <em>decidir</em>. Cartas de ordem delegam apenas a prática de <em>atos materiais</em> — ouvir testemunha, citar pessoa. O poder decisório permanece com quem expediu a carta."},
+  {q:"Competência jurisdicional é o poder-dever atribuído a:",opts:["A) Pessoa física do juiz, podendo ser delegada","B) Órgão jurisdicional, em virtude de lei","C) Qualquer servidor do Poder Judiciário","D) Exclusivamente ao STF como guardião da CF"],ans:1,fb:"Competência é do <strong>órgão</strong> — não da pessoa física do juiz. O juiz que é promovido não leva a competência do cargo anterior."},
+  {q:"Nos termos do art. 43 CPC, a perpetuatio jurisdictionis significa que:",opts:["A) A competência pode ser modificada a qualquer tempo por decisão judicial","B) Uma vez proposta a ação, a competência se perpetua, salvo supressão do órgão ou alteração de competência absoluta","C) O juiz prevento tem competência permanente para todos os processos futuros entre as mesmas partes","D) A competência relativa não pode ser modificada após a citação"],ans:1,fb:"A <strong>perpetuação da jurisdição</strong> (art. 43 CPC) garante que a competência fixada no momento da propositura se mantém mesmo com mudanças posteriores. Exceções: supressão do órgão ou alteração de competência absoluta."},
   {q:"A competência absoluta distingue-se da relativa porque:",opts:["A) A absoluta pode ser modificada por eleição de foro; a relativa, não","B) A absoluta protege interesse das partes; a relativa, o interesse público","C) A absoluta não pode ser modificada pelas partes e pode ser conhecida de ofício; a relativa admite prorrogação se não alegada","D) A absoluta prorroga se não arguida; a relativa não preclui"],ans:2,fb:"A <strong>competência absoluta</strong> é fixada no interesse público, não admite modificação pelas partes, pode ser conhecida de ofício e não preclui. A <strong>relativa</strong> protege interesse das partes, admite prorrogação (art. 65) se não alegada na contestação."},
   {q:"Segundo o art. 46 CPC, a regra geral de competência territorial para ações pessoais é:",opts:["A) Foro do local do fato","B) Foro do domicílio do autor","C) Foro do domicílio do réu","D) Foro da sede do juízo de 1º grau"],ans:2,fb:"A regra geral do CPC é o <strong>foro do domicílio do réu</strong> (art. 46). Trata-se de competência relativa (territorial), podendo ser modificada por convenção das partes ou prorrogada."},
-  {q:"A competência territorial é classificada como:",opts:["A) Absoluta — não pode ser modificada por vontade das partes","B) Relativa — pode ser modificada por convenção ou prorrogação","C) Funcional — decorre das funções do órgão no processo","D) Objetiva — decorre da matéria da causa"],ans:1,fb:"A <strong>competência territorial</strong> (arts. 46 a 53 CPC) é de natureza <strong>relativa</strong>. Pode ser modificada por eleição de foro (cláusula contratual), conexão, continência ou prorrogação (se o réu não alega na contestação)."},
-  {q:"A competência funcional é de natureza:",opts:["A) Relativa — pode ser derrogada por eleição de foro","B) Absoluta — não pode ser modificada pelas partes","C) Objetiva — decorre do valor da causa","D) Territorial — depende do domicílio das partes"],ans:1,fb:"A <strong>competência funcional</strong> é <strong>absoluta</strong>. Por decorrer das funções atribuídas a cada órgão dentro do processo (aspecto horizontal e vertical), não pode ser derrogada por vontade das partes."},
-  {q:"Conexão (art. 55 CPC) ocorre quando duas ações têm:",opts:["A) Identidade de partes, causa de pedir e pedido — litispendência","B) Identidade de partes e causa de pedir, mas pedidos distintos sendo um mais amplo","C) Mesmo pedido ou mesma causa de pedir","D) Mesmo autor e mesmo réu apenas"],ans:2,fb:"A <strong>conexão</strong> (art. 55) ocorre quando há o <strong>mesmo pedido OU a mesma causa de pedir</strong>. Não exige identidade de partes. O art. 55, §3º amplia o conceito para casos de risco de decisões conflitantes, mesmo sem identidade estrita."},
-  {q:"Continência (art. 56 CPC) ocorre quando:",opts:["A) As ações têm o mesmo pedido, mas causas de pedir distintas","B) As ações têm identidade de partes e causa de pedir, mas o pedido de uma abrange o da outra","C) As ações têm partes distintas mas causa de pedir idêntica","D) Duas ações têm a mesma prova e o mesmo réu"],ans:1,fb:"A <strong>continência</strong> (art. 56) exige: <strong>identidade de partes + identidade de causa de pedir + pedido de uma mais amplo que o da outra</strong>. Efeito: a ação mais restrita é extinta (art. 57), diferente da conexão que reúne as ações."},
-  {q:"Se o réu não alega incompetência relativa na contestação, ocorre:",opts:["A) Nulidade da sentença por vício insanável","B) Prorrogação da competência — o juízo torna-se competente (art. 65)","C) Extinção do processo sem resolução de mérito","D) Remessa automática ao juízo competente"],ans:1,fb:"A falta de alegação oportuna da incompetência relativa gera sua <strong>prorrogação</strong> (art. 65 CPC): o juízo originalmente incompetente torna-se competente para aquele processo. É diferente da incompetência absoluta, que não preclui."},
-  {q:"O conflito de competência negativo (art. 66 CPC) ocorre quando:",opts:["A) Dois juízes se declaram competentes para o mesmo processo","B) Um juiz declara sua incompetência e remete ao STF","C) Dois juízes se declaram incompetentes para o mesmo processo","D) As partes discordam da competência fixada pelo juiz"],ans:2,fb:"O <strong>conflito negativo</strong> ocorre quando dois juízes se declaram <strong>incompetentes</strong> para o mesmo processo. O <strong>positivo</strong> é o inverso: ambos se declaram competentes. Resolve-se pelo tribunal hierarquicamente superior."},
+  {q:"A competência territorial é classificada como:",opts:["A) Absoluta — não pode ser modificada por vontade das partes","B) Relativa — pode ser modificada por convenção ou prorrogação","C) Funcional — decorre das funções do órgão no processo","D) Objetiva — decorre da matéria da causa"],ans:1,fb:"A <strong>competência territorial</strong> (arts. 46 a 53 CPC) é de natureza <strong>relativa</strong>. Pode ser modificada por eleição de foro, conexão, continência ou prorrogação (se o réu não alega na contestação)."},
+  {q:"A competência funcional é de natureza:",opts:["A) Relativa — pode ser derrogada por eleição de foro","B) Absoluta — não pode ser modificada pelas partes","C) Objetiva — decorre do valor da causa","D) Territorial — depende do domicílio das partes"],ans:1,fb:"A <strong>competência funcional</strong> é <strong>absoluta</strong>. Por decorrer das funções atribuídas a cada órgão dentro do processo, não pode ser derrogada por vontade das partes."},
+  {q:"Conexão (art. 55 CPC) ocorre quando duas ações têm:",opts:["A) Identidade de partes, causa de pedir e pedido","B) Identidade de partes e causa de pedir, mas pedidos distintos sendo um mais amplo","C) Mesmo pedido ou mesma causa de pedir","D) Mesmo autor e mesmo réu apenas"],ans:2,fb:"A <strong>conexão</strong> (art. 55) ocorre quando há o <strong>mesmo pedido OU a mesma causa de pedir</strong>. Não exige identidade de partes. O art. 55, §3º amplia o conceito para risco de decisões conflitantes."},
+  {q:"Continência (art. 56 CPC) ocorre quando:",opts:["A) As ações têm o mesmo pedido, mas causas de pedir distintas","B) As ações têm identidade de partes e causa de pedir, mas o pedido de uma abrange o da outra","C) As ações têm partes distintas mas causa de pedir idêntica","D) Duas ações têm a mesma prova e o mesmo réu"],ans:1,fb:"A <strong>continência</strong> (art. 56) exige: <strong>identidade de partes + identidade de causa de pedir + pedido de uma mais amplo que o da outra</strong>. Efeito: a ação mais restrita é extinta (art. 57)."},
+  {q:"Se o réu não alega incompetência relativa na contestação, ocorre:",opts:["A) Nulidade da sentença por vício insanável","B) Prorrogação da competência — o juízo torna-se competente (art. 65)","C) Extinção do processo sem resolução de mérito","D) Remessa automática ao juízo competente"],ans:1,fb:"A falta de alegação oportuna da incompetência relativa gera <strong>prorrogação</strong> (art. 65 CPC): o juízo originalmente incompetente torna-se competente. Diferente da absoluta, que não preclui."},
+  {q:"O conflito de competência negativo (art. 66 CPC) ocorre quando:",opts:["A) Dois juízes se declaram competentes para o mesmo processo","B) Um juiz declara sua incompetência e remete ao STF","C) Dois juízes se declaram incompetentes para o mesmo processo","D) As partes discordam da competência fixada pelo juiz"],ans:2,fb:"O <strong>conflito negativo</strong> ocorre quando dois juízes se declaram <strong>incompetentes</strong> para o mesmo processo. O positivo é o inverso. Resolve-se pelo tribunal hierarquicamente superior."},
   {q:"O conflito de competência entre juízes estaduais do mesmo Estado é resolvido pelo:",opts:["A) STF","B) STJ","C) Tribunal de Justiça do Estado","D) Tribunal Regional Federal da região"],ans:2,fb:"O conflito entre juízes do <strong>mesmo Estado</strong> é resolvido pelo <strong>Tribunal de Justiça</strong> daquele Estado. O STJ resolve conflitos entre tribunais estaduais, entre TRFs, e entre tribunal estadual e federal."},
   {q:"A carta precatória (arts. 67 e ss. CPC) é expedida:",opts:["A) Por tribunal a juízo a ele vinculado hierarquicamente","B) Entre juízos de mesma hierarquia situados em comarcas distintas","C) Para cumprimento de atos em território estrangeiro","D) Apenas pelo STF para cumprimento em outros tribunais"],ans:1,fb:"A <strong>carta precatória</strong> é expedida entre <strong>juízos de mesma hierarquia em comarcas distintas</strong>. A carta de <em>ordem</em> é de tribunal a juízo vinculado. A carta <em>rogatória</em> é para cooperação internacional."},
   {q:"A eleição de foro como modificação convencional da competência relativa:",opts:["A) Pode derrogar a competência absoluta se as partes concordarem","B) É válida apenas em contratos de adesão","C) É admitida desde que não derogue competência absoluta e não seja abusiva","D) Somente é possível após o ajuizamento da ação"],ans:2,fb:"A <strong>eleição de foro</strong> (art. 63 CPC) é válida para modificar competência <strong>relativa</strong>. Não pode derrogar competência absoluta. Pode ser declarada ineficaz se abusiva em contratos de adesão (art. 63, §3º)."},
-  {q:"No julgado do TJRS (AI 70083383976/2020), a conexão foi reconhecida mesmo sem identidade total das causas de pedir porque:",opts:["A) As partes eram as mesmas em ambas as ações","B) Havia correlação entre as causas e risco real de decisões conflitantes — art. 55, §3º","C) O valor das causas era idêntico","D) Ambas as ações tramitavam na mesma vara"],ans:1,fb:"O TJRS aplicou o <strong>art. 55, §3º CPC</strong>: reconheceu a conexão pela <strong>correlação entre as causas de pedir</strong> e o <strong>risco concreto de decisões conflitantes</strong>, mesmo sem identidade total. Ampliação do conceito de conexão pelo CPC/2015."}
+  {q:"No julgado do TJRS (AI 70083383976/2020), a conexão foi reconhecida mesmo sem identidade total das causas de pedir porque:",opts:["A) As partes eram as mesmas em ambas as ações","B) Havia correlação entre as causas e risco real de decisões conflitantes — art. 55, §3º","C) O valor das causas era idêntico","D) Ambas as ações tramitavam na mesma vara"],ans:1,fb:"O TJRS aplicou o <strong>art. 55, §3º CPC</strong>: reconheceu a conexão pela <strong>correlação entre as causas de pedir</strong> e o <strong>risco concreto de decisões conflitantes</strong>, mesmo sem identidade total."}
 ];
 
 let cur=0,score=0,answered=[];
