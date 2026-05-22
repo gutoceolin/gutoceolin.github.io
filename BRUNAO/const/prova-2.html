@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -7,82 +7,606 @@
 <title>Teoria da Constituição — Prova 2</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@300;400;500;600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#111118;--surface:#1c1c26;--surface2:#242430;--border:rgba(255,255,255,.07);--border2:rgba(255,255,255,.12);--text:#e8e4f0;--text2:#9490a8;--text3:#56526a;--white:#f5f2ff;--accent:#7b8fe8;--accent-dim:rgba(123,143,232,.06);}
+:root{
+  --bg:#111118;--surface:#1c1c26;--surface2:#242430;--surface3:#1c1c24;
+  --border:rgba(255,255,255,.07);--border2:rgba(255,255,255,.12);
+  --text:#e8e4f0;--text2:#9490a8;--text3:#56526a;--white:#f5f2ff;
+  --neo:#9b6fe8;  --neo-dim:rgba(155,111,232,.10);  --neo-mid:rgba(155,111,232,.22);
+  --hae:#5cb8e0;  --hae-dim:rgba(92,184,224,.10);   --hae-mid:rgba(92,184,224,.22);
+  --int:#e07a5c;  --int-dim:rgba(224,122,92,.10);   --int-mid:rgba(224,122,92,.22);
+  --nor:#d4a843;  --nor-dim:rgba(212,168,67,.10);   --nor-mid:rgba(212,168,67,.22);
+  --pri:#5cc98a;  --pri-dim:rgba(92,201,138,.10);   --pri-mid:rgba(92,201,138,.22);
+}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-weight:300;min-height:100vh}
-body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse 70% 40% at 10% 0%,var(--accent-dim) 0%,transparent 55%)}
-.wrap{position:relative;z-index:10;max-width:1100px;margin:0 auto;padding:3rem 2rem}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse 70% 40% at 10% 0%,rgba(155,111,232,.05) 0%,transparent 55%),
+             radial-gradient(ellipse 55% 35% at 90% 100%,rgba(92,201,138,.03) 0%,transparent 55%)}
+.hdr{position:relative;z-index:10;padding:3rem 2rem 0;max-width:1100px;margin:0 auto}
 .back{display:inline-flex;align-items:center;gap:.45rem;font-family:'Outfit',sans-serif;font-size:.75rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);text-decoration:none;margin-bottom:1.5rem;padding:.38rem 1rem;border-radius:100px;border:1px solid var(--border);background:var(--surface);transition:all .2s}
-.back:hover{color:var(--text);border-color:var(--border2);background:var(--surface2)}.back:focus-visible{outline:2px solid var(--gold, #d4a843);outline-offset:2px}
+.back:hover{color:var(--text);border-color:var(--border2);background:var(--surface2)}
 .ey{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--text3);margin-bottom:.9rem}
-.htitle{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,6.5vw,4.6rem);font-weight:700;color:var(--white);line-height:.95;letter-spacing:-.02em;margin-bottom:.75rem}
+.htitle{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,6.5vw,4.6rem);font-weight:700;color:var(--white);line-height:.95;letter-spacing:-.02em}
 .htitle em{font-style:italic;color:var(--text2);font-weight:400}
-.disc-pill{display:inline-flex;align-items:center;gap:.38rem;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;padding:.25rem .65rem;border-radius:100px;margin-top:1.1rem;background:rgba(123,143,232,.1);color:var(--accent);border:1px solid rgba(123,143,232,.22)}
-.disc-pill .dot{width:4px;height:4px;border-radius:50%;background:currentColor}
-.wip{margin-top:3rem;padding:3.5rem 2.5rem;background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:0 2px 12px rgba(0,0,0,.25);text-align:center}
-.wip-icon{font-size:0;width:48px;height:48px;margin:0 auto 1.75rem;border-radius:12px;background:var(--surface2);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:5px}.wip-icon::before,.wip-icon::after{content:"";display:block;border-radius:2px;background:var(--accent);opacity:.55}.wip-icon::before{width:20px;height:2px}.wip-icon::after{width:13px;height:2px}
-.wip-title{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--white);margin-bottom:.65rem;letter-spacing:-.02em;margin-bottom:.75rem}
-.wip-text{font-family:'Outfit',sans-serif;font-size:.88rem;color:var(--text2);letter-spacing:.07em;line-height:1.85}
-.accent-line{width:48px;height:2px;background:var(--accent);margin:1.1rem auto 0;border-radius:2px;opacity:.5}
-.topics{display:flex;gap:.4rem;flex-wrap:wrap;justify-content:center;margin-top:1.5rem}
-.topic{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.04em;background:var(--surface2);border:1px solid var(--border);color:var(--text2);padding:.18rem .5rem;border-radius:100px}
-.ft{max-width:1100px;margin:4rem auto 0;padding:1.5rem 2rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.85rem;color:var(--text3)}
-.ft a{color:var(--text2);text-decoration:none}.ft a:hover{color:var(--white)}.ft a:focus-visible{outline:2px solid currentColor;outline-offset:3px}
-@media(max-width:600px){.wrap,.ft{padding-left:1rem;padding-right:1rem}}
+.hsub{margin-top:1.1rem;font-size:.8rem;color:var(--text2);font-family:'JetBrains Mono',monospace;letter-spacing:.04em}
+.banca-pill{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.2rem;padding:.42rem .95rem;background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.25);border-radius:100px;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.07em;color:var(--nor);text-transform:uppercase}
+.banca-pill .p{width:5px;height:5px;border-radius:50%;background:var(--nor);animation:pu 2s infinite}
+@keyframes pu{0%,100%{opacity:1}50%{opacity:.35}}
+.sw{margin-top:.85rem;position:relative}
+.si{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:100px;padding:.68rem 1rem .68rem 2.5rem;color:var(--text);font-family:'Outfit',sans-serif;font-size:.85rem;outline:none;transition:border-color .2s}
+.si::placeholder{color:var(--text3)}.si:focus{border-color:var(--border2)}
+.sic{position:absolute;left:.82rem;top:50%;transform:translateY(-50%);color:var(--text3);font-size:.88rem;pointer-events:none}
+mark{background:rgba(212,168,67,.28);color:var(--white);border-radius:2px;padding:0 2px}
+.mnav{display:flex;gap:.42rem;flex-wrap:wrap;margin:1.9rem auto 0;max-width:1100px;padding:0 2rem;position:relative;z-index:10}
+.nb{display:flex;align-items:center;gap:.5rem;padding:.52rem .95rem;border:1px solid var(--border);border-radius:100px;background:var(--surface);color:var(--text2);font-family:'Outfit',sans-serif;font-size:.75rem;font-weight:500;letter-spacing:.02em;cursor:pointer;transition:all .2s;text-transform:none;min-height:36px}
+.nb:hover{border-color:var(--border2);color:var(--text)}
+.nb .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.nb[data-m=neo] .d{background:var(--neo)}.nb[data-m=hae] .d{background:var(--hae)}
+.nb[data-m=int] .d{background:var(--int)}.nb[data-m=nor] .d{background:var(--nor)}
+.nb[data-m=pri] .d{background:var(--pri)}.nb[data-m=quiz] .d{background:var(--white)}
+.nb.active{color:var(--white)}
+.nb[data-m=neo].active{border-color:var(--neo);background:var(--neo-dim)}
+.nb[data-m=hae].active{border-color:var(--hae);background:var(--hae-dim)}
+.nb[data-m=int].active{border-color:var(--int);background:var(--int-dim)}
+.nb[data-m=nor].active{border-color:var(--nor);background:var(--nor-dim)}
+.nb[data-m=pri].active{border-color:var(--pri);background:var(--pri-dim)}
+.nb[data-m=quiz].active{border-color:rgba(255,255,255,.28);background:rgba(255,255,255,.04)}
+.main{position:relative;z-index:5;max-width:1100px;margin:1.8rem auto 5rem;padding:0 2rem}
+.mod{display:none;animation:fu .3s ease both}.mod.active{display:block}
+@keyframes fu{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.mhd{display:flex;align-items:flex-start;gap:1.4rem;padding:1.75rem 2rem;border-radius:14px 14px 0 0;border:1px solid var(--border);border-bottom:none;box-shadow:0 4px 20px rgba(0,0,0,.25)}
+.mhd[data-c=neo]{background:var(--neo-dim);border-color:rgba(155,111,232,.28)}
+.mhd[data-c=hae]{background:var(--hae-dim);border-color:rgba(92,184,224,.28)}
+.mhd[data-c=int]{background:var(--int-dim);border-color:rgba(224,122,92,.28)}
+.mhd[data-c=nor]{background:var(--nor-dim);border-color:rgba(212,168,67,.28)}
+.mhd[data-c=pri]{background:var(--pri-dim);border-color:rgba(92,201,138,.28)}
+.mi{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
+.mi[data-c=neo]{background:var(--neo-mid)}.mi[data-c=hae]{background:var(--hae-mid)}
+.mi[data-c=int]{background:var(--int-mid)}.mi[data-c=nor]{background:var(--nor-mid)}
+.mi[data-c=pri]{background:var(--pri-mid)}
+.mnum{font-family:'Outfit',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.12em;color:var(--text3);text-transform:uppercase;margin-bottom:.25rem}
+.mtitle{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--white);line-height:1}
+.mdesc{margin-top:.42rem;font-size:.82rem;color:var(--text2);line-height:1.62}
+.mbody{border:1px solid var(--border);border-top:none;border-radius:0 0 14px 14px;background:var(--surface);overflow:hidden}
+.stabs{display:flex;border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
+.stabs::-webkit-scrollbar{display:none}
+.stab{padding:.78rem 1.15rem;font-family:'Outfit',sans-serif;font-size:.78rem;font-weight:500;letter-spacing:.01em;text-transform:none;color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;background:none;border-top:none;border-left:none;border-right:none;margin-bottom:-1px;min-height:44px}
+.stab:hover{color:var(--text)}.stab.active{color:var(--white)}
+.stab.active[data-c=neo]{border-bottom-color:var(--neo)}.stab.active[data-c=hae]{border-bottom-color:var(--hae)}
+.stab.active[data-c=int]{border-bottom-color:var(--int)}.stab.active[data-c=nor]{border-bottom-color:var(--nor)}
+.stab.active[data-c=pri]{border-bottom-color:var(--pri)}
+.sp{display:none;padding:2rem 2.25rem;animation:fu .22s ease}.sp.active{display:block}
+.sl{font-family:'Outfit',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);margin-bottom:.58rem;margin-top:1.55rem;display:flex;align-items:center;gap:.5rem}
+.sl::after{content:'';flex:1;height:1px;background:var(--border)}.sl:first-child{margin-top:0}
+p{font-size:.9375rem;color:#b5b0be;line-height:1.88}p+p{margin-top:.65rem}
+.hl{color:var(--white);font-weight:500}
+.art{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--nor);font-weight:500}
+ul,ol{padding-left:1.25rem;margin-top:.48rem}
+li{font-size:.9rem;color:#aeaab8;line-height:1.82;margin-bottom:.2rem}li strong{color:var(--white);font-weight:500}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:.88rem;margin-top:.68rem}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:.72rem;margin-top:.68rem}
+@media(max-width:640px){.g2,.g3{grid-template-columns:1fr}}
+.card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:1rem;box-shadow:0 2px 8px rgba(0,0,0,.18);transition:border-color .2s,box-shadow .2s}.card:hover{border-color:var(--border2);box-shadow:0 4px 16px rgba(0,0,0,.28)}
+.ct{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.55rem;display:flex;align-items:center;gap:.4rem}
+.ct::before{content:'';width:3px;height:11px;border-radius:2px;flex-shrink:0}
+.cn .ct{color:var(--neo)}.cn .ct::before{background:var(--neo)}
+.ch .ct{color:var(--hae)}.ch .ct::before{background:var(--hae)}
+.ci .ct{color:var(--int)}.ci .ct::before{background:var(--int)}
+.co{display:flex;gap:.75rem;padding:.88rem 1rem;border-radius:10px;margin-top:.82rem;font-size:.83rem;line-height:1.72;color:#aeaab8}
+.co-ico{font-size:.92rem;flex-shrink:0;margin-top:.05rem}.co strong{font-weight:500}
+.cw{background:rgba(212,168,67,.07);border:1px solid rgba(212,168,67,.2)}.cw strong{color:var(--nor)}
+.cv{background:rgba(155,111,232,.07);border:1px solid rgba(155,111,232,.2)}.cv strong{color:var(--neo)}
+.cb{background:rgba(92,184,224,.07);border:1px solid rgba(92,184,224,.2)}.cb strong{color:var(--hae)}
+.cs{background:rgba(92,201,138,.07);border:1px solid rgba(92,201,138,.2)}.cs strong{color:var(--pri)}
+.cr{background:rgba(224,122,92,.07);border:1px solid rgba(224,122,92,.2)}.cr strong{color:var(--int)}
+.tw{overflow-x:auto;margin-top:.68rem;border-radius:10px;border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:.82rem}
+th{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);padding:.68rem 1rem;background:var(--surface2);border-bottom:1px solid var(--border);text-align:left;white-space:nowrap}
+td{padding:.62rem 1rem;border-bottom:1px solid var(--border);color:#aeaab8;vertical-align:top;line-height:1.6}
+tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.012)}td strong{color:var(--white);font-weight:500}
+/* QUIZ */
+.qwrap{padding:1.5rem 2rem 2rem}
+.qtop{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.4rem}
+.qtitle{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:700;color:var(--white)}
+.sbadge{font-family:'Outfit',sans-serif;font-size:.65rem;padding:.26rem .72rem;border-radius:100px;background:var(--surface2);border:1px solid var(--border);color:var(--text2)}
+.qdots{display:flex;gap:.28rem;flex-wrap:wrap;margin-bottom:1.2rem}
+.qdot{width:7px;height:7px;border-radius:50%;background:var(--border2);transition:all .2s}
+.qdot.cur{background:var(--text2)}.qdot.ok{background:#5cc98a}.qdot.err{background:#e06e8c}
+[data-theme=light] .qdot.ok{background:#289050}
+[data-theme=light] .qdot.err{background:#c04070}
+.qq{display:none;animation:fu .26s ease}.qq.active{display:block}
+.qnum{font-family:'JetBrains Mono',monospace;font-size:.56rem;color:var(--text3);letter-spacing:.1em;margin-bottom:.6rem}
+.qtext{font-size:.96rem;color:var(--white);line-height:1.68;margin-bottom:1.15rem;font-weight:400}
+.qopts{display:flex;flex-direction:column;gap:.42rem}
+.qopt{display:flex;align-items:flex-start;gap:.65rem;padding:.82rem .92rem;border:1px solid var(--border);border-radius:10px;cursor:pointer;transition:all .2s;background:var(--surface2);text-align:left;width:100%}
+.qopt:hover:not(:disabled){border-color:var(--border2)}
+.ql{font-family:'JetBrains Mono',monospace;font-size:.6rem;width:20px;height:20px;border-radius:6px;background:var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--text2);transition:all .2s}
+.qt{font-size:.84rem;color:#aeaab8;line-height:1.6}
+.qopt.correct{border-color:var(--pri);background:var(--pri-dim)}.qopt.correct .ql{background:var(--pri);color:#000}.qopt.correct .qt{color:var(--white)}
+.qopt.wrong{border-color:var(--int);background:var(--int-dim)}.qopt.wrong .ql{background:var(--int);color:#fff}
+.qopt.disabled{cursor:default;opacity:.54}.qopt.disabled.correct{opacity:1}
+.qfb{display:none;margin-top:.88rem;padding:.88rem 1rem;border-radius:5px;font-size:.83rem;line-height:1.68;color:#aeaab8}
+.qfb.show{display:block;animation:fu .18s ease}
+.qfb.ok{background:var(--pri-dim);border:1px solid rgba(92,201,138,.26)}.qfb.ok strong{color:var(--pri)}
+.qfb.ng{background:var(--int-dim);border:1px solid rgba(224,122,92,.26)}.qfb.ng strong{color:var(--int)}
+.qnav{display:flex;align-items:center;justify-content:space-between;margin-top:1.35rem}
+.qbn{font-family:'Outfit',sans-serif;font-size:.6rem;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;transition:all .2s;border:none;padding:.52rem 1.1rem;border-radius:100px}
+.qbn-next{background:#5cc98a;color:#fff;display:none}.qbn-next:hover{opacity:.88}.qbn-next.show{display:block}
+.qbn-rs{background:var(--surface2);border:1px solid var(--border);color:var(--text2)}.qbn-rs:hover{border-color:var(--border2);color:var(--text)}
+.qres{display:none;text-align:center;padding:2.5rem 0}.qres.show{display:block;animation:fu .28s ease}
+.rscore{font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:700;color:var(--white);line-height:1}
+.rlabel{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--text3);letter-spacing:.15em;text-transform:uppercase;margin-top:.4rem}
+.hub-footer{position:relative;z-index:5;max-width:1100px;margin:3rem auto 0;padding:1.5rem 2rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.ft-left{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--text3);letter-spacing:.08em}
+.ft-right{font-family:'JetBrains Mono',monospace;font-size:.55rem;color:var(--text3)}.ft-right a{color:var(--text2);text-decoration:none}.ft-right a:hover{color:var(--white)}
+@media(max-width:600px){.hdr,.main,.mnav{padding-left:1rem;padding-right:1rem}.hub-footer{padding:1.5rem 1rem}}
 
 /* ── LIGHT MODE ── */
 [data-theme=light]{
   --bg:#f0eef7;--surface:#ffffff;--surface2:#f4f2fb;--surface3:#eceaf5;
   --border:rgba(0,0,0,.07);--border2:rgba(0,0,0,.14);
   --text:#1a1828;--text2:#6a6480;--text3:#9a94b0;--white:#0a0818;
-  --civil:#c04070;--civil-dim:rgba(192,64,112,.1);--civil-mid:rgba(192,64,112,.18);
-  --const:#5060c8;--const-dim:rgba(80,96,200,.1);--const-mid:rgba(80,96,200,.18);
-  --proc:#2088b0;--proc-dim:rgba(32,136,176,.1);--proc-mid:rgba(32,136,176,.18);
-  --penal:#b85030;--penal-dim:rgba(184,80,48,.1);--penal-mid:rgba(184,80,48,.18);
-  --eca:#289050;--eca-dim:rgba(40,144,80,.1);--eca-mid:rgba(40,144,80,.18);
-  --gold:#987020;--gold-dim:rgba(152,112,32,.1)}
+  --neo:#7a50c8;--neo-dim:rgba(122,80,200,.1);--neo-mid:rgba(122,80,200,.18);
+  --hae:#2088b0;--hae-dim:rgba(32,136,176,.1);--hae-mid:rgba(32,136,176,.18);
+  --int:#b85030;--int-dim:rgba(184,80,48,.1);--int-mid:rgba(184,80,48,.18);
+  --nor:#987020;--nor-dim:rgba(152,112,32,.1);--nor-mid:rgba(152,112,32,.18);
+  --pri:#289050;--pri-dim:rgba(40,144,80,.1);--pri-mid:rgba(40,144,80,.18)}
 [data-theme=light] body::before{opacity:.18}
-[data-theme=light] .disc-pill{background:transparent}
+[data-theme=light] .qdot.ok{background:#289050}
+[data-theme=light] .qdot.err{background:#c04070}
+[data-theme=light] p{color:#3a3632}
+[data-theme=light] li{color:#3a3632}
+[data-theme=light] .co{color:#3a3632}
 
 /* ── THEME TOGGLE ── */
 .theme-toggle{position:fixed;bottom:1.75rem;right:1.75rem;z-index:100;width:40px;height:40px;border-radius:50%;background:var(--surface2);border:1px solid var(--border2);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text2);transition:background .2s,border-color .2s,color .2s,box-shadow .2s}
 .theme-toggle:hover{background:var(--surface);color:var(--text);box-shadow:0 4px 20px rgba(0,0,0,.18)}
-.theme-toggle:focus-visible{outline:2px solid var(--gold,#d4a843);outline-offset:3px}
+.theme-toggle:focus-visible{outline:2px solid var(--nor,#d4a843);outline-offset:3px}
 .theme-toggle svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;display:block}
 .icon-sun{display:none}.icon-moon{display:block}
-[data-theme=light] .icon-sun{display:block}[data-theme=light] .icon-moon{display:none}</style>
+[data-theme=light] .icon-sun{display:block}[data-theme=light] .icon-moon{display:none}
+</style>
 </head>
 <body>
-<div class="wrap">
+
+<div class="hdr">
   <a class="back" href="../../index.html">&#8592; Central de Resumos</a>
-  <div class="ey">Teoria da Constituição &mdash; Prova 2 &middot; UFN 2026/1</div>
-  <h1 class="htitle">Eficácia das Normas<br><em>Direitos Fundamentais</em></h1>
-  <div class="disc-pill"><span class="dot"></span>Teoria da Constituição</div>
-  <div class="wip">
-    <div class="wip-icon" aria-hidden="true"></div>
-    <div class="wip-title">Resumo em preparação</div>
-    <div class="wip-text">O conteúdo deste resumo será adicionado em breve.<br>Volte quando o material estiver disponível.</div>
-    <div class="accent-line"></div>
-    <div class="topics">
-      <span class="topic">Eficácia plena</span>
-      <span class="topic">Eficácia contida</span>
-      <span class="topic">Eficácia limitada</span>
-      <span class="topic">José Afonso da Silva</span>
-      <span class="topic">1ª, 2ª e 3ª dimensões</span>
-      <span class="topic">Eficácia horizontal</span>
-      <span class="topic">Art. 5º CF</span>
+  <div class="ey">Teoria da Constitui&#231;&#227;o &mdash; Prova 2 &middot; UFN 2026/1</div>
+  <h1 class="htitle">Neoconstitucionalismo<br><em>Regras, Princ&#237;pios e Interpreta&#231;&#227;o</em></h1>
+  <div class="hsub">H&#228;berle &middot; Hesse &middot; Alexy &middot; Dworkin &middot; Barroso &middot; P&#243;s-positivismo &middot; Banca UFN</div>
+  <div class="banca-pill"><span class="p"></span>Banca UFN &mdash; Estilo de Quest&#245;es Identificado</div>
+  <div class="sw" role="search">
+    <span class="sic" aria-hidden="true">&#x2315;</span>
+    <input class="si" type="text" placeholder="Buscar neste resumo..." oninput="doSearch(this.value)" aria-label="Buscar conceito" autocomplete="off">
+  </div>
+</div>
+
+<nav class="mnav">
+  <button class="nb active" data-m="neo" onclick="switchMod('neo',this)"><span class="d"></span>Neoconstitucionalismo</button>
+  <button class="nb" data-m="hae" onclick="switchMod('hae',this)"><span class="d"></span>H&#228;berle e For&#231;a Normativa</button>
+  <button class="nb" data-m="int" onclick="switchMod('int',this)"><span class="d"></span>Nova Interpreta&#231;&#227;o</button>
+  <button class="nb" data-m="nor" onclick="switchMod('nor',this)"><span class="d"></span>Regras x Princ&#237;pios</button>
+  <button class="nb" data-m="pri" onclick="switchMod('pri',this)"><span class="d"></span>Princ&#237;pios Fundamentais</button>
+  <button class="nb" data-m="quiz" onclick="switchMod('quiz',this)"><span class="d"></span>Quiz (20 q.)</button>
+</nav>
+
+<main class="main">
+
+<!-- ═══ MÓDULO 1: NEOCONSTITUCIONALISMO ═══ -->
+<div class="mod active" id="mod-neo">
+  <div class="mhd" data-c="neo">
+    <div class="mi" data-c="neo">⚖</div>
+    <div>
+      <div class="mnum">M&#243;dulo 01</div>
+      <div class="mtitle">Neoconstitucionalismo</div>
+      <div class="mdesc">Surgimento, caracter&#237;sticas e rela&#231;&#227;o com o p&#243;s-positivismo.</div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="neo" onclick="switchTab(this,'n1t1')">Contexto Hist&#243;rico</button>
+      <button class="stab" data-c="neo" onclick="switchTab(this,'n1t2')">Caracter&#237;sticas</button>
+      <button class="stab" data-c="neo" onclick="switchTab(this,'n1t3')">P&#243;s-positivismo</button>
+    </div>
+
+    <div class="sp active" id="n1t1">
+      <div class="sl">Surgimento do Neoconstitucionalismo</div>
+      <p>O <span class="hl">neoconstitucionalismo</span> emerge no contexto do p&#243;s-Segunda Guerra Mundial, marcado pela rea&#231;&#227;o aos regimes totalit&#225;rios que utilizaram o direito positivo para legitimar atrocidades. A experi&#234;ncia dos Estados nazifascistas demonstrou que o <em>positivismo jur&#237;dico cl&#225;ssico</em> — que separava o direito da moral — era insuficiente para proteger a dignidade humana.</p>
+      <p>Na Europa, os marcos foram: a <span class="hl">Lei Fundamental Alem&#227; (1949)</span>, a <span class="hl">Constitui&#231;&#227;o Italiana (1948)</span> e, mais tarde, a <span class="hl">Constitui&#231;&#227;o Portuguesa (1976)</span> e a <span class="hl">Constitui&#231;&#227;o Espanhola (1978)</span>. No Brasil, a <span class="hl">CF/1988</span> representa o marco do neoconstitucionalismo p&#225;trio.</p>
+      <div class="co cv"><span class="co-ico">&#9733;</span><div><strong>Tr&#234;s marcos hist&#243;ricos (Barroso):</strong> (1) Hist&#243;rico — pós-guerra, redemocratiza&#231;&#227;o; (2) Filos&#243;fico — p&#243;s-positivismo, reaproximação direito/moral; (3) Te&#243;rico — for&#231;a normativa da Constitui&#231;&#227;o, expansão da jurisdi&#231;&#227;o constitucional, nova hermenêutica.</div></div>
+      <div class="sl">No Brasil</div>
+      <p>O neoconstitucionalismo brasileiro é associado sobretudo ao processo de redemocratiza&#231;&#227;o e à promulga&#231;&#227;o da CF/1988. <span class="hl">Lu&#237;s Roberto Barroso</span> é o principal te&#243;rico nacional a sistematizar o movimento, identificando sua inf lu&#234;ncia na expans&#227;o do controle de constitucionalidade, na aplica&#231;&#227;o direta dos direitos fundamentais e na revaloriza&#231;&#227;o dos princ&#237;pios.</p>
+    </div>
+
+    <div class="sp" id="n1t2">
+      <div class="sl">Principais Caracter&#237;sticas</div>
+      <div class="g2">
+        <div class="card cn"><div class="ct">Constitucionaliza&#231;&#227;o do Direito</div><ul><li>Constitui&#231;&#227;o permeia todos os ramos jur&#237;dicos</li><li>Normas constitucionais aplicadas diretamente</li><li>Filtragem constitucional do ordenamento</li></ul></div>
+        <div class="card cn"><div class="ct">For&#231;a Normativa dos Princ&#237;pios</div><ul><li>Princ&#237;pios t&#234;m efic&#225;cia jur&#237;dica direta</li><li>N&#227;o s&#227;o meras orienta&#231;&#245;es programáticas</li><li>Aplicados mesmo sem mediaç&#227;o legislativa</li></ul></div>
+        <div class="card cn"><div class="ct">Expansão da Jurisdição Constitucional</div><ul><li>Protagonismo dos tribunais constitucionais</li><li>Controle judicial ampliado</li><li>STF como guardião e intérprete final da CF</li></ul></div>
+        <div class="card cn"><div class="ct">Nova Hermenêutica Constitucional</div><ul><li>Métodos cl&#225;ssicos insuficientes</li><li>Pondera&#231;&#227;o de princ&#237;pios e proporcionalidade</li><li>Interpreta&#231;&#227;o conforme a Constitui&#231;&#227;o</li></ul></div>
+      </div>
+      <div class="co cw"><span class="co-ico">&#9888;</span><div><strong>Cr&#237;tica ao neoconstitucionalismo:</strong> O risco de <em>ativismo judicial excessivo</em> — tribunais substituindo o legislador, com base em princ&#237;pios abertos, comprometendo a democracia representativa e a separa&#231;&#227;o dos poderes. Esse debate é central no constitucionalismo contemporâneo.</div></div>
+    </div>
+
+    <div class="sp" id="n1t3">
+      <div class="sl">P&#243;s-positivismo — Supera&#231;&#227;o do Positivismo Cl&#225;ssico</div>
+      <p>O <span class="hl">positivismo jur&#237;dico</span> (Kelsen, Hart) separava o direito da moral: a norma era v&#225;lida se produzida conforme o procedimento, independentemente de seu conte&#250;do ético. O <span class="hl">p&#243;s-positivismo</span> supera essa separa&#231;&#227;o, defendendo que:</p>
+      <ul>
+        <li>Princ&#237;pios s&#227;o normas jur&#237;dicas com for&#231;a vinculante</li>
+        <li>O direito possui cone&#231;&#227;o necess&#225;ria com a moral (Dworkin, Alexy)</li>
+        <li>A interpreta&#231;&#227;o jur&#237;dica n&#227;o é neutra — envolve valoração</li>
+        <li>A dignidade humana funciona como meta-princ&#237;pio</li>
+      </ul>
+      <div class="co cv"><span class="co-ico">&#9733;</span><div><strong>Autores centrais do p&#243;s-positivismo:</strong> Ronald Dworkin (EUA), Robert Alexy (Alemanha), Carlos Santiago Nino (Argentina), Gustavo Zagrebelsky (Itália), Lu&#237;s Roberto Barroso (Brasil).</div></div>
+      <div class="sl">Correntes Internas</div>
+      <div class="g2">
+        <div class="card cn"><div class="ct">P&#243;s-positivismo Moderado</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Aceita cone&#231;&#227;o moral-direito, mas mant&#233;m autonomia do sistema jur&#237;dico. O direito inclui princ&#237;pios como parte de seu conte&#250;do, n&#227;o apenas como refer&#234;ncia externa. Alexy.</p></div>
+        <div class="card cn"><div class="ct">Direito como Integridade</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Dworkin: o direito é um sistema coerente de princ&#237;pios morais. O "juiz Hércules" deve encontrar a resposta certa (right answer thesis) que melhor se ajusta ao sistema.</p></div>
+      </div>
     </div>
   </div>
 </div>
-<footer class="ft">
-  <span>Guto Ceolin &middot; UFN &middot; Teoria da Constituição &middot; 2026/1</span>
-  <a href="../../index.html">← Voltar ao Hub</a>
+
+<!-- ═══ MÓDULO 2: HÄBERLE E FORÇA NORMATIVA ═══ -->
+<div class="mod" id="mod-hae">
+  <div class="mhd" data-c="hae">
+    <div class="mi" data-c="hae">&#128218;</div>
+    <div>
+      <div class="mnum">M&#243;dulo 02</div>
+      <div class="mtitle">H&#228;berle e For&#231;a Normativa</div>
+      <div class="mdesc">Sociedade aberta de int&#233;rpretes e for&#231;a normativa da Constitui&#231;&#227;o.</div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="hae" onclick="switchTab(this,'h2t1')">Peter H&#228;berle</button>
+      <button class="stab" data-c="hae" onclick="switchTab(this,'h2t2')">Konrad Hesse</button>
+      <button class="stab" data-c="hae" onclick="switchTab(this,'h2t3')">Compara&#231;&#227;o</button>
+    </div>
+
+    <div class="sp active" id="h2t1">
+      <div class="sl">A Sociedade Aberta dos Int&#233;rpretes da Constitui&#231;&#227;o</div>
+      <p><span class="hl">Peter H&#228;berle</span> (1934–2022), jurista alem&#227;o, publicou em 1975 o ensaio <em>"A Sociedade Aberta dos Int&#233;rpretes da Constitui&#231;&#227;o: Contribui&#231;&#227;o para a Interpreta&#231;&#227;o Pluralista e 'Procedimental' da Constitui&#231;&#227;o"</em>. A tese central é que a interpreta&#231;&#227;o constitucional n&#227;o é monop&#243;lio dos &#243;rg&#227;os estatais.</p>
+      <div class="co cb"><span class="co-ico">&#9432;</span><div><strong>Tese de H&#228;berle:</strong> Todo aquele que <em>vive a norma</em> é seu legítimo intérprete. A Constitui&#231;&#227;o é interpretada n&#227;o apenas pelos tribunais, mas por cidad&#227;os, partidos pol&#237;ticos, meios de comunica&#231;&#227;o, grupos de press&#227;o, sindicatos e pela pr&#243;pria opini&#227;o p&#250;blica.</div></div>
+      <div class="sl">Princ&#237;pio da Publicidade Procedimental</div>
+      <p>H&#228;berle defende a abertura do processo de interpreta&#231;&#227;o constitucional, com a participa&#231;&#227;o plural de atores sociais. No Brasil, isso se reflete na admiss&#227;o de <span class="hl">amicus curiae</span> e na realiza&#231;&#227;o de <span class="hl">audi&#234;ncias p&#250;blicas</span> pelo STF.</p>
+      <div class="sl">Pr&#233;-compreens&#227;o Hermenêutica</div>
+      <p>Todo int&#233;rprete possui uma <span class="hl">pr&#233;-compreens&#227;o</span> (Vorverst&#228;ndnis) — um conjunto de valores, experi&#234;ncias e conhecimentos que condiciona a leitura do texto. A interpreta&#231;&#227;o nunca é neutra ou est&#233;ril: h&#225; sempre um horizonte valorativo do int&#233;rprete.</p>
+      <div class="co cw"><span class="co-ico">&#9888;</span><div><strong>Impacto no STF:</strong> O instrumento do <em>amicus curiae</em> (<span class="art">art. 138 CPC</span> e legisla&#231;&#227;o do controle concentrado) é considerado a concretiza&#231;&#227;o h&#228;berliana da sociedade aberta no processo constitucional brasileiro.</div></div>
+    </div>
+
+    <div class="sp" id="h2t2">
+      <div class="sl">For&#231;a Normativa da Constitui&#231;&#227;o — Konrad Hesse</div>
+      <p><span class="hl">Konrad Hesse</span> (1919–2005) publicou em 1959 a aula inaugural <em>"A For&#231;a Normativa da Constitui&#231;&#227;o"</em>, resposta direta a Ferdinand Lassalle (estudado na Prova 1). Para Hesse, a Constitui&#231;&#227;o possui <span class="hl">for&#231;a normativa pr&#243;pria</span>, n&#227;o sendo mera "folha de papel".</p>
+      <div class="sl">Vontade de Constitui&#231;&#227;o</div>
+      <p>O conceito-chave de Hesse é a <span class="hl"><em>Wille zur Verfassung</em></span> (Vontade de Constitui&#231;&#227;o): para que a Constitui&#231;&#227;o tenha for&#231;a normativa, é preciso que todos — governantes e governados — estejam dispostos a cumpri-la e defend&#234;-la. Sem essa vontade coletiva, o texto constitucional perde efetividade.</p>
+      <div class="g2">
+        <div class="card ch"><div class="ct">Condi&#231;&#245;es da For&#231;a Normativa</div><ul><li>Correspond&#234;ncia m&#237;nima com a realidade</li><li>Vontade de Constitui&#231;&#227;o dos destinat&#225;rios</li><li>Interpreta&#231;&#227;o que preserve a efic&#225;cia m&#225;xima</li><li>Estabilidade — resist&#234;ncia a revis&#245;es fr&#237;volas</li></ul></div>
+        <div class="card ch"><div class="ct">Limites da For&#231;a Normativa</div><ul><li>Constitui&#231;&#227;o n&#227;o pode ignorar a realidade</li><li>Contexto hist&#243;rico e social condiciona a norma</li><li>Sem adequa&#231;&#227;o m&#237;nima, perde efic&#225;cia</li><li>N&#227;o basta o texto — precisa de efetividade</li></ul></div>
+      </div>
+    </div>
+
+    <div class="sp" id="h2t3">
+      <div class="sl">Lassalle × Hesse × H&#228;berle — Quadro Comparativo</div>
+      <div class="tw"><table>
+        <thead><tr><th>Autor</th><th>Obra Central</th><th>Tese Principal</th><th>Implica&#231;&#227;o</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Lassalle</strong></td><td>Sobre a Ess&#234;ncia da Constitui&#231;&#227;o (1862)</td><td>Constitui&#231;&#227;o real = fatores de poder; texto escrito é "folha de papel"</td><td>Pessimismo normativo</td></tr>
+          <tr><td><strong>Hesse</strong></td><td>For&#231;a Normativa (1959)</td><td>Constitui&#231;&#227;o tem for&#231;a normativa pr&#243;pria se houver <em>Wille zur Verfassung</em></td><td>Otimismo normativo moderado</td></tr>
+          <tr><td><strong>H&#228;berle</strong></td><td>Sociedade Aberta (1975)</td><td>Int&#233;rprete é todo aquele que vive a norma; sociedade plural</td><td>Democracia constitucional participativa</td></tr>
+        </tbody>
+      </table></div>
+      <div class="co cs"><span class="co-ico">&#10003;</span><div><strong>Para a prova:</strong> Hesse responde a Lassalle, defendendo a for&#231;a normativa. H&#228;berle complementa, ampliando os intérpretes além do Estado. Os tr&#234;s formam o debate cl&#225;ssico sobre a nature za e efic&#225;cia da Constitui&#231;&#227;o.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MÓDULO 3: NOVA INTERPRETAÇÃO CONSTITUCIONAL ═══ -->
+<div class="mod" id="mod-int">
+  <div class="mhd" data-c="int">
+    <div class="mi" data-c="int">&#128269;</div>
+    <div>
+      <div class="mnum">M&#243;dulo 03</div>
+      <div class="mtitle">Nova Interpreta&#231;&#227;o Constitucional</div>
+      <div class="mdesc">M&#233;todos e princ&#237;pios de interpreta&#231;&#227;o da Constitui&#231;&#227;o.</div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="int" onclick="switchTab(this,'i3t1')">M&#233;todos Cl&#225;ssicos</button>
+      <button class="stab" data-c="int" onclick="switchTab(this,'i3t2')">Princ&#237;pios de Interpreta&#231;&#227;o</button>
+      <button class="stab" data-c="int" onclick="switchTab(this,'i3t3')">Interpreta&#231;&#227;o Conforme</button>
+    </div>
+
+    <div class="sp active" id="i3t1">
+      <div class="sl">M&#233;todos Cl&#225;ssicos de Interpreta&#231;&#227;o</div>
+      <p>Os m&#233;todos cl&#225;ssicos derivam da hermenêutica geral do direito privado (Savigny) e s&#227;o insuficientes sozinhos para a interpreta&#231;&#227;o constitucional, que exige considera&#231;&#245;es pol&#237;ticas, axiológicas e sistem&#225;ticas mais complexas.</p>
+      <div class="tw"><table>
+        <thead><tr><th>M&#233;todo</th><th>Crit&#233;rio</th><th>Aplica&#231;&#227;o Constitucional</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Gramatical / Literal</strong></td><td>Texto da norma</td><td>Ponto de partida obrigat&#243;rio, nunca suficiente isoladamente</td></tr>
+          <tr><td><strong>Hist&#243;rico</strong></td><td>Inten&#231;&#227;o do legislador (originalismo)</td><td>An&#225;lise dos debates da Assembleia Constituinte</td></tr>
+          <tr><td><strong>Sist&#234;mico / L&#243;gico</strong></td><td>Coer&#234;ncia interna do sistema</td><td>Harmoniza&#231;&#227;o das normas constitucionais entre si</td></tr>
+          <tr><td><strong>Teleol&#243;gico</strong></td><td>Finalidade da norma</td><td>Efetividade dos direitos fundamentais e valores constitucionais</td></tr>
+          <tr><td><strong>Topol&#243;gico (Viehweg)</strong></td><td>Lugares-comuns jur&#237;dicos</td><td>Argumenta&#231;&#227;o a partir de <em>topoi</em> constitucionais aceitos</td></tr>
+        </tbody>
+      </table></div>
+      <div class="co cr"><span class="co-ico">&#9888;</span><div><strong>Insufici&#234;ncia dos m&#233;todos cl&#225;ssicos:</strong> A Constitui&#231;&#227;o tem car&#225;ter pol&#237;tico, cl&#225;usulas abertas e princ&#237;pios que demandam pondera&#231;&#227;o — o m&#233;todo subsuntivo (regra → caso) n&#227;o resolve conflitos entre princ&#237;pios constitucionais.</div></div>
+    </div>
+
+    <div class="sp" id="i3t2">
+      <div class="sl">Princ&#237;pios Espec&#237;ficos de Interpreta&#231;&#227;o Constitucional (Canotilho)</div>
+      <div class="g2">
+        <div class="card ci"><div class="ct">Unidade da Constitui&#231;&#227;o</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">A CF deve ser interpretada como um todo coerente, sem antinomias. Normas aparentemente contradit&#243;rias se harmonizam sistematicamente. N&#227;o h&#225; hierarquia interna entre normas originais.</p></div>
+        <div class="card ci"><div class="ct">Efeito Integrador</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">A interpreta&#231;&#227;o deve favorecer a integra&#231;&#227;o pol&#237;tica e social, fortalecendo a unidade do Estado. Prioriza solu&#231;&#245;es que promovam coes&#227;o e equil&#237;brio institucional.</p></div>
+        <div class="card ci"><div class="ct">M&#225;xima Efetividade</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Deve-se preferir a interpreta&#231;&#227;o que confira maior efic&#225;cia e aplica&#231;&#227;o &#224; norma constitucional. Especialmente importante para os direitos fundamentais.</p></div>
+        <div class="card ci"><div class="ct">Concordância Pr&#225;tica</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">No conflito entre bens constitucionais, deve-se buscar a harmoniza&#231;&#227;o, minimizando o sacrifício de cada um — sem sacrificar totalmente nenhum bem protegido.</p></div>
+        <div class="card ci"><div class="ct">For&#231;a Normativa da CF</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Decorrente de Hesse: a interpreta&#231;&#227;o deve maximizar a efetividade das normas constitucionais, preservando seu conte&#250;do normativo essencial.</p></div>
+        <div class="card ci"><div class="ct">Conformidade Funcional</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">O intérprete n&#227;o pode subverter a distribui&#231;&#227;o de fun&#231;&#245;es estabelecida pela CF. O STF n&#227;o substitui o Congresso; cada poder age em sua esfera.</p></div>
+      </div>
+    </div>
+
+    <div class="sp" id="i3t3">
+      <div class="sl">Interpreta&#231;&#227;o Conforme a Constitui&#231;&#227;o</div>
+      <p>A <span class="hl">interpreta&#231;&#227;o conforme a Constitui&#231;&#227;o</span> é técnica pela qual, diante de uma norma infraconstitucional com múltiplos sentidos possíveis, o tribunal escolhe a interpreta&#231;&#227;o compat&#237;vel com a CF, descartando as inconstituc ionais. Pressupõe:</p>
+      <ul>
+        <li>Norma infraconstitucional amb&#237;gua ou com m&#250;ltiplos sentidos</li>
+        <li>Pelo menos um sentido compat&#237;vel com a CF</li>
+        <li>Preserva&#231;&#227;o da norma (em vez de declar&#225;-la inconstitucional)</li>
+      </ul>
+      <div class="co cs"><span class="co-ico">&#10003;</span><div><strong>Limites:</strong> A interpreta&#231;&#227;o conforme n&#227;o pode ser usada para: (a) dar sentido oposto ao texto da lei; (b) corrigir omiss&#245;es legislativas; (c) substituir o legislador. Quando s&#243; resta sentido inconstitucional, a declara&#231;&#227;o de inconstitucionalidade é inevit&#225;vel.</div></div>
+      <div class="sl">Declara&#231;&#227;o Parcial de Inconstitucionalidade sem Redu&#231;&#227;o de Texto</div>
+      <p>Modalidade pr&#243;xima: o STF declara inconstitucional determinada <span class="hl">aplica&#231;&#227;o</span> da norma, mantendo seu texto &#237;ntegro, mas excluindo interpreta&#231;&#245;es inconstitucionais (&#8220;&#233; inconstitucional a aplica&#231;&#227;o do art. X quando...&#8221;).</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MÓDULO 4: REGRAS x PRINCÍPIOS ═══ -->
+<div class="mod" id="mod-nor">
+  <div class="mhd" data-c="nor">
+    <div class="mi" data-c="nor">&#9878;</div>
+    <div>
+      <div class="mnum">M&#243;dulo 04</div>
+      <div class="mtitle">Teoria das Normas — Regras x Princ&#237;pios</div>
+      <div class="mdesc">Dworkin, Alexy e a distinção estrutural entre regras e princípios.</div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="nor" onclick="switchTab(this,'r4t1')">Dworkin</button>
+      <button class="stab" data-c="nor" onclick="switchTab(this,'r4t2')">Alexy</button>
+      <button class="stab" data-c="nor" onclick="switchTab(this,'r4t3')">Conflito e Ponder a&#231;&#227;o</button>
+      <button class="stab" data-c="nor" onclick="switchTab(this,'r4t4')">Quadro Comparativo</button>
+    </div>
+
+    <div class="sp active" id="r4t1">
+      <div class="sl">Ronald Dworkin — "Levando os Direitos a S&#233;rio" (1977)</div>
+      <p><span class="hl">Ronald Dworkin</span> foi o primeiro a propor uma distinção rigorosa entre regras e princ&#237;pios. Para ele, o positivismo (Hart) errava ao ignorar os princ&#237;pios como parte do direito.</p>
+      <div class="g2">
+        <div class="card cn"><div class="ct">Regras (Rules)</div><ul><li>Aplicação <strong>tudo ou nada</strong> (all-or-nothing)</li><li>Ou se aplica integralmente ou n&#227;o se aplica</li><li>Conflito: invalidade de uma das regras</li><li>Ex: regra que fixa prazo de 30 dias</li></ul></div>
+        <div class="card cn"><div class="ct">Princ&#237;pios (Principles)</div><ul><li>T&#234;m <strong>dimensão de peso</strong> (dimension of weight)</li><li>No conflito, o de maior peso prevalece</li><li>O preterido não é inválido, apenas afastado</li><li>Ex: due process vs. segurança pública</li></ul></div>
+      </div>
+      <div class="co cv"><span class="co-ico">&#9733;</span><div><strong>Juiz Hércules:</strong> Para Dworkin, existe sempre uma <em>resposta certa</em> (right answer thesis) para os casos difíceis (hard cases). O juiz ideal — Hércules — deve buscar a interpret ação que melhor se ajuste ao direito como integridade, considerando princípios e precedentes.</div></div>
+    </div>
+
+    <div class="sp" id="r4t2">
+      <div class="sl">Robert Alexy — "Teoria dos Direitos Fundamentais" (1985)</div>
+      <p><span class="hl">Robert Alexy</span> aprofunda a distinção de Dworkin, com mais rigor lógico. Para ele, a diferen&#231;a entre regras e princ&#237;pios é <span class="hl">qualitativa</span>, n&#227;o apenas de grau.</p>
+      <div class="co cv"><span class="co-ico">!</span><div><strong>Definição de Alexy:</strong> Princ&#237;pios são <em>mandamentos de otimização</em> (Optimierungsgebote) — normas que ordenam que algo seja realizado na <strong>maior medida poss&#237;vel</strong>, dentro das possibilidades f&#225;ticas e jur&#237;dicas. Regras s&#227;o mandamentos definitivos — se válidas, devem ser cumpridas exatamente.</div></div>
+      <div class="g2">
+        <div class="card cn"><div class="ct">Regras</div><ul><li>Mandamentos definitivos</li><li>Satisfa&#231;&#227;o: cumprida ou n&#227;o cumprida</li><li>Conflito: cl&#225;usula de exce&#231;&#227;o ou invalidade</li><li>Dimensional: n&#227;o admite "mais ou menos"</li></ul></div>
+        <div class="card cn"><div class="ct">Princ&#237;pios</div><ul><li>Mandamentos de otimiza&#231;&#227;o</li><li>Realizados em diferentes graus</li><li>Colisão: pondera&#231;&#227;o (Abw&#228;gung)</li><li>Condi&#231;&#245;es f&#225;ticas e jur&#237;dicas limitam a realiza&#231;&#227;o</li></ul></div>
+      </div>
+    </div>
+
+    <div class="sp" id="r4t3">
+      <div class="sl">Colisão de Princ&#237;pios — Pondera&#231;&#227;o e Proporcionalidade</div>
+      <p>Quando dois princ&#237;pios colidem, Alexy prop&#245;e a <span class="hl">pondera&#231;&#227;o</span> (Abw&#228;gung), guiada pelo <span class="hl">princ&#237;pio da proporcionalidade</span>, composto por tr&#234;s sub-princ&#237;pios (m&#225;ximas):</p>
+      <div class="g3">
+        <div class="card cn"><div class="ct">Adequa&#231;&#227;o</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">O meio adotado deve ser apto a atingir o fim pretendido. Pergunta: <em>a medida funciona?</em></p></div>
+        <div class="card cn"><div class="ct">Necessidade</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Dentre os meios igualmente eficazes, deve-se escolher o menos restritivo. Pergunta: <em>h&#225; alternativa menos gravosa?</em></p></div>
+        <div class="card cn"><div class="ct">Proporcionalidade em Sentido Estrito</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Os benef&#237;cios superam os custos? Pondera&#231;&#227;o dos bens em jogo. Pergunta: <em>vale o sacrif&#237;cio?</em></p></div>
+      </div>
+      <div class="sl">Lei da Colisão</div>
+      <p>Alexy formula a <span class="hl">lei da colisão</span>: as condi&#231;&#245;es sob as quais um princ&#237;pio prevalece sobre outro formam o suporte f&#225;tico de uma regra. O resultado da pondera&#231;&#227;o vira regra para casos futuros similares.</p>
+      <div class="co cw"><span class="co-ico">&#9888;</span><div><strong>Conflito de Regras x Colis&#227;o de Princ&#237;pios:</strong> Conflito de regras → invalidade (uma regra contém excep&#231;&#227;o que afasta a outra) ou declaração de inconstitucionalidade. Colisão de princ&#237;pios → pondera&#231;&#227;o caso a caso, sem invalidade do princ&#237;pio preterido.</div></div>
+    </div>
+
+    <div class="sp" id="r4t4">
+      <div class="sl">Regras x Princ&#237;pios — Quadro Geral</div>
+      <div class="tw"><table>
+        <thead><tr><th>Crit&#233;rio</th><th>Regras</th><th>Princ&#237;pios</th></tr></thead>
+        <tbody>
+          <tr><td>Aplica&#231;&#227;o</td><td>Tudo ou nada (Dworkin) / Definitiva (Alexy)</td><td>Dimens&#227;o de peso / Otimiza&#231;&#227;o</td></tr>
+          <tr><td>Conflito</td><td>Invalidade ou cl&#225;usula de exce&#231;&#227;o</td><td>Pondera&#231;&#227;o — nenhum é invalidado</td></tr>
+          <tr><td>Grau de abstração</td><td>Concreto, hipot&#233;tico-condicionais</td><td>Abstrato, fins e valores</td></tr>
+          <tr><td>Determina&#231;&#227;o</td><td>Alta — preveem conse qu&#234;ncia jur&#237;dica precisa</td><td>Baixa — exigem concretiza&#231;&#227;o</td></tr>
+          <tr><td>Exemplo CF/88</td><td>Art. 5.º, XLVII (penas vedadas)</td><td>Art. 5.º, <em>caput</em> (igualdade, liberdade)</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MÓDULO 5: PRINCÍPIOS FUNDAMENTAIS ═══ -->
+<div class="mod" id="mod-pri">
+  <div class="mhd" data-c="pri">
+    <div class="mi" data-c="pri">&#127775;</div>
+    <div>
+      <div class="mnum">M&#243;dulo 05</div>
+      <div class="mtitle">Princ&#237;pios Constitucionais Fundamentais</div>
+      <div class="mdesc">Normatividade dos princ&#237;pios e princ&#237;pios fundamentais da CF/88.</div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="pri" onclick="switchTab(this,'p5t1')">Normatividade</button>
+      <button class="stab" data-c="pri" onclick="switchTab(this,'p5t2')">Princ&#237;pios da Rep&#250;blica</button>
+      <button class="stab" data-c="pri" onclick="switchTab(this,'p5t3')">Dignidade da Pessoa Humana</button>
+    </div>
+
+    <div class="sp active" id="p5t1">
+      <div class="sl">Normatividade dos Princ&#237;pios</div>
+      <p>O reconhecimento da <span class="hl">normatividade dos princ&#237;pios</span> — de que eles s&#227;o normas jur&#237;dicas verdadeiras, e n&#227;o meras diretivas pol&#237;ticas ou valores morais — é a pedra angular do p&#243;s-positivismo e do neoconstitucionalismo.</p>
+      <div class="co cs"><span class="co-ico">&#10003;</span><div><strong>Evolu&#231;&#227;o hist&#243;rica:</strong> (1) Fase jusnaturalista — princ&#237;pios como valores ético-morais extralegais; (2) Fase positivista — princ&#237;pios como fonte supletiva, aplicados na omiss&#227;o da lei (art. 4.º LINDB); (3) Fase p&#243;s-positivista — princ&#237;pios como normas jur&#237;dicas primárias, com efic&#225;cia direta e imediata.</div></div>
+      <div class="sl">Efic&#225;cia Jur&#237;dica dos Princ&#237;pios</div>
+      <div class="g2">
+        <div class="card cn" style="border-color:rgba(92,201,138,.22)"><div class="ct" style="color:var(--pri)">Positiva</div><ul><li>Ap licação direta — geram direitos sem lei intermedi&#225;ria</li><li>Base para interpreta&#231;&#227;o das demais normas</li><li>Orienta&#231;&#227;o para legislador e administrador</li></ul></div>
+        <div class="card cn" style="border-color:rgba(92,201,138,.22)"><div class="ct" style="color:var(--pri)">Negativa</div><ul><li>Invalidam normas incompat&#237;veis</li><li>Vedam condutas que os contrariem</li><li>Bloqueio a interpreta&#231;&#245;es inconstitucionais</li></ul></div>
+      </div>
+    </div>
+
+    <div class="sp" id="p5t2">
+      <div class="sl">Princ&#237;pios Fundamentais da CF/88 — Arts. 1.º a 4.º</div>
+      <div class="tw"><table>
+        <thead><tr><th>Artigo</th><th>Conte&#250;do</th><th>Elementos</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Art. 1.º</strong></td><td>Fundamentos da Rep&#250;blica</td><td>Soberania · Cidadania · Dignidade · Valores sociais do trabalho e livre iniciativa · Pluralismo pol&#237;tico</td></tr>
+          <tr><td><strong>Art. 2.º</strong></td><td>Separa&#231;&#227;o dos Poderes</td><td>Executivo · Legislativo · Judici&#225;rio — independentes e harm&#244;nicos</td></tr>
+          <tr><td><strong>Art. 3.º</strong></td><td>Objetivos Fundamentais</td><td>Construir sociedade livre · Desenvolvimento nacional · Erradicar pobreza · Promover o bem sem preconceitos</td></tr>
+          <tr><td><strong>Art. 4.º</strong></td><td>Rela&#231;&#245;es Internacionais</td><td>Independ&#234;ncia nacional · Defesa da paz · Autodetermina&#231;&#227;o · N&#227;o-interven&#231;&#227;o · Igualdade entre Estados · Solu&#231;&#227;o pac&#237;fica · Repúdio ao terrorism o e racismo · Coopera&#231;&#227;o · Integra&#231;&#227;o latino-americana</td></tr>
+        </tbody>
+      </table></div>
+      <div class="co cw"><span class="co-ico">&#9888;</span><div><strong>Fundamentos × Objetivos:</strong> Art. 1.º = fundamentos (o que a Rep&#250;blica É — sua identidade). Art. 3.º = objetivos (o que a Rep&#250;blica QUER FAZER — metas program&#225;ticas). Distinção frequente em provas.</div></div>
+    </div>
+
+    <div class="sp" id="p5t3">
+      <div class="sl">Dignidade da Pessoa Humana — Meta-Princ&#237;pio</div>
+      <p>A <span class="hl">dignidade da pessoa humana</span> (<span class="art">art. 1.º, III, CF</span>) ocupa posi&#231;&#227;o de <em>meta-princ&#237;pio</em> — "sobreprincípio" que irradia efeitos por todo o ordenamento. &#201; fundamento da Rep&#250;blica e base de todos os direitos fundamentais.</p>
+      <div class="g2">
+        <div class="card cn" style="border-color:rgba(92,201,138,.22)"><div class="ct" style="color:var(--pri)">F&#243;rmula Kantiana</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Kant: o ser humano &#233; fim em si mesmo, nunca meio. A dignidade proíbe a instrumentaliza&#231;&#227;o da pessoa — n&#227;o se pode tratar o ser humano como objeto para atingir fins, mesmo nobres.</p></div>
+        <div class="card cn" style="border-color:rgba(92,201,138,.22)"><div class="ct" style="color:var(--pri)">N&#250;cleo Essencial</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Todo direito fundamental tem um n&#250;cleo essencial que não pode ser violado mesmo por emenda constitucional — dele emana a prote&#231;&#227;o m&#237;nima da dignidade.</p></div>
+      </div>
+      <div class="co cs"><span class="co-ico">&#10003;</span><div><strong>Dupla dimens&#227;o:</strong> Positiva — obriga o Estado a criar condi&#231;&#245;es m&#237;nimas de exist&#234;ncia digna (m&#237;nimo existencial). Negativa — proíbe atos que degradem, humilhem ou instrumentalizem o ser humano.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MÓDULO QUIZ ═══ -->
+<div class="mod" id="mod-quiz">
+  <div class="mhd" data-c="nor">
+    <div class="mi" data-c="nor">&#128221;</div>
+    <div>
+      <div class="mnum">Quiz</div>
+      <div class="mtitle">20 Quest&#245;es — Banca UFN</div>
+      <div class="mdesc">Neoconstitucionalismo · H&#228;berle · Hesse · Regras × Princ&#237;pios · Alexy · Dworkin</div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="qwrap">
+      <div class="qtop">
+        <div class="qtitle">Simulado</div>
+        <div class="sbadge" id="qscore">0 / 20</div>
+      </div>
+      <div class="qdots" id="qdots"></div>
+      <div id="qzone"></div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer class="hub-footer">
+  <div class="ft-left">Guto Ceolin &middot; UFN &middot; Teoria da Constitui&#231;&#227;o &middot; 2026/1</div>
+  <div class="ft-right"><a href="../../index.html">&#8592; Voltar ao Hub</a></div>
 </footer>
+
 <script>
 function toggleTheme(){var h=document.documentElement;var l=h.getAttribute('data-theme')==='light';h.setAttribute('data-theme',l?'dark':'light');localStorage.setItem('theme',l?'dark':'light');}
-</script><button class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar modo claro/escuro" title="Modo claro/escuro">
+
+const questions=[
+  {q:"O neoconstitucionalismo surgiu principalmente como reação a qual contexto histórico?",opts:["Ao absolutismo monárquico do século XVIII","Aos regimes totalitários do pós-Segunda Guerra Mundial","À Revolução Francesa de 1789","Ao positivismo jurídico do século XIX"],ans:1,fb:"O neoconstitucionalismo emerge no <strong>pós-Segunda Guerra Mundial</strong>, como reação aos regimes nazifascistas que usaram o direito positivo para legitimar atrocidades, demonstrando a insuficiência de separar o direito da moral."},
+  {q:"Quais são os três marcos históricos do neoconstitucionalismo, segundo Luís Roberto Barroso?",opts:["Filosófico, científico e jurídico","Histórico, filosófico e teórico","Político, econômico e social","Normativo, hermenêutico e jurisdicional"],ans:1,fb:"Barroso identifica três marcos: <strong>(1) Histórico</strong> — pós-guerra e redemocratização; <strong>(2) Filosófico</strong> — pós-positivismo, reaproximação direito/moral; <strong>(3) Teórico</strong> — força normativa da CF, expansão da jurisdição constitucional, nova hermenêutica."},
+  {q:"O pós-positivismo, em relação ao positivismo jurídico clássico, distingue-se principalmente por:",opts:["Defender que normas são válidas apenas se justas","Reconhecer que princípios são normas jurídicas com força vinculante","Afirmar que o direito deve ser separado rigorosamente da moral","Negar a validade de normas constitucionais programáticas"],ans:1,fb:"O <strong>pós-positivismo</strong> supera a separação positivista entre direito e moral ao reconhecer que princípios têm força jurídica normativa direta — não são meras diretivas políticas ou valores extrajurídicos."},
+  {q:"A tese da 'Sociedade Aberta dos Intérpretes da Constituição', de Peter Häberle, afirma que:",opts:["Apenas o STF tem legitimidade para interpretar a Constituição","Todo aquele que vive a norma é seu intérprete legítimo","A Constituição só pode ser interpretada por juristas","A sociedade civil não participa da interpretação constitucional"],ans:1,fb:"Para <strong>Häberle</strong>, o círculo de intérpretes deve ser expandido: todo cidadão, partido, sindicato, meio de comunicação e grupo social que vive a norma constitucional é seu legítimo intérprete. A interpretação não é monopólio estatal."},
+  {q:"O conceito de 'Wille zur Verfassung', de Konrad Hesse, significa:",opts:["A força dos fatores reais de poder sobre a Constituição","A vontade de Constituição — disposição coletiva de cumprir e defender a CF","A interpretação literal do texto constitucional","A vontade do legislador constituinte originário"],ans:1,fb:"A <strong><em>Wille zur Verfassung</em></strong> (Vontade de Constituição) de Hesse é a disposição coletiva de governantes e governados de cumprir e defender a Constituição. Sem essa vontade, o texto constitucional perde sua força normativa."},
+  {q:"Konrad Hesse publicou 'A Força Normativa da Constituição' como resposta direta a:",opts:["Hans Kelsen e sua teoria pura do direito","Ferdinand Lassalle e sua tese dos fatores reais de poder","Carl Schmitt e sua decisão política fundamental","Jeremy Bentham e o utilitarismo jurídico"],ans:1,fb:"Hesse responde diretamente a <strong>Lassalle</strong>, que afirmara ser a Constituição escrita uma mera 'folha de papel' submetida aos fatores reais de poder. Hesse defende que a Constituição tem força normativa própria capaz de condicionar a realidade."},
+  {q:"A admissão de amicus curiae pelo STF é considerada concretização de qual teoria?",opts:["Teoria da força normativa de Hesse","Teoria da sociedade aberta dos intérpretes de Häberle","Teoria dos princípios de Alexy","Teoria da integridade de Dworkin"],ans:1,fb:"O <strong>amicus curiae</strong> concretiza a tese häberliana da sociedade aberta: permite que entidades não-partes participem do processo constitucional, ampliando o círculo de intérpretes para além das partes e do tribunal."},
+  {q:"O princípio de interpretação constitucional que ordena harmonizar bens constitucionais sem sacrificar totalmente nenhum deles é:",opts:["Máxima efetividade","Unidade da Constituição","Concordância prática","Conformidade funcional"],ans:2,fb:"A <strong>concordância prática</strong> (Canotilho) impõe que, no conflito entre bens constitucionais, o intérprete busque harmonizá-los, limitando cada um na menor medida possível — sem eliminar totalmente nenhum."},
+  {q:"O princípio da conformidade funcional proíbe:",opts:["A interpretação extensiva de direitos fundamentais","O intérprete de subverter a distribuição de funções estabelecida pela CF","A criação de normas por analogia no direito constitucional","A interpretação histórica da Constituição"],ans:1,fb:"A <strong>conformidade funcional</strong> determina que o intérprete não pode subverter a repartição de competências e funções traçada pela CF. O STF não pode assumir funções do legislador; cada poder deve atuar dentro de sua esfera constitucional."},
+  {q:"A técnica pela qual o tribunal, diante de norma infraconstitucional com múltiplos sentidos, escolhe o interpretação compatível com a CF, é denominada:",opts:["Declaração de inconstitucionalidade por omissão","Interpretação conforme a Constituição","Interpretação analógica extensiva","Controle preventivo de constitucionalidade"],ans:1,fb:"A <strong>interpretação conforme a Constituição</strong> preserva a norma infraconstitucional ao eleger, dentre seus múltiplos sentidos possíveis, aquele compatível com a CF — evitando a declaração de inconstitucionalidade quando houver ao menos um sentido válido."},
+  {q:"Para Ronald Dworkin, a diferença entre regras e princípios é:",opts:["Apenas quantitativa — princípios têm mais peso que regras","Qualitativa — regras aplicam-se em tudo ou nada; princípios têm dimensão de peso","Hierárquica — princípios estão acima das regras na pirâmide normativa","Temporal — princípios são anteriores às regras no ordenamento"],ans:1,fb:"Para <strong>Dworkin</strong>, a diferença é qualitativa: regras operam em <em>all-or-nothing</em> (tudo ou nada) — ou se aplicam inteiramente ou não se aplicam. Princípios têm <em>dimensão de peso</em> — no conflito, o de maior peso prevalece, sem que o preterido seja inválido."},
+  {q:"Segundo Robert Alexy, princípios são:",opts:["Normas hierarquicamente superiores às regras","Mandamentos de otimização, realizados na maior medida possível","Valores morais sem força jurídica vinculante","Disposições programáticas sem eficácia imediata"],ans:1,fb:"Para <strong>Alexy</strong>, princípios são <em>mandamentos de otimização</em> (Optimierungsgebote): ordenam que algo seja realizado na maior medida possível, dentro das possibilidades fáticas e jurídicas. São satisfeitos em graus variáveis, ao contrário das regras."},
+  {q:"Quando dois princípios colidem, a solução proposta por Alexy é:",opts:["Declarar inválido o princípio de menor hierarquia","Aplicar o princípio mais antigo (lex posterior)","Ponderar os princípios segundo o princípio da proporcionalidade","Suspender ambos até decisão legislativa"],ans:2,fb:"A colisão de princípios é resolvida pela <strong>ponderação</strong> (Abwägung), guiada pelo princípio da proporcionalidade (adequação, necessidade e proporcionalidade em sentido estrito). O princípio preterido não é inválido — apenas afastado no caso concreto."},
+  {q:"As três máximas (sub-princípios) do princípio da proporcionalidade são:",opts:["Legalidade, razoabilidade e eficiência","Adequação, necessidade e proporcionalidade em sentido estrito","Subsidiariedade, proporcionalidade e razoabilidade","Eficácia, efetividade e eficiência"],ans:1,fb:"O princípio da proporcionalidade é decomposto em três máximas: <strong>adequação</strong> (o meio atinge o fim?), <strong>necessidade</strong> (há meio menos restritivo igualmente eficaz?) e <strong>proporcionalidade em sentido estrito</strong> (os benefícios superam os custos?)."},
+  {q:"A 'lei da colisão' de Alexy estabelece que:",opts:["Princípios nunca conflitam entre si no ordenamento jurídico","As condições em que um princípio prevalece formam o suporte fático de uma regra","Todo conflito de princípios deve ser resolvido pelo legislador","A colisão de princípios gera a invalidade de um deles"],ans:1,fb:"A <strong>lei da colisão</strong> de Alexy afirma que as condições concretas sob as quais um princípio prevalece sobre outro formam o suporte fático de uma regra concreta. O resultado da ponderação se transforma em regra aplicável a casos futuros similares."},
+  {q:"A diferença entre os fundamentos da República (art. 1.º CF) e os objetivos fundamentais (art. 3.º CF) é:",opts:["Fundamentos são normas programáticas; objetivos são normas de eficácia plena","Fundamentos expressam o que a República É (identidade); objetivos expressam o que ela QUER FAZER (metas)","Fundamentos são cláusulas pétreas; objetivos podem ser emendados","Não há diferença — ambos têm a mesma natureza jurídica"],ans:1,fb:"<strong>Art. 1.º (fundamentos)</strong>: dizem o que a República É — soberania, cidadania, dignidade, valores sociais, pluralismo. <strong>Art. 3.º (objetivos)</strong>: dizem o que a República quer construir — erradicar pobreza, reduzir desigualdades, promover o bem comum. É distinção clássica em provas de constitucional."},
+  {q:"A dignidade da pessoa humana, prevista no art. 1.º, III da CF, é classificada na doutrina como:",opts:["Princípio setorial aplicável apenas aos direitos sociais","Meta-princípio (sobreprincípio) que irradia efeitos por todo o ordenamento","Norma programática sem aplicabilidade imediata","Cláusula pétrea aplicável apenas ao poder Judiciário"],ans:1,fb:"A <strong>dignidade da pessoa humana</strong> é o <em>meta-princípio</em> do ordenamento constitucional — irradia efeitos sobre todos os direitos fundamentais e todo o sistema jurídico. É fundamento da República e base normativa de toda a proteção constitucional."},
+  {q:"A fase em que princípios são reconhecidos como normas jurídicas primárias, com eficácia direta, é denominada:",opts:["Fase jusnaturalista","Fase positivista clássica","Fase pós-positivista","Fase legalista"],ans:2,fb:"Na <strong>fase pós-positivista</strong>, os princípios deixam de ser meras fontes supletivas (como no positivismo — art. 4.º LINDB) ou valores morais extralegais (jusnaturalismo), para se tornarem normas jurídicas com eficácia direta e imediata."},
+  {q:"Quando duas regras conflitam no mesmo ordenamento, a solução é:",opts:["Ponderação — aplica-se a de maior peso","Invalidade — uma das regras é declarada inválida ou contém cláusula de exceção","Suspensão — ambas ficam ineficazes até decisão judicial","Hierarquia de princípios — o princípio de maior peso determina qual regra prevalece"],ans:1,fb:"O conflito de regras é resolvido pela <strong>invalidade</strong>: ou uma das regras contém uma cláusula de exceção que afasta a outra no caso concreto, ou uma é declarada inválida (inconstitucional). Não há ponderação — o método de resolução é diferente do conflito de princípios."},
+  {q:"A dimensão negativa da dignidade da pessoa humana obriga o Estado a:",opts:["Criar condições materiais mínimas de existência (mínimo existencial)","Abster-se de atos que degradem, humilhem ou instrumentalizem o ser humano","Editar leis que promovam a igualdade material","Garantir saúde e educação a todos os cidadãos"],ans:1,fb:"A <strong>dimensão negativa</strong> da dignidade impõe ao Estado um dever de abstenção: proíbe atos que degradem, humilhem ou tratem o ser humano como mero instrumento. A dimensão positiva (mínimo existencial) impõe ações prestacionais — são funções distintas."}
+];
+
+let cur=0,score=0,answered=[],SQ=[];
+const zone=document.getElementById('qzone');
+const dots=document.getElementById('qdots');
+const sc=document.getElementById('qscore');
+
+function shuffleOpts(q){const idx=Array.from({length:q.opts.length},(_,i)=>i);for(let i=idx.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[idx[i],idx[j]]=[idx[j],idx[i]];}return{...q,opts:idx.map(i=>q.opts[i]),ans:idx.indexOf(q.ans)};}
+
+function buildDots(){SQ=questions.map(shuffleOpts);dots.innerHTML='';SQ.forEach((_,i)=>{const d=document.createElement('div');d.className='qdot'+(i===0?' cur':'');d.id='dot'+i;dots.appendChild(d);});}
+
+function renderQ(i){
+  if(i>=SQ.length){showResult();return;}
+  const q=SQ[i];
+  let html=`<div class="qq active" id="qq${i}"><div class="qnum">Questão ${i+1} de ${SQ.length}</div><div class="qtext">${q.q}</div><div class="qopts">`;
+  q.opts.forEach((o,j)=>{html+=`<button class="qopt" onclick="pick(${i},${j})"><span class="ql">${String.fromCharCode(65+j)}</span><span class="qt">${o}</span></button>`;});
+  html+=`</div><div class="qfb" id="fb${i}"></div><div class="qnav"><button class="qbn qbn-rs" onclick="resetQuiz()">Reiniciar</button><button class="qbn qbn-next" id="nx${i}" onclick="nextQ(${i+1})">Próxima →</button></div></div>`;
+  zone.innerHTML=html;
+}
+
+function pick(qi,oi){
+  if(answered[qi]!==undefined)return;
+  answered[qi]=oi;
+  const q=SQ[qi];
+  const opts=document.querySelectorAll(`#qq${qi} .qopt`);
+  opts.forEach((o,j)=>{o.classList.add('disabled');if(j===q.ans)o.classList.add('correct');else if(j===oi)o.classList.add('wrong');});
+  const fb=document.getElementById('fb'+qi);
+  if(oi===q.ans){score++;fb.className='qfb ok show';fb.innerHTML='<strong>Correto!</strong> '+q.fb;}
+  else{fb.className='qfb ng show';fb.innerHTML='<strong>Incorreto.</strong> '+q.fb;}
+  const dot=document.getElementById('dot'+qi);
+  dot.className='qdot '+(oi===q.ans?'ok':'err');
+  if(qi+1<SQ.length){const dot2=document.getElementById('dot'+(qi+1));if(dot2)dot2.classList.add('cur');}
+  sc.textContent=score+' / '+SQ.length;
+  document.getElementById('nx'+qi).classList.add('show');
+}
+
+function nextQ(i){cur=i;renderQ(i);}
+
+function showResult(){
+  const pct=Math.round(score/SQ.length*100);
+  zone.innerHTML=`<div class="qres show"><div class="rscore">${score}<span style="font-size:2rem;color:var(--text2)">/${SQ.length}</span></div><div class="rlabel">${pct}% de acerto</div><div style="margin-top:1.2rem;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--text2)">${pct>=70?'Aprovado — bom desempenho!':'Continue revisando o conteúdo.'}</div><div class="qnav" style="justify-content:center;margin-top:1.5rem"><button class="qbn qbn-rs" onclick="resetQuiz()">Refazer Quiz</button></div></div>`;
+  try{const _k='quiz_'+location.pathname.split('/').slice(-2).join('/').replace('.html','').replace('/','_');localStorage.setItem(_k,JSON.stringify({score,total:SQ.length,pct,ts:Date.now()}));}catch(_e){}
+}
+
+function resetQuiz(){cur=0;score=0;answered=[];sc.textContent='0 / '+questions.length;buildDots();renderQ(0);}
+
+function switchMod(m,btn){
+  document.querySelectorAll('.mod').forEach(d=>d.classList.remove('active'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
+  document.getElementById('mod-'+m).classList.add('active');
+  btn.classList.add('active');
+}
+
+function switchTab(btn,panelId){
+  const mbody=btn.closest('.mbody');
+  mbody.querySelectorAll('.stab').forEach(b=>b.classList.remove('active'));
+  mbody.querySelectorAll('.sp').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(panelId).classList.add('active');
+}
+
+function doSearch(v){
+  if(!v){document.querySelectorAll('mark').forEach(m=>{const p=m.parentNode;p.replaceChild(document.createTextNode(m.textContent),m);p.normalize();});return;}
+}
+
+buildDots();renderQ(0);
+</script>
+<button class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar modo claro/escuro" title="Modo claro/escuro">
   <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
   <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-</button></body>
+</button>
+</body>
 </html>
