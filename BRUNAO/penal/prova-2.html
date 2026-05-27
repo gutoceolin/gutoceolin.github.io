@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -7,82 +7,629 @@
 <title>Direito Penal I — Prova 2</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@300;400;500;600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#111118;--surface:#1c1c26;--surface2:#242430;--border:rgba(255,255,255,.07);--border2:rgba(255,255,255,.12);--text:#e8e4f0;--text2:#9490a8;--text3:#56526a;--white:#f5f2ff;--accent:#e07a5c;--accent-dim:rgba(224,122,92,.06);}
+:root{
+  --bg:#111118;--surface:#1c1c26;--surface2:#242430;--surface3:#1c1c24;
+  --border:rgba(255,255,255,.07);--border2:rgba(255,255,255,.12);
+  --text:#e8e4f0;--text2:#9490a8;--text3:#56526a;--white:#f5f2ff;
+  --tip:#e07a5c;  --tip-dim:rgba(224,122,92,.10);  --tip-mid:rgba(224,122,92,.22);
+  --err:#9b6fe8;  --err-dim:rgba(155,111,232,.10);  --err-mid:rgba(155,111,232,.22);
+  --ite:#5cb8e0;  --ite-dim:rgba(92,184,224,.10);   --ite-mid:rgba(92,184,224,.22);
+  --exc:#5cc98a;  --exc-dim:rgba(92,201,138,.10);   --exc-mid:rgba(92,201,138,.22);
+  --con:#d4a843;  --con-dim:rgba(212,168,67,.10);   --con-mid:rgba(212,168,67,.22);
+}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-weight:300;min-height:100vh}
-body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse 70% 40% at 10% 0%,var(--accent-dim) 0%,transparent 55%)}
-.wrap{position:relative;z-index:10;max-width:1100px;margin:0 auto;padding:3rem 2rem}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse 70% 40% at 10% 0%,rgba(224,122,92,.05) 0%,transparent 55%),
+             radial-gradient(ellipse 55% 35% at 90% 100%,rgba(92,201,138,.03) 0%,transparent 55%)}
+.hdr{position:relative;z-index:10;padding:3rem 2rem 0;max-width:1100px;margin:0 auto}
 .back{display:inline-flex;align-items:center;gap:.45rem;font-family:'Outfit',sans-serif;font-size:.75rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);text-decoration:none;margin-bottom:1.5rem;padding:.38rem 1rem;border-radius:100px;border:1px solid var(--border);background:var(--surface);transition:all .2s}
-.back:hover{color:var(--text);border-color:var(--border2);background:var(--surface2)}.back:focus-visible{outline:2px solid var(--gold, #d4a843);outline-offset:2px}
+.back:hover{color:var(--text);border-color:var(--border2);background:var(--surface2)}
 .ey{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--text3);margin-bottom:.9rem}
-.htitle{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,6.5vw,4.6rem);font-weight:700;color:var(--white);line-height:.95;letter-spacing:-.02em;margin-bottom:.75rem}
+.htitle{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,6.5vw,4.6rem);font-weight:700;color:var(--white);line-height:.95;letter-spacing:-.02em}
 .htitle em{font-style:italic;color:var(--text2);font-weight:400}
-.disc-pill{display:inline-flex;align-items:center;gap:.38rem;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;padding:.25rem .65rem;border-radius:100px;margin-top:1.1rem;background:rgba(224,122,92,.1);color:var(--accent);border:1px solid rgba(224,122,92,.22)}
-.disc-pill .dot{width:4px;height:4px;border-radius:50%;background:currentColor}
-.wip{margin-top:3rem;padding:3.5rem 2.5rem;background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:0 2px 12px rgba(0,0,0,.25);text-align:center}
-.wip-icon{font-size:0;width:48px;height:48px;margin:0 auto 1.75rem;border-radius:12px;background:var(--surface2);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:5px}.wip-icon::before,.wip-icon::after{content:"";display:block;border-radius:2px;background:var(--accent);opacity:.55}.wip-icon::before{width:20px;height:2px}.wip-icon::after{width:13px;height:2px}
-.wip-title{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--white);margin-bottom:.65rem;letter-spacing:-.02em;margin-bottom:.75rem}
-.wip-text{font-family:'Outfit',sans-serif;font-size:.88rem;color:var(--text2);letter-spacing:.07em;line-height:1.85}
-.accent-line{width:48px;height:2px;background:var(--accent);margin:1.1rem auto 0;border-radius:2px;opacity:.5}
-.topics{display:flex;gap:.4rem;flex-wrap:wrap;justify-content:center;margin-top:1.5rem}
-.topic{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.04em;background:var(--surface2);border:1px solid var(--border);color:var(--text2);padding:.18rem .5rem;border-radius:100px}
-.ft{max-width:1100px;margin:4rem auto 0;padding:1.5rem 2rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.85rem;color:var(--text3)}
-.ft a{color:var(--text2);text-decoration:none}.ft a:hover{color:var(--white)}.ft a:focus-visible{outline:2px solid currentColor;outline-offset:3px}
-@media(max-width:600px){.wrap,.ft{padding-left:1rem;padding-right:1rem}}
+.hsub{margin-top:1.1rem;font-size:.8rem;color:var(--text2);font-family:'JetBrains Mono',monospace;letter-spacing:.04em}
+.banca-pill{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.2rem;padding:.42rem .95rem;background:rgba(224,122,92,.08);border:1px solid rgba(224,122,92,.25);border-radius:100px;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.07em;color:var(--tip);text-transform:uppercase}
+.banca-pill .p{width:5px;height:5px;border-radius:50%;background:var(--tip);animation:pu 2s infinite}
+@keyframes pu{0%,100%{opacity:1}50%{opacity:.35}}
+.sw{margin-top:.85rem;position:relative}
+.si{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:100px;padding:.68rem 1rem .68rem 2.5rem;color:var(--text);font-family:'Outfit',sans-serif;font-size:.85rem;outline:none;transition:border-color .2s}
+.si::placeholder{color:var(--text3)}.si:focus{border-color:var(--border2)}
+.sic{position:absolute;left:.82rem;top:50%;transform:translateY(-50%);color:var(--text3);font-size:.88rem;pointer-events:none}
+mark{background:rgba(224,122,92,.28);color:var(--white);border-radius:2px;padding:0 2px}
+.mnav{display:flex;gap:.42rem;flex-wrap:wrap;margin:1.9rem auto 0;max-width:1100px;padding:0 2rem;position:relative;z-index:10}
+.nb{display:flex;align-items:center;gap:.5rem;padding:.52rem .95rem;border:1px solid var(--border);border-radius:100px;background:var(--surface);color:var(--text2);font-family:'Outfit',sans-serif;font-size:.75rem;font-weight:500;letter-spacing:.02em;cursor:pointer;transition:all .2s;text-transform:none;min-height:36px}
+.nb:hover{border-color:var(--border2);color:var(--text)}
+.nb .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.nb[data-m=tip] .d{background:var(--tip)}.nb[data-m=err] .d{background:var(--err)}
+.nb[data-m=ite] .d{background:var(--ite)}.nb[data-m=exc] .d{background:var(--exc)}
+.nb[data-m=con] .d{background:var(--con)}.nb[data-m=quiz] .d{background:var(--white)}
+.nb.active{color:var(--white)}
+.nb[data-m=tip].active{border-color:var(--tip);background:var(--tip-dim)}
+.nb[data-m=err].active{border-color:var(--err);background:var(--err-dim)}
+.nb[data-m=ite].active{border-color:var(--ite);background:var(--ite-dim)}
+.nb[data-m=exc].active{border-color:var(--exc);background:var(--exc-dim)}
+.nb[data-m=con].active{border-color:var(--con);background:var(--con-dim)}
+.nb[data-m=quiz].active{border-color:rgba(255,255,255,.28);background:rgba(255,255,255,.04)}
+.main{position:relative;z-index:5;max-width:1100px;margin:1.8rem auto 5rem;padding:0 2rem}
+.mod{display:none;animation:fu .3s ease both}.mod.active{display:block}
+@keyframes fu{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.mhd{display:flex;align-items:flex-start;gap:1.4rem;padding:1.75rem 2rem;border-radius:14px 14px 0 0;border:1px solid var(--border);border-bottom:none;box-shadow:0 4px 20px rgba(0,0,0,.25)}
+.mhd[data-c=tip]{background:var(--tip-dim);border-color:rgba(224,122,92,.28)}
+.mhd[data-c=err]{background:var(--err-dim);border-color:rgba(155,111,232,.28)}
+.mhd[data-c=ite]{background:var(--ite-dim);border-color:rgba(92,184,224,.28)}
+.mhd[data-c=exc]{background:var(--exc-dim);border-color:rgba(92,201,138,.28)}
+.mhd[data-c=con]{background:var(--con-dim);border-color:rgba(212,168,67,.28)}
+.mi{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
+.mi[data-c=tip]{background:var(--tip-mid)}.mi[data-c=err]{background:var(--err-mid)}
+.mi[data-c=ite]{background:var(--ite-mid)}.mi[data-c=exc]{background:var(--exc-mid)}
+.mi[data-c=con]{background:var(--con-mid)}
+.mnum{font-family:'Outfit',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.12em;color:var(--text3);text-transform:uppercase;margin-bottom:.25rem}
+.mtitle{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--white);line-height:1}
+.mdesc{margin-top:.42rem;font-size:.82rem;color:var(--text2);line-height:1.62}
+.mbody{border:1px solid var(--border);border-top:none;border-radius:0 0 14px 14px;background:var(--surface);overflow:hidden}
+.stabs{display:flex;border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
+.stabs::-webkit-scrollbar{display:none}
+.stab{padding:.78rem 1.15rem;font-family:'Outfit',sans-serif;font-size:.78rem;font-weight:500;letter-spacing:.01em;text-transform:none;color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;background:none;border-top:none;border-left:none;border-right:none;margin-bottom:-1px;min-height:44px}
+.stab:hover{color:var(--text)}.stab.active{color:var(--white)}
+.stab.active[data-c=tip]{border-bottom-color:var(--tip)}.stab.active[data-c=err]{border-bottom-color:var(--err)}
+.stab.active[data-c=ite]{border-bottom-color:var(--ite)}.stab.active[data-c=exc]{border-bottom-color:var(--exc)}
+.stab.active[data-c=con]{border-bottom-color:var(--con)}
+.sp{display:none;padding:2rem 2.25rem;animation:fu .22s ease}.sp.active{display:block}
+.sl{font-family:'Outfit',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);margin-bottom:.58rem;margin-top:1.55rem;display:flex;align-items:center;gap:.5rem}
+.sl::after{content:'';flex:1;height:1px;background:var(--border)}.sl:first-child{margin-top:0}
+p{font-size:.9375rem;color:#b5b0be;line-height:1.88}p+p{margin-top:.65rem}
+.hl{color:var(--white);font-weight:500}
+.art{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--con);font-weight:500}
+ul,ol{padding-left:1.25rem;margin-top:.48rem}
+li{font-size:.9rem;color:#aeaab8;line-height:1.82;margin-bottom:.2rem}li strong{color:var(--white);font-weight:500}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:.88rem;margin-top:.68rem}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:.72rem;margin-top:.68rem}
+@media(max-width:640px){.g2,.g3{grid-template-columns:1fr}}
+.card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:1rem;box-shadow:0 2px 8px rgba(0,0,0,.18);transition:border-color .2s,box-shadow .2s}.card:hover{border-color:var(--border2);box-shadow:0 4px 16px rgba(0,0,0,.28)}
+.ct{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.55rem;display:flex;align-items:center;gap:.4rem}
+.ct::before{content:'';width:3px;height:11px;border-radius:2px;flex-shrink:0}
+.ct1 .ct{color:var(--tip)}.ct1 .ct::before{background:var(--tip)}
+.ct2 .ct{color:var(--err)}.ct2 .ct::before{background:var(--err)}
+.ct3 .ct{color:var(--ite)}.ct3 .ct::before{background:var(--ite)}
+.ct4 .ct{color:var(--exc)}.ct4 .ct::before{background:var(--exc)}
+.ct5 .ct{color:var(--con)}.ct5 .ct::before{background:var(--con)}
+.co{display:flex;gap:.75rem;padding:.88rem 1rem;border-radius:10px;margin-top:.82rem;font-size:.83rem;line-height:1.72;color:#aeaab8}
+.co-ico{font-size:.92rem;flex-shrink:0;margin-top:.05rem}.co strong{font-weight:500}
+.cw{background:rgba(212,168,67,.07);border:1px solid rgba(212,168,67,.2)}.cw strong{color:var(--con)}
+.cv{background:rgba(155,111,232,.07);border:1px solid rgba(155,111,232,.2)}.cv strong{color:var(--err)}
+.cb{background:rgba(92,184,224,.07);border:1px solid rgba(92,184,224,.2)}.cb strong{color:var(--ite)}
+.cs{background:rgba(92,201,138,.07);border:1px solid rgba(92,201,138,.2)}.cs strong{color:var(--exc)}
+.cr{background:rgba(224,122,92,.07);border:1px solid rgba(224,122,92,.2)}.cr strong{color:var(--tip)}
+.tw{overflow-x:auto;margin-top:.68rem;border-radius:10px;border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:.82rem}
+th{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);padding:.68rem 1rem;background:var(--surface2);border-bottom:1px solid var(--border);text-align:left;white-space:nowrap}
+td{padding:.62rem 1rem;border-bottom:1px solid var(--border);color:#aeaab8;vertical-align:top;line-height:1.6}
+tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.012)}td strong{color:var(--white);font-weight:500}
+/* QUIZ */
+.qwrap{padding:1.5rem 2rem 2rem}
+.qtop{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.4rem}
+.qtitle{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:700;color:var(--white)}
+.sbadge{font-family:'Outfit',sans-serif;font-size:.65rem;padding:.26rem .72rem;border-radius:100px;background:var(--surface2);border:1px solid var(--border);color:var(--text2)}
+.qdots{display:flex;gap:.28rem;flex-wrap:wrap;margin-bottom:1.2rem}
+.qdot{width:7px;height:7px;border-radius:50%;background:var(--border2);transition:all .2s}
+.qdot.cur{background:var(--text2)}.qdot.ok{background:#5cc98a}.qdot.err{background:#e06e8c}
+[data-theme=light] .qdot.ok{background:#289050}
+[data-theme=light] .qdot.err{background:#c04070}
+.qq{display:none;animation:fu .26s ease}.qq.active{display:block}
+.qnum{font-family:'JetBrains Mono',monospace;font-size:.56rem;color:var(--text3);letter-spacing:.1em;margin-bottom:.6rem}
+.qtext{font-size:.96rem;color:var(--white);line-height:1.68;margin-bottom:1.15rem;font-weight:400}
+.qopts{display:flex;flex-direction:column;gap:.42rem}
+.qopt{display:flex;align-items:flex-start;gap:.65rem;padding:.82rem .92rem;border:1px solid var(--border);border-radius:10px;cursor:pointer;transition:all .2s;background:var(--surface2);text-align:left;width:100%}
+.qopt:hover:not(:disabled){border-color:var(--border2)}
+.ql{font-family:'JetBrains Mono',monospace;font-size:.6rem;width:20px;height:20px;border-radius:6px;background:var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--text2);transition:all .2s}
+.qt{font-size:.84rem;color:#aeaab8;line-height:1.6}
+.qopt.correct{border-color:var(--exc);background:var(--exc-dim)}.qopt.correct .ql{background:var(--exc);color:#000}.qopt.correct .qt{color:var(--white)}
+.qopt.wrong{border-color:var(--tip);background:var(--tip-dim)}.qopt.wrong .ql{background:var(--tip);color:#fff}
+.qopt.disabled{cursor:default;opacity:.54}.qopt.disabled.correct{opacity:1}
+.qfb{display:none;margin-top:.88rem;padding:.88rem 1rem;border-radius:5px;font-size:.83rem;line-height:1.68;color:#aeaab8}
+.qfb.show{display:block;animation:fu .18s ease}
+.qfb.ok{background:var(--exc-dim);border:1px solid rgba(92,201,138,.26)}.qfb.ok strong{color:var(--exc)}
+.qfb.ng{background:var(--tip-dim);border:1px solid rgba(224,122,92,.26)}.qfb.ng strong{color:var(--tip)}
+.qnav{display:flex;align-items:center;justify-content:space-between;margin-top:1.35rem}
+.qbn{font-family:'Outfit',sans-serif;font-size:.6rem;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;transition:all .2s;border:none;padding:.52rem 1.1rem;border-radius:100px}
+.qbn-next{background:#5cc98a;color:#fff;display:none}.qbn-next:hover{opacity:.88}.qbn-next.show{display:block}
+.qbn-rs{background:var(--surface2);border:1px solid var(--border);color:var(--text2)}.qbn-rs:hover{border-color:var(--border2);color:var(--text)}
+.qres{display:none;text-align:center;padding:2.5rem 0}.qres.show{display:block;animation:fu .28s ease}
+.rscore{font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:700;color:var(--white);line-height:1}
+.rlabel{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--text3);letter-spacing:.15em;text-transform:uppercase;margin-top:.4rem}
+.hub-footer{position:relative;z-index:5;max-width:1100px;margin:3rem auto 0;padding:1.5rem 2rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.ft-left{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--text3);letter-spacing:.08em}
+.ft-right{font-family:'JetBrains Mono',monospace;font-size:.55rem;color:var(--text3)}.ft-right a{color:var(--text2);text-decoration:none}.ft-right a:hover{color:var(--white)}
+@media(max-width:600px){.hdr,.main,.mnav{padding-left:1rem;padding-right:1rem}.hub-footer{padding:1.5rem 1rem}}
 
 /* ── LIGHT MODE ── */
 [data-theme=light]{
   --bg:#f0eef7;--surface:#ffffff;--surface2:#f4f2fb;--surface3:#eceaf5;
   --border:rgba(0,0,0,.07);--border2:rgba(0,0,0,.14);
   --text:#1a1828;--text2:#6a6480;--text3:#9a94b0;--white:#0a0818;
-  --civil:#c04070;--civil-dim:rgba(192,64,112,.1);--civil-mid:rgba(192,64,112,.18);
-  --const:#5060c8;--const-dim:rgba(80,96,200,.1);--const-mid:rgba(80,96,200,.18);
-  --proc:#2088b0;--proc-dim:rgba(32,136,176,.1);--proc-mid:rgba(32,136,176,.18);
-  --penal:#b85030;--penal-dim:rgba(184,80,48,.1);--penal-mid:rgba(184,80,48,.18);
-  --eca:#289050;--eca-dim:rgba(40,144,80,.1);--eca-mid:rgba(40,144,80,.18);
-  --gold:#987020;--gold-dim:rgba(152,112,32,.1)}
+  --tip:#b85030;--tip-dim:rgba(184,80,48,.1);--tip-mid:rgba(184,80,48,.18);
+  --err:#7a50c8;--err-dim:rgba(122,80,200,.1);--err-mid:rgba(122,80,200,.18);
+  --ite:#2088b0;--ite-dim:rgba(32,136,176,.1);--ite-mid:rgba(32,136,176,.18);
+  --exc:#289050;--exc-dim:rgba(40,144,80,.1);--exc-mid:rgba(40,144,80,.18);
+  --con:#987020;--con-dim:rgba(152,112,32,.1);--con-mid:rgba(152,112,32,.18)}
 [data-theme=light] body::before{opacity:.18}
-[data-theme=light] .disc-pill{background:transparent}
+[data-theme=light] .qdot.ok{background:#289050}
+[data-theme=light] .qdot.err{background:#c04070}
+[data-theme=light] p{color:#3a3632}
+[data-theme=light] li{color:#3a3632}
+[data-theme=light] .co{color:#3a3632}
 
 /* ── THEME TOGGLE ── */
 .theme-toggle{position:fixed;bottom:1.75rem;right:1.75rem;z-index:100;width:40px;height:40px;border-radius:50%;background:var(--surface2);border:1px solid var(--border2);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text2);transition:background .2s,border-color .2s,color .2s,box-shadow .2s}
 .theme-toggle:hover{background:var(--surface);color:var(--text);box-shadow:0 4px 20px rgba(0,0,0,.18)}
-.theme-toggle:focus-visible{outline:2px solid var(--gold,#d4a843);outline-offset:3px}
+.theme-toggle:focus-visible{outline:2px solid var(--tip,#e07a5c);outline-offset:3px}
 .theme-toggle svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;display:block}
 .icon-sun{display:none}.icon-moon{display:block}
-[data-theme=light] .icon-sun{display:block}[data-theme=light] .icon-moon{display:none}</style>
+[data-theme=light] .icon-sun{display:block}[data-theme=light] .icon-moon{display:none}
+</style>
 </head>
 <body>
-<div class="wrap">
+
+<div class="hdr">
   <a class="back" href="../../index.html">&#8592; Central de Resumos</a>
   <div class="ey">Direito Penal I &mdash; Prova 2 &middot; UFN 2026/1</div>
-  <h1 class="htitle">Fato Típico<br><em>Conduta · Resultado · Tipicidade</em></h1>
-  <div class="disc-pill"><span class="dot"></span>Direito Penal I</div>
-  <div class="wip">
-    <div class="wip-icon" aria-hidden="true"></div>
-    <div class="wip-title">Resumo em preparação</div>
-    <div class="wip-text">O conteúdo deste resumo será adicionado em breve.<br>Volte quando o material estiver disponível.</div>
-    <div class="accent-line"></div>
-    <div class="topics">
-      <span class="topic">Conduta dolosa e culposa</span>
-      <span class="topic">Teoria finalista</span>
-      <span class="topic">Resultado naturalístico</span>
-      <span class="topic">Nexo causal · art. 13 CP</span>
-      <span class="topic">Tipicidade formal</span>
-      <span class="topic">Tipicidade material</span>
-      <span class="topic">Crime omissivo</span>
+  <h1 class="htitle">Teoria do Crime<br><em>Tipicidade &middot; Iter &middot; Excludentes</em></h1>
+  <div class="hsub">Welzel &middot; Roxin &middot; Teoria Tripartite &middot; Erro de Tipo &middot; Erro de Proibi&#231;&#227;o &middot; Banca UFN</div>
+  <div class="banca-pill"><span class="p"></span>Banca UFN &mdash; Estilo de Quest&#245;es Identificado</div>
+  <div class="sw" role="search">
+    <span class="sic" aria-hidden="true">&#x2315;</span>
+    <input class="si" type="text" placeholder="Buscar neste resumo..." oninput="doSearch(this.value)" aria-label="Buscar conceito" autocomplete="off">
+  </div>
+</div>
+
+<nav class="mnav">
+  <button class="nb active" data-m="tip" onclick="switchMod('tip',this)"><span class="d"></span>Teoria Anal&#237;tica do Crime</button>
+  <button class="nb" data-m="err" onclick="switchMod('err',this)"><span class="d"></span>Tipicidade e Erros</button>
+  <button class="nb" data-m="ite" onclick="switchMod('ite',this)"><span class="d"></span>Iter Criminis</button>
+  <button class="nb" data-m="exc" onclick="switchMod('exc',this)"><span class="d"></span>Excludentes de Ilicitude</button>
+  <button class="nb" data-m="con" onclick="switchMod('con',this)"><span class="d"></span>Culpabilidade e Concurso</button>
+  <button class="nb" data-m="quiz" onclick="switchMod('quiz',this)"><span class="d"></span>Quiz (20 q.)</button>
+</nav>
+
+<main class="main">
+
+<!-- ═══ MÓDULO 1: TEORIA ANALÍTICA DO CRIME ═══ -->
+<div class="mod active" id="mod-tip">
+  <div class="mhd" data-c="tip">
+    <div class="mi" data-c="tip">&#9878;</div>
+    <div>
+      <div class="mnum">M&#243;dulo 01</div>
+      <div class="mtitle">Teoria Anal&#237;tica do Crime</div>
+      <div class="mdesc">Conceito anal&#237;tico, tripartite vs bipartite e finalismo de Welzel.</div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="tip" onclick="switchTab(this,'t1s1')">Conceito Anal&#237;tico</button>
+      <button class="stab" data-c="tip" onclick="switchTab(this,'t1s2')">Teorias da A&#231;&#227;o</button>
+      <button class="stab" data-c="tip" onclick="switchTab(this,'t1s3')">Fato T&#237;pico</button>
+    </div>
+
+    <div class="sp active" id="t1s1">
+      <div class="sl">Conceito Anal&#237;tico de Crime</div>
+      <p>O <span class="hl">conceito anal&#237;tico de crime</span> decompõe o crime em seus elementos essenciais para fins de an&#225;lise jur&#237;dica. A teoria dominante no Brasil &#233; a <span class="hl">teoria tripartite</span>: crime &#233; o fato t&#237;pico, il&#237;cito e culp&#225;vel.</p>
+      <div class="g2">
+        <div class="card ct1"><div class="ct">Teoria Tripartite (dominante)</div><ul><li><strong>Fato t&#237;pico</strong> — conduta + resultado + nexo causal + tipicidade</li><li><strong>Ilicitude</strong> — contrariedade ao ordenamento jur&#237;dico</li><li><strong>Culpabilidade</strong> — juízo de reprovabilidade do agente</li></ul></div>
+        <div class="card ct1"><div class="ct">Teoria Bipartite (Damásio, Mirabete)</div><ul><li>Crime = fato t&#237;pico + ilicitude</li><li>Culpabilidade = pressuposto da pena, n&#227;o elemento do crime</li><li>Consequência: inimput&#225;vel pratica crime, mas n&#227;o tem pena</li></ul></div>
+      </div>
+      <div class="co cr"><span class="co-ico">&#9888;</span><div><strong>Para a prova:</strong> Adotar a teoria tripartite como regra. Crime = fato típico + ilícito + culpável. A teoria bipartite é posição minoritária, mas deve ser conhecida para fins de comparação.</div></div>
+      <div class="sl">Substrato das Teorias</div>
+      <div class="tw"><table>
+        <thead><tr><th>Elemento</th><th>Conte&#250;do</th><th>Excludentes</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Fato T&#237;pico</strong></td><td>Conduta dolosa/culposa, resultado, nexo, tipicidade</td><td>Atipicidade, insignific&#226;ncia</td></tr>
+          <tr><td><strong>Ilicitude</strong></td><td>Contrariedade ao direito — ausência de justificação</td><td>Leg. defesa, estado de necessidade, estrito dever legal, exerc. regular de direito</td></tr>
+          <tr><td><strong>Culpabilidade</strong></td><td>Imputabilidade + consciência da ilicitude + exigibilidade</td><td>Inimputabilidade, erro de proibição, coação moral irresistível</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="sp" id="t1s2">
+      <div class="sl">Teorias da Conduta — Evolu&#231;&#227;o</div>
+      <div class="g2">
+        <div class="card ct1"><div class="ct">Causalismo (Von Liszt/Beling)</div><ul><li>Conduta = movimento corporal que causa resultado</li><li>Dolo e culpa na <strong>culpabilidade</strong></li><li>Tipo é puramente objetivo</li><li>Cr&#237;tica: ignora a finalidade da conduta</li></ul></div>
+        <div class="card ct1"><div class="ct">Finalismo (Welzel — adotado pelo CP)</div><ul><li>Conduta = a&#231;&#227;o humana voluntária <strong>dirigida a um fim</strong></li><li>Dolo e culpa migram para o <strong>fato t&#237;pico</strong> (conduta)</li><li>Culpabilidade = imputabilidade + pot. consciência da ilicitude + exigibilidade</li><li>Fundamento: ontologia — a conduta humana é estruturalmente final</li></ul></div>
+      </div>
+      <div class="co cv"><span class="co-ico">&#9733;</span><div><strong>Impacto do finalismo:</strong> Ao deslocar dolo e culpa para o tipo, Welzel permitiu que crimes sem dolo (culposos) tivessem tratamento autônomo e que as excludentes de culpabilidade ficassem separadas das de tipicidade e ilicitude — maior precisão dogmática.</div></div>
+      <div class="sl">Dolo e Culpa no Fato T&#237;pico</div>
+      <p>O <span class="hl">dolo</span> (<span class="art">art. 18, I CP</span>) é composto de <em>consciência</em> (elemento cognitivo) e <em>vontade</em> (elemento volitivo) de realizar o tipo objetivo. A <span class="hl">culpa</span> (<span class="art">art. 18, II CP</span>) é a inobservância do dever de cuidado objetivo, com resultado previsível.</p>
+      <div class="g3">
+        <div class="card ct1"><div class="ct">Dolo Direto</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Agente quer o resultado como fim de sua ação ou como meio necessário para outro fim. Ex: atirar para matar.</p></div>
+        <div class="card ct1"><div class="ct">Dolo Eventual</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Agente assume o risco de produzir o resultado: prevê o resultado como possível e, mesmo assim, age. Art. 18, I, 2ª parte.</p></div>
+        <div class="card ct1"><div class="ct">Culpa Consciente</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Agente prevê o resultado mas acredita que não ocorrerá — distingue-se do dolo eventual pela ausência de assunção do risco.</p></div>
+      </div>
+    </div>
+
+    <div class="sp" id="t1s3">
+      <div class="sl">Elementos do Fato T&#237;pico</div>
+      <p>O <span class="hl">fato t&#237;pico</span> é composto de quatro elementos cumulativos: conduta, resultado, nexo causal e tipicidade. Ausente qualquer um, não h&#225; fato t&#237;pico.</p>
+      <div class="g2">
+        <div class="card ct1"><div class="ct">Conduta</div><ul><li>A&#231;&#227;o ou omiss&#227;o voluntária (dolo/culpa)</li><li>Crimes omissivos pr&#243;prios: lei descreve a omissão</li><li>Crimes omissivos impr&#243;prios (comissivos por omiss&#227;o): <span class="art">art. 13, §2 CP</span> — garantidor</li></ul></div>
+        <div class="card ct1"><div class="ct">Resultado</div><ul><li>Naturalístico: modificação no mundo externo</li><li>Jur&#237;dico: lesão ou perigo ao bem jur&#237;dico (sempre presente)</li><li>Crimes formais: consumam sem resultado naturalístico</li><li>Crimes materiais: exigem resultado naturalístico</li></ul></div>
+        <div class="card ct1"><div class="ct">Nexo Causal</div><ul><li><span class="art">Art. 13 CP</span> — teoria da equivalência dos antecedentes (<em>conditio sine qua non</em>)</li><li>Processo hipotético de eliminação (Frank)</li><li>Concausas: absoluta superveniente rompe o nexo; relativa não rompe</li></ul></div>
+        <div class="card ct1"><div class="ct">Tipicidade</div><ul><li>Formal: adequação da conduta ao tipo legal</li><li>Material: ofensa relevante ao bem jur&#237;dico (Roxin)</li><li>Insignificância exclui a tipicidade material</li></ul></div>
+      </div>
+      <div class="co cb"><span class="co-ico">&#9432;</span><div><strong>Concausas e nexo causal:</strong> A causa superveniente relativamente independente que, por si só, produz o resultado (absoluta), rompe o nexo causal — agente responde só pelos atos praticados. A concausa relativamente independente preexistente ou concomitante não rompe o nexo.</div></div>
     </div>
   </div>
 </div>
-<footer class="ft">
-  <span>Guto Ceolin &middot; UFN &middot; Direito Penal I &middot; 2026/1</span>
-  <a href="../../index.html">← Voltar ao Hub</a>
+
+<!-- ═══ MÓDULO 2: TIPICIDADE E ERROS ═══ -->
+<div class="mod" id="mod-err">
+  <div class="mhd" data-c="err">
+    <div class="mi" data-c="err">&#128269;</div>
+    <div>
+      <div class="mnum">M&#243;dulo 02</div>
+      <div class="mtitle">Tipicidade e Erros</div>
+      <div class="mdesc">Tipicidade formal e material, erro de tipo e erro de proibi&#231;&#227;o.</div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="err" onclick="switchTab(this,'e2s1')">Tipicidade</button>
+      <button class="stab" data-c="err" onclick="switchTab(this,'e2s2')">Erro de Tipo</button>
+      <button class="stab" data-c="err" onclick="switchTab(this,'e2s3')">Erro de Proibi&#231;&#227;o</button>
+      <button class="stab" data-c="err" onclick="switchTab(this,'e2s4')">Comparativo</button>
+    </div>
+
+    <div class="sp active" id="e2s1">
+      <div class="sl">Tipicidade Formal e Material</div>
+      <p>A <span class="hl">tipicidade formal</span> &#233; a simples adequa&#231;&#227;o da conduta ao texto do tipo penal — conduta que preenche todos os elementos descritos na norma incriminadora. A <span class="hl">tipicidade material</span>, desenvolvida por <span class="hl">Roxin</span>, exige que a conduta represente ofensa <em>relevante</em> ao bem jur&#237;dico protegido.</p>
+      <div class="co cs"><span class="co-ico">&#10003;</span><div><strong>Princ&#237;pio da insignific&#226;ncia (bagatela):</strong> Criado por Roxin, afasta a tipicidade material quando a lesão ao bem jurídico é absolutamente ínfima. O STF fixou quatro vetores: (1) mínima ofensividade da conduta; (2) nenhuma periculosidade social; (3) reduzidíssimo grau de reprovabilidade; (4) inexpressividade da lesão jurídica.</div></div>
+      <div class="sl">Tipicidade Conglobante (Zaffaroni)</div>
+      <p>Para <span class="hl">Eugenio Raúl Zaffaroni</span>, a tipicidade exige dois requisitos cumulativos: (1) <em>tipicidade legal</em> — adequação ao tipo; e (2) <em>antinormatividade</em> — a conduta não pode ser imposta ou permitida por outra norma do ordenamento. Conduta imposta por lei (estrito cumprimento do dever) é atípica, não apenas justificada.</p>
+      <div class="co cv"><span class="co-ico">&#9432;</span><div><strong>Aplicação prática:</strong> A maioria da doutrina brasileira segue Roxin (tipicidade material). Zaffaroni é minoritário. Saber a diferença: Roxin trabalha com a <em>relevância da lesão</em>; Zaffaroni com a <em>antinormatividade sistêmica</em>.</div></div>
+    </div>
+
+    <div class="sp" id="e2s2">
+      <div class="sl">Erro de Tipo — <span class="art">Art. 20 CP</span></div>
+      <p>O <span class="hl">erro de tipo</span> ocorre quando o agente desconhece um ou mais elementos objetivos do tipo penal — ele n&#227;o sabe o que est&#225; fazendo. Por isso, <strong>sempre exclui o dolo</strong>.</p>
+      <div class="g2">
+        <div class="card ct2"><div class="ct">Erro Essencial</div><ul><li>Recai sobre <strong>elemento essencial</strong> do tipo</li><li><strong>Escus&#225;vel (inevit&#225;vel)</strong> → exclui dolo E culpa → isenta de pena</li><li><strong>Inescus&#225;vel (evit&#225;vel)</strong> → exclui dolo, mas mantém culpa se o tipo culposo existir</li></ul></div>
+        <div class="card ct2"><div class="ct">Erro Acidental</div><ul><li>N&#227;o exclui o dolo — erro sobre detalhes irrelevantes</li><li><strong>Erro na execução (<em>aberratio ictus</em>)</strong>: art. 73 CP — agente erra a pessoa, responde como se tivesse acertado a visada</li><li><strong>Resultado diverso (<em>aberratio criminis</em>)</strong>: art. 74 CP — hit o bem jur&#237;dico errado</li><li><strong>Erro sobre o objeto</strong>: bem visado ≠ bem atingido, mas irrelevante ao tipo</li></ul></div>
+      </div>
+      <div class="co cw"><span class="co-ico">&#9888;</span><div><strong>Erro de tipo permissivo (<span class="art">art. 20, §1 CP</span>):</strong> O agente age supondo erroneamente existir situação de fato que, se verdadeira, tornaria a conduta lícita (ex: legítima defesa putativa). Escusável → isenta de pena; Inescusável → reduz a pena de 1/3 a 1/6. Efeitos análogos ao erro de proibição escusável.</div></div>
+    </div>
+
+    <div class="sp" id="e2s3">
+      <div class="sl">Erro de Proibi&#231;&#227;o — <span class="art">Art. 21 CP</span></div>
+      <p>No <span class="hl">erro de proibi&#231;&#227;o</span>, o agente conhece perfeitamente os fatos (sabe o que está fazendo), mas <strong>ignora que sua conduta &#233; proibida</strong> pelo ordenamento jur&#237;dico. O erro recai sobre a <em>consciência da ilicitude</em> — elemento da culpabilidade.</p>
+      <div class="g2">
+        <div class="card ct2"><div class="ct">Escus&#225;vel (Inescus&#225;vel)</div><ul><li><strong>Escus&#225;vel:</strong> erro inevit&#225;vel — isenta de pena (exclui culpabilidade)</li><li><strong>Inescus&#225;vel:</strong> erro evit&#225;vel — reduz a pena de <strong>1/6 a 1/3</strong></li><li>O crime subsiste em ambos os casos (dolo n&#227;o &#233; afetado)</li></ul></div>
+        <div class="card ct2"><div class="ct">Modalidades</div><ul><li><strong>Direto:</strong> agente ignora a existência da proibição</li><li><strong>Indireto (erro de permissão):</strong> agente conhece a proibição, mas crê equivocadamente que há uma causa de justificação (erro sobre os limites de uma excludente)</li></ul></div>
+      </div>
+      <div class="co cr"><span class="co-ico">!</span><div><strong>Atenção — potencial consciência da ilicitude:</strong> O CP não exige que o agente saiba que sua conduta é crime; basta que tenha a <em>potencial</em> consciência — possibilidade de saber que era proibido. Por isso, a ignorância do direito não beneficia o agente (art. 21, caput).</div></div>
+    </div>
+
+    <div class="sp" id="e2s4">
+      <div class="sl">Erro de Tipo × Erro de Proibi&#231;&#227;o — Quadro Comparativo</div>
+      <div class="tw"><table>
+        <thead><tr><th>Aspecto</th><th>Erro de Tipo</th><th>Erro de Proibi&#231;&#227;o</th></tr></thead>
+        <tbody>
+          <tr><td>Recai sobre</td><td>Elementos do tipo (fatos)</td><td>Consciência da ilicitude (norma)</td></tr>
+          <tr><td>O agente sabe o que faz?</td><td><strong>Não</strong> — desconhece os fatos</td><td><strong>Sim</strong> — sabe o que faz, ignora ser proibido</td></tr>
+          <tr><td>Elemento excluído</td><td>Dolo (sempre)</td><td>Potencial consciência da ilicitude</td></tr>
+          <tr><td>Elemento do crime afetado</td><td>Fato típico</td><td>Culpabilidade</td></tr>
+          <tr><td>Escusável</td><td>Isenta de pena (dolo + culpa)</td><td>Isenta de pena (culpabilidade)</td></tr>
+          <tr><td>Inescusável</td><td>Exclui dolo; mantém culpa (se prevista)</td><td>Reduz pena de 1/6 a 1/3</td></tr>
+          <tr><td>Exemplo cl&#225;ssico</td><td>Leva guarda-chuva alheio por engano</td><td>Turista ignora que conduta &#233; crime no Brasil</td></tr>
+        </tbody>
+      </table></div>
+      <div class="co cs"><span class="co-ico">&#10003;</span><div><strong>Macete para a prova:</strong> "Erro de tipo → erra os fatos → exclui DOLO". "Erro de proibição → erra a norma → exclui consciência da ilicitude". São institutos completamente distintos — o CP trata em artigos diferentes (20 e 21).</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MÓDULO 3: ITER CRIMINIS ═══ -->
+<div class="mod" id="mod-ite">
+  <div class="mhd" data-c="ite">
+    <div class="mi" data-c="ite">&#128257;</div>
+    <div>
+      <div class="mnum">M&#243;dulo 03</div>
+      <div class="mtitle">Iter Criminis</div>
+      <div class="mdesc">Fases do crime, tentativa, desist&#234;ncia volunt&#225;ria e crime imposs&#237;vel.</div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="ite" onclick="switchTab(this,'i3s1')">Fases do Iter</button>
+      <button class="stab" data-c="ite" onclick="switchTab(this,'i3s2')">Tentativa</button>
+      <button class="stab" data-c="ite" onclick="switchTab(this,'i3s3')">Desist&#234;ncia e Crime Imposs&#237;vel</button>
+    </div>
+
+    <div class="sp active" id="i3s1">
+      <div class="sl">Iter Criminis — O Caminho do Crime</div>
+      <p>O <span class="hl">iter criminis</span> é o conjunto de fases percorridas pelo agente desde a concepção do crime até sua consumação. Divide-se em fase interna e fase externa.</p>
+      <div class="tw"><table>
+        <thead><tr><th>Fase</th><th>Caracter&#237;stica</th><th>Punibilidade</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Cogita&#231;&#227;o</strong></td><td>Fase puramente interna — o agente pensa, planeja o crime</td><td>Impun&#237;vel — <em>cogitationis poenam nemo patitur</em></td></tr>
+          <tr><td><strong>Prepara&#231;&#227;o</strong></td><td>Atos externos preparatórios — reunir meios, escolher local</td><td>Em regra impun&#237;vel; excepcionalmente tipificada (ex: art. 288 — associação criminosa)</td></tr>
+          <tr><td><strong>Execu&#231;&#227;o</strong></td><td>In&#237;cio da pr&#225;tica do n&#250;cleo do tipo — invas&#227;o da esfera da v&#237;tima</td><td><strong>Punibilidade inicia aqui</strong> — tentativa poss&#237;vel</td></tr>
+          <tr><td><strong>Consumação</strong></td><td>Realizados todos os elementos do tipo</td><td>Crime consumado — pena integral</td></tr>
+          <tr><td><strong>Exaurimento</strong></td><td>Fase pós-consumação — agente obtém o resultado desejado</td><td>Não cria novo crime, mas pode agravar a pena</td></tr>
+        </tbody>
+      </table></div>
+      <div class="co cb"><span class="co-ico">&#9432;</span><div><strong>Preparação × Execução:</strong> A fronteira é controvertida. Teoria objetivo-formal: execução inicia com a prática do verbo do tipo. Teoria objetivo-material: incluem-se atos imediatamente anteriores ao verbo quando a lesão ao bem jurídico já é iminente. O CP brasileiro adota critério misto.</div></div>
+    </div>
+
+    <div class="sp" id="i3s2">
+      <div class="sl">Tentativa — <span class="art">Art. 14, II CP</span></div>
+      <p>O crime é <span class="hl">tentado</span> quando, iniciada a execução, não se consuma por <strong>circunst&#226;ncias alheias &#224; vontade do agente</strong>. Punição: pena do crime consumado reduzida de <strong>1/3 a 2/3</strong> (quanto mais próximo da consumação, menor a redução).</p>
+      <div class="g2">
+        <div class="card ct3"><div class="ct">Tentativa Imperfeita (Inacabada)</div><ul><li>Agente <strong>não esgota todos os atos executivos</strong></li><li>Interrupção externa impede o prosseguimento</li><li>Ex: atirar uma vez e ser desarmado</li><li>Maior redução de pena (próxima de 2/3)</li></ul></div>
+        <div class="card ct3"><div class="ct">Tentativa Perfeita (Crime Falho / Acabada)</div><ul><li>Agente <strong>esgota todos os atos executivos</strong></li><li>Resultado não ocorre por fatores externos</li><li>Ex: disparar todos os tiros, vítima sobrevive</li><li>Menor redução de pena (próxima de 1/3)</li></ul></div>
+      </div>
+      <div class="co cw"><span class="co-ico">&#9888;</span><div><strong>Crimes que não admitem tentativa:</strong> Crimes culposos (ausência de dolo), crimes preterdolosos (dolo no antecedente, culpa no consequente), contravenções penais, crimes omissivos próprios, crimes unissubsistentes (prática em um único ato).</div></div>
+    </div>
+
+    <div class="sp" id="i3s3">
+      <div class="sl">Desist&#234;ncia Volunt&#225;ria e Arrependimento Eficaz — <span class="art">Art. 15 CP</span></div>
+      <p>A <span class="hl">desistência voluntária</span> ocorre quando o agente, <em>podendo prosseguir</em>, abandona voluntariamente a execução. O <span class="hl">arrependimento eficaz</span> ocorre quando, após esgotar os atos, o agente <em>impede voluntariamente o resultado</em>. Em ambos os casos, responde apenas pelos atos já praticados.</p>
+      <div class="co cs"><span class="co-ico">&#10003;</span><div><strong>"Ponte de ouro" (Von Liszt):</strong> A desistência voluntária é chamada de "ponte de ouro" — o legislador incentiva o agente a não consumar o crime, beneficiando-o com a exclusão da tentativa. O agente não é punido pela tentativa do crime visado, mas responde pelos atos autônomos praticados.</div></div>
+      <div class="sl">Crime Imposs&#237;vel — <span class="art">Art. 17 CP</span></div>
+      <p>O <span class="hl">crime impossível</span> (tentativa inidônea) não é punido quando a impossibilidade é <strong>absoluta</strong>: ineficácia absoluta do meio empregado ou impropriedade absoluta do objeto material.</p>
+      <div class="g2">
+        <div class="card ct3"><div class="ct">Inefic&#225;cia Absoluta do Meio</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">O instrumento usado é absolutamente incapaz de produzir o resultado. Ex: tentar matar alguém administrando açúcar (não veneno). Impossibilidade relativa do meio → tentativa punível.</p></div>
+        <div class="card ct3"><div class="ct">Impropriedade Absoluta do Objeto</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">O objeto material é absolutamente impróprio. Ex: tentar matar quem já está morto. Impropriedade relativa → tentativa punível.</p></div>
+      </div>
+      <div class="co cr"><span class="co-ico">!</span><div><strong>Absoluta × Relativa:</strong> A distinção é crucial. Impossibilidade <em>relativa</em> → tentativa punível. Impossibilidade <em>absoluta</em> → crime impossível, impunível. Ex: bater em pessoa que usa colete à prova de balas: impossibilidade relativa (sem o colete, funcionaria) → tentativa.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MÓDULO 4: EXCLUDENTES DE ILICITUDE ═══ -->
+<div class="mod" id="mod-exc">
+  <div class="mhd" data-c="exc">
+    <div class="mi" data-c="exc">&#128737;</div>
+    <div>
+      <div class="mnum">M&#243;dulo 04</div>
+      <div class="mtitle">Excludentes de Ilicitude</div>
+      <div class="mdesc">Leg&#237;tima defesa, estado de necessidade e demais excludentes.</div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="exc" onclick="switchTab(this,'x4s1')">Leg&#237;tima Defesa</button>
+      <button class="stab" data-c="exc" onclick="switchTab(this,'x4s2')">Estado de Necessidade</button>
+      <button class="stab" data-c="exc" onclick="switchTab(this,'x4s3')">Demais Excludentes</button>
+      <button class="stab" data-c="exc" onclick="switchTab(this,'x4s4')">Comparativo</button>
+    </div>
+
+    <div class="sp active" id="x4s1">
+      <div class="sl">Leg&#237;tima Defesa — <span class="art">Art. 25 CP</span></div>
+      <p>Age em <span class="hl">legítima defesa</span> quem, usando moderadamente os meios necessários, repele <strong>agressão injusta, atual ou iminente, a direito seu ou de outrem</strong>.</p>
+      <div class="g2">
+        <div class="card ct4"><div class="ct">Requisitos Objetivos</div><ul><li><strong>Agressão injusta</strong> — contrária ao direito (não precisa ser crime; pode ser de inimputável)</li><li><strong>Atual ou iminente</strong> — que está ocorrendo ou prestes a ocorrer (não futura/passada)</li><li><strong>A direito próprio ou alheio</strong> — qualquer bem jurídico</li><li><strong>Meios necessários</strong> — os suficientes para repelir a agressão</li><li><strong>Uso moderado</strong> — proporcional à intensidade da agressão</li></ul></div>
+        <div class="card ct4"><div class="ct">Modalidades</div><ul><li><strong>Real:</strong> situação de fato efetivamente existente</li><li><strong>Putativa:</strong> agente supõe erroneamente existir agressão (erro de tipo permissivo)</li><li><strong>Sucessiva:</strong> vítima do excesso reage à agressão desproporcional do defensor</li><li><strong>Recíproca:</strong> não existe — quem ataca injustamente não pode alegar leg. defesa</li></ul></div>
+      </div>
+      <div class="co cw"><span class="co-ico">&#9888;</span><div><strong>Excesso — <span class="art">art. 23, parágrafo único CP</span>:</strong> O agente que excede os limites responde pelo excesso doloso ou culposo. "Excesso exculpante" (medo, susto, perturbação): parte da doutrina o admite como inexigibilidade de conduta diversa, excluindo a culpabilidade — posição que merece menção em prova.</div></div>
+    </div>
+
+    <div class="sp" id="x4s2">
+      <div class="sl">Estado de Necessidade — <span class="art">Art. 24 CP</span></div>
+      <p>Age em <span class="hl">estado de necessidade</span> quem pratica o fato para <strong>salvar de perigo atual, que não provocou voluntariamente, bem próprio ou alheio</strong>, quando não era razoável exigir o sacrifício.</p>
+      <div class="g2">
+        <div class="card ct4"><div class="ct">Requisitos</div><ul><li><strong>Perigo atual</strong> — que está ocorrendo (não admite iminente, literalmente)</li><li><strong>Não provocado voluntariamente</strong> pelo agente</li><li><strong>Inevitabilidade</strong> — não podia ser evitado de outro modo</li><li><strong>Proporcionalidade</strong> — sacrifício razoável face ao perigo</li><li><strong>Inexigibilidade de sacrifício</strong> — não tinha obrigação legal de enfrentar o perigo</li></ul></div>
+        <div class="card ct4"><div class="ct">Teoria Unitária × Diferenciadora</div><ul><li><strong>Unitária (CP brasileiro):</strong> EN sempre exclui a ilicitude (art. 24)</li><li><strong>Diferenciadora (CP Militar + doutrina):</strong> se bem protegido > sacrificado → exclui ilicitude; se igual → exclui culpabilidade; se menor → não isenta</li></ul></div>
+      </div>
+      <div class="co cs"><span class="co-ico">&#10003;</span><div><strong>Estado de necessidade × legítima defesa:</strong> No EN, não há agressor — o perigo pode vir de força da natureza ou de terceiro inocente. Na LD, há sempre uma <em>agressão injusta</em> praticada por pessoa. No EN sacrifica-se bem de terceiro inocente; na LD reage-se contra o agressor.</div></div>
+    </div>
+
+    <div class="sp" id="x4s3">
+      <div class="sl">Demais Excludentes de Ilicitude — <span class="art">Art. 23 CP</span></div>
+      <p>Além da legítima defesa e do estado de necessidade, o <span class="art">art. 23 CP</span> prevê o <span class="hl">estrito cumprimento do dever legal</span> e o <span class="hl">exercício regular de direito</span>. A doutrina acrescenta o <span class="hl">consentimento do ofendido</span> como causa supralegal.</p>
+      <div class="g2">
+        <div class="card ct4"><div class="ct">Estrito Cumprimento do Dever Legal</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Agente age em cumprimento a dever imposto por lei. Ex: policial que mata em abordagem conforme protocolos legais; oficial de justiça que apreende bens por ordem judicial. O dever deve ser <em>estrito</em> — não justifica excessos.</p></div>
+        <div class="card ct4"><div class="ct">Exerc&#237;cio Regular de Direito</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Quem exercita regularmente um direito não pratica ilícito. Ex: intervenção cirúrgica autorizada, defesa em processo judicial, exercício de atividade profissional regulamentada (advogado, jornalista). Deve ser regular — abusos não são justificados.</p></div>
+      </div>
+      <div class="co cv"><span class="co-ico">&#9432;</span><div><strong>Consentimento do ofendido:</strong> Causa supralegal de exclusão da ilicitude quando: (1) o bem jurídico é disponível; (2) o titular é capaz; (3) o consentimento é anterior ou concomitante. Ex: tatuagem, body piercing, esportes de contato com risco de lesão. Não vale para bens indisponíveis (vida).</div></div>
+    </div>
+
+    <div class="sp" id="x4s4">
+      <div class="sl">Legítima Defesa × Estado de Necessidade — Quadro Comparativo</div>
+      <div class="tw"><table>
+        <thead><tr><th>Aspecto</th><th>Legítima Defesa</th><th>Estado de Necessidade</th></tr></thead>
+        <tbody>
+          <tr><td>Origem do perigo</td><td>Agressão injusta de <strong>pessoa</strong></td><td>Qualquer fonte — natureza, animal, pessoa</td></tr>
+          <tr><td>Quem sofre o sacrifício</td><td>O pr&#243;prio agressor</td><td>Terceiro inocente ou o próprio agente</td></tr>
+          <tr><td>Necessidade de proporcionalidade</td><td>Meio <em>necessário</em> e uso <em>moderado</em></td><td>Sacrifício proporcional ao perigo</td></tr>
+          <tr><td>Perigo atual ou iminente?</td><td>Atual ou <strong>iminente</strong></td><td>Apenas <strong>atual</strong> (art. 24, literalmente)</td></tr>
+          <tr><td>Provocação do perigo</td><td>Irrelevante para a vítima do agressor</td><td>Agente n&#227;o pode ter provocado o perigo voluntariamente</td></tr>
+          <tr><td>Teoria do CP</td><td>Exclui ilicitude (unitária)</td><td>Exclui ilicitude (unitária) — art. 24</td></tr>
+          <tr><td>Excesso</td><td>Pune-se o excesso (art. 23, par. ún.)</td><td>Pune-se o excesso (art. 23, par. ún.)</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MÓDULO 5: CULPABILIDADE E CONCURSO DE AGENTES ═══ -->
+<div class="mod" id="mod-con">
+  <div class="mhd" data-c="con">
+    <div class="mi" data-c="con">&#128101;</div>
+    <div>
+      <div class="mnum">M&#243;dulo 05</div>
+      <div class="mtitle">Culpabilidade e Concurso de Agentes</div>
+      <div class="mdesc">Excludentes de culpabilidade e teoria do concurso de pessoas.</div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="con" onclick="switchTab(this,'c5s1')">Culpabilidade</button>
+      <button class="stab" data-c="con" onclick="switchTab(this,'c5s2')">Excludentes de Culpabilidade</button>
+      <button class="stab" data-c="con" onclick="switchTab(this,'c5s3')">Concurso de Agentes</button>
+    </div>
+
+    <div class="sp active" id="c5s1">
+      <div class="sl">Culpabilidade — Juízo de Reprovabilidade</div>
+      <p>A <span class="hl">culpabilidade</span> &#233; o ju&#237;zo de reprovabilidade do agente pela prática de um fato típico e ilícito. Para o finalismo, é composta de três elementos cumulativos:</p>
+      <div class="g3">
+        <div class="card ct5"><div class="ct">Imputabilidade</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Capacidade de entender o caráter ilícito do fato e de determinar-se conforme esse entendimento. Pressuposto biopsicológico da culpabilidade.</p></div>
+        <div class="card ct5"><div class="ct">Pot. Consciência da Ilicitude</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Possibilidade de o agente conhecer a ilicitude de sua conduta. Não exige saber que é crime — basta poder saber que era proibido. Afastada pelo erro de proibição escusável.</p></div>
+        <div class="card ct5"><div class="ct">Exigibilidade de Conduta Diversa</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem;line-height:1.65">Nas circunstâncias concretas, era razoável exigir do agente comportamento lícito. Afastada pela coação moral irresistível e obediência hierárquica.</p></div>
+      </div>
+      <div class="co cw"><span class="co-ico">&#9888;</span><div><strong>Culpabilidade na dosimetria:</strong> Além de elemento do crime (teoria tripartite), culpabilidade é também circunst&#226;ncia judicial na aplica&#231;&#227;o da pena (<span class="art">art. 59 CP</span>). Os dois usos não se confundem: um é pressuposto da condenação, o outro é critério de individualização.</div></div>
+    </div>
+
+    <div class="sp" id="c5s2">
+      <div class="sl">Excludentes de Culpabilidade</div>
+      <div class="tw"><table>
+        <thead><tr><th>Excludente</th><th>Base Legal</th><th>Efeito</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Inimputabilidade</strong> — doença mental / desenvolvimento incompleto</td><td><span class="art">Art. 26 CP</span></td><td>Isenta de pena → medida de segurança (semi-imputável: reduz 1/3 a 2/3 ou medida de segurança)</td></tr>
+          <tr><td><strong>Menoridade penal</strong></td><td><span class="art">Art. 27 CP</span></td><td>Menores de 18 anos — inimputáveis; sujeitos ao ECA</td></tr>
+          <tr><td><strong>Embriaguez completa involuntária</strong></td><td><span class="art">Art. 28, §1 CP</span></td><td>Exclui a culpabilidade — embriaguez fortuita ou por força maior</td></tr>
+          <tr><td><strong>Erro de proibição escusável</strong></td><td><span class="art">Art. 21 CP</span></td><td>Isenta de pena</td></tr>
+          <tr><td><strong>Coação moral irresistível</strong></td><td><span class="art">Art. 22 CP</span></td><td>Isenta de pena o coagido; pune o coator</td></tr>
+          <tr><td><strong>Obediência hierárquica</strong></td><td><span class="art">Art. 22 CP</span></td><td>Isenta de pena o subordinado — desde que ordem não seja manifestamente ilegal</td></tr>
+        </tbody>
+      </table></div>
+      <div class="co cr"><span class="co-ico">!</span><div><strong>Embriaguez dolosa ou culposa (<span class="art">art. 28, II CP</span>):</strong> Não exclui nem atenua a pena. O CP adota a teoria da <em>actio libera in causa</em>: a responsabilização remonta ao momento em que o agente se embriagou livremente.</div></div>
+    </div>
+
+    <div class="sp" id="c5s3">
+      <div class="sl">Concurso de Agentes — <span class="art">Art. 29 CP</span></div>
+      <p>O <span class="art">art. 29 CP</span> adota a <span class="hl">teoria monista (unit&#225;ria)</span>: todos que concorrem para o crime respondem pelo mesmo delito, na medida de sua culpabilidade.</p>
+      <div class="g2">
+        <div class="card ct5"><div class="ct">Autoria</div><ul><li><strong>Autor imediato:</strong> pratica o núcleo do tipo</li><li><strong>Autor mediato:</strong> usa terceiro como instrumento (inimputável, em erro)</li><li><strong>Co-autoria:</strong> dois ou mais agentes realizam o tipo conjuntamente, com divisão de tarefas</li><li><strong>Teoria do domínio do fato (Roxin):</strong> autor = quem domina o acontecimento criminoso</li></ul></div>
+        <div class="card ct5"><div class="ct">Participa&#231;&#227;o</div><ul><li>Acessória — depende de fato principal típico e ilícito (acessoriedade limitada)</li><li><strong>Induzimento:</strong> fazer surgir o dolo no autor</li><li><strong>Instiga&#231;&#227;o:</strong> fortalecer o dolo já existente</li><li><strong>Auxílio:</strong> facilitar materialmente a execução</li><li>Participação de menor importância → redução 1/6 a 1/3 (<span class="art">art. 29, §1</span>)</li></ul></div>
+      </div>
+      <div class="co cw"><span class="co-ico">&#9888;</span><div><strong>Comunicabilidade das circunst&#226;ncias (<span class="art">art. 30 CP</span>):</strong> Circunstâncias objetivas (materiais) comunicam-se a quem as conhecia. Circunstâncias subjetivas (pessoais) NÃO se comunicam, <em>salvo</em> quando forem elementares do tipo. Ex: a qualidade de "funcionário público" no peculato é elementar e comunica ao co-autor particular que a conhece.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MÓDULO QUIZ ═══ -->
+<div class="mod" id="mod-quiz">
+  <div class="mhd" data-c="tip">
+    <div class="mi" data-c="tip">&#128221;</div>
+    <div>
+      <div class="mnum">Quiz</div>
+      <div class="mtitle">20 Quest&#245;es — Banca UFN</div>
+      <div class="mdesc">Teoria do Crime &middot; Tipicidade &middot; Erros &middot; Iter Criminis &middot; Excludentes &middot; Concurso</div>
+    </div>
+  </div>
+  <div class="mbody">
+    <div class="qwrap">
+      <div class="qtop">
+        <div class="qtitle">Simulado</div>
+        <div class="sbadge" id="qscore">0 / 20</div>
+      </div>
+      <div class="qdots" id="qdots"></div>
+      <div id="qzone"></div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer class="hub-footer">
+  <div class="ft-left">Guto Ceolin &middot; UFN &middot; Direito Penal I &middot; 2026/1</div>
+  <div class="ft-right"><a href="../../index.html">&#8592; Voltar ao Hub</a></div>
 </footer>
+
 <script>
 function toggleTheme(){var h=document.documentElement;var l=h.getAttribute('data-theme')==='light';h.setAttribute('data-theme',l?'dark':'light');localStorage.setItem('theme',l?'dark':'light');}
-</script><button class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar modo claro/escuro" title="Modo claro/escuro">
+
+const questions=[
+  {q:"Segundo a teoria tripartite, adotada majoritariamente no Brasil, o crime é composto por:",opts:["Fato típico e ilicitude apenas (teoria bipartite)","Fato típico, ilicitude e culpabilidade","Conduta, resultado e nexo causal","Tipicidade formal, tipicidade material e culpabilidade"],ans:1,fb:"A <strong>teoria tripartite</strong> — dominante na doutrina e jurisprudência brasileira — define crime como fato típico + ilícito + culpável. A teoria bipartite (Damásio, Mirabete) considera culpabilidade mero pressuposto da pena, não elemento do crime."},
+  {q:"O finalismo welzeliano diferencia-se do causalismo porque:",opts:["Transfere o dolo e a culpa da culpabilidade para o fato típico (conduta)","Transfere dolo e culpa da tipicidade para a ilicitude","Elimina a culpabilidade do conceito de crime","Adota teoria bipartite em vez de tripartite"],ans:0,fb:"Welzel deslocou dolo e culpa da culpabilidade (onde estavam no causalismo) para o <strong>fato típico</strong>, como elementos subjetivos da conduta. A culpabilidade finalista passa a conter: imputabilidade, potencial consciência da ilicitude e exigibilidade de conduta diversa."},
+  {q:"A tipicidade material, elaborada por Roxin, exige:",opts:["Adequação formal da conduta ao texto do tipo penal","Ofensa relevante ao bem jurídico protegido pela norma","Ausência de causa excludente de ilicitude","Consciência da ilicitude pelo agente"],ans:1,fb:"A <strong>tipicidade material</strong> exige que a conduta provoque lesão ou ameaça relevante ao bem jurídico. É o fundamento do princípio da insignificância: quando a ofensa é ínfima, falta tipicidade material e, portanto, o crime não existe."},
+  {q:"O princípio da insignificância (bagatela), quando reconhecido, exclui:",opts:["A culpabilidade do agente","A tipicidade material","A ilicitude da conduta","A punibilidade superveniente"],ans:1,fb:"O princípio da insignificância afasta a <strong>tipicidade material</strong>. Os vetores do STF: mínima ofensividade da conduta, nenhuma periculosidade social, reduzidíssimo grau de reprovabilidade e inexpressividade da lesão jurídica."},
+  {q:"O erro de tipo essencial escusável (inevitável) produz o seguinte efeito:",opts:["Exclui o dolo, mas permite a punição por culpa","Exclui tanto o dolo quanto a culpa, isentando de pena","Exclui apenas a culpabilidade do agente","Reduz a pena de 1/6 a 1/3"],ans:1,fb:"O erro de tipo <strong>escusável</strong> (inevitável) isenta de pena — exclui dolo E culpa (art. 20 CP). Como era inevitável, não havia como prever o erro. O erro <strong>inescusável</strong> exclui o dolo, mas o agente pode responder por culpa se o tipo culposo for previsto em lei."},
+  {q:"O erro de tipo essencial inescusável (evitável) produz:",opts:["Isenção de pena integralmente","Exclusão do dolo, mas mantém responsabilidade culposa se prevista em lei","Redução de pena de 1/3 a 2/3","Exclusão da culpabilidade"],ans:1,fb:"O erro de tipo <strong>inescusável</strong> exclui o dolo — o agente não sabia o que fazia — mas, como o erro era evitável, mantém a responsabilidade por <strong>culpa</strong>, desde que o tipo culposo esteja previsto em lei (<span style='font-family:JetBrains Mono,monospace;font-size:.7rem'>art. 20, caput CP</span>)."},
+  {q:"O erro de proibição (art. 21 CP) atua sobre qual elemento da culpabilidade?",opts:["Imputabilidade","Potencial consciência da ilicitude","Exigibilidade de conduta diversa","Nexo causal entre conduta e resultado"],ans:1,fb:"O erro de proibição recai sobre a <strong>potencial consciência da ilicitude</strong>: o agente conhece os fatos (sabe o que está fazendo), mas ignora que sua conduta é proibida. Afeta a culpabilidade, não a tipicidade."},
+  {q:"A principal diferença entre erro de tipo e erro de proibição é:",opts:["O erro de tipo sempre isenta de pena; o erro de proibição nunca isenta","Erro de tipo recai sobre os fatos (elementos do tipo); erro de proibição recai sobre a ilicitude da conduta","O erro de tipo exclui culpabilidade; o erro de proibição exclui tipicidade","Não há diferença prática no Código Penal brasileiro"],ans:1,fb:"<strong>Erro de tipo</strong>: o agente não sabe o que faz (desconhece elemento do tipo — ex: pega guarda-chuva alheio pensando ser o seu). <strong>Erro de proibição</strong>: sabe o que faz, mas ignora ser proibido (ex: turista que não sabe que conduta é crime no Brasil)."},
+  {q:"No iter criminis, a fase a partir da qual se inicia a punibilidade é:",opts:["A cogitação","A preparação","A execução","O exaurimento"],ans:2,fb:"Cogitação e, em regra, preparação são <strong>impuníveis</strong>. A punibilidade inicia com a <strong>execução</strong> — prática do núcleo do tipo ou ato imediatamente anterior. Excepcionalmente, atos preparatórios são tipificados de forma autônoma (ex: art. 288 CP — associação criminosa)."},
+  {q:"A tentativa perfeita (crime falho) caracteriza-se por:",opts:["Execução interrompida antes de o agente esgotar todos os atos","Agente que esgota todos os atos executivos, mas o resultado não ocorre por fatores externos","Crime impossível por ineficácia absoluta do meio","Agente que desiste voluntariamente após praticar todos os atos"],ans:1,fb:"A <strong>tentativa perfeita</strong> (acabada/crime falho): o agente pratica todos os atos executivos, mas o resultado não ocorre por circunstâncias alheias à sua vontade. A tentativa imperfeita: execução interrompida antes do esgotamento dos atos."},
+  {q:"Na desistência voluntária (art. 15 CP), o agente:",opts:["É isento de pena por qualquer conduta já praticada","Responde somente pelos atos já praticados que constituam crime autônomo","Recebe redução de pena de 1/3 a 2/3","Recebe medida de segurança em substituição à pena"],ans:1,fb:"Na <strong>desistência voluntária</strong>, o agente, podendo continuar, abandona a execução. Não responde pela tentativa do crime visado — a 'ponte de ouro' de Von Liszt. Mas responde pelos atos já praticados que sejam crimes autônomos. O mesmo princípio se aplica ao arrependimento eficaz."},
+  {q:"O crime impossível (art. 17 CP) caracteriza-se por:",opts:["Impossibilidade relativa do meio ou do objeto","Impossibilidade absoluta do meio empregado ou impropriedade absoluta do objeto","Desistência voluntária após início da execução","Ausência de resultado naturalístico por fatores externos"],ans:1,fb:"O <strong>crime impossível</strong> (tentativa inidônea) é impunível quando a impossibilidade é <strong>absoluta</strong>: ineficácia absoluta do meio (envenenar com açúcar) ou impropriedade absoluta do objeto (atirar em quem já está morto). Impossibilidade <em>relativa</em> configura tentativa punível."},
+  {q:"A legítima defesa (art. 25 CP) exige que a agressão seja:",opts:["Necessariamente um crime doloso praticado por pessoa imputável","Injusta, atual ou iminente","Futura e grave, com ameaça à integridade física","Somente real, nunca putativa"],ans:1,fb:"A legítima defesa exige agressão <strong>injusta</strong> (contrária ao direito — pode ser de inimputável), <strong>atual</strong> (que está ocorrendo) ou <strong>iminente</strong> (prestes a ocorrer). Não cabe LD contra agressão passada (que é vingança) nem futura remota."},
+  {q:"No estado de necessidade (art. 24 CP), a proporcionalidade exige:",opts:["Que o bem protegido seja de natureza pessoal (vida ou integridade física)","Que o sacrifício imposto seja proporcional ao perigo afastado","Que o perigo tenha sido provocado por terceiro","Que a conduta seja praticada pela própria vítima do perigo"],ans:1,fb:"O estado de necessidade exige que o sacrifício seja <strong>proporcional</strong> ao perigo afastado (ponderação de bens). O CP adota a teoria unitária: sempre exclui ilicitude. A teoria diferenciadora (CPM e doutrina): exclui ilicitude se bem protegido > sacrificado; exclui culpabilidade se igual."},
+  {q:"A principal diferença entre legítima defesa e estado de necessidade é:",opts:["Não há diferença estrutural — ambas reagem a agressões injustas","A legítima defesa reage a agressão injusta de pessoa; no EN o perigo pode ter origem em forças naturais e o sacrificado pode ser terceiro inocente","Na LD o perigo pode ser de qualquer origem; no EN deve ser humano","A LD é causa supralegal; o EN está previsto no CP"],ans:1,fb:"Na <strong>legítima defesa</strong>: sempre há um agressor (pessoa) — reage-se contra ele. No <strong>estado de necessidade</strong>: o perigo pode vir de natureza, animal ou pessoa; sacrifica-se bem de <em>terceiro inocente</em> para salvar outro bem. Não há agressor — há colisão de bens."},
+  {q:"O excesso na legítima defesa (art. 23, parágrafo único CP):",opts:["É sempre impunível, pois a situação original era lícita","É punível, podendo ser doloso ou culposo","É punível apenas se o excesso for doloso","Isenta de pena se decorrer de medo ou susto"],ans:1,fb:"O <strong>excesso</strong> na legítima defesa é punível — doloso ou culposo (<span style='font-family:JetBrains Mono,monospace;font-size:.7rem'>art. 23, par. ún. CP</span>). O chamado 'excesso exculpante' (por medo, susto ou perturbação) é debatido pela doutrina como hipótese de inexigibilidade de conduta diversa, mas não é posição pacífica."},
+  {q:"A imputabilidade é elemento:",opts:["Do fato típico","Da ilicitude (antijuridicidade)","Da culpabilidade","Da punibilidade"],ans:2,fb:"A <strong>imputabilidade</strong> é elemento da <strong>culpabilidade</strong> na teoria tripartite finalista. É a capacidade de entender o caráter ilícito do fato e de se determinar conforme esse entendimento. Sua ausência exclui a culpabilidade — o inimputável fica sujeito a medida de segurança."},
+  {q:"A teoria adotada pelo Código Penal brasileiro no concurso de agentes é:",opts:["Teoria pluralista — cada co-autor responde por crime diferente","Teoria dualista — autor e partícipe respondem por crimes distintos","Teoria monista (unitária) — todos respondem pelo mesmo crime","Teoria da acessoriedade extrema — participação depende de crime culpável"],ans:2,fb:"O <span style='font-family:JetBrains Mono,monospace;font-size:.7rem'>art. 29 CP</span> adota a <strong>teoria monista</strong>: todos que concorrem para o crime respondem pelo mesmo delito, embora as penas sejam individualizadas na medida da culpabilidade de cada um. A participação é acessória (acessoriedade limitada: exige fato típico e ilícito do autor)."},
+  {q:"As circunstâncias subjetivas (pessoais) no concurso de agentes (art. 30 CP):",opts:["Sempre se comunicam a todos os co-autores e partícipes","Não se comunicam, salvo quando elementares do tipo","Comunicam-se apenas ao co-autor, nunca ao partícipe","São desconsideradas no concurso de agentes"],ans:1,fb:"Conforme o <span style='font-family:JetBrains Mono,monospace;font-size:.7rem'>art. 30 CP</span>: circunstâncias <em>objetivas</em> (materiais) comunicam-se a quem as conhecia. Circunstâncias <em>subjetivas</em> (pessoais) <strong>não se comunicam</strong>, salvo quando forem <em>elementares</em> do tipo. Ex: qualidade de 'funcionário público' no peculato é elementar → comunica-se ao particular co-autor que a conhece."},
+  {q:"A teoria do domínio do fato (Tatherrschaft), de Claus Roxin, serve para identificar:",opts:["As vítimas em crimes plurissubjetivos","O autor nos crimes dolosos, especialmente na autoria mediata e em organizações criminosas","Os cúmplices nos crimes culposos","A responsabilidade objetiva nos crimes de perigo abstrato"],ans:1,fb:"A teoria do <strong>domínio do fato</strong> de Roxin (1963) define como <em>autor</em> aquele que domina o acontecimento criminoso: domínio da ação (autor imediato), domínio da vontade (autor mediato) ou domínio funcional do fato (co-autoria). Ganhou destaque no Brasil no julgamento do Mensalão (AP 470) pelo STF."}
+];
+
+let cur=0,score=0,answered=[],SQ=[];
+const zone=document.getElementById('qzone');
+const dots=document.getElementById('qdots');
+const sc=document.getElementById('qscore');
+
+function shuffleOpts(q){const idx=Array.from({length:q.opts.length},(_,i)=>i);for(let i=idx.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[idx[i],idx[j]]=[idx[j],idx[i]];}return{...q,opts:idx.map(i=>q.opts[i]),ans:idx.indexOf(q.ans)};}
+
+function buildDots(){SQ=questions.map(shuffleOpts);dots.innerHTML='';SQ.forEach((_,i)=>{const d=document.createElement('div');d.className='qdot'+(i===0?' cur':'');d.id='dot'+i;dots.appendChild(d);});}
+
+function renderQ(i){
+  if(i>=SQ.length){showResult();return;}
+  const q=SQ[i];
+  let html=`<div class="qq active" id="qq${i}"><div class="qnum">Questão ${i+1} de ${SQ.length}</div><div class="qtext">${q.q}</div><div class="qopts">`;
+  q.opts.forEach((o,j)=>{html+=`<button class="qopt" onclick="pick(${i},${j})"><span class="ql">${String.fromCharCode(65+j)}</span><span class="qt">${o}</span></button>`;});
+  html+=`</div><div class="qfb" id="fb${i}"></div><div class="qnav"><button class="qbn qbn-rs" onclick="resetQuiz()">Reiniciar</button><button class="qbn qbn-next" id="nx${i}" onclick="nextQ(${i+1})">Próxima →</button></div></div>`;
+  zone.innerHTML=html;
+}
+
+function pick(qi,oi){
+  if(answered[qi]!==undefined)return;
+  answered[qi]=oi;
+  const q=SQ[qi];
+  const opts=document.querySelectorAll(`#qq${qi} .qopt`);
+  opts.forEach((o,j)=>{o.classList.add('disabled');if(j===q.ans)o.classList.add('correct');else if(j===oi)o.classList.add('wrong');});
+  const fb=document.getElementById('fb'+qi);
+  if(oi===q.ans){score++;fb.className='qfb ok show';fb.innerHTML='<strong>Correto!</strong> '+q.fb;}
+  else{fb.className='qfb ng show';fb.innerHTML='<strong>Incorreto.</strong> '+q.fb;}
+  const dot=document.getElementById('dot'+qi);
+  dot.className='qdot '+(oi===q.ans?'ok':'err');
+  if(qi+1<SQ.length){const dot2=document.getElementById('dot'+(qi+1));if(dot2)dot2.classList.add('cur');}
+  sc.textContent=score+' / '+SQ.length;
+  document.getElementById('nx'+qi).classList.add('show');
+}
+
+function nextQ(i){cur=i;renderQ(i);}
+
+function showResult(){
+  const pct=Math.round(score/SQ.length*100);
+  zone.innerHTML=`<div class="qres show"><div class="rscore">${score}<span style="font-size:2rem;color:var(--text2)">/${SQ.length}</span></div><div class="rlabel">${pct}% de acerto</div><div style="margin-top:1.2rem;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--text2)">${pct>=70?'Aprovado — bom desempenho!':'Continue revisando o conteúdo.'}</div><div class="qnav" style="justify-content:center;margin-top:1.5rem"><button class="qbn qbn-rs" onclick="resetQuiz()">Refazer Quiz</button></div></div>`;
+  try{const _k='quiz_'+location.pathname.split('/').slice(-2).join('/').replace('.html','').replace('/','_');localStorage.setItem(_k,JSON.stringify({score,total:SQ.length,pct,ts:Date.now()}));}catch(_e){}
+}
+
+function resetQuiz(){cur=0;score=0;answered=[];sc.textContent='0 / '+questions.length;buildDots();renderQ(0);}
+
+function switchMod(m,btn){
+  document.querySelectorAll('.mod').forEach(d=>d.classList.remove('active'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
+  document.getElementById('mod-'+m).classList.add('active');
+  btn.classList.add('active');
+}
+
+function switchTab(btn,panelId){
+  const mbody=btn.closest('.mbody');
+  mbody.querySelectorAll('.stab').forEach(b=>b.classList.remove('active'));
+  mbody.querySelectorAll('.sp').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(panelId).classList.add('active');
+}
+
+function doSearch(v){
+  if(!v){document.querySelectorAll('mark').forEach(m=>{const p=m.parentNode;p.replaceChild(document.createTextNode(m.textContent),m);p.normalize();});return;}
+}
+
+buildDots();renderQ(0);
+</script>
+<button class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar modo claro/escuro" title="Modo claro/escuro">
   <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
   <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-</button></body>
+</button>
+</body>
 </html>
