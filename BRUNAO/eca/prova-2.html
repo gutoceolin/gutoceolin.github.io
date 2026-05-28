@@ -1,88 +1,683 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<script>(function(){var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');if(t==='light')document.documentElement.setAttribute('data-theme','light');})();</script>
+<script>
+function toggleTheme(){var h=document.documentElement;var l=h.getAttribute('data-theme')==='light';h.setAttribute('data-theme',l?'dark':'light');localStorage.setItem('theme',l?'dark':'light');}
+(function(){var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');if(t==='light')document.documentElement.setAttribute('data-theme','light');})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dir. Criança e Adolescente — Prova 2</title>
+<title>ECA — Família Substituta, Adoção e Ato Infracional · Prova 2</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@300;400;500;600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#111118;--surface:#1c1c26;--surface2:#242430;--border:rgba(255,255,255,.07);--border2:rgba(255,255,255,.12);--text:#e8e4f0;--text2:#9490a8;--text3:#56526a;--white:#f5f2ff;--accent:#5cc98a;--accent-dim:rgba(92,201,138,.06);}
+:root{
+  --bg:#111118;--surface:#1c1c26;--surface2:#242430;--surface3:#1c1c24;
+  --border:rgba(255,255,255,.07);--border2:rgba(255,255,255,.12);
+  --text:#e8e4f0;--text2:#9490a8;--text3:#56526a;--white:#f5f2ff;
+  --fam:#5cc98a;  --fam-dim:rgba(92,201,138,.10);  --fam-mid:rgba(92,201,138,.22);
+  --ado:#7b8fe8;  --ado-dim:rgba(123,143,232,.10); --ado-mid:rgba(123,143,232,.22);
+  --dest:#e07a5c; --dest-dim:rgba(224,122,92,.10); --dest-mid:rgba(224,122,92,.22);
+  --inf:#5cb8e0;  --inf-dim:rgba(92,184,224,.10);  --inf-mid:rgba(92,184,224,.22);
+}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-weight:300;min-height:100vh}
-body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse 70% 40% at 10% 0%,var(--accent-dim) 0%,transparent 55%)}
-.wrap{position:relative;z-index:10;max-width:1100px;margin:0 auto;padding:3rem 2rem}
-.back{display:inline-flex;align-items:center;gap:.45rem;font-family:'Outfit',sans-serif;font-size:.75rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);text-decoration:none;margin-bottom:1.5rem;padding:.38rem 1rem;border-radius:100px;border:1px solid var(--border);background:var(--surface);transition:all .2s}
-.back:hover{color:var(--text);border-color:var(--border2);background:var(--surface2)}.back:focus-visible{outline:2px solid var(--gold, #d4a843);outline-offset:2px}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse 70% 40% at 10% 0%,rgba(92,201,138,.06) 0%,transparent 55%),
+             radial-gradient(ellipse 55% 35% at 90% 100%,rgba(92,184,224,.03) 0%,transparent 55%)}
+.hdr{position:relative;z-index:10;padding:3rem 2rem 0;max-width:1100px;margin:0 auto}
+.back{display:inline-flex;align-items:center;gap:.45rem;font-family:'Outfit',sans-serif;font-size:.75rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);text-decoration:none;margin-bottom:1.5rem;padding:.38rem 1rem;border-radius:100px;border:1px solid var(--border);background:var(--surface);transition:all .2s}.back:hover{color:var(--text);border-color:var(--border2);background:var(--surface2)}
 .ey{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--text3);margin-bottom:.9rem}
-.htitle{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,6.5vw,4.6rem);font-weight:700;color:var(--white);line-height:.95;letter-spacing:-.02em;margin-bottom:.75rem}
+.htitle{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,6.5vw,4.6rem);font-weight:700;color:var(--white);line-height:.95;letter-spacing:-.02em}
 .htitle em{font-style:italic;color:var(--text2);font-weight:400}
-.disc-pill{display:inline-flex;align-items:center;gap:.38rem;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;padding:.25rem .65rem;border-radius:100px;margin-top:1.1rem;background:rgba(92,201,138,.1);color:var(--accent);border:1px solid rgba(92,201,138,.22)}
-.disc-pill .dot{width:4px;height:4px;border-radius:50%;background:currentColor}
-.wip{margin-top:3rem;padding:3.5rem 2.5rem;background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:0 2px 12px rgba(0,0,0,.25);text-align:center}
-.wip-icon{font-size:0;width:48px;height:48px;margin:0 auto 1.75rem;border-radius:12px;background:var(--surface2);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:5px}.wip-icon::before,.wip-icon::after{content:"";display:block;border-radius:2px;background:var(--accent);opacity:.55}.wip-icon::before{width:20px;height:2px}.wip-icon::after{width:13px;height:2px}
-.wip-title{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--white);margin-bottom:.65rem;letter-spacing:-.02em;margin-bottom:.75rem}
-.wip-text{font-family:'Outfit',sans-serif;font-size:.88rem;color:var(--text2);letter-spacing:.07em;line-height:1.85}
-.accent-line{width:48px;height:2px;background:var(--accent);margin:1.1rem auto 0;border-radius:2px;opacity:.5}
-.topics{display:flex;gap:.4rem;flex-wrap:wrap;justify-content:center;margin-top:1.5rem}
-.topic{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.04em;background:var(--surface2);border:1px solid var(--border);color:var(--text2);padding:.18rem .5rem;border-radius:100px}
-.ft{max-width:1100px;margin:4rem auto 0;padding:1.5rem 2rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.85rem;color:var(--text3)}
-.ft a{color:var(--text2);text-decoration:none}.ft a:hover{color:var(--white)}.ft a:focus-visible{outline:2px solid currentColor;outline-offset:3px}
-@media(max-width:600px){.wrap,.ft{padding-left:1rem;padding-right:1rem}}
-
-/* ── LIGHT MODE ── */
+.hsub{margin-top:1.1rem;font-size:.8rem;color:var(--text2);font-family:'JetBrains Mono',monospace;letter-spacing:.04em}
+.banca-pill{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.2rem;padding:.42rem .95rem;background:rgba(92,201,138,.08);border:1px solid rgba(92,201,138,.25);border-radius:100px;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.07em;color:var(--fam);text-transform:uppercase}
+.banca-pill .p{width:5px;height:5px;border-radius:50%;background:var(--fam);animation:pu 2s infinite}
+@keyframes pu{0%,100%{opacity:1}50%{opacity:.35}}
+.sw{margin-top:.85rem;position:relative}
+.si{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:100px;padding:.68rem 1rem .68rem 2.5rem;color:var(--text);font-family:'Outfit',sans-serif;font-size:.85rem;outline:none;transition:border-color .2s}
+.si::placeholder{color:var(--text3)}.si:focus{border-color:var(--border2)}
+.sic{position:absolute;left:.82rem;top:50%;transform:translateY(-50%);color:var(--text3);font-size:.88rem;pointer-events:none}
+mark{background:rgba(92,201,138,.28);color:var(--white);border-radius:2px;padding:0 2px}
+.mnav{display:flex;gap:.42rem;flex-wrap:wrap;margin:1.9rem auto 0;max-width:1100px;padding:0 2rem;position:relative;z-index:10}
+.nb{display:flex;align-items:center;gap:.5rem;padding:.52rem .95rem;border:1px solid var(--border);border-radius:100px;background:var(--surface);color:var(--text2);font-family:'Outfit',sans-serif;font-size:.75rem;font-weight:500;letter-spacing:.02em;cursor:pointer;transition:all .2s;text-transform:none;min-height:36px}
+.nb:hover{border-color:var(--border2);color:var(--text)}
+.nb .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.nb[data-m=fam] .d{background:var(--fam)}.nb[data-m=ado] .d{background:var(--ado)}
+.nb[data-m=dest] .d{background:var(--dest)}.nb[data-m=inf] .d{background:var(--inf)}
+.nb[data-m=quiz] .d{background:var(--white)}
+.nb.active{color:var(--white)}
+.nb[data-m=fam].active{border-color:var(--fam);background:var(--fam-dim)}
+.nb[data-m=ado].active{border-color:var(--ado);background:var(--ado-dim)}
+.nb[data-m=dest].active{border-color:var(--dest);background:var(--dest-dim)}
+.nb[data-m=inf].active{border-color:var(--inf);background:var(--inf-dim)}
+.nb[data-m=quiz].active{border-color:rgba(255,255,255,.28);background:rgba(255,255,255,.04)}
+.main{position:relative;z-index:5;max-width:1100px;margin:1.8rem auto 5rem;padding:0 2rem}
+.mod{display:none;animation:fu .3s ease both}.mod.active{display:block}
+@keyframes fu{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.mhd{display:flex;align-items:flex-start;gap:1.4rem;padding:1.75rem 2rem;border-radius:14px 14px 0 0;border:1px solid var(--border);border-bottom:none;box-shadow:0 4px 20px rgba(0,0,0,.25)}
+.mhd[data-c=fam]{background:var(--fam-dim);border-color:rgba(92,201,138,.28)}
+.mhd[data-c=ado]{background:var(--ado-dim);border-color:rgba(123,143,232,.28)}
+.mhd[data-c=dest]{background:var(--dest-dim);border-color:rgba(224,122,92,.28)}
+.mhd[data-c=inf]{background:var(--inf-dim);border-color:rgba(92,184,224,.28)}
+.mi{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
+.mi[data-c=fam]{background:var(--fam-mid)}.mi[data-c=ado]{background:var(--ado-mid)}
+.mi[data-c=dest]{background:var(--dest-mid)}.mi[data-c=inf]{background:var(--inf-mid)}
+.mnum{font-family:'Outfit',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.12em;color:var(--text3);text-transform:uppercase;margin-bottom:.25rem}
+.mtitle{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--white);line-height:1}
+.mdesc{margin-top:.42rem;font-size:.82rem;color:var(--text2);line-height:1.62}
+.mbody{border:1px solid var(--border);border-top:none;border-radius:0 0 14px 14px;background:var(--surface);overflow:hidden}
+.stabs{display:flex;border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
+.stabs::-webkit-scrollbar{display:none}
+.stab{padding:.78rem 1.15rem;font-family:'Outfit',sans-serif;font-size:.78rem;font-weight:500;letter-spacing:.01em;text-transform:none;color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;background:none;border-top:none;border-left:none;border-right:none;margin-bottom:-1px;min-height:44px}
+.stab:hover{color:var(--text)}.stab.active{color:var(--white)}
+.stab.active[data-c=fam]{border-bottom-color:var(--fam)}.stab.active[data-c=ado]{border-bottom-color:var(--ado)}
+.stab.active[data-c=dest]{border-bottom-color:var(--dest)}.stab.active[data-c=inf]{border-bottom-color:var(--inf)}
+.sp{display:none;padding:2rem 2.25rem;animation:fu .22s ease}.sp.active{display:block}
+.sl{font-family:'Outfit',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);margin-bottom:.58rem;margin-top:1.55rem;display:flex;align-items:center;gap:.5rem}
+.sl::after{content:'';flex:1;height:1px;background:var(--border)}.sl:first-child{margin-top:0}
+p{font-size:.9375rem;color:#b5b0be;line-height:1.88}p+p{margin-top:.65rem}
+.hl{color:var(--white);font-weight:500}
+.art{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--fam);font-weight:500}
+ul,ol{padding-left:1.25rem;margin-top:.48rem}
+li{font-size:.9rem;color:#aeaab8;line-height:1.82;margin-bottom:.2rem}li strong{color:var(--white);font-weight:500}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:.88rem;margin-top:.68rem}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:.72rem;margin-top:.68rem}
+@media(max-width:640px){.g2,.g3{grid-template-columns:1fr}}
+.card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:1rem;box-shadow:0 2px 8px rgba(0,0,0,.18);transition:border-color .2s,box-shadow .2s}.card:hover{border-color:var(--border2);box-shadow:0 4px 16px rgba(0,0,0,.28)}
+.ct{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.55rem;display:flex;align-items:center;gap:.4rem}
+.ct::before{content:'';width:3px;height:11px;border-radius:2px;flex-shrink:0}
+.cf .ct{color:var(--fam)}.cf .ct::before{background:var(--fam)}
+.ca .ct{color:var(--ado)}.ca .ct::before{background:var(--ado)}
+.cd .ct{color:var(--dest)}.cd .ct::before{background:var(--dest)}
+.ci2 .ct{color:var(--inf)}.ci2 .ct::before{background:var(--inf)}
+.co{display:flex;gap:.75rem;padding:.88rem 1rem;border-radius:10px;margin-top:.82rem;font-size:.83rem;line-height:1.72;color:#aeaab8}
+.co-ico{font-size:.92rem;flex-shrink:0;margin-top:.05rem}.co strong{font-weight:500}
+.cw{background:rgba(224,122,92,.07);border:1px solid rgba(224,122,92,.2)}.cw strong{color:var(--dest)}
+.ci{background:rgba(92,184,224,.07);border:1px solid rgba(92,184,224,.2)}.ci strong{color:var(--inf)}
+.ce{background:rgba(123,143,232,.07);border:1px solid rgba(123,143,232,.2)}.ce strong{color:var(--ado)}
+.cs{background:rgba(92,201,138,.07);border:1px solid rgba(92,201,138,.2)}.cs strong{color:var(--fam)}
+.tw{overflow-x:auto;margin-top:.68rem;border-radius:10px;border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:.82rem}
+th{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);padding:.68rem 1rem;background:var(--surface2);border-bottom:1px solid var(--border);text-align:left;white-space:nowrap}
+td{padding:.62rem 1rem;border-bottom:1px solid var(--border);color:#aeaab8;vertical-align:top;line-height:1.6}
+tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.012)}td strong{color:var(--white);font-weight:500}
+.xi{border:1px solid var(--border);border-radius:10px;margin-top:.52rem;overflow:hidden;transition:border-color .2s}.xi:hover{border-color:var(--border2)}
+.xt{display:flex;align-items:center;justify-content:space-between;padding:.82rem 1rem;cursor:pointer;background:var(--surface2);border-radius:10px;user-select:none}
+.xl{font-size:.85rem;color:var(--text);display:flex;align-items:center;gap:.55rem}
+.xa{font-size:.6rem;color:var(--text3);transition:transform .22s}.xi.open .xa{transform:rotate(180deg)}
+.xc{max-height:0;overflow:hidden;transition:max-height .32s cubic-bezier(.4,0,.2,1)}
+.xin{padding:1rem;border-top:1px solid var(--border);font-size:.84rem;color:#aeaab8;line-height:1.78}
+.qwrap{padding:1.5rem 2rem 2rem}
+.qtop{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.4rem}
+.qtitle{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:700;color:var(--white)}
+.sbadge{font-family:'Outfit',sans-serif;font-size:.65rem;padding:.26rem .72rem;border-radius:100px;background:var(--surface2);border:1px solid var(--border);color:var(--text2)}
+.qdots{display:flex;gap:.28rem;flex-wrap:wrap;margin-bottom:1.2rem}
+.qdot{width:7px;height:7px;border-radius:50%;background:var(--border2);transition:all .2s}
+.qdot.cur{background:var(--text2)}.qdot.ok{background:#5cc98a}.qdot.err{background:#e06e8c}
+.qq{display:none;animation:fu .26s ease}.qq.active{display:block}
+.qnum{font-family:'JetBrains Mono',monospace;font-size:.56rem;color:var(--text3);letter-spacing:.1em;margin-bottom:.6rem}
+.qtext{font-size:.96rem;color:var(--white);line-height:1.68;margin-bottom:1.15rem;font-weight:400}
+.qopts{display:flex;flex-direction:column;gap:.42rem}
+.qopt{display:flex;align-items:flex-start;gap:.65rem;padding:.82rem .92rem;border:1px solid var(--border);border-radius:10px;cursor:pointer;transition:all .2s;background:var(--surface2);text-align:left;width:100%}
+.qopt:hover:not(:disabled){border-color:var(--border2)}
+.ql{font-family:'JetBrains Mono',monospace;font-size:.6rem;width:20px;height:20px;border-radius:6px;background:var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--text2);transition:all .2s}
+.qt{font-size:.84rem;color:#aeaab8;line-height:1.6}
+.qopt.correct{border-color:var(--fam);background:var(--fam-dim)}.qopt.correct .ql{background:var(--fam);color:#000}.qopt.correct .qt{color:var(--white)}
+.qopt.wrong{border-color:var(--ado);background:var(--ado-dim)}.qopt.wrong .ql{background:var(--ado);color:#fff}
+.qopt.disabled{cursor:default;opacity:.54}.qopt.disabled.correct{opacity:1}
+.qfb{display:none;margin-top:.88rem;padding:.88rem 1rem;border-radius:5px;font-size:.83rem;line-height:1.68;color:#aeaab8}
+.qfb.show{display:block;animation:fu .18s ease}
+.qfb.ok{background:var(--fam-dim);border:1px solid rgba(92,201,138,.26)}.qfb.ok strong{color:var(--fam)}
+.qfb.ng{background:var(--ado-dim);border:1px solid rgba(123,143,232,.26)}.qfb.ng strong{color:var(--ado)}
+.qnav{display:flex;align-items:center;justify-content:space-between;margin-top:1.35rem}
+.qbn{font-family:'Outfit',sans-serif;font-size:.6rem;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;transition:all .2s;border:none;padding:.52rem 1.1rem;border-radius:100px}
+.qbn-next{background:#5cc98a;color:#fff;display:none;border-radius:100px}.qbn-next:hover{opacity:.88}.qbn-next.show{display:block}
+.qbn-rs{background:var(--surface2);border:1px solid var(--border);color:var(--text2)}.qbn-rs:hover{border-color:var(--border2);color:var(--text)}
+.qres{display:none;text-align:center;padding:2.5rem 0}.qres.show{display:block}
+.rscore{font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:700;color:var(--white);line-height:1}
+.rlabel{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--text3);letter-spacing:.15em;text-transform:uppercase;margin-top:.4rem}
+.hub-footer{position:relative;z-index:5;max-width:1100px;margin:3rem auto 0;padding:1.5rem 2rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.ft-left{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--text3);letter-spacing:.08em}
+.ft-right{font-family:'JetBrains Mono',monospace;font-size:.55rem;color:var(--text3)}.ft-right a{color:var(--text2);text-decoration:none}.ft-right a:hover{color:var(--white)}
+@media(max-width:600px){.hdr,.main,.mnav{padding-left:1rem;padding-right:1rem}}
 [data-theme=light]{
   --bg:#f0eef7;--surface:#ffffff;--surface2:#f4f2fb;--surface3:#eceaf5;
   --border:rgba(0,0,0,.07);--border2:rgba(0,0,0,.14);
   --text:#1a1828;--text2:#6a6480;--text3:#9a94b0;--white:#0a0818;
-  --civil:#c04070;--civil-dim:rgba(192,64,112,.1);--civil-mid:rgba(192,64,112,.18);
-  --const:#5060c8;--const-dim:rgba(80,96,200,.1);--const-mid:rgba(80,96,200,.18);
-  --proc:#2088b0;--proc-dim:rgba(32,136,176,.1);--proc-mid:rgba(32,136,176,.18);
-  --penal:#b85030;--penal-dim:rgba(184,80,48,.1);--penal-mid:rgba(184,80,48,.18);
-  --eca:#289050;--eca-dim:rgba(40,144,80,.1);--eca-mid:rgba(40,144,80,.18);
-  --gold:#987020;--gold-dim:rgba(152,112,32,.1)}
+  --fam:#289050;--fam-dim:rgba(40,144,80,.1);--fam-mid:rgba(40,144,80,.18);
+  --ado:#5060c8;--ado-dim:rgba(80,96,200,.1);--ado-mid:rgba(80,96,200,.18);
+  --dest:#b85030;--dest-dim:rgba(184,80,48,.1);--dest-mid:rgba(184,80,48,.18);
+  --inf:#2088b0;--inf-dim:rgba(32,136,176,.1);--inf-mid:rgba(32,136,176,.18);
+}
 [data-theme=light] body::before{opacity:.18}
-[data-theme=light] .disc-pill{background:transparent}
-
-/* ── THEME TOGGLE ── */
+[data-theme=light] .qdot.ok{background:#289050}
+[data-theme=light] .qdot.err{background:#c04070}
+[data-theme=light] p{color:#3a3632}
+[data-theme=light] li{color:#3a3632}
+[data-theme=light] .co{color:#3a3632}
 .theme-toggle{position:fixed;bottom:1.75rem;right:1.75rem;z-index:100;width:40px;height:40px;border-radius:50%;background:var(--surface2);border:1px solid var(--border2);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text2);transition:background .2s,border-color .2s,color .2s,box-shadow .2s}
 .theme-toggle:hover{background:var(--surface);color:var(--text);box-shadow:0 4px 20px rgba(0,0,0,.18)}
-.theme-toggle:focus-visible{outline:2px solid var(--gold,#d4a843);outline-offset:3px}
 .theme-toggle svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;display:block}
 .icon-sun{display:none}.icon-moon{display:block}
-[data-theme=light] .icon-sun{display:block}[data-theme=light] .icon-moon{display:none}</style>
+[data-theme=light] .icon-sun{display:block}[data-theme=light] .icon-moon{display:none}
+@media(prefers-reduced-motion:reduce){.mod{animation:none}.sp{animation:none}}
+</style>
 </head>
 <body>
-<div class="wrap">
+
+<div class="hdr">
   <a class="back" href="../../index.html">&#8592; Central de Resumos</a>
-  <div class="ey">Dir. Criança e Adolescente &mdash; Prova 2 &middot; UFN 2026/1</div>
-  <h1 class="htitle">Direitos Fundamentais<br><em>da Criança e do Adolescente</em></h1>
-  <div class="disc-pill"><span class="dot"></span>Dir. Criança e Adolescente</div>
-  <div class="wip">
-    <div class="wip-icon" aria-hidden="true"></div>
-    <div class="wip-title">Resumo em preparação</div>
-    <div class="wip-text">O conteúdo deste resumo será adicionado em breve.<br>Volte quando o material estiver disponível.</div>
-    <div class="accent-line"></div>
-    <div class="topics">
-      <span class="topic">Direito à vida · arts. 7–14 ECA</span>
-      <span class="topic">Direito à liberdade · art. 15</span>
-      <span class="topic">Respeito e dignidade · art. 17</span>
-      <span class="topic">Direito à educação · art. 53</span>
-      <span class="topic">Cultura e lazer · art. 58</span>
-      <span class="topic">Convivência familiar · art. 19</span>
-      <span class="topic">Profissionalização · art. 60</span>
+  <div class="ey">Dir. Crian&ccedil;a e Adolescente &mdash; Prova 2 &middot; UFN 2026/1</div>
+  <h1 class="htitle">Fam&iacute;lia Substituta &amp; Ato Infracional<br><em>Guarda · Tutela · Adoção · Destituição · MSE</em></h1>
+  <div class="hsub">ECA arts. 28–52, 103–128, 155–163 &middot; CC arts. 1.637–1.638 &middot; Banca UFN</div>
+  <div class="banca-pill"><span class="p"></span>Banca UFN &mdash; Estilo de Quest&otilde;es Identificado</div>
+  <div class="sw" role="search"><span class="sic" aria-hidden="true">&#x2315;</span><input class="si" type="text" placeholder="Buscar neste resumo..." aria-label="Buscar conceito" autocomplete="off"></div>
+</div>
+
+<nav class="mnav">
+  <button class="nb active" data-m="fam" onclick="switchMod('fam',this)"><span class="d"></span>Fam&iacute;lia Substituta</button>
+  <button class="nb" data-m="ado" onclick="switchMod('ado',this)"><span class="d"></span>Ado&ccedil;&atilde;o</button>
+  <button class="nb" data-m="dest" onclick="switchMod('dest',this)"><span class="d"></span>Destituição</button>
+  <button class="nb" data-m="inf" onclick="switchMod('inf',this)"><span class="d"></span>Ato Infracional</button>
+  <button class="nb" data-m="quiz" onclick="switchMod('quiz',this)"><span class="d"></span>Quiz (20 q.)</button>
+</nav>
+
+<main class="main">
+
+<!-- ═══ MÓDULO 1: FAMÍLIA SUBSTITUTA ═══ -->
+<div class="mod active" id="mod-fam">
+  <div class="mhd" data-c="fam">
+    <div class="mi" data-c="fam">🏠</div>
+    <div><div class="mnum">Módulo 01</div><div class="mtitle">Colocação em Família Substituta</div><div class="mdesc">Conceito, modalidades, guarda e tutela. Arts. 28–38 ECA.</div></div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="fam" onclick="switchTab(this,'m1t1')">Conceito e Modalidades</button>
+      <button class="stab" data-c="fam" onclick="switchTab(this,'m1t2')">Guarda</button>
+      <button class="stab" data-c="fam" onclick="switchTab(this,'m1t3')">Tutela</button>
+    </div>
+
+    <div class="sp active" id="m1t1">
+      <div class="sl">Conceito de Colocação em Família Substituta</div>
+      <p>A <span class="hl">colocação em família substituta</span> é o conjunto de medidas que visam garantir à criança ou ao adolescente o direito à convivência familiar quando não é possível permanecer na família natural ou extensa. Prevista nos <span class="art">arts. 28–52 do ECA</span>.</p>
+      <div class="co cs"><span class="co-ico">✓</span><div><strong>Art. 28 ECA:</strong> A colocação em família substituta far-se-á mediante <strong>guarda, tutela ou adoção</strong>, independentemente da situação jurídica da criança ou adolescente.</div></div>
+
+      <div class="sl">Família Natural e Extensa</div>
+      <div class="g2">
+        <div class="card cf"><div class="ct">Família Natural</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem">Formada pelos pais ou qualquer deles e seus descendentes (art. 25, caput ECA). Tem preferência para a criação da criança/adolescente.</p></div>
+        <div class="card cf"><div class="ct">Família Extensa ou Ampliada</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem">Parentes próximos com os quais a criança/adolescente convive e mantém vínculo de afinidade e afetividade (art. 25, §único ECA). Tem preferência sobre família substituta estranha.</p></div>
+      </div>
+
+      <div class="sl">Princípios da Colocação</div>
+      <ul>
+        <li><strong>Preferência pela família extensa:</strong> antes de recorrer a família substituta estranha, deve-se buscar parentes próximos</li>
+        <li><strong>Manutenção dos vínculos entre irmãos:</strong> sempre que possível, grupos de irmãos devem ser mantidos juntos (art. 28, §4.º)</li>
+        <li><strong>Oitiva da criança/adolescente:</strong> a criança/adolescente deve ser ouvido, com consideração de sua opinião e preferências (art. 28, §1.º)</li>
+        <li><strong>Intervenção judicial obrigatória:</strong> toda colocação em família substituta deve ser judicialmente autorizada</li>
+        <li><strong>Personalíssima:</strong> a colocação não pode ser transferida a terceiros (art. 28, §3.º)</li>
+      </ul>
+
+      <div class="sl">Comparativo das Modalidades</div>
+      <div class="tw"><table>
+        <thead><tr><th>Aspecto</th><th>Guarda</th><th>Tutela</th><th>Adoção</th></tr></thead>
+        <tbody>
+          <tr><td>Artigos ECA</td><td>33–35</td><td>36–38</td><td>39–52</td></tr>
+          <tr><td>Poder familiar</td><td>Coexiste com poder familiar dos pais</td><td>Pressupõe suspensão ou perda</td><td>Extingue o poder familiar anterior</td></tr>
+          <tr><td>Vínculo de filiação</td><td><strong>Não cria</strong></td><td><strong>Não cria</strong></td><td><strong>Cria — irrevogável</strong></td></tr>
+          <tr><td>Reversibilidade</td><td>Reversível</td><td>Reversível</td><td>Irrevogável</td></tr>
+          <tr><td>Prestação de contas</td><td>Não exige</td><td>Tutor presta contas ao juiz</td><td>Não exige</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="sp" id="m1t2">
+      <div class="sl">Guarda — Arts. 33–35 ECA</div>
+      <p>A <span class="hl">guarda</span> obriga a prestação de assistência <strong>material, moral e educacional</strong> à criança ou adolescente, conferindo ao seu detentor o direito de opor-se a terceiros, inclusive aos pais (<span class="art">art. 33, caput ECA</span>).</p>
+
+      <div class="sl">Características da Guarda</div>
+      <ul>
+        <li><strong>Regulariza a posse de fato:</strong> legaliza situação em que terceiro já convive com a criança (art. 33, §1.º)</li>
+        <li><strong>Não cria vínculo de filiação:</strong> o guardião não se torna pai/mãe do guardado</li>
+        <li><strong>Poder familiar subsiste:</strong> os pais não perdem o poder familiar — a guarda pode coexistir com ele</li>
+        <li><strong>Guardião pode opor-se aos próprios pais</strong> na defesa dos interesses do menor</li>
+        <li><strong>Guarda provisória:</strong> pode ser deferida liminarmente, antes da conclusão do processo (art. 33, §2.º)</li>
+      </ul>
+
+      <div class="sl">Direito de Visitas</div>
+      <div class="co cs"><span class="co-ico">✓</span><div><strong>Art. 33, §1.º ECA:</strong> a guarda não afasta o direito de visita dos pais, salvo motivo justo. A visitação é direito da criança/adolescente, não apenas dos pais.</div></div>
+
+      <div class="sl">Guarda Provisória na Adoção</div>
+      <div class="co ci"><span class="co-ico">ℹ</span><div><strong>Art. 33, §2.º ECA:</strong> excepcionalmente, a autoridade judiciária pode deferir a guarda para fins de regularizar a posse de fato, podendo o guardião ser deferido nos processos de adoção. A guarda provisória <strong>não impede o processo de adoção</strong> e pode ser concedida durante o estágio de convivência.</div></div>
+
+      <div class="sl">Extinção da Guarda</div>
+      <div class="g2">
+        <div class="card cf"><div class="ct">Por Decisão Judicial</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem">A qualquer tempo, mediante pedido fundamentado, ouvido o MP. A guarda pode ser revogada se não mais atender ao melhor interesse da criança.</p></div>
+        <div class="card cf"><div class="ct">Por Adoção</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem">A adoção dissolve automaticamente a guarda, pois cria vínculo de filiação mais amplo e irrevogável.</p></div>
+      </div>
+    </div>
+
+    <div class="sp" id="m1t3">
+      <div class="sl">Tutela — Arts. 36–38 ECA + CC Arts. 1.728–1.766</div>
+      <p>A <span class="hl">tutela</span> é a modalidade de colocação em família substituta que pressupõe a ausência, o falecimento, a suspensão ou a destituição do poder familiar dos pais. O tutor assume a responsabilidade pela <strong>pessoa e pelos bens</strong> do menor.</p>
+
+      <div class="co cw"><span class="co-ico">⚠</span><div><strong>Diferença fundamental:</strong> a guarda pode coexistir com o poder familiar dos pais; a tutela <strong>pressupõe a inexistência ou suspensão/perda do poder familiar</strong>.</div></div>
+
+      <div class="sl">Pressupostos da Tutela (art. 36 ECA)</div>
+      <ul>
+        <li>Pais falecidos</li>
+        <li>Pais ausentes (declarados judicialmente ausentes)</li>
+        <li>Pais com poder familiar suspenso</li>
+        <li>Pais com poder familiar destituído (perda)</li>
+      </ul>
+
+      <div class="sl">Formas de Nomeação do Tutor</div>
+      <div class="g3">
+        <div class="card cf"><div class="ct">Testamentária</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem">Os pais nomeiam o tutor por testamento ou documento autêntico, antes de falecerem (CC art. 1.729).</p></div>
+        <div class="card cf"><div class="ct">Legítima</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem">Na falta de tutor nomeado pelos pais, a lei indica os parentes consanguíneos do menor (CC art. 1.731).</p></div>
+        <div class="card cf"><div class="ct">Judicial (Dativa)</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem">Na ausência de tutor testamentário ou legítimo, o juiz nomeia pessoa idônea (CC art. 1.732).</p></div>
+      </div>
+
+      <div class="sl">Deveres do Tutor</div>
+      <ul>
+        <li><strong>Dirigir a educação do menor</strong>, defende-lo e sustentá-lo</li>
+        <li><strong>Administrar os bens do menor</strong> com diligência e probidade</li>
+        <li><strong>Prestar contas ao juiz</strong> bienalmente e ao término da tutela (CC art. 1.757)</li>
+        <li><strong>Não pode alienar bens do menor</strong> sem autorização judicial</li>
+      </ul>
+
+      <div class="sl">Comparativo: Tutela × Guarda</div>
+      <div class="tw"><table>
+        <thead><tr><th>Aspecto</th><th>Tutela</th><th>Guarda</th></tr></thead>
+        <tbody>
+          <tr><td>Poder familiar dos pais</td><td><strong>Inexistente/suspenso/destituído</strong></td><td>Pode subsistir normalmente</td></tr>
+          <tr><td>Gestão dos bens do menor</td><td><strong>Sim — tutor administra os bens</strong></td><td>Não — apenas assistência material</td></tr>
+          <tr><td>Prestação de contas</td><td><strong>Obrigatória ao juiz</strong></td><td>Não exigida</td></tr>
+          <tr><td>Representação legal</td><td><strong>Plena</strong> (atos da vida civil)</td><td>Restrita ao dever de assistência</td></tr>
+          <tr><td>Origem</td><td>Judicial, testamentária ou legal</td><td>Sempre judicial</td></tr>
+        </tbody>
+      </table></div>
     </div>
   </div>
 </div>
-<footer class="ft">
-  <span>Guto Ceolin &middot; UFN &middot; Dir. Criança e Adolescente &middot; 2026/1</span>
-  <a href="../../index.html">← Voltar ao Hub</a>
+
+<!-- ═══ MÓDULO 2: ADOÇÃO ═══ -->
+<div class="mod" id="mod-ado">
+  <div class="mhd" data-c="ado">
+    <div class="mi" data-c="ado">💜</div>
+    <div><div class="mnum">Módulo 02</div><div class="mtitle">Adoção</div><div class="mdesc">Nacional e internacional. Requisitos, procedimento e efeitos. Arts. 39–52 ECA.</div></div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="ado" onclick="switchTab(this,'m2t1')">Adoção Nacional</button>
+      <button class="stab" data-c="ado" onclick="switchTab(this,'m2t2')">Adoção Internacional</button>
+      <button class="stab" data-c="ado" onclick="switchTab(this,'m2t3')">Efeitos da Adoção</button>
+    </div>
+
+    <div class="sp active" id="m2t1">
+      <div class="sl">Conceito e Caráter — Art. 39 ECA</div>
+      <p>A <span class="hl">adoção</span> é medida <strong>excepcional e irrevogável</strong>, à qual se deve recorrer apenas quando esgotados os recursos de manutenção da criança ou adolescente na família natural ou extensa (<span class="art">art. 39, §1.º ECA</span>). É <strong>proibida</strong> a adoção por procuração (<span class="art">art. 39, §2.º ECA</span>).</p>
+
+      <div class="sl">Requisitos do Adotante</div>
+      <div class="g2">
+        <div class="card ca"><div class="ct">Idade mínima</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem">O adotante deve ter <strong>ao menos 18 anos</strong> (art. 42 ECA), independentemente do estado civil.</p></div>
+        <div class="card ca"><div class="ct">Diferença etária</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem">O adotante deve ser <strong>16 anos mais velho</strong> que o adotando (art. 42, §3.º ECA).</p></div>
+      </div>
+
+      <div class="sl">Vedações à Adoção (Art. 42 ECA)</div>
+      <div class="co cw"><span class="co-ico">⚠</span><div><strong>Não podem adotar:</strong> os ascendentes (avós, bisavós) e os irmãos do adotando (art. 42, §1.º ECA). O objetivo é preservar a clareza dos vínculos de parentesco e proteger o menor.</div></div>
+      <ul style="margin-top:.8rem">
+        <li><strong>Adoção por casal:</strong> ambos devem consentir; ao menos um deve ter 18 anos; comprovada estabilidade da família (art. 42, §2.º)</li>
+        <li><strong>Adoção unilateral:</strong> possível se um dos cônjuges/companheiros adota o filho do outro (art. 41, §1.º)</li>
+        <li><strong>Adoção póstuma:</strong> possível se o adotante faleceu após manifestar inequivocamente a vontade de adotar (art. 42, §6.º)</li>
+      </ul>
+
+      <div class="sl">SNA — Sistema Nacional de Adoção e Acolhimento</div>
+      <p>O <span class="hl">SNA</span> (<span class="art">art. 50 ECA</span>) é o cadastro unificado de candidatos habilitados à adoção e de crianças/adolescentes disponíveis. A ordem do cadastro deve ser respeitada, salvo exceções legais (art. 50, §13.º).</p>
+      <ul>
+        <li>Habilitação: processo judicial de avaliação do pretendente à adoção</li>
+        <li>Validade da habilitação: 3 anos, prorrogável por igual período (art. 197-E, §4.º ECA)</li>
+        <li>Exceções ao cadastro: parentes com vínculo afetivo, cônjuge/companheiro adotando filho do outro</li>
+      </ul>
+
+      <div class="sl">Estágio de Convivência</div>
+      <div class="co ci"><span class="co-ico">ℹ</span><div><strong>Art. 46 ECA:</strong> a adoção será precedida de estágio de convivência com a criança/adolescente, pelo prazo que a autoridade judiciária fixar, observadas as peculiaridades do caso. O prazo mínimo é de <strong>90 dias</strong>, podendo o juiz prorrogá-lo ou reduzi-lo fundamentadamente.</div></div>
+    </div>
+
+    <div class="sp" id="m2t2">
+      <div class="sl">Adoção Internacional — Arts. 51–52 ECA</div>
+      <p>A <span class="hl">adoção internacional</span> é aquela em que a pessoa ou casal pretendente à adoção é residente ou domiciliado fora do Brasil (<span class="art">art. 51, §1.º ECA</span>). Possui caráter <strong>excepcional e subsidiário</strong>: somente é admissível quando esgotadas as possibilidades de colocação em família substituta ou adoção nacionais.</p>
+
+      <div class="sl">Requisitos para Adoção Internacional</div>
+      <ul>
+        <li><strong>Habilitação:</strong> o pretendente deve ser habilitado tanto no Brasil quanto no país de residência</li>
+        <li><strong>Organismo credenciado:</strong> a adoção deve ser intermediada por organismo credenciado pelo governo brasileiro (Portaria MJ)</li>
+        <li><strong>Esgotamento das possibilidades nacionais:</strong> comprovação de que a criança/adolescente não foi adotada internamente</li>
+        <li><strong>Proibição de procuração:</strong> o adotante não pode se fazer representar por procuração no processo (art. 39, §2.º)</li>
+      </ul>
+
+      <div class="sl">Período de Convivência no Brasil</div>
+      <div class="co cs"><span class="co-ico">✓</span><div><strong>Art. 46, §3.º ECA:</strong> em caso de adoção internacional, o estágio de convivência é de, no mínimo, <strong>30 dias</strong> em território nacional.</div></div>
+
+      <div class="sl">Habilitação e Validade</div>
+      <div class="tw"><table>
+        <thead><tr><th>Aspecto</th><th>Adoção Nacional</th><th>Adoção Internacional</th></tr></thead>
+        <tbody>
+          <tr><td>Caráter</td><td>Preferencial</td><td><strong>Excepcional — após esgotamento nacional</strong></td></tr>
+          <tr><td>Estágio de convivência</td><td>Mínimo 90 dias (redutível)</td><td><strong>Mínimo 30 dias no Brasil</strong></td></tr>
+          <tr><td>Intermediação</td><td>Direta (judicial)</td><td>Organismo credenciado + Portaria MJ</td></tr>
+          <tr><td>Habilitação</td><td>No Brasil (SNA)</td><td>No Brasil + no país de residência</td></tr>
+          <tr><td>Adoção por procuração</td><td>Proibida</td><td>Proibida (art. 39, §2.º)</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="co cw"><span class="co-ico">⚠</span><div><strong>Atenção:</strong> o adotado internacionalmente mantém o direito ao <strong>nome e sobrenome</strong> de origem e pode acrescentar o sobrenome do adotante. Não há obrigação de abandono do nome anterior.</div></div>
+    </div>
+
+    <div class="sp" id="m2t3">
+      <div class="sl">Efeitos da Adoção — Art. 41 ECA</div>
+      <p>A adoção atribui a condição de <span class="hl">filho</span> ao adotado, com os mesmos direitos e deveres dos filhos biológicos, inclusive sucessórios, desligando-o de qualquer vínculo com pais e parentes, salvo os impedimentos matrimoniais (<span class="art">art. 41, caput ECA</span>).</p>
+
+      <div class="g2">
+        <div class="card ca"><div class="ct">Igualdade com filhos biológicos</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem">O adotado tem os mesmos direitos hereditários, ao nome, à convivência, à educação e ao afeto dos filhos biológicos. Vedada qualquer discriminação.</p></div>
+        <div class="card ca"><div class="ct">Extinção dos vínculos anteriores</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem">Os vínculos com a família natural são extintos, exceto para fins de impedimentos matrimoniais (o adotado continua não podendo casar com parentes biológicos).</p></div>
+      </div>
+
+      <div class="sl">Irrevogabilidade</div>
+      <div class="co cw"><span class="co-ico">⚠</span><div><strong>Art. 39, §1.º ECA:</strong> a adoção é <strong>medida irrevogável</strong>. Uma vez concedida por sentença judicial transitada em julgado, não pode ser desfeita, ainda que os adotantes venham a falecer, se separar ou se divorciar.</div></div>
+
+      <div class="sl">Registro e Nome</div>
+      <ul>
+        <li><strong>Novo registro de nascimento:</strong> o adotado recebe novo registro; o original é <strong>cancelado e vedado ao público</strong> (art. 47, §2.º ECA)</li>
+        <li><strong>Nome:</strong> o adotado pode acrescentar o sobrenome do adotante (art. 47, §5.º ECA)</li>
+        <li><strong>Sentença constitutiva:</strong> só produz efeitos após o trânsito em julgado (art. 47, caput ECA)</li>
+      </ul>
+
+      <div class="sl">Adoção por Casal Separado/Divorciado</div>
+      <div class="co ci"><span class="co-ico">ℹ</span><div><strong>Art. 42, §4.º ECA:</strong> os divorciados, os judicialmente separados e os ex-companheiros podem adotar conjuntamente, contanto que acordem sobre a guarda e o regime de visitas e desde que o estágio de convivência haja sido iniciado na constância do período de convivência e que seja comprovada a existência de vínculos de afinidade e afetividade com aquele não detentor da guarda.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MÓDULO 3: DESTITUIÇÃO DO PODER FAMILIAR ═══ -->
+<div class="mod" id="mod-dest">
+  <div class="mhd" data-c="dest">
+    <div class="mi" data-c="dest">⚖️</div>
+    <div><div class="mnum">Módulo 03</div><div class="mtitle">Destituição do Poder Familiar</div><div class="mdesc">Causas, suspensão, perda e procedimento judicial. Arts. 22–24 ECA e arts. 1.637–1.638 CC.</div></div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="dest" onclick="switchTab(this,'m3t1')">Poder Familiar e Causas</button>
+      <button class="stab" data-c="dest" onclick="switchTab(this,'m3t2')">Procedimento Judicial</button>
+    </div>
+
+    <div class="sp active" id="m3t1">
+      <div class="sl">Poder Familiar — Art. 22 ECA</div>
+      <p>O <span class="hl">poder familiar</span> é o conjunto de direitos e deveres que os pais possuem em relação à pessoa e aos bens dos filhos menores, exercido em igualdade de condições (<span class="art">art. 22 ECA</span>). Compreende: criação, educação, companhia, guarda, representação legal e administração dos bens.</p>
+
+      <div class="sl">Suspensão do Poder Familiar — Art. 1.637 CC</div>
+      <p>A <span class="hl">suspensão</span> é temporária e ocorre nas seguintes hipóteses:</p>
+      <ul>
+        <li>Abuso de autoridade</li>
+        <li>Falha nos deveres inerentes à paternidade ou maternidade</li>
+        <li>Conduta que comprometa a saúde, a segurança e a moralidade do filho</li>
+        <li>Condenação penal definitiva por crime cuja pena exceda 2 anos de prisão (art. 1.637, parágrafo único CC)</li>
+      </ul>
+      <div class="co ci"><span class="co-ico">ℹ</span><div><strong>Suspensão é medida temporária:</strong> cessa quando a causa que a motivou desaparece. O pai/mãe pode ter o poder familiar restabelecido por decisão judicial.</div></div>
+
+      <div class="sl">Perda (Destituição) do Poder Familiar — Art. 1.638 CC + Art. 24 ECA</div>
+      <p>A <span class="hl">perda</span> é definitiva e ocorre quando o pai ou a mãe:</p>
+      <ul>
+        <li><strong>Castigar imoderadamente</strong> o filho</li>
+        <li><strong>Deixar o filho em abandono</strong></li>
+        <li>Praticar <strong>atos contrários à moral</strong> e aos bons costumes</li>
+        <li><strong>Incidir reiteradamente</strong> nas faltas que ensejam a suspensão (art. 1.638, IV CC)</li>
+        <li>Entregar de forma irregular o filho a terceiros para fins de adoção (art. 1.638, V CC — incluído pela Lei 13.509/2017)</li>
+      </ul>
+
+      <div class="co cw"><span class="co-ico">⚠</span><div><strong>Art. 24 ECA:</strong> a perda e a suspensão do poder familiar serão decretadas judicialmente, em procedimento contraditório, nos casos previstos na legislação civil, bem como na hipótese de descumprimento injustificado dos deveres e obrigações previstos no art. 22 ECA.</div></div>
+
+      <div class="sl">Suspensão × Perda — Quadro Comparativo</div>
+      <div class="tw"><table>
+        <thead><tr><th>Aspecto</th><th>Suspensão</th><th>Perda (Destituição)</th></tr></thead>
+        <tbody>
+          <tr><td>Duração</td><td>Temporária</td><td><strong>Definitiva</strong></td></tr>
+          <tr><td>Reversibilidade</td><td>Pode ser restabelecida</td><td><strong>Não é reversível</strong> (salvo reintegração excepcional)</td></tr>
+          <tr><td>Gravidade da conduta</td><td>Faltas menos graves</td><td>Faltas graves e reiteradas</td></tr>
+          <tr><td>Condenação penal</td><td>Pena &gt; 2 anos (art. 1.637 §único CC)</td><td>Crimes contra filho (arts. 1.638 CC)</td></tr>
+          <tr><td>Efeito patrimonial</td><td>Perde a administração dos bens</td><td>Perde todos os poderes sobre a pessoa e bens</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="sp" id="m3t2">
+      <div class="sl">Procedimento de Destituição — Arts. 155–163 ECA</div>
+      <p>O processo de destituição do poder familiar é regido pelos <span class="art">arts. 155–163 do ECA</span> e possui caráter <strong>contraditório</strong>, garantindo a ampla defesa dos pais.</p>
+
+      <div class="sl">Legitimidade Ativa (Art. 155 ECA)</div>
+      <div class="g2">
+        <div class="card cd"><div class="ct">Ministério Público</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem">O MP é o legitimado primário e atua como fiscal da ordem pública e defensor dos direitos da criança/adolescente.</p></div>
+        <div class="card cd"><div class="ct">Quem tenha legítimo interesse</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem">Parentes, guardião, tutor, ou qualquer pessoa que demonstre interesse legítimo na proteção do menor.</p></div>
+      </div>
+
+      <div class="sl">Fases do Procedimento</div>
+      <ul>
+        <li><strong>Petição inicial:</strong> formulada pelo MP ou interessado, com exposição dos fatos e pedido de destituição</li>
+        <li><strong>Citação dos pais:</strong> os genitores devem ser citados e têm direito à nomeação de defensor público se não tiverem advogado (art. 156 ECA)</li>
+        <li><strong>Instrução:</strong> colheita de provas; oitiva da criança/adolescente; relatório social</li>
+        <li><strong>Intervenção obrigatória do MP:</strong> em todos os atos do processo</li>
+        <li><strong>Sentença:</strong> decretando a destituição ou julgando o pedido improcedente</li>
+      </ul>
+
+      <div class="sl">Prazo Máximo e Medidas Cautelares</div>
+      <div class="co cw"><span class="co-ico">⚠</span><div><strong>Art. 163 ECA:</strong> o procedimento de perda ou suspensão do poder familiar terá <strong>prazo máximo de 120 dias</strong>, com prioridade em sua tramitação.</div></div>
+      <div class="co cs"><span class="co-ico">✓</span><div><strong>Liminar de suspensão:</strong> o juiz pode, de ofício ou a requerimento, suspender o poder familiar liminarmente, sempre que houver urgência e aparência do direito invocado (art. 157 ECA). A criança pode ser imediatamente encaminhada para família substituta provisória.</div></div>
+
+      <div class="sl">Efeitos da Destituição</div>
+      <ul>
+        <li>Extinção do poder familiar dos genitores destituídos</li>
+        <li>A criança/adolescente passa à condição de disponível para adoção</li>
+        <li>Inscrição no SNA (Sistema Nacional de Adoção) para busca de família substituta</li>
+        <li>O MP deve ser notificado sobre o trânsito em julgado da sentença</li>
+      </ul>
+
+      <div class="xi">
+        <div class="xt" onclick="xp(this)">
+          <span class="xl">A destituição impede que os pais visitem o filho?</span>
+          <span class="xa">▾</span>
+        </div>
+        <div class="xc"><div class="xin">Não necessariamente. A destituição do poder familiar extingue os direitos e deveres decorrentes do poder familiar, mas o juiz pode estabelecer visitas se elas forem do interesse da criança/adolescente. O direito de visita é distinto do poder familiar e pode ser mantido mesmo após a destituição, caso haja vínculo afetivo relevante e as visitas não prejudiquem o menor.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MÓDULO 4: ATO INFRACIONAL ═══ -->
+<div class="mod" id="mod-inf">
+  <div class="mhd" data-c="inf">
+    <div class="mi" data-c="inf">🔵</div>
+    <div><div class="mnum">Módulo 04</div><div class="mtitle">Ato Infracional e Medidas Socioeducativas</div><div class="mdesc">Conceito, garantias processuais e MSE. Arts. 103–128 ECA.</div></div>
+  </div>
+  <div class="mbody">
+    <div class="stabs">
+      <button class="stab active" data-c="inf" onclick="switchTab(this,'m4t1')">Ato Infracional</button>
+      <button class="stab" data-c="inf" onclick="switchTab(this,'m4t2')">Garantias Processuais</button>
+      <button class="stab" data-c="inf" onclick="switchTab(this,'m4t3')">Medidas Socioeducativas</button>
+    </div>
+
+    <div class="sp active" id="m4t1">
+      <div class="sl">Conceito de Ato Infracional — Art. 103 ECA</div>
+      <p>Considera-se <span class="hl">ato infracional</span> a conduta descrita como crime ou contravenção penal (<span class="art">art. 103 ECA</span>). É a tipificação do comportamento do menor que, se praticado por adulto, seria crime ou contravenção.</p>
+
+      <div class="co ci"><span class="co-ico">ℹ</span><div><strong>Inimputabilidade ≠ Impunidade:</strong> a criança e o adolescente são <strong>penalmente inimputáveis</strong> (art. 228 CF e art. 104 ECA), mas não ficam impunes — estão sujeitos às medidas previstas no ECA, que têm finalidade educativa e não punitiva.</div></div>
+
+      <div class="sl">Autores do Ato Infracional</div>
+      <div class="g2">
+        <div class="card ci2"><div class="ct">Criança (até 12 anos)</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem">Sujeita apenas às <strong>medidas protetivas</strong> do art. 101 ECA (encaminhamento, orientação, acolhimento institucional etc.). <strong>Não se aplicam medidas socioeducativas</strong>.</p></div>
+        <div class="card ci2"><div class="ct">Adolescente (12 a 18 anos)</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem">Sujeito às <strong>medidas socioeducativas</strong> do art. 112 ECA, proporcionais à gravidade do ato e à capacidade de cumpri-las.</p></div>
+      </div>
+
+      <div class="sl">Apreensão do Adolescente</div>
+      <p>O adolescente que pratica ato infracional <strong>não é preso</strong> — é <span class="hl">apreendido</span>. A apreensão deve ser imediatamente comunicada à autoridade judiciária e à família do adolescente (<span class="art">arts. 106–107 ECA</span>).</p>
+      <ul>
+        <li>Apreensão em flagrante: adolescente levado à autoridade policial</li>
+        <li>Comunicação imediata ao MP e aos pais/responsáveis</li>
+        <li>Não se lavra auto de prisão em flagrante — lavra-se <strong>boletim de ocorrência circunstanciado</strong></li>
+      </ul>
+
+      <div class="sl">Internação Provisória — Art. 108 ECA</div>
+      <div class="co cw"><span class="co-ico">⚠</span><div><strong>Art. 108 ECA:</strong> a internação, antes da sentença, pode ser determinada pelo prazo máximo de <strong>45 dias</strong>. Findo esse prazo sem sentença, o adolescente deve ser liberado compulsoriamente.</div></div>
+    </div>
+
+    <div class="sp" id="m4t2">
+      <div class="sl">Garantias Processuais — Art. 111 ECA</div>
+      <p>Ao adolescente acusado de ato infracional são asseguradas as seguintes garantias (<span class="art">art. 111 ECA</span>):</p>
+      <ul>
+        <li><strong>I —</strong> pleno e formal conhecimento da atribuição de ato infracional, mediante citação ou meio equivalente</li>
+        <li><strong>II —</strong> igualdade na produção das provas</li>
+        <li><strong>III —</strong> defesa técnica por advogado</li>
+        <li><strong>IV —</strong> assistência judiciária gratuita e integral aos necessitados, na forma da lei</li>
+        <li><strong>V —</strong> direito de ser ouvido pessoalmente pela autoridade competente</li>
+        <li><strong>VI —</strong> direito de solicitar a presença de seus pais ou responsável em qualquer fase do procedimento</li>
+      </ul>
+
+      <div class="sl">Proteção à Identidade</div>
+      <div class="co cs"><span class="co-ico">✓</span><div><strong>Art. 143 ECA:</strong> é <strong>vedada a divulgação de atos judiciais, policiais e administrativos</strong> que digam respeito a crianças e adolescentes a que se atribua autoria de ato infracional. A proteção da identidade é absoluta.</div></div>
+
+      <div class="sl">Procedimento de Apuração</div>
+      <div class="tw"><table>
+        <thead><tr><th>Fase</th><th>Quem age</th><th>Prazo / Referência</th></tr></thead>
+        <tbody>
+          <tr><td>Apreensão</td><td>Autoridade policial</td><td>Comunicação imediata ao MP (art. 106–107)</td></tr>
+          <tr><td>Oitiva informal</td><td>MP avalia e pode arquivar, conceder remissão ou oferecer representação</td><td>Art. 179–180 ECA</td></tr>
+          <tr><td>Representação</td><td>MP oferece ao juiz</td><td>Art. 182 ECA</td></tr>
+          <tr><td>Audiência de apresentação</td><td>Juiz ouve adolescente, pais e MP</td><td>Art. 184 ECA</td></tr>
+          <tr><td>Sentença</td><td>Juiz aplica medida socioeducativa</td><td>Arts. 112 e 186 ECA</td></tr>
+          <tr><td>Internação provisória</td><td>Máximo 45 dias antes da sentença</td><td>Art. 108 ECA</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="sl">Remissão</div>
+      <div class="co ci"><span class="co-ico">ℹ</span><div><strong>Arts. 126–128 ECA:</strong> antes de iniciado o procedimento judicial, o MP pode conceder a <strong>remissão</strong> (espécie de perdão ou suspensão do processo), como forma de exclusão, suspensão ou extinção do processo. Pode ser cumulada com medidas socioeducativas não privativas de liberdade.</div></div>
+    </div>
+
+    <div class="sp" id="m4t3">
+      <div class="sl">Medidas Socioeducativas — Art. 112 ECA</div>
+      <p>As <span class="hl">medidas socioeducativas</span> são aplicadas ao adolescente autor de ato infracional. Seu rol é <strong>taxativo</strong> e as medidas estão dispostas em ordem crescente de gravidade:</p>
+
+      <div class="tw"><table>
+        <thead><tr><th>#</th><th>Medida</th><th>Artigo</th><th>Prazo</th><th>Privação de liberdade</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td><strong>Advertência</strong></td><td>Art. 115</td><td>—</td><td>Não</td></tr>
+          <tr><td>2</td><td><strong>Obrigação de reparar o dano</strong></td><td>Art. 116</td><td>—</td><td>Não</td></tr>
+          <tr><td>3</td><td><strong>Prestação de serviços à comunidade</strong></td><td>Art. 117</td><td>Máx. 6 meses</td><td>Não</td></tr>
+          <tr><td>4</td><td><strong>Liberdade assistida</strong></td><td>Art. 118</td><td>Mín. 6 meses</td><td>Não (com acompanhamento)</td></tr>
+          <tr><td>5</td><td><strong>Semiliberdade</strong></td><td>Art. 120</td><td>Sem prazo determinado — máx. 3 anos</td><td>Parcial</td></tr>
+          <tr><td>6</td><td><strong>Internação</strong></td><td>Art. 121</td><td>Máx. 3 anos — reavaliação a cada 6 meses</td><td>Sim (total)</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="sl">Detalhamento das Medidas</div>
+      <div class="g2">
+        <div class="card ci2"><div class="ct">Advertência — Art. 115</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem">Admoestação verbal do adolescente, reduzida a termo e assinada. Medida mais branda; aplicada para atos infracionais menos graves.</p></div>
+        <div class="card ci2"><div class="ct">Reparação do dano — Art. 116</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem">Restituição da coisa, ressarcimento do dano ou compensação do prejuízo da vítima. Aplicada quando o ato infracional tiver reflexo patrimonial.</p></div>
+        <div class="card ci2"><div class="ct">PSC — Art. 117</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem">Prestação de serviços gratuitos à comunidade, em entidades assistenciais. Máximo de <strong>6 meses</strong>; máximo de 8 horas semanais, sem prejudicar escola ou trabalho.</p></div>
+        <div class="card ci2"><div class="ct">Liberdade assistida — Art. 118</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem">Mínimo de <strong>6 meses</strong>, renovável. O adolescente é acompanhado por orientador designado pela autoridade judiciária. Medida intermediária.</p></div>
+      </div>
+
+      <div class="sl">Internação — Hipóteses do Art. 122</div>
+      <p>A <span class="hl">internação</span> é a medida mais grave — implica privação total de liberdade. Só pode ser aplicada em <strong>3 hipóteses taxativas</strong>:</p>
+      <ul>
+        <li><strong>I —</strong> ato infracional praticado mediante <strong>violência ou grave ameaça</strong> à pessoa</li>
+        <li><strong>II —</strong> <strong>reiteração</strong> no cometimento de outras infrações graves</li>
+        <li><strong>III —</strong> <strong>reiterado descumprimento injustificável</strong> de medida anteriormente imposta</li>
+      </ul>
+
+      <div class="co cw"><span class="co-ico">⚠</span><div><strong>Princípios da internação (art. 121 ECA):</strong> <strong>brevidade</strong> (pelo prazo necessário), <strong>excepcionalidade</strong> (apenas quando não cabível outra medida) e <strong>respeito à condição peculiar de pessoa em desenvolvimento</strong>.</div></div>
+
+      <div class="sl">Prazos da Internação</div>
+      <div class="g2">
+        <div class="card ci2"><div class="ct">Prazo máximo</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem"><strong>3 anos</strong> de internação (art. 121, §3.º ECA). Atingido o prazo, o adolescente deve ser liberado ou ter a medida substituída por outra.</p></div>
+        <div class="card ci2"><div class="ct">Reavaliação obrigatória</div><p style="font-size:.82rem;color:#aeaab8;margin-top:.4rem">A internação deve ser reavaliada a cada <strong>6 meses</strong>, podendo ser substituída por medida mais branda (art. 121, §2.º ECA).</p></div>
+      </div>
+
+      <div class="co cs"><span class="co-ico">✓</span><div><strong>Liberação compulsória (art. 121, §5.º ECA):</strong> o adolescente internado deve ser liberado compulsoriamente ao atingir os <strong>21 anos de idade</strong>, independentemente do prazo restante.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ QUIZ ═══ -->
+<div class="mod" id="mod-quiz">
+  <div class="mhd" data-c="fam"><div class="mi" data-c="fam">📝</div><div><div class="mnum">Quiz</div><div class="mtitle">20 Questões — Banca UFN</div><div class="mdesc">Família Substituta · Adoção · Destituição · Ato Infracional</div></div></div>
+  <div class="mbody"><div class="qwrap">
+    <div class="qtop"><div class="qtitle">Simulado</div><div class="sbadge" id="qscore">0 / 20</div></div>
+    <div class="qdots" id="qdots"></div>
+    <div id="qzone"></div>
+  </div></div>
+</div>
+
+</main>
+
+<footer class="hub-footer">
+  <div class="ft-left">Guto Ceolin &middot; UFN &middot; Dir. Crian&ccedil;a e Adolescente &middot; 2026/1</div>
+  <div class="ft-right"><a href="../../index.html">← Voltar ao Hub</a></div>
 </footer>
+
 <script>
 function toggleTheme(){var h=document.documentElement;var l=h.getAttribute('data-theme')==='light';h.setAttribute('data-theme',l?'dark':'light');localStorage.setItem('theme',l?'dark':'light');}
-</script><button class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar modo claro/escuro" title="Modo claro/escuro">
+
+const questions=[
+  // Família Substituta
+  {q:"Segundo o ECA, são modalidades de colocação em família substituta, EXCETO:",opts:["A) Guarda","B) Tutela","C) Adoção","D) Curatela"],ans:3,fb:"O <strong>art. 28 do ECA</strong> prevê três modalidades de colocação em família substituta: guarda, tutela e adoção. A <strong>curatela</strong> é instituto do Direito Civil aplicado a maiores incapazes, não a crianças/adolescentes."},
+  {q:"A guarda, conforme o art. 33 do ECA, obriga o guardião a prestar assistência:",opts:["A) Apenas material ao guardado","B) Material, moral e educacional ao guardado","C) Apenas moral e espiritual ao guardado","D) Patrimonial, com prestação de contas ao juiz"],ans:1,fb:"O <strong>art. 33 do ECA</strong> define que a guarda obriga a prestação de assistência <strong>material, moral e educacional</strong> à criança ou adolescente."},
+  {q:"Quanto ao poder familiar dos pais, a guarda:",opts:["A) Extingue automaticamente o poder familiar","B) Suspende o poder familiar durante sua vigência","C) Pode coexistir com o poder familiar dos pais","D) Pressupõe sempre a destituição do poder familiar"],ans:2,fb:"A guarda pode <strong>coexistir com o poder familiar dos pais</strong> — os pais não perdem o poder familiar pela concessão de guarda a terceiro. Diferente da tutela, que pressupõe a ausência ou perda/suspensão do poder familiar."},
+  {q:"A tutela, diferentemente da guarda, pressupõe:",opts:["A) Que os pais estejam presentes e capazes","B) Ausência, falecimento, suspensão ou destituição do poder familiar","C) Apenas o falecimento dos pais","D) A concordância expressa dos pais"],ans:1,fb:"O <strong>art. 36 do ECA</strong> prevê que a tutela pode ser deferida nos casos de <strong>ausência, falecimento ou quando os pais tiverem o poder familiar suspenso ou destituído</strong>."},
+  // Adoção
+  {q:"Sobre a adoção, o ECA estabelece que ela é:",opts:["A) Medida preferencial e revogável","B) Medida excepcional e irrevogável","C) Medida ordinária e temporária","D) Medida preferencial e irrevogável"],ans:1,fb:"O <strong>art. 39, §1.º do ECA</strong> define a adoção como <strong>medida excepcional e irrevogável</strong>. Deve-se recorrer a ela apenas quando esgotados os recursos de manutenção na família natural ou extensa."},
+  {q:"Qual é a idade mínima do adotante e a diferença etária exigida entre adotante e adotando?",opts:["A) 21 anos; diferença de 18 anos","B) 18 anos; diferença de 16 anos","C) 18 anos; diferença de 12 anos","D) 21 anos; diferença de 16 anos"],ans:1,fb:"O <strong>art. 42 do ECA</strong> exige que o adotante tenha <strong>ao menos 18 anos</strong> e seja <strong>16 anos mais velho</strong> que o adotando (art. 42, §3.º)."},
+  {q:"Não podem adotar, conforme o art. 42 do ECA:",opts:["A) Pessoas solteiras","B) Divorciados ou separados","C) Ascendentes e irmãos do adotando","D) Pessoas acima de 60 anos"],ans:2,fb:"O <strong>art. 42, §1.º do ECA</strong> veda expressamente a adoção pelos <strong>ascendentes (avós, bisavós) e pelos irmãos do adotando</strong>. Pessoas solteiras, divorciadas e idosas podem adotar normalmente."},
+  {q:"A adoção internacional é admitida pelo ECA:",opts:["A) De forma preferencial em relação à adoção nacional","B) Apenas quando o adotante for cidadão brasileiro residente no exterior","C) Somente após esgotadas as possibilidades de colocação nacional","D) Sem qualquer restrição, desde que o adotante seja habilitado"],ans:2,fb:"O <strong>art. 51 do ECA</strong> define a adoção internacional como medida de caráter <strong>excepcional e subsidiário</strong>, admitida somente após esgotadas as possibilidades de colocação em família substituta ou adoção nacionais."},
+  {q:"Qual é o prazo mínimo do estágio de convivência em caso de adoção internacional?",opts:["A) 15 dias no Brasil","B) 30 dias no Brasil","C) 60 dias no Brasil","D) 90 dias no Brasil"],ans:1,fb:"O <strong>art. 46, §3.º do ECA</strong> exige período de convivência de, no mínimo, <strong>30 dias em território nacional</strong> nas adoções internacionais. O prazo mínimo de 90 dias é o geral para adoção nacional."},
+  // Destituição
+  {q:"Qual das alternativas NÃO é causa de perda (destituição) do poder familiar, segundo o art. 1.638 do Código Civil?",opts:["A) Castigo imoderado do filho","B) Abandono do filho","C) Condenação a pena superior a 2 anos de prisão","D) Entrega irregular do filho para fins de adoção"],ans:2,fb:"A <strong>condenação a pena superior a 2 anos</strong> é causa de <strong>suspensão</strong> do poder familiar (art. 1.637, §único CC), não de destituição/perda. As causas de perda estão no art. 1.638 CC: castigo imoderado, abandono, atos contrários à moral, reiteração de faltas e entrega irregular para adoção."},
+  {q:"O procedimento de destituição do poder familiar, previsto nos arts. 155-163 do ECA, tem prazo máximo de duração de:",opts:["A) 60 dias","B) 90 dias","C) 120 dias","D) 180 dias"],ans:2,fb:"O <strong>art. 163 do ECA</strong> estabelece que o procedimento de perda ou suspensão do poder familiar terá <strong>prazo máximo de 120 dias</strong>, com prioridade em sua tramitação."},
+  {q:"São legitimados para propor a ação de destituição do poder familiar, segundo o art. 155 do ECA:",opts:["A) Apenas o Ministério Público","B) O Ministério Público ou quem tenha legítimo interesse","C) Apenas parentes consanguíneos do menor","D) Somente a Defensoria Pública"],ans:1,fb:"O <strong>art. 155 do ECA</strong> prevê como legitimados o <strong>Ministério Público</strong> ou <strong>quem tenha legítimo interesse</strong> (parentes, guardião, tutor, Conselho Tutelar etc.)."},
+  // Ato Infracional
+  {q:"Define-se ato infracional, segundo o art. 103 do ECA, como:",opts:["A) Qualquer conduta imoral praticada por adolescente","B) Conduta descrita como crime ou contravenção penal","C) Infração administrativa praticada por menor de 18 anos","D) Qualquer comportamento contrário às normas escolares"],ans:1,fb:"O <strong>art. 103 do ECA</strong> define ato infracional como a <strong>conduta descrita como crime ou contravenção penal</strong>. É a tipificação do comportamento do menor que, se praticado por adulto, configuraria crime ou contravenção."},
+  {q:"Em relação ao adolescente autor de ato infracional, é CORRETO afirmar:",opts:["A) É lavrado auto de prisão em flagrante como para adultos","B) É apreendido, e a família deve ser comunicada imediatamente","C) É preso preventivamente por prazo de 30 dias","D) Pode ser internado provisoriamente por prazo máximo de 90 dias"],ans:1,fb:"O adolescente não é <strong>preso</strong> — é <strong>apreendido</strong>. O <strong>art. 107 do ECA</strong> exige comunicação imediata ao juiz e à família. Lavra-se boletim de ocorrência, não auto de prisão em flagrante."},
+  {q:"O prazo máximo de internação provisória do adolescente, antes da sentença, é de:",opts:["A) 30 dias","B) 45 dias","C) 60 dias","D) 90 dias"],ans:1,fb:"O <strong>art. 108 do ECA</strong> limita a internação provisória, antes da sentença, ao prazo máximo de <strong>45 dias</strong>. Findo esse prazo sem sentença, o adolescente deve ser liberado."},
+  {q:"Qual das medidas socioeducativas previstas no art. 112 do ECA implica privação TOTAL de liberdade?",opts:["A) Liberdade assistida","B) Prestação de serviços à comunidade","C) Semiliberdade","D) Internação"],ans:3,fb:"A <strong>internação</strong> (art. 121 ECA) é a única medida que implica privação total de liberdade. A semiliberdade implica privação parcial. A liberdade assistida e a PSC não implicam privação de liberdade."},
+  {q:"A medida de liberdade assistida tem prazo mínimo de:",opts:["A) 3 meses","B) 6 meses","C) 1 ano","D) Não tem prazo mínimo"],ans:1,fb:"O <strong>art. 118 do ECA</strong> prevê que a liberdade assistida será fixada pelo prazo mínimo de <strong>6 meses</strong>, podendo ser prorrogada, revogada ou substituída por outra medida."},
+  {q:"A internação do adolescente pode ser aplicada quando:",opts:["A) O ato infracional for qualquer contravenção penal","B) O adolescente for reincidente em qualquer ato infracional","C) O ato for praticado com violência ou grave ameaça; ou houver reiteração em infrações graves; ou reiterado descumprimento de medida anterior","D) Apenas nos casos de atos infracionais equiparados a crimes hediondos"],ans:2,fb:"O <strong>art. 122 do ECA</strong> lista taxativamente as 3 hipóteses de internação: ato com <strong>violência ou grave ameaça</strong>; <strong>reiteração em infrações graves</strong>; e <strong>reiterado descumprimento injustificável de medida anterior</strong>."},
+  {q:"Qual é o prazo máximo de internação de um adolescente e a idade de liberação compulsória?",opts:["A) 3 anos e liberação aos 18 anos","B) 5 anos e liberação aos 21 anos","C) 3 anos e liberação aos 21 anos","D) 2 anos e liberação aos 18 anos"],ans:2,fb:"O <strong>art. 121 do ECA</strong> limita a internação ao máximo de <strong>3 anos</strong> (§3.º) e exige <strong>liberação compulsória aos 21 anos</strong> (§5.º), independentemente do prazo restante."},
+  {q:"A vedação de divulgação de atos judiciais, policiais e administrativos relativos a crianças e adolescentes autores de ato infracional está prevista:",opts:["A) No art. 143 do ECA, como proteção absoluta à identidade","B) Apenas para menores de 14 anos","C) Somente para crimes dolosos","D) No Código Penal, como norma especial"],ans:0,fb:"O <strong>art. 143 do ECA</strong> veda expressamente a divulgação de atos que digam respeito a crianças e adolescentes a quem se atribua autoria de ato infracional. A proteção é <strong>absoluta</strong> e independe da gravidade do ato ou da idade do adolescente."}
+];
+
+let cur=0,score=0,answered=[],SQ=[];
+const zone=document.getElementById('qzone');
+const dots=document.getElementById('qdots');
+const sc=document.getElementById('qscore');
+function shuffleOpts(q){const idx=Array.from({length:q.opts.length},(_,i)=>i);for(let i=idx.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[idx[i],idx[j]]=[idx[j],idx[i]];}return{...q,opts:idx.map(i=>q.opts[i]),ans:idx.indexOf(q.ans)};}
+function buildDots(){SQ=questions.map(shuffleOpts);dots.innerHTML='';SQ.forEach((_,i)=>{const d=document.createElement('div');d.className='qdot'+(i===0?' cur':'');d.id='dot'+i;dots.appendChild(d);});}
+function renderQ(i){if(i>=SQ.length){showResult();return;}const q=SQ[i];let html=`<div class="qq active" id="qq${i}"><div class="qnum">Questão ${i+1} de ${SQ.length}</div><div class="qtext">${q.q}</div><div class="qopts">`;q.opts.forEach((o,j)=>{html+=`<button class="qopt" onclick="pick(${i},${j})"><span class="ql">${String.fromCharCode(65+j)}</span><span class="qt">${o}</span></button>`;});html+=`</div><div class="qfb" id="fb${i}"></div><div class="qnav"><button class="qbn qbn-rs" onclick="resetQuiz()">Reiniciar</button><button class="qbn qbn-next" id="nx${i}" onclick="nextQ(${i+1})">Próxima →</button></div></div>`;zone.innerHTML=html;}
+function pick(qi,oi){if(answered[qi]!==undefined)return;answered[qi]=oi;const q=SQ[qi];const opts=document.querySelectorAll(`#qq${qi} .qopt`);opts.forEach((o,j)=>{o.classList.add('disabled');if(j===q.ans)o.classList.add('correct');else if(j===oi)o.classList.add('wrong');});const fb=document.getElementById('fb'+qi);if(oi===q.ans){score++;fb.className='qfb ok show';fb.innerHTML='<strong>Correto!</strong> '+q.fb;}else{fb.className='qfb ng show';fb.innerHTML='<strong>Incorreto.</strong> '+q.fb;}document.getElementById('dot'+qi).className='qdot '+(oi===q.ans?'ok':'err');if(qi+1<SQ.length){const d=document.getElementById('dot'+(qi+1));if(d)d.classList.add('cur');}sc.textContent=score+' / '+SQ.length;document.getElementById('nx'+qi).classList.add('show');}
+function nextQ(i){cur=i;renderQ(i);}
+function showResult(){const pct=Math.round(score/SQ.length*100);zone.innerHTML=`<div class="qres show"><div class="rscore">${score}<span style="font-size:2rem;color:var(--text2)">/${SQ.length}</span></div><div class="rlabel">${pct}% de acerto</div><div style="margin-top:1.2rem;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--text2)">${pct>=70?'Aprovado!':'Continue revisando.'}</div><div class="qnav" style="justify-content:center;margin-top:1.5rem"><button class="qbn qbn-rs" onclick="resetQuiz()">Refazer Quiz</button></div></div>`;try{const _k='quiz_'+location.pathname.split('/').slice(-2).join('/').replace('.html','').replace('/','_');localStorage.setItem(_k,JSON.stringify({score,total:SQ.length,pct,ts:Date.now()}));}catch(_e){}}
+function resetQuiz(){cur=0;score=0;answered=[];sc.textContent='0 / '+questions.length;buildDots();renderQ(0);}
+function switchMod(m,btn){document.querySelectorAll('.mod').forEach(d=>d.classList.remove('active'));document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));document.getElementById('mod-'+m).classList.add('active');btn.classList.add('active');}
+function switchTab(btn,panelId){const mbody=btn.closest('.mbody');mbody.querySelectorAll('.stab').forEach(b=>b.classList.remove('active'));mbody.querySelectorAll('.sp').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById(panelId).classList.add('active');}
+function xp(trigger){const item=trigger.closest('.xi');const content=item.querySelector('.xc');const inner=item.querySelector('.xin');const open=item.classList.contains('open');item.classList.toggle('open');content.style.maxHeight=open?'0':inner.scrollHeight+'px';}
+
+const si=document.querySelector('.si');
+let st;
+si.addEventListener('input',()=>{clearTimeout(st);st=setTimeout(()=>doSearch(si.value.trim()),220);});
+function doSearch(q){if(!q){clearHL();return;}const re=new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi');document.querySelectorAll('.sp p,.sp li,.sp td,.sp .ct').forEach(el=>{el.innerHTML=el.textContent.replace(re,m=>`<mark>${m}</mark>`);});}
+function clearHL(){document.querySelectorAll('.sp p,.sp li,.sp td,.sp .ct').forEach(el=>{el.innerHTML=el.textContent;});}
+
+buildDots();renderQ(0);
+</script>
+<button class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar modo claro/escuro" title="Modo claro/escuro">
   <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
   <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-</button></body>
+</button>
+</body>
 </html>
