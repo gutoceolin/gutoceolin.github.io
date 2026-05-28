@@ -34,36 +34,19 @@ body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font
 /* HERO */
 .hero{position:relative;z-index:10;max-width:1140px;margin:0 auto;padding:3.5rem 2rem 0}
 .hero-inner{background:var(--surface);border-radius:var(--r);box-shadow:var(--sh-sm);border:1px solid var(--border);overflow:hidden}
-/* faixa de disciplinas no topo */
-.hero-strip{display:flex;height:4px}
+.hero-strip{display:flex;height:5px}
 .hero-strip div{flex:1}
-/* conteúdo interno */
-.hero-body{padding:2rem 2.5rem 2rem}
+.hero-body{padding:2.5rem 2.5rem 2.25rem}
 .hero-eye{font-size:.68rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);margin-bottom:1.4rem;display:flex;align-items:center;gap:.6rem}
 .hero-eye::before{content:'';display:inline-block;width:16px;height:2px;background:var(--eca);border-radius:2px}
-/* layout principal: título + stats */
-.hero-main{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem}
 .hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,6vw,4.8rem);font-weight:700;color:var(--white);line-height:.93;letter-spacing:-.025em}
 .hero-title em{font-style:italic;font-weight:300;color:var(--text2);display:block}
-/* stats à direita */
-.hero-stats{display:flex;align-items:center;gap:1.5rem;flex-shrink:0;padding-bottom:.2rem}
-.hero-stat{display:flex;flex-direction:column;align-items:center;gap:.2rem}
-.hs-n{font-family:'Cormorant Garamond',serif;font-size:2.6rem;font-weight:700;color:var(--white);line-height:1}
-.hs-l{font-size:.58rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--text3)}
-.hero-sep{width:1px;height:2.4rem;background:var(--border2);align-self:center}
-/* nomes das disciplinas */
-.hero-discs{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid var(--border)}
-.hero-disc{display:flex;align-items:center;gap:.4rem;font-size:.7rem;font-weight:600;letter-spacing:.04em}
-.hero-disc-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
-/* badges */
-.hero-meta{display:flex;align-items:center;gap:.6rem;margin-top:1.2rem;flex-wrap:wrap}
+.hero-sub{font-family:'Outfit',sans-serif;font-size:.88rem;font-weight:400;color:var(--text2);margin-top:1rem;letter-spacing:.02em}
+.hero-meta{display:flex;align-items:center;gap:.6rem;margin-top:1.5rem;flex-wrap:wrap}
 .hero-badge{font-size:.7rem;font-weight:500;letter-spacing:.04em;padding:.3rem .8rem;border-radius:100px;background:var(--surface2);color:var(--text3);border:1px solid var(--border)}
 .hero-badge.live{background:var(--eca-dim);color:var(--eca);border-color:rgba(92,201,138,.25);display:flex;align-items:center;gap:.45rem}
 .hero-badge.live::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--eca);animation:blink 2.5s infinite;flex-shrink:0}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-/* light mode hero */
-[data-theme=light] .hero-sep{background:var(--border)}
-@media(max-width:600px){.hero-main{flex-direction:column;align-items:flex-start;gap:1.25rem}.hero-stats{gap:1rem}.hero-discs{gap:.65rem}}
 
 /* SEM TABS */
 .sem-tabs{max-width:1140px;margin:1.5rem auto 0;padding:0 2rem}
@@ -293,39 +276,11 @@ html.sem4-active .empty-state.sem-4-only.show{display:block!important}
 
     <div class="hero-body">
       <div class="hero-eye">gutoceolin.github.io &mdash; central de resumos</div>
-
-      <!-- título + stats -->
-      <div class="hero-main">
-        <h1 class="hero-title">
-          Resumos<br>
-          <em>para Provas</em>
-        </h1>
-        <div class="hero-stats">
-          <div class="hero-stat">
-            <span class="hs-n">15</span>
-            <span class="hs-l">Resumos</span>
-          </div>
-          <div class="hero-sep"></div>
-          <div class="hero-stat">
-            <span class="hs-n">5</span>
-            <span class="hs-l">Disciplinas</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- disciplinas com cor -->
-      <div class="hero-discs">
-        <span class="hero-disc" style="color:var(--civil)"><span class="hero-disc-dot" style="background:var(--civil)"></span>Dir. Civil</span>
-        <span class="hero-disc" style="color:var(--const)"><span class="hero-disc-dot" style="background:var(--const)"></span>Teoria da Const.</span>
-        <span class="hero-disc" style="color:var(--proc)"><span class="hero-disc-dot" style="background:var(--proc)"></span>T.C. Proc. Civil</span>
-        <span class="hero-disc" style="color:var(--penal)"><span class="hero-disc-dot" style="background:var(--penal)"></span>Direito Penal</span>
-        <span class="hero-disc" style="color:var(--eca)"><span class="hero-disc-dot" style="background:var(--eca)"></span>ECA</span>
-      </div>
-
-      <!-- badges -->
+      <h1 class="hero-title">Resumos<br><em>para Provas</em></h1>
+      <p class="hero-sub">Gradua&ccedil;&atilde;o em Direito &middot; Universidade Franciscana</p>
       <div class="hero-meta">
         <div class="hero-badge live">Atualizado 2026/1</div>
-        <div class="hero-badge">UFN &middot; Curso de Direito</div>
+        <div class="hero-badge">3&ordm; e 4&ordm; Semestres</div>
       </div>
     </div>
   </div>
