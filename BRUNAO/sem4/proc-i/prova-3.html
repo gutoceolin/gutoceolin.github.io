@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<script>(function(){var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');if(t==='light')document.documentElement.setAttribute('data-theme','light');})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dir. Processual Civil I &mdash; Prova 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@300;400;500;600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#111118;--surface:#1c1c26;--surface2:#242430;--border:rgba(255,255,255,.07);--border2:rgba(255,255,255,.12);--text:#e8e4f0;--text2:#9490a8;--text3:#56526a;--white:#f5f2ff;--accent:#5cb8e0;--accent-dim:rgba(92,184,224,.08);}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-weight:300;min-height:100vh}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse 70% 40% at 10% 0%,var(--accent-dim) 0%,transparent 55%)}
+.wrap{position:relative;z-index:10;max-width:1100px;margin:0 auto;padding:3rem 2rem}
+.back{display:inline-flex;align-items:center;gap:.45rem;font-family:'Outfit',sans-serif;font-size:.75rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);text-decoration:none;margin-bottom:1.5rem;padding:.38rem 1rem;border-radius:100px;border:1px solid var(--border);background:var(--surface);transition:all .2s}
+.back:hover{color:var(--text);border-color:var(--border2);background:var(--surface2)}.back:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.ey{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--text3);margin-bottom:.9rem}
+.htitle{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,6.5vw,4.6rem);font-weight:700;color:var(--white);line-height:.95;letter-spacing:-.02em;margin-bottom:.75rem}
+.htitle em{font-style:italic;color:var(--text2);font-weight:400}
+.disc-pill{display:inline-flex;align-items:center;gap:.38rem;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;padding:.25rem .65rem;border-radius:100px;margin-top:1.1rem;background:rgba(92,184,224,.08);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 30%,transparent)}
+.disc-pill .dot{width:4px;height:4px;border-radius:50%;background:currentColor}
+.wip{margin-top:3rem;padding:3.5rem 2.5rem;background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:0 2px 12px rgba(0,0,0,.25);text-align:center}
+.wip-icon{font-size:0;width:48px;height:48px;margin:0 auto 1.75rem;border-radius:12px;background:var(--surface2);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:5px}.wip-icon::before,.wip-icon::after{content:"";display:block;border-radius:2px;background:var(--accent);opacity:.55}.wip-icon::before{width:20px;height:2px}.wip-icon::after{width:13px;height:2px}
+.wip-title{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--white);margin-bottom:.75rem;letter-spacing:-.02em}
+.wip-text{font-family:'Outfit',sans-serif;font-size:.88rem;color:var(--text2);letter-spacing:.07em;line-height:1.85}
+.accent-line{width:48px;height:2px;background:var(--accent);margin:1.1rem auto 0;border-radius:2px;opacity:.5}
+.topics{display:flex;gap:.4rem;flex-wrap:wrap;justify-content:center;margin-top:1.5rem}
+.topic{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.04em;background:var(--surface2);border:1px solid var(--border);color:var(--text2);padding:.18rem .5rem;border-radius:100px}
+.ft{max-width:1100px;margin:4rem auto 0;padding:1.5rem 2rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.85rem;color:var(--text3)}
+.ft a{color:var(--text2);text-decoration:none}.ft a:hover{color:var(--white)}.ft a:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+@media(max-width:600px){.wrap,.ft{padding-left:1rem;padding-right:1rem}}
+[data-theme=light]{
+  --bg:#f0eef7;--surface:#ffffff;--surface2:#f4f2fb;
+  --border:rgba(0,0,0,.07);--border2:rgba(0,0,0,.14);
+  --text:#1a1828;--text2:#6a6480;--text3:#9a94b0;--white:#0a0818;
+  --accent:#2088b0;--accent-dim:rgba(32,136,176,.1);}
+[data-theme=light] body::before{opacity:.18}
+[data-theme=light] .disc-pill{background:transparent}
+.theme-toggle{position:fixed;bottom:1.75rem;right:1.75rem;z-index:100;width:40px;height:40px;border-radius:50%;background:var(--surface2);border:1px solid var(--border2);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text2);transition:background .2s,border-color .2s,color .2s,box-shadow .2s}
+.theme-toggle:hover{background:var(--surface);color:var(--text);box-shadow:0 4px 20px rgba(0,0,0,.18)}
+.theme-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.theme-toggle svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;display:block}
+.icon-sun{display:none}.icon-moon{display:block}
+[data-theme=light] .icon-sun{display:block}[data-theme=light] .icon-moon{display:none}</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../../../index.html">&#8592; Central de Resumos</a>
+  <div class="ey">Dir. Processual Civil I &mdash; Prova 3 &middot; UFN 2026/2</div>
+  <h1 class="htitle">Provas, Sentença<br><em>e Coisa Julgada</em></h1>
+  <div class="disc-pill"><span class="dot"></span>Dir. Proc. Civil I</div>
+  <div class="wip">
+    <div class="wip-icon" aria-hidden="true"></div>
+    <div class="wip-title">Resumo em prepara&ccedil;&atilde;o</div>
+    <div class="wip-text">O conte&uacute;do deste resumo ser&aacute; adicionado em breve.<br>Volte quando o material estiver dispon&iacute;vel.</div>
+    <div class="accent-line"></div>
+    <div class="topics">
+      <span class="topic">Teoria Geral das Provas</span>
+      <span class="topic">Ônus da Prova · art. 373</span>
+      <span class="topic">Sentença · art. 489</span>
+      <span class="topic">Coisa Julgada e Recursos</span>
+    </div>
+  </div>
+</div>
+<footer class="ft">
+  <span>Guto Ceolin &middot; UFN &middot; Dir. Processual Civil I &middot; 2026/2</span>
+  <a href="../../../index.html">&#8592; Voltar ao Hub</a>
+</footer>
+<script>
+function toggleTheme(){var h=document.documentElement;var l=h.getAttribute('data-theme')==='light';h.setAttribute('data-theme',l?'dark':'light');localStorage.setItem('theme',l?'dark':'light');}
+</script><button class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar modo claro/escuro" title="Modo claro/escuro">
+  <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button></body>
+</html>

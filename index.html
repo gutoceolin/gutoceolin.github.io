@@ -17,6 +17,11 @@
   --penal:#e07a5c;--penal-dim:rgba(224,122,92,.14);--penal-mid:rgba(224,122,92,.24);
   --eca:#5cc98a;--eca-dim:rgba(92,201,138,.14);--eca-mid:rgba(92,201,138,.24);
   --gold:#d4a843;--gold-dim:rgba(212,168,67,.14);
+  --const-i:#7b8fe8;--const-i-dim:rgba(123,143,232,.14);--const-i-mid:rgba(123,143,232,.24);
+  --obrig:#e8904a;--obrig-dim:rgba(232,144,74,.14);--obrig-mid:rgba(232,144,74,.24);
+  --emp:#8855d4;--emp-dim:rgba(136,85,212,.14);--emp-mid:rgba(136,85,212,.24);
+  --penal2:#e07a5c;--penal2-dim:rgba(224,122,92,.14);--penal2-mid:rgba(224,122,92,.24);
+  --proc-i:#5cb8e0;--proc-i-dim:rgba(92,184,224,.14);--proc-i-mid:rgba(92,184,224,.24);
   --r:14px;--r-sm:8px;--r-xs:6px;
   --sh:0 8px 32px rgba(0,0,0,.4),0 2px 8px rgba(0,0,0,.2);
   --sh-sm:0 2px 12px rgba(0,0,0,.3),0 1px 4px rgba(0,0,0,.15);
@@ -79,6 +84,11 @@ body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font
 .sem-coming-text{font-size:.88rem;color:var(--text2);line-height:1.75;max-width:360px;margin:0 auto}
 
 .sem-other-active .sem-3-only{display:none!important}
+.sem-4-only{display:none!important}
+html.sem4-active .filters-rail.sem-4-only{display:block!important}
+html.sem4-active .section-head.sem-4-only{display:flex!important}
+html.sem4-active .grid.sem-4-only{display:grid!important}
+html.sem4-active .empty-state.sem-4-only{display:block!important}
 
 /* FILTROS */
 .filters-rail{position:sticky;top:0;z-index:20;background:rgba(17,17,24,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);margin-top:1.5rem}
@@ -91,6 +101,11 @@ body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font
 .filter-btn[data-disc=proc].active{background:var(--proc-dim);color:var(--proc);border-color:rgba(92,184,224,.3)}
 .filter-btn[data-disc=penal].active{background:var(--penal-dim);color:var(--penal);border-color:rgba(224,122,92,.3)}
 .filter-btn[data-disc=eca].active{background:var(--eca-dim);color:var(--eca);border-color:rgba(92,201,138,.3)}
+.filter-btn[data-disc=const-i].active{background:var(--const-i-dim);color:var(--const-i);border-color:rgba(123,143,232,.3)}
+.filter-btn[data-disc=obrig].active{background:var(--obrig-dim);color:var(--obrig);border-color:rgba(232,144,74,.3)}
+.filter-btn[data-disc=emp].active{background:var(--emp-dim);color:var(--emp);border-color:rgba(136,85,212,.3)}
+.filter-btn[data-disc=penal2].active{background:var(--penal2-dim);color:var(--penal2);border-color:rgba(224,122,92,.3)}
+.filter-btn[data-disc=proc-i].active{background:var(--proc-i-dim);color:var(--proc-i);border-color:rgba(92,184,224,.3)}
 .filter-sep{flex:1}
 .search-mini{position:relative}
 .search-mini input{background:var(--surface);border:1px solid var(--border);border-radius:100px;padding:.38rem 1rem .38rem 2.1rem;color:var(--text);font-family:'Outfit',sans-serif;font-size:.8rem;outline:none;width:190px;transition:border-color .2s,background .2s;min-height:36px}
@@ -122,6 +137,11 @@ body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font
 .rcard[data-disc=proc]:hover{border-color:rgba(92,184,224,.35)}
 .rcard[data-disc=penal]:hover{border-color:rgba(224,122,92,.35)}
 .rcard[data-disc=eca]:hover{border-color:rgba(92,201,138,.35)}
+.rcard[data-disc=const-i]:hover{border-color:rgba(123,143,232,.35)}
+.rcard[data-disc=obrig]:hover{border-color:rgba(232,144,74,.35)}
+.rcard[data-disc=emp]:hover{border-color:rgba(136,85,212,.35)}
+.rcard[data-disc=penal2]:hover{border-color:rgba(224,122,92,.35)}
+.rcard[data-disc=proc-i]:hover{border-color:rgba(92,184,224,.35)}
 .rcard.hidden{display:none!important}
 .rcard.locked{opacity:.4;cursor:default;pointer-events:none}
 
@@ -132,6 +152,11 @@ body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font
 .rcard[data-disc=proc]   .rcard-top{background:linear-gradient(90deg,var(--proc),transparent)}
 .rcard[data-disc=penal]  .rcard-top{background:linear-gradient(90deg,var(--penal),transparent)}
 .rcard[data-disc=eca]    .rcard-top{background:linear-gradient(90deg,var(--eca),transparent)}
+.rcard[data-disc=const-i] .rcard-top{background:linear-gradient(90deg,var(--const-i),transparent)}
+.rcard[data-disc=obrig]  .rcard-top{background:linear-gradient(90deg,var(--obrig),transparent)}
+.rcard[data-disc=emp]    .rcard-top{background:linear-gradient(90deg,var(--emp),transparent)}
+.rcard[data-disc=penal2] .rcard-top{background:linear-gradient(90deg,var(--penal2),transparent)}
+.rcard[data-disc=proc-i] .rcard-top{background:linear-gradient(90deg,var(--proc-i),transparent)}
 
 .rcard-body{padding:1.4rem;flex:1;display:flex;flex-direction:column;gap:.6rem}
 
@@ -143,6 +168,11 @@ body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font
 .rcard[data-disc=proc]   .disc-pill{background:var(--proc-dim);color:var(--proc)}
 .rcard[data-disc=penal]  .disc-pill{background:var(--penal-dim);color:var(--penal)}
 .rcard[data-disc=eca]    .disc-pill{background:var(--eca-dim);color:var(--eca)}
+.rcard[data-disc=const-i] .disc-pill{background:var(--const-i-dim);color:var(--const-i)}
+.rcard[data-disc=obrig]  .disc-pill{background:var(--obrig-dim);color:var(--obrig)}
+.rcard[data-disc=emp]    .disc-pill{background:var(--emp-dim);color:var(--emp)}
+.rcard[data-disc=penal2] .disc-pill{background:var(--penal2-dim);color:var(--penal2)}
+.rcard[data-disc=proc-i] .disc-pill{background:var(--proc-i-dim);color:var(--proc-i)}
 
 .rcard-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:var(--white);line-height:1.2}
 
@@ -224,6 +254,11 @@ body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font
   --penal:#b85030;--penal-dim:rgba(184,80,48,.1);--penal-mid:rgba(184,80,48,.18);
   --eca:#289050;--eca-dim:rgba(40,144,80,.1);--eca-mid:rgba(40,144,80,.18);
   --gold:#987020;--gold-dim:rgba(152,112,32,.1);
+  --const-i:#5060c8;--const-i-dim:rgba(80,96,200,.1);--const-i-mid:rgba(80,96,200,.18);
+  --obrig:#c06820;--obrig-dim:rgba(192,104,32,.1);--obrig-mid:rgba(192,104,32,.18);
+  --emp:#6030a8;--emp-dim:rgba(96,48,168,.1);--emp-mid:rgba(96,48,168,.18);
+  --penal2:#b85030;--penal2-dim:rgba(184,80,48,.1);--penal2-mid:rgba(184,80,48,.18);
+  --proc-i:#2088b0;--proc-i-dim:rgba(32,136,176,.1);--proc-i-mid:rgba(32,136,176,.18);
   --sh:0 8px 32px rgba(0,0,0,.1),0 2px 8px rgba(0,0,0,.06);
   --sh-sm:0 2px 12px rgba(0,0,0,.07),0 1px 4px rgba(0,0,0,.04);
   --sh-hover:0 16px 48px rgba(0,0,0,.14),0 4px 12px rgba(0,0,0,.08)}
@@ -282,7 +317,7 @@ body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font
       <div class="hero-discs">
         <span class="hero-disc" style="color:var(--civil)"><span class="hero-disc-dot" style="background:var(--civil)"></span>Dir. Civil</span>
         <span class="hero-disc" style="color:var(--const)"><span class="hero-disc-dot" style="background:var(--const)"></span>Teoria da Const.</span>
-        <span class="hero-disc" style="color:var(--proc)"><span class="hero-disc-dot" style="background:var(--proc)"></span>Processual Civil</span>
+        <span class="hero-disc" style="color:var(--proc)"><span class="hero-disc-dot" style="background:var(--proc)"></span>T.C. Proc. Civil</span>
         <span class="hero-disc" style="color:var(--penal)"><span class="hero-disc-dot" style="background:var(--penal)"></span>Direito Penal</span>
         <span class="hero-disc" style="color:var(--eca)"><span class="hero-disc-dot" style="background:var(--eca)"></span>ECA</span>
       </div>
@@ -302,7 +337,7 @@ body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font
     <button class="sem-tab" data-sem="1" role="tab" aria-selected="false" onclick="setSemester(1,this)">1&ordm; <span class="sem-badge">Em breve</span></button>
     <button class="sem-tab" data-sem="2" role="tab" aria-selected="false" onclick="setSemester(2,this)">2&ordm; <span class="sem-badge">Em breve</span></button>
     <button class="sem-tab active" data-sem="3" role="tab" aria-selected="true" onclick="setSemester(3,this)">3&ordm; <span class="sem-badge">Atual</span></button>
-    <button class="sem-tab" data-sem="4" role="tab" aria-selected="false" onclick="setSemester(4,this)">4&ordm; <span class="sem-badge">Futuro</span></button>
+    <button class="sem-tab" data-sem="4" role="tab" aria-selected="false" onclick="setSemester(4,this)">4&ordm; <span class="sem-badge">Em breve</span></button>
     <button class="sem-tab" data-sem="5" role="tab" aria-selected="false" onclick="setSemester(5,this)">5&ordm; <span class="sem-badge">Futuro</span></button>
     <button class="sem-tab" data-sem="6" role="tab" aria-selected="false" onclick="setSemester(6,this)">6&ordm; <span class="sem-badge">Futuro</span></button>
   </div>
@@ -323,7 +358,7 @@ body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font
   <button class="filter-btn active" data-disc="all" aria-pressed="true" onclick="applyFilter('all',this)">Todos</button>
   <button class="filter-btn" data-disc="civil" aria-pressed="false" onclick="applyFilter('civil',this)">Civil</button>
   <button class="filter-btn" data-disc="const" aria-pressed="false" onclick="applyFilter('const',this)">Teoria da Constituição</button>
-  <button class="filter-btn" data-disc="proc" aria-pressed="false" onclick="applyFilter('proc',this)">Processual</button>
+  <button class="filter-btn" data-disc="proc" aria-pressed="false" onclick="applyFilter('proc',this)">T.C. Proc. Civil</button>
   <button class="filter-btn" data-disc="penal" aria-pressed="false" onclick="applyFilter('penal',this)">Penal</button>
   <button class="filter-btn" data-disc="eca" aria-pressed="false" onclick="applyFilter('eca',this)">ECA</button>
   <div class="filter-sep"></div>
@@ -347,7 +382,7 @@ body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font
   <!-- CIVIL -->
   <a class="rcard" data-disc="civil" data-sem="3"
      data-title="pessoa natural nascituro capacidade emancipacao"
-     href="BRUNAO/civil/prova-1.html">
+     href="BRUNAO/sem3/civil/prova-1.html">
     <div class="rcard-top"></div>
     <span class="status-badge ready">Dispon&#237;vel</span>
     <div class="rcard-body">
@@ -368,7 +403,7 @@ body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font
 
   <a class="rcard" data-disc="civil" data-sem="3"
      data-title="morte ausencia pj domicilio pessoa juridica"
-     href="BRUNAO/civil/prova-2.html">
+     href="BRUNAO/sem3/civil/prova-2.html">
     <div class="rcard-top"></div>
     <span class="status-badge ready">Dispon&#237;vel</span>
     <div class="rcard-body">
@@ -395,7 +430,7 @@ body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font
 
   <a class="rcard" data-disc="civil" data-sem="3"
      data-title="negocios juridicos vicios consentimento nulidade"
-     href="BRUNAO/civil/prova-3.html">
+     href="BRUNAO/sem3/civil/prova-3.html">
     <div class="rcard-top"></div>
     <span class="status-badge ready">Dispon&#237;vel</span>
     <div class="rcard-body">
@@ -416,7 +451,7 @@ body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font
   <!-- TEORIA DA CONSTITUICAO -->
   <a class="rcard" data-disc="const" data-sem="3"
      data-title="teoria constituicao poder constituinte originario derivado supremacia clausulas petreas conceito"
-     href="BRUNAO/const/prova-1.html">
+     href="BRUNAO/sem3/const/prova-1.html">
     <div class="rcard-top"></div>
     <span class="status-badge ready">Dispon&#237;vel</span>
     <div class="rcard-body">
@@ -437,7 +472,7 @@ body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font
 
   <a class="rcard" data-disc="const" data-sem="3"
      data-title="eficacia normas constitucionais direitos fundamentais"
-     href="BRUNAO/const/prova-2.html">
+     href="BRUNAO/sem3/const/prova-2.html">
     <div class="rcard-top"></div>
     <span class="status-badge ready">Dispon&#237;vel</span>
     <div class="rcard-body">
@@ -458,7 +493,7 @@ body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font
 
   <a class="rcard" data-disc="const" data-sem="3"
      data-title="controle constitucionalidade adi adc adpf stf"
-     href="BRUNAO/const/prova-3.html">
+     href="BRUNAO/sem3/const/prova-3.html">
     <div class="rcard-top"></div>
     <span class="status-badge ready">Dispon&#237;vel</span>
     <div class="rcard-body">
@@ -480,11 +515,11 @@ body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font
   <!-- PROCESSUAL CIVIL -->
   <a class="rcard" data-disc="proc" data-sem="3"
      data-title="principios processo civil contraditorio jurisdicao adr"
-     href="BRUNAO/proc/prova-1.html">
+     href="BRUNAO/sem3/proc/prova-1.html">
     <div class="rcard-top"></div>
     <span class="status-badge ready">Dispon&#237;vel</span>
     <div class="rcard-body">
-      <span class="disc-pill"><span class="dot"></span>Dir. Processual Civil</span>
+      <span class="disc-pill"><span class="dot"></span>T.C. Proc. Civil</span>
       <div class="rcard-title">Princ&#237;pios e Normas Fundamentais (Prova 1)</div>
       <div class="rcard-topics">
         <span class="topic-tag">MASC &middot; autotutela</span>
@@ -501,11 +536,11 @@ body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font
 
   <a class="rcard" data-disc="proc" data-sem="3"
      data-title="jurisdicao competencia jurisdicional absoluta relativa conexao continencia cooperacao processual civil voluntaria contenciosa"
-     href="BRUNAO/proc/prova-2.html">
+     href="BRUNAO/sem3/proc/prova-2.html">
     <div class="rcard-top"></div>
     <span class="status-badge ready">Dispon&#237;vel</span>
     <div class="rcard-body">
-      <span class="disc-pill"><span class="dot"></span>Dir. Processual Civil</span>
+      <span class="disc-pill"><span class="dot"></span>T.C. Proc. Civil</span>
       <div class="rcard-title">Jurisdi&#231;&#227;o e Compet&#234;ncia (Prova 2)</div>
       <div class="rcard-topics">
         <span class="topic-tag">Jurisdi&#231;&#227;o &middot; contenciosa e volunt&#225;ria</span>
@@ -526,11 +561,11 @@ body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font
 
   <a class="rcard" data-disc="proc" data-sem="3"
      data-title="partes litisconsorcio atos processuais intervencao"
-     href="BRUNAO/proc/prova-3.html">
+     href="BRUNAO/sem3/proc/prova-3.html">
     <div class="rcard-top"></div>
     <span class="status-badge ready">Dispon&#237;vel</span>
     <div class="rcard-body">
-      <span class="disc-pill"><span class="dot"></span>Dir. Processual Civil</span>
+      <span class="disc-pill"><span class="dot"></span>T.C. Proc. Civil</span>
       <div class="rcard-title">Prova 3</div>
       <div class="rcard-topics">
         <span class="topic-tag">Capacidade processual</span>
@@ -548,7 +583,7 @@ body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font
   <!-- PENAL -->
   <a class="rcard" data-disc="penal" data-sem="3"
      data-title="direito penal ilicitude excludentes estado necessidade legitima defesa excesso consentimento"
-     href="BRUNAO/penal/prova-1.html">
+     href="BRUNAO/sem3/penal/prova-1.html">
     <div class="rcard-top"></div>
     <span class="status-badge ready">Dispon&#237;vel</span>
     <div class="rcard-body">
@@ -573,7 +608,7 @@ body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font
 
   <a class="rcard" data-disc="penal" data-sem="3"
      data-title="teoria analitica crime tipicidade iter criminis tentativa excludentes ilicitude concurso agentes penal"
-     href="BRUNAO/penal/prova-2.html">
+     href="BRUNAO/sem3/penal/prova-2.html">
     <div class="rcard-top"></div>
     <span class="status-badge ready">Dispon&#237;vel</span>
     <div class="rcard-body">
@@ -595,7 +630,7 @@ body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font
 
   <a class="rcard" data-disc="penal" data-sem="3"
      data-title="ilicitude culpabilidade legitima defesa imputabilidade penal"
-     href="BRUNAO/penal/prova-3.html">
+     href="BRUNAO/sem3/penal/prova-3.html">
     <div class="rcard-top"></div>
     <span class="status-badge ready">Dispon&#237;vel</span>
     <div class="rcard-body">
@@ -617,7 +652,7 @@ body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font
   <!-- ECA -->
   <a class="rcard" data-disc="eca" data-sem="3"
      data-title="eca historicidade fundamentos protecao integral direitos fundamentais educacao trabalho crianca adolescente"
-     href="BRUNAO/eca/prova-1.html">
+     href="BRUNAO/sem3/eca/prova-1.html">
     <div class="rcard-top"></div>
     <span class="status-badge ready">Dispon&#237;vel</span>
     <div class="rcard-body">
@@ -642,7 +677,7 @@ body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font
 
   <a class="rcard" data-disc="eca" data-sem="3"
      data-title="familia substituta adocao guarda tutela destituicao poder familiar ato infracional medidas socioeducativas mse eca"
-     href="BRUNAO/eca/prova-2.html">
+     href="BRUNAO/sem3/eca/prova-2.html">
     <div class="rcard-top"></div>
     <div class="rcard-body">
       <span class="disc-pill"><span class="dot"></span>Dir. Crian&#231;a e Adolescente</span>
@@ -662,7 +697,7 @@ body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font
 
   <a class="rcard" data-disc="eca" data-sem="3"
      data-title="familia substituta adocao guarda tutela eca"
-     href="BRUNAO/eca/prova-3.html">
+     href="BRUNAO/sem3/eca/prova-3.html">
     <div class="rcard-top"></div>
     <span class="status-badge ready">Dispon&#237;vel</span>
     <div class="rcard-body">
@@ -688,6 +723,361 @@ body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font
   </div>
 </div>
 
+<!-- FILTROS SEM4 -->
+<div class="filters-rail sem-4-only">
+<div class="filters">
+  <button class="filter-btn active" data-disc="all" aria-pressed="true" onclick="applyFilter('all',this)">Todos</button>
+  <button class="filter-btn" data-disc="const-i" aria-pressed="false" onclick="applyFilter('const-i',this)">Const. I</button>
+  <button class="filter-btn" data-disc="obrig" aria-pressed="false" onclick="applyFilter('obrig',this)">Obriga&ccedil;&otilde;es</button>
+  <button class="filter-btn" data-disc="emp" aria-pressed="false" onclick="applyFilter('emp',this)">Empresarial</button>
+  <button class="filter-btn" data-disc="penal2" aria-pressed="false" onclick="applyFilter('penal2',this)">Penal II</button>
+  <button class="filter-btn" data-disc="proc-i" aria-pressed="false" onclick="applyFilter('proc-i',this)">Proc. Civil I</button>
+  <div class="filter-sep"></div>
+  <div class="search-mini" role="search">
+    <span class="ico" aria-hidden="true">&#x2315;</span>
+    <input type="text" placeholder="Buscar resumo..." aria-label="Buscar resumo" oninput="applySearch(this.value)" autocomplete="off">
+  </div>
+</div>
+</div>
+
+<!-- SECTION HEAD SEM4 -->
+<div class="section-head sem-4-only">
+  <span class="section-head-label">Resumos</span>
+  <div class="section-head-line"></div>
+  <span class="section-head-count" id="cardCount4"><span>15</span> dispon&iacute;veis</span>
+</div>
+
+<!-- GRID SEM4 -->
+<div class="grid sem-4-only" id="cardGrid4">
+
+  <!-- CONST I -->
+  <a class="rcard" data-disc="const-i" data-sem="4"
+     data-title="direito constitucional i principios fundamentais direitos individuais sociais mandado segurança"
+     href="BRUNAO/sem4/const-i/prova-1.html">
+    <div class="rcard-top"></div>
+    <span class="status-badge soon">Em breve</span>
+    <div class="rcard-body">
+      <span class="disc-pill"><span class="dot"></span>Dir. Constitucional I</span>
+      <div class="rcard-title">Fundamentos e Direitos Individuais (Prova 1)</div>
+      <div class="rcard-topics">
+        <span class="topic-tag">Princ&iacute;pios Fundamentais</span>
+        <span class="topic-tag">Direitos Individuais</span>
+        <span class="topic-tag">Direitos Sociais</span>
+        <span class="topic-tag">Rem&eacute;dios Constitucionais</span>
+      </div>
+      <div class="rcard-meta">
+        <span class="meta-sem">4&ordm; semestre &middot; 2026/2</span>
+        <div class="meta-items"><span class="meta-chip">Em prep.</span></div>
+      </div>
+    </div>
+  </a>
+
+  <a class="rcard" data-disc="const-i" data-sem="4"
+     data-title="organizacao estado poder legislativo administracao publica processo legislativo"
+     href="BRUNAO/sem4/const-i/prova-2.html">
+    <div class="rcard-top"></div>
+    <span class="status-badge soon">Em breve</span>
+    <div class="rcard-body">
+      <span class="disc-pill"><span class="dot"></span>Dir. Constitucional I</span>
+      <div class="rcard-title">Organiza&ccedil;&atilde;o do Estado e Poder Legislativo (Prova 2)</div>
+      <div class="rcard-topics">
+        <span class="topic-tag">Organiza&ccedil;&atilde;o Pol&iacute;tico-Adm.</span>
+        <span class="topic-tag">Administra&ccedil;&atilde;o P&uacute;blica</span>
+        <span class="topic-tag">Poder Legislativo</span>
+        <span class="topic-tag">Processo Legislativo</span>
+      </div>
+      <div class="rcard-meta">
+        <span class="meta-sem">4&ordm; semestre &middot; 2026/2</span>
+        <div class="meta-items"><span class="meta-chip">Em prep.</span></div>
+      </div>
+    </div>
+  </a>
+
+  <a class="rcard" data-disc="const-i" data-sem="4"
+     data-title="poder executivo judiciario funcoes essenciais tributacao orcamento"
+     href="BRUNAO/sem4/const-i/prova-3.html">
+    <div class="rcard-top"></div>
+    <span class="status-badge soon">Em breve</span>
+    <div class="rcard-body">
+      <span class="disc-pill"><span class="dot"></span>Dir. Constitucional I</span>
+      <div class="rcard-title">Poder Executivo, Judici&aacute;rio e Tributa&ccedil;&atilde;o (Prova 3)</div>
+      <div class="rcard-topics">
+        <span class="topic-tag">Poder Executivo</span>
+        <span class="topic-tag">Poder Judici&aacute;rio</span>
+        <span class="topic-tag">Fun&ccedil;&otilde;es Essenciais &agrave; Justi&ccedil;a</span>
+        <span class="topic-tag">Tributa&ccedil;&atilde;o e Or&ccedil;amento</span>
+      </div>
+      <div class="rcard-meta">
+        <span class="meta-sem">4&ordm; semestre &middot; 2026/2</span>
+        <div class="meta-items"><span class="meta-chip">Em prep.</span></div>
+      </div>
+    </div>
+  </a>
+
+  <!-- OBRIGAÇÕES -->
+  <a class="rcard" data-disc="obrig" data-sem="4"
+     data-title="obrigacoes modalidades dar fazer nao fazer alternativa solidaria"
+     href="BRUNAO/sem4/obrig/prova-1.html">
+    <div class="rcard-top"></div>
+    <span class="status-badge soon">Em breve</span>
+    <div class="rcard-body">
+      <span class="disc-pill"><span class="dot"></span>Dir. das Obriga&ccedil;&otilde;es</span>
+      <div class="rcard-title">Modalidades de Obriga&ccedil;&atilde;o (Prova 1)</div>
+      <div class="rcard-topics">
+        <span class="topic-tag">Obriga&ccedil;&atilde;o de Dar coisa certa</span>
+        <span class="topic-tag">Obriga&ccedil;&atilde;o de Fazer</span>
+        <span class="topic-tag">Obriga&ccedil;&atilde;o Alternativa</span>
+        <span class="topic-tag">Obriga&ccedil;&atilde;o Solid&aacute;ria</span>
+      </div>
+      <div class="rcard-meta">
+        <span class="meta-sem">4&ordm; semestre &middot; 2026/2</span>
+        <div class="meta-items"><span class="meta-chip">Em prep.</span></div>
+      </div>
+    </div>
+  </a>
+
+  <a class="rcard" data-disc="obrig" data-sem="4"
+     data-title="inadimplemento mora perdas danos clausula penal"
+     href="BRUNAO/sem4/obrig/prova-2.html">
+    <div class="rcard-top"></div>
+    <span class="status-badge soon">Em breve</span>
+    <div class="rcard-body">
+      <span class="disc-pill"><span class="dot"></span>Dir. das Obriga&ccedil;&otilde;es</span>
+      <div class="rcard-title">Inadimplemento, Mora e Perdas e Danos (Prova 2)</div>
+      <div class="rcard-topics">
+        <span class="topic-tag">Inadimplemento absoluto</span>
+        <span class="topic-tag">Mora do devedor e credor</span>
+        <span class="topic-tag">Perdas e Danos &middot; art. 402</span>
+        <span class="topic-tag">Cl&aacute;usula Penal</span>
+      </div>
+      <div class="rcard-meta">
+        <span class="meta-sem">4&ordm; semestre &middot; 2026/2</span>
+        <div class="meta-items"><span class="meta-chip">Em prep.</span></div>
+      </div>
+    </div>
+  </a>
+
+  <a class="rcard" data-disc="obrig" data-sem="4"
+     data-title="extincao obrigacoes pagamento novacao compensacao enriquecimento"
+     href="BRUNAO/sem4/obrig/prova-3.html">
+    <div class="rcard-top"></div>
+    <span class="status-badge soon">Em breve</span>
+    <div class="rcard-body">
+      <span class="disc-pill"><span class="dot"></span>Dir. das Obriga&ccedil;&otilde;es</span>
+      <div class="rcard-title">Extin&ccedil;&atilde;o das Obriga&ccedil;&otilde;es (Prova 3)</div>
+      <div class="rcard-topics">
+        <span class="topic-tag">Pagamento &middot; arts. 304&ndash;333</span>
+        <span class="topic-tag">Nova&ccedil;&atilde;o e Compensa&ccedil;&atilde;o</span>
+        <span class="topic-tag">Pagamento Indevido</span>
+        <span class="topic-tag">Enriquecimento Sem Causa</span>
+      </div>
+      <div class="rcard-meta">
+        <span class="meta-sem">4&ordm; semestre &middot; 2026/2</span>
+        <div class="meta-items"><span class="meta-chip">Em prep.</span></div>
+      </div>
+    </div>
+  </a>
+
+  <!-- EMPRESARIAL -->
+  <a class="rcard" data-disc="emp" data-sem="4"
+     data-title="empresarial empresa empresario estabelecimento comercial registro nome"
+     href="BRUNAO/sem4/emp/prova-1.html">
+    <div class="rcard-top"></div>
+    <span class="status-badge soon">Em breve</span>
+    <div class="rcard-body">
+      <span class="disc-pill"><span class="dot"></span>Dir. Empresarial</span>
+      <div class="rcard-title">Empresa, Empres&aacute;rio e Estabelecimento (Prova 1)</div>
+      <div class="rcard-topics">
+        <span class="topic-tag">Teoria da Empresa</span>
+        <span class="topic-tag">Empres&aacute;rio &middot; art. 966 CC</span>
+        <span class="topic-tag">Estabelecimento Comercial</span>
+        <span class="topic-tag">Registro Empresarial</span>
+      </div>
+      <div class="rcard-meta">
+        <span class="meta-sem">4&ordm; semestre &middot; 2026/2</span>
+        <div class="meta-items"><span class="meta-chip">Em prep.</span></div>
+      </div>
+    </div>
+  </a>
+
+  <a class="rcard" data-disc="emp" data-sem="4"
+     data-title="sociedades limitada anonima socios administradores empresarial"
+     href="BRUNAO/sem4/emp/prova-2.html">
+    <div class="rcard-top"></div>
+    <span class="status-badge soon">Em breve</span>
+    <div class="rcard-body">
+      <span class="disc-pill"><span class="dot"></span>Dir. Empresarial</span>
+      <div class="rcard-title">Sociedades Ltda. e An&ocirc;nimas (Prova 2)</div>
+      <div class="rcard-topics">
+        <span class="topic-tag">Sociedade Simples x Empres&aacute;ria</span>
+        <span class="topic-tag">Sociedade Limitada</span>
+        <span class="topic-tag">Sociedade An&ocirc;nima</span>
+        <span class="topic-tag">Administradores e S&oacute;cios</span>
+      </div>
+      <div class="rcard-meta">
+        <span class="meta-sem">4&ordm; semestre &middot; 2026/2</span>
+        <div class="meta-items"><span class="meta-chip">Em prep.</span></div>
+      </div>
+    </div>
+  </a>
+
+  <a class="rcard" data-disc="emp" data-sem="4"
+     data-title="titulos credito cheque duplicata falencia recuperacao judicial"
+     href="BRUNAO/sem4/emp/prova-3.html">
+    <div class="rcard-top"></div>
+    <span class="status-badge soon">Em breve</span>
+    <div class="rcard-body">
+      <span class="disc-pill"><span class="dot"></span>Dir. Empresarial</span>
+      <div class="rcard-title">T&iacute;tulos de Cr&eacute;dito e Fal&ecirc;ncia (Prova 3)</div>
+      <div class="rcard-topics">
+        <span class="topic-tag">Nota Promiss&oacute;ria &middot; Cheque</span>
+        <span class="topic-tag">Duplicata Mercantil</span>
+        <span class="topic-tag">Recupera&ccedil;&atilde;o Judicial</span>
+        <span class="topic-tag">Fal&ecirc;ncia &middot; Lei 11.101</span>
+      </div>
+      <div class="rcard-meta">
+        <span class="meta-sem">4&ordm; semestre &middot; 2026/2</span>
+        <div class="meta-items"><span class="meta-chip">Em prep.</span></div>
+      </div>
+    </div>
+  </a>
+
+  <!-- PENAL II -->
+  <a class="rcard" data-disc="penal2" data-sem="4"
+     data-title="penal ii crimes vida homicidio suicidio infanticidio aborto"
+     href="BRUNAO/sem4/penal2/prova-1.html">
+    <div class="rcard-top"></div>
+    <span class="status-badge soon">Em breve</span>
+    <div class="rcard-body">
+      <span class="disc-pill"><span class="dot"></span>Dir. Penal II</span>
+      <div class="rcard-title">Crimes contra a Vida (Prova 1)</div>
+      <div class="rcard-topics">
+        <span class="topic-tag">Homic&iacute;dio doloso &middot; art. 121</span>
+        <span class="topic-tag">Induzimento ao suic&iacute;dio</span>
+        <span class="topic-tag">Infantic&iacute;dio &middot; art. 123</span>
+        <span class="topic-tag">Aborto &middot; arts. 124&ndash;128</span>
+      </div>
+      <div class="rcard-meta">
+        <span class="meta-sem">4&ordm; semestre &middot; 2026/2</span>
+        <div class="meta-items"><span class="meta-chip">Em prep.</span></div>
+      </div>
+    </div>
+  </a>
+
+  <a class="rcard" data-disc="penal2" data-sem="4"
+     data-title="lesao corporal crimes honra calúnia difamação injúria periclitacao"
+     href="BRUNAO/sem4/penal2/prova-2.html">
+    <div class="rcard-top"></div>
+    <span class="status-badge soon">Em breve</span>
+    <div class="rcard-body">
+      <span class="disc-pill"><span class="dot"></span>Dir. Penal II</span>
+      <div class="rcard-title">Les&atilde;o Corporal e Crimes contra Honra (Prova 2)</div>
+      <div class="rcard-topics">
+        <span class="topic-tag">Les&atilde;o corporal &middot; art. 129</span>
+        <span class="topic-tag">Periclita&ccedil;&atilde;o da vida</span>
+        <span class="topic-tag">Cal&uacute;nia &middot; Difama&ccedil;&atilde;o &middot; Inj&uacute;ria</span>
+        <span class="topic-tag">Constrangimento ilegal</span>
+      </div>
+      <div class="rcard-meta">
+        <span class="meta-sem">4&ordm; semestre &middot; 2026/2</span>
+        <div class="meta-items"><span class="meta-chip">Em prep.</span></div>
+      </div>
+    </div>
+  </a>
+
+  <a class="rcard" data-disc="penal2" data-sem="4"
+     data-title="crimes patrimonio furto roubo extorsao estelionato receptacao"
+     href="BRUNAO/sem4/penal2/prova-3.html">
+    <div class="rcard-top"></div>
+    <span class="status-badge soon">Em breve</span>
+    <div class="rcard-body">
+      <span class="disc-pill"><span class="dot"></span>Dir. Penal II</span>
+      <div class="rcard-title">Crimes contra o Patrim&ocirc;nio (Prova 3)</div>
+      <div class="rcard-topics">
+        <span class="topic-tag">Furto &middot; art. 155</span>
+        <span class="topic-tag">Roubo e Extors&atilde;o</span>
+        <span class="topic-tag">Estelionato &middot; art. 171</span>
+        <span class="topic-tag">Recept&atilde;o &middot; art. 180</span>
+      </div>
+      <div class="rcard-meta">
+        <span class="meta-sem">4&ordm; semestre &middot; 2026/2</span>
+        <div class="meta-items"><span class="meta-chip">Em prep.</span></div>
+      </div>
+    </div>
+  </a>
+
+  <!-- PROC CIVIL I -->
+  <a class="rcard" data-disc="proc-i" data-sem="4"
+     data-title="processual civil i normas fundamentais jurisdicao acao pressupostos partes"
+     href="BRUNAO/sem4/proc-i/prova-1.html">
+    <div class="rcard-top"></div>
+    <span class="status-badge soon">Em breve</span>
+    <div class="rcard-body">
+      <span class="disc-pill"><span class="dot"></span>Dir. Proc. Civil I</span>
+      <div class="rcard-title">Normas Fundamentais e Partes (Prova 1)</div>
+      <div class="rcard-topics">
+        <span class="topic-tag">Princ&iacute;pios do CPC/2015</span>
+        <span class="topic-tag">Jurisdi&ccedil;&atilde;o e A&ccedil;&atilde;o</span>
+        <span class="topic-tag">Pressupostos Processuais</span>
+        <span class="topic-tag">Partes e Procuradores</span>
+      </div>
+      <div class="rcard-meta">
+        <span class="meta-sem">4&ordm; semestre &middot; 2026/2</span>
+        <div class="meta-items"><span class="meta-chip">Em prep.</span></div>
+      </div>
+    </div>
+  </a>
+
+  <a class="rcard" data-disc="proc-i" data-sem="4"
+     data-title="peticao inicial contestacao reconvencao tutela provisoria"
+     href="BRUNAO/sem4/proc-i/prova-2.html">
+    <div class="rcard-top"></div>
+    <span class="status-badge soon">Em breve</span>
+    <div class="rcard-body">
+      <span class="disc-pill"><span class="dot"></span>Dir. Proc. Civil I</span>
+      <div class="rcard-title">Peti&ccedil;&atilde;o Inicial e Resposta do R&eacute;u (Prova 2)</div>
+      <div class="rcard-topics">
+        <span class="topic-tag">Requisitos da Peti&ccedil;&atilde;o Inicial</span>
+        <span class="topic-tag">Tutela Provis&oacute;ria</span>
+        <span class="topic-tag">Contesta&ccedil;&atilde;o e Exce&ccedil;&otilde;es</span>
+        <span class="topic-tag">Reconven&ccedil;&atilde;o</span>
+      </div>
+      <div class="rcard-meta">
+        <span class="meta-sem">4&ordm; semestre &middot; 2026/2</span>
+        <div class="meta-items"><span class="meta-chip">Em prep.</span></div>
+      </div>
+    </div>
+  </a>
+
+  <a class="rcard" data-disc="proc-i" data-sem="4"
+     data-title="provas sentenca coisa julgada recursos ônus prova"
+     href="BRUNAO/sem4/proc-i/prova-3.html">
+    <div class="rcard-top"></div>
+    <span class="status-badge soon">Em breve</span>
+    <div class="rcard-body">
+      <span class="disc-pill"><span class="dot"></span>Dir. Proc. Civil I</span>
+      <div class="rcard-title">Provas, Senten&ccedil;a e Coisa Julgada (Prova 3)</div>
+      <div class="rcard-topics">
+        <span class="topic-tag">Teoria Geral das Provas</span>
+        <span class="topic-tag">&Ocirc;nus da Prova &middot; art. 373</span>
+        <span class="topic-tag">Senten&ccedil;a &middot; art. 489</span>
+        <span class="topic-tag">Coisa Julgada e Recursos</span>
+      </div>
+      <div class="rcard-meta">
+        <span class="meta-sem">4&ordm; semestre &middot; 2026/2</span>
+        <div class="meta-items"><span class="meta-chip">Em prep.</span></div>
+      </div>
+    </div>
+  </a>
+
+</div>
+
+<div class="empty-state sem-4-only" id="emptyState4" aria-live="polite" aria-atomic="true">
+  <div class="empty-inner">
+    <p>Nenhum resumo encontrado para essa busca.</p>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer class="hub-footer">
   <div class="ft-left">Guto Ceolin &middot; UFN &middot; Curso de Direito &middot; 2026/1</div>
@@ -695,11 +1085,12 @@ body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font
 </footer>
 
 <script>
-let activeFilter='all', activeSearch='';
+let activeFilter='all', activeSearch='', activeSem=3;
 
 function applyFilter(disc,btn){
   activeFilter=disc;
-  document.querySelectorAll('.filter-btn').forEach(b=>{b.classList.remove('active');b.setAttribute('aria-pressed','false');});
+  const rail=btn.closest('.filters-rail');
+  rail.querySelectorAll('.filter-btn').forEach(b=>{b.classList.remove('active');b.setAttribute('aria-pressed','false');});
   btn.classList.add('active');
   btn.setAttribute('aria-pressed','true');
   render();
@@ -711,7 +1102,7 @@ function applySearch(val){
 }
 
 function render(){
-  const cards=document.querySelectorAll('.rcard');
+  const cards=document.querySelectorAll('.rcard[data-sem="'+activeSem+'"]');
   let visible=0;
   cards.forEach(card=>{
     const disc=card.dataset.disc||'';
@@ -721,30 +1112,34 @@ function render(){
     if(mDisc&&mSearch){card.classList.remove('hidden');visible++;}
     else{card.classList.add('hidden');}
   });
-  document.getElementById('emptyState').classList.toggle('show',visible===0);
-  const el=document.getElementById('cardCount');
-  if(el){
-    const label=visible===1?'disponível':'disponíveis';
-    el.innerHTML=`<span>${visible}</span> ${label}`;
-  }
+  const countId=activeSem===3?'cardCount':'cardCount'+activeSem;
+  const emptyId=activeSem===3?'emptyState':'emptyState'+activeSem;
+  const el=document.getElementById(countId);
+  if(el){const label=visible===1?'disponível':'disponíveis';el.innerHTML=`<span>${visible}</span> ${label}`;}
+  document.getElementById(emptyId).classList.toggle('show',visible===0);
 }
 
 function setSemester(n,btn){
+  activeFilter='all';
+  activeSearch='';
+  activeSem=n;
   document.querySelectorAll('.sem-tab').forEach(t=>{
     t.classList.remove('active');
     t.setAttribute('aria-selected','false');
   });
   btn.classList.add('active');
   btn.setAttribute('aria-selected','true');
-  const isSem3=n===3;
-  document.documentElement.classList.toggle('sem-other-active',!isSem3);
+  document.documentElement.classList.toggle('sem-other-active',n!==3);
+  document.documentElement.classList.toggle('sem4-active',n===4);
+  document.querySelectorAll('.search-mini input').forEach(i=>i.value='');
+  const withContent=new Set([3,4]);
   const coming=document.getElementById('semComing');
-  const num=document.getElementById('semComingNum');
-  if(isSem3){
+  if(withContent.has(n)){
     coming.classList.remove('show');
+    render();
   } else {
     coming.classList.add('show');
-    num.textContent=n+'º';
+    document.getElementById('semComingNum').textContent=n+'º';
   }
 }
 
@@ -761,7 +1156,7 @@ function loadQuizScores(){
   document.querySelectorAll('.rcard').forEach(card=>{
     const href=card.getAttribute('href');
     if(!href)return;
-    const key='quiz_'+href.replace('BRUNAO/','').replace('/','_').replace('.html','');
+    const key='quiz_'+href.replace(/BRUNAO\/sem\d+\//,'').replace('BRUNAO/','').replace('/','_').replace('.html','');
     let d;try{d=JSON.parse(localStorage.getItem(key));}catch(e){return;}
     if(!d||d.score==null)return;
     const pct=d.pct;
